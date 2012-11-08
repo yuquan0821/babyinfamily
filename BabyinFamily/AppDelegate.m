@@ -7,14 +7,18 @@
 //
 
 #import "AppDelegate.h"
+#import "HomeViewController.h"
+#import "HotViewController.h"
+#import "TakePhotoViewController.h"
+#import "MessageViewController.h"
+#import "ProfileViewController.h"
 
 @implementation AppDelegate
-
-@synthesize window = _window;
 
 - (void)dealloc
 {
     [_window release];
+    [_tabBarController release];
     [super dealloc];
 }
 
@@ -22,11 +26,48 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
+    
+    HomeViewController *vc1 = [[[HomeViewController alloc] init] autorelease];
+    HotViewController *vc2 = [[[HotViewController alloc] init] autorelease];
+    TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
+    MessageViewController *vc4 = [[[MessageViewController alloc] init] autorelease];
+    ProfileViewController *vc5 = [[[ProfileViewController alloc] init] autorelease];
+    
+    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+    self.tabBarController.viewControllers = @[vc1, vc2,vc3,vc4,vc5];
+    
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:self.tabBarController];
+    
+    //self.window.rootViewController = nav;
+    [self.window addSubview:nav.view];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
+    [self addCenterButtonWithImage:[UIImage imageNamed:fullpath] highlightImage:nil];
+    
     return YES;
 }
-
+-(void) addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage
+{
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+    button.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
+    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    [button setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
+    
+    CGFloat heightDifference = buttonImage.size.height - self.tabBarController.tabBar.frame.size.height;
+    if (heightDifference < 0)
+        button.center = self.tabBarController.tabBar.center;
+    else
+    {
+        CGPoint center = self.tabBarController.tabBar.center;
+        center.y = center.y - heightDifference/2.0;
+        button.center = center;
+    }
+    
+    [self.tabBarController.view addSubview:button];
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*
