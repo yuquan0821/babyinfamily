@@ -28,18 +28,23 @@
     // Override point for customization after application launch.
     
     HomeViewController *vc1 = [[[HomeViewController alloc] init] autorelease];
+    
     HotViewController *vc2 = [[[HotViewController alloc] init] autorelease];
     TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
     MessageViewController *vc4 = [[[MessageViewController alloc] init] autorelease];
     ProfileViewController *vc5 = [[[ProfileViewController alloc] init] autorelease];
     
+    UINavigationController * nav1 = [[[UINavigationController alloc] initWithRootViewController:vc1] autorelease];
+    UINavigationController * nav2 = [[[UINavigationController alloc] initWithRootViewController:vc2] autorelease];
+    UINavigationController * nav3 = [[[UINavigationController alloc] initWithRootViewController:vc3] autorelease];
+    UINavigationController * nav4 = [[[UINavigationController alloc] initWithRootViewController:vc4] autorelease];
+    UINavigationController * nav5 = [[[UINavigationController alloc] initWithRootViewController:vc5] autorelease];
+    
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.tabBarController.viewControllers = @[vc1, vc2,vc3,vc4,vc5];
+    self.tabBarController.viewControllers = @[nav1, nav2,nav3,nav4,nav5];
     
-    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:self.tabBarController];
-    
-    //self.window.rootViewController = nav;
-    [self.window addSubview:nav.view];
+    self.window.rootViewController = self.tabBarController;
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
