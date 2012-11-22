@@ -60,7 +60,7 @@
     button.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
     [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
     [button setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
-    
+    [button addTarget:self action:@selector(takePhoto) forControlEvents:UIControlEventTouchUpInside];
     CGFloat heightDifference = buttonImage.size.height - self.tabBarController.tabBar.frame.size.height;
     if (heightDifference < 0)
         button.center = self.tabBarController.tabBar.center;
@@ -72,6 +72,9 @@
     }
     
     [self.tabBarController.view addSubview:button];
+}
+- (void)takePhoto{
+    self.tabBarController.selectedIndex = 2;
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {
