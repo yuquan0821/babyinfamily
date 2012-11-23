@@ -195,6 +195,7 @@
 		28EA949E165F59CD009F69E5 /* UIDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				28EA94A0165F6031009F69E5 /* VCS */,
 			);
 			name = UIDisplay;
 			sourceTree = "<group>";
@@ -204,6 +205,33 @@
 			children = (
 			);
 			name = babyTools;
+			sourceTree = "<group>";
+		};
+		28EA94A0165F6031009F69E5 /* VCS */ = {
+			isa = PBXGroup;
+			children = (
+				28EA94A1165F6058009F69E5 /* TabViewControllers */,
+			);
+			name = VCS;
+			sourceTree = "<group>";
+		};
+		28EA94A1165F6058009F69E5 /* TabViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B4C94ED7164C00F500722F37 /* BaseViewController.h */,
+				B4C94ED8164C00F500722F37 /* BaseViewController.m */,
+				B4C94EDB164C015100722F37 /* HomeViewController.h */,
+				B4C94EDC164C015100722F37 /* HomeViewController.m */,
+				B4C94EDE164C017800722F37 /* HotViewController.h */,
+				B4C94EDF164C017800722F37 /* HotViewController.m */,
+				B4C94EE1164C02DD00722F37 /* TakePhotoViewController.h */,
+				B4C94EE2164C02DD00722F37 /* TakePhotoViewController.m */,
+				B4C94EE4164C02E900722F37 /* MessageViewController.h */,
+				B4C94EE5164C02E900722F37 /* MessageViewController.m */,
+				B4C94EE7164C034D00722F37 /* ProfileViewController.h */,
+				B4C94EE8164C034D00722F37 /* ProfileViewController.m */,
+			);
+			name = TabViewControllers;
 			sourceTree = "<group>";
 		};
 		B40B1F421650E99F000BC5DA /* asi */ = {
@@ -281,18 +309,6 @@
 		B4227EC2162FE77B005F1700 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				B4C94ED7164C00F500722F37 /* BaseViewController.h */,
-				B4C94ED8164C00F500722F37 /* BaseViewController.m */,
-				B4C94EDB164C015100722F37 /* HomeViewController.h */,
-				B4C94EDC164C015100722F37 /* HomeViewController.m */,
-				B4C94EDE164C017800722F37 /* HotViewController.h */,
-				B4C94EDF164C017800722F37 /* HotViewController.m */,
-				B4C94EE1164C02DD00722F37 /* TakePhotoViewController.h */,
-				B4C94EE2164C02DD00722F37 /* TakePhotoViewController.m */,
-				B4C94EE4164C02E900722F37 /* MessageViewController.h */,
-				B4C94EE5164C02E900722F37 /* MessageViewController.m */,
-				B4C94EE7164C034D00722F37 /* ProfileViewController.h */,
-				B4C94EE8164C034D00722F37 /* ProfileViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
