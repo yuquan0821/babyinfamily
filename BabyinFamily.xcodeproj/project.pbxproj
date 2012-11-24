@@ -14,6 +14,9 @@
 		28EA9366165F12F5009F69E5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EA9365165F12F5009F69E5 /* OpenGLES.framework */; };
 		28EA9368165F1305009F69E5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EA9367165F1305009F69E5 /* QuartzCore.framework */; };
 		28EA9378165F13BA009F69E5 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EA9373165F1340009F69E5 /* libGPUImage.a */; };
+		28EA94B2165F7FC1009F69E5 /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EA94B0165F7FC1009F69E5 /* TakePhotoViewController.m */; };
+		28EA94B3165F7FC1009F69E5 /* TakePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */; };
+		28EA94CB165F961F009F69E5 /* TakePhoto.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94CA165F961F009F69E5 /* TakePhoto.bundle */; };
 		B40B1F5C1650E9D6000BC5DA /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B1F471650E9D6000BC5DA /* ASIAuthenticationDialog.m */; };
 		B40B1F5D1650E9D6000BC5DA /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B1F4A1650E9D6000BC5DA /* ASIDataCompressor.m */; };
 		B40B1F5E1650E9D6000BC5DA /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B1F4C1650E9D6000BC5DA /* ASIDataDecompressor.m */; };
@@ -42,7 +45,6 @@
 		B4C94ED9164C00F500722F37 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94ED8164C00F500722F37 /* BaseViewController.m */; };
 		B4C94EDD164C015100722F37 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EDC164C015100722F37 /* HomeViewController.m */; };
 		B4C94EE0164C017800722F37 /* HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EDF164C017800722F37 /* HotViewController.m */; };
-		B4C94EE3164C02DD00722F37 /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EE2164C02DD00722F37 /* TakePhotoViewController.m */; };
 		B4C94EE6164C02E900722F37 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EE5164C02E900722F37 /* MessageViewController.m */; };
 		B4C94EE9164C034D00722F37 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EE8164C034D00722F37 /* ProfileViewController.m */; };
 		B4C94EEF164C057100722F37 /* sourcekit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B4C94EEE164C057100722F37 /* sourcekit.bundle */; };
@@ -80,6 +82,10 @@
 		28EA9365165F12F5009F69E5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28EA9367165F1305009F69E5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		28EA9369165F1340009F69E5 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = lib/GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
+		28EA94AF165F7FC1009F69E5 /* TakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhotoViewController.h; sourceTree = "<group>"; };
+		28EA94B0165F7FC1009F69E5 /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoViewController.m; sourceTree = "<group>"; };
+		28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TakePhotoViewController.xib; sourceTree = "<group>"; };
+		28EA94CA165F961F009F69E5 /* TakePhoto.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TakePhoto.bundle; path = Images/TakePhoto/TakePhoto.bundle; sourceTree = "<group>"; };
 		B40B1F461650E9D6000BC5DA /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "lib/asi-httprequest/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		B40B1F471650E9D6000BC5DA /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "lib/asi-httprequest/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		B40B1F481650E9D6000BC5DA /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "lib/asi-httprequest/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -134,8 +140,6 @@
 		B4C94EDC164C015100722F37 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		B4C94EDE164C017800722F37 /* HotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotViewController.h; sourceTree = "<group>"; };
 		B4C94EDF164C017800722F37 /* HotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotViewController.m; sourceTree = "<group>"; };
-		B4C94EE1164C02DD00722F37 /* TakePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhotoViewController.h; sourceTree = "<group>"; };
-		B4C94EE2164C02DD00722F37 /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoViewController.m; sourceTree = "<group>"; };
 		B4C94EE4164C02E900722F37 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		B4C94EE5164C02E900722F37 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		B4C94EE7164C034D00722F37 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				B4C94EEE164C057100722F37 /* sourcekit.bundle */,
+				28EA94CA165F961F009F69E5 /* TakePhoto.bundle */,
 			);
 			name = resource;
 			sourceTree = "<group>";
@@ -224,12 +229,13 @@
 				B4C94EDC164C015100722F37 /* HomeViewController.m */,
 				B4C94EDE164C017800722F37 /* HotViewController.h */,
 				B4C94EDF164C017800722F37 /* HotViewController.m */,
-				B4C94EE1164C02DD00722F37 /* TakePhotoViewController.h */,
-				B4C94EE2164C02DD00722F37 /* TakePhotoViewController.m */,
 				B4C94EE4164C02E900722F37 /* MessageViewController.h */,
 				B4C94EE5164C02E900722F37 /* MessageViewController.m */,
 				B4C94EE7164C034D00722F37 /* ProfileViewController.h */,
 				B4C94EE8164C034D00722F37 /* ProfileViewController.m */,
+				28EA94AF165F7FC1009F69E5 /* TakePhotoViewController.h */,
+				28EA94B0165F7FC1009F69E5 /* TakePhotoViewController.m */,
+				28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */,
 			);
 			name = TabViewControllers;
 			sourceTree = "<group>";
@@ -466,6 +472,8 @@
 				B4C94EEF164C057100722F37 /* sourcekit.bundle in Resources */,
 				B40B1F711650ECD7000BC5DA /* Default-568h@2x.png in Resources */,
 				B40B1F7C1650EE53000BC5DA /* SinaWeibo.bundle in Resources */,
+				28EA94B3165F7FC1009F69E5 /* TakePhotoViewController.xib in Resources */,
+				28EA94CB165F961F009F69E5 /* TakePhoto.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +489,6 @@
 				B4C94ED9164C00F500722F37 /* BaseViewController.m in Sources */,
 				B4C94EDD164C015100722F37 /* HomeViewController.m in Sources */,
 				B4C94EE0164C017800722F37 /* HotViewController.m in Sources */,
-				B4C94EE3164C02DD00722F37 /* TakePhotoViewController.m in Sources */,
 				B4C94EE6164C02E900722F37 /* MessageViewController.m in Sources */,
 				B4C94EE9164C034D00722F37 /* ProfileViewController.m in Sources */,
 				B40B1F5C1650E9D6000BC5DA /* ASIAuthenticationDialog.m in Sources */,
@@ -497,6 +504,7 @@
 				B40B1F7D1650EE53000BC5DA /* SinaWeibo.m in Sources */,
 				B40B1F7E1650EE53000BC5DA /* SinaWeiboAuthorizeView.m in Sources */,
 				B40B1F7F1650EE53000BC5DA /* SinaWeiboRequest.m in Sources */,
+				28EA94B2165F7FC1009F69E5 /* TakePhotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
