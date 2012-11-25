@@ -312,13 +312,6 @@
 			path = BabyinFamily;
 			sourceTree = "<group>";
 		};
-		B4227EC2162FE77B005F1700 /* controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = controller;
-			sourceTree = "<group>";
-		};
 		B4227EC3162FE78D005F1700 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,7 +366,6 @@
 				28EA949D165F5962009F69E5 /* resource */,
 				28EA949C165F58F4009F69E5 /* netWork */,
 				B4227EC3162FE78D005F1700 /* model */,
-				B4227EC2162FE77B005F1700 /* controller */,
 				B44954AE15A978F200FAA116 /* Supporting Files */,
 			);
 			path = BabyinFamily;

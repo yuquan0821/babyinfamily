@@ -74,6 +74,12 @@
     [self.tabBarController.view addSubview:button];
 }
 - (void)takePhoto{
+    TakePhotoViewController *picker = [[TakePhotoViewController alloc] init];
+    picker.hidesBottomBarWhenPushed = YES;
+   // [self.navigationController pushViewController:picker animated:NO];
+   // self.navigationController.navigationBarHidden = YES;
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+    [self.tabBarController presentModalViewController:picker animated:YES];
     self.tabBarController.selectedIndex = 2;
 }
 - (void)applicationWillResignActive:(UIApplication *)application

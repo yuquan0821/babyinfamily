@@ -36,7 +36,8 @@
     
     if (self) {
         self.title = @"拍照";
-        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+       // [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+        self.navigationController.navigationBarHidden = YES;
         //[self presentModalViewController:picker animated:YES];
         self.outputJPEGQuality = 1.0;
     }
@@ -47,7 +48,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CGRect mainScreenFrame = [[UIScreen mainScreen] bounds];
+    CGRect mainScreenFrame = CGRectMake(0,0,320,480);
+    [[UIScreen mainScreen] bounds];
 	[[GPUImageView alloc] initWithFrame:mainScreenFrame];
     self.wantsFullScreenLayout = YES;
     //set background color
