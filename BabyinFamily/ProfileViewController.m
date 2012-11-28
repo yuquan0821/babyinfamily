@@ -150,7 +150,7 @@
     UIBarButtonItem *SettingBtn = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(setting)];
     self.navigationItem.leftBarButtonItem = SettingBtn;
     [SettingBtn release];
-    
+    table = self.tableView;
     [table setTableHeaderView:headerView];
 
     if (avatarImage) {
