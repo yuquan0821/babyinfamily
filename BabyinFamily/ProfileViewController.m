@@ -147,7 +147,7 @@
     self.navigationItem.rightBarButtonItem = retwitterBtn;
     [retwitterBtn release];
     
-    UIBarButtonItem *SettingBtn = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(Setting)];
+    UIBarButtonItem *SettingBtn = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(setting)];
     self.navigationItem.leftBarButtonItem = SettingBtn;
     [SettingBtn release];
     
