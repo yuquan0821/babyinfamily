@@ -6,11 +6,6 @@
 //
 //
 
-/*#import "BaseViewController.h"
-
-@interface HomeViewController : BaseViewController
-
-@end*/
 
 #import <UIKit/UIKit.h>
 #import "StatusViewControllerBase.h"

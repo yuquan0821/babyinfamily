@@ -6,37 +6,26 @@
 //
 //
 
-/*#import "BaseViewController.h"
- 
- @interface ProfileViewController : BaseViewController
- 
- @end*/
 
 #import <UIKit/UIKit.h>
-#import "StatusCell.h"
 #import "PullRefreshTableViewController.h"
 #import "User.h"
-#import "ImageBrowser.h"
 #import "TwitterVC.h"
 #import "SettingVC.h"
 
 @class WeiBoMessageManager;
-@class ImageBrowser;
 
 #define kTextViewPadding            16.0
 #define kLineBreakMode              UILineBreakModeWordWrap
 
-@interface ProfileViewController : PullRefreshTableViewController<UITableViewDelegate,UITableViewDataSource,StatusCellDelegate,ImageBrowserDelegate>
+@interface ProfileViewController : PullRefreshTableViewController<UITableViewDelegate,UITableViewDataSource>
 {
     WeiBoMessageManager *manager;
     NSNotificationCenter *defaultNotifCenter;
     
     UITableView         *table;
     NSString            *userID;
-    UINib               *statusCellNib;
-    NSMutableArray      *statuesArr;
     NSMutableDictionary *imageDictionary;
-    ImageBrowser        *browserView;
     
     
     BOOL                shouldShowIndicator;
@@ -46,10 +35,6 @@
 }
 @property (retain, nonatomic)   IBOutlet UITableView    *table;
 @property (nonatomic, copy)     NSString                *userID;
-@property (nonatomic, retain)   UINib                   *statusCellNib;
-@property (nonatomic, retain)   NSMutableArray          *statuesArr;
-@property (nonatomic, retain)   NSMutableDictionary     *imageDictionary;
-@property (nonatomic, retain)   ImageBrowser            *browserView;
 @property (nonatomic, retain) User *user;
 @property (nonatomic, retain) UIImage *avatarImage;
 @property (retain, nonatomic) IBOutlet UIView *headerView;

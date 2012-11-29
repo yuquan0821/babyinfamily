@@ -41,7 +41,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"粉丝";
-        self.tabBarItem.image = [UIImage imageNamed:@"First.png"];
+        //self.tabBarItem.image = [UIImage imageNamed:@"First.png"];
         _isFollowingViewController = NO;
         _shouldReloadTable = YES;
         _manager = [WeiBoMessageManager getInstance];

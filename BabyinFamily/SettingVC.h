@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingVC : UITableViewController<UIAlertViewDelegate>
+@interface SettingVC : UITableViewController<UIAlertViewDelegate,UINavigationControllerDelegate>
 
 @end

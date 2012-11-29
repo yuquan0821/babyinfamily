@@ -11,16 +11,16 @@
 #define IMAGE_VIEW_HEIGHT 80.0f
 
 @implementation StatusCell
-@synthesize retwitterBgImage;
-@synthesize retwitterContentTF;
-@synthesize retwitterContentImage;
+//@synthesize retwitterBgImage;
+//@synthesize retwitterContentTF;
+//@synthesize retwitterContentImage;
 @synthesize countLB;
 @synthesize avatarImage;
 @synthesize contentTF;
 @synthesize userNameLB;
 @synthesize bgImage;
 @synthesize contentImage;
-@synthesize retwitterMainV;
+//@synthesize retwitterMainV;
 @synthesize delegate;
 @synthesize cellIndexPath;
 @synthesize fromLB;
@@ -35,40 +35,17 @@
     countLB.text = [NSString stringWithFormat:@"评论:%d 转发:%d",status.commentsCount,status.retweetsCount];
     fromLB.text = [NSString stringWithFormat:@"来自:%@",status.source];
     timeLB.text = status.timestamp;
-    
-    Status  *retwitterStatus    = status.retweetedStatus;
-    
-    //有转发
-    if (retwitterStatus && ![retwitterStatus isEqual:[NSNull null]]) 
-    {
-        self.retwitterMainV.hidden = NO;
-        self.retwitterContentTF.text = [NSString stringWithFormat:@"%@:%@",status.retweetedStatus.user.screenName,retwitterStatus.text];
-        self.contentImage.hidden = YES;
-        
-        if (![imageData isEqual:[NSNull null]]) 
-        {
-            self.retwitterContentImage.image = [UIImage imageWithData:imageData];
+
+       
+    if (![imageData isEqual:[NSNull null]]) {
+        self.contentImage.image = [UIImage imageWithData:imageData];
         }
         
-        NSString *url = status.retweetedStatus.thumbnailPic;
-        self.retwitterContentImage.hidden = url != nil && [url length] != 0 ? NO : YES;
-        [self setTFHeightWithImage:NO 
-                haveRetwitterImage:url != nil && [url length] != 0 ? YES : NO];//计算cell的高度，以及背景图的处理
-    }
-    
-    //无转发
-    else
-    {
-        self.retwitterMainV.hidden = YES;
-        if (![imageData isEqual:[NSNull null]]) {
-            self.contentImage.image = [UIImage imageWithData:imageData];
-        }
-        
-        NSString *url = status.thumbnailPic;
-        self.contentImage.hidden = url != nil && [url length] != 0 ? NO : YES;
-        [self setTFHeightWithImage:url != nil && [url length] != 0 ? YES : NO 
+    NSString *url = status.bmiddlePic;
+    self.contentImage.hidden = url != nil && [url length] != 0 ? NO : YES;
+   [self setTFHeightWithImage:url != nil && [url length] != 0 ? YES : NO 
                 haveRetwitterImage:NO];//计算cell的高度，以及背景图的处理
-    }
+    
 }
 
 //计算cell的高度，以及背景图的处理
@@ -81,33 +58,10 @@
     frame.size = contentTF.contentSize;
     contentTF.frame = frame;
     
-    //转发博文Text
-    frame = retwitterContentTF.frame;
-    frame.size = retwitterContentTF.contentSize;
-    retwitterContentTF.frame = frame;
-    
-    
-    //转发的主View
-    frame = retwitterMainV.frame;
-    
-    if (haveRetwitterImage) frame.size.height = retwitterContentTF.frame.size.height + IMAGE_VIEW_HEIGHT + 15;
-    else frame.size.height = retwitterContentTF.frame.size.height + 15;
-    
-    if(hasImage) frame.origin.y = contentTF.frame.size.height + contentTF.frame.origin.y + IMAGE_VIEW_HEIGHT;
-    else frame.origin.y = contentTF.frame.size.height + contentTF.frame.origin.y;
-    
-    retwitterMainV.frame = frame;
-    
-    
-    //转发的图片
-    frame = retwitterContentImage.frame;
-    frame.origin.y = retwitterContentTF.frame.size.height;
-    frame.size.height = IMAGE_VIEW_HEIGHT;
-    retwitterContentImage.frame = frame;
     
     //正文的图片
     frame = contentImage.frame;
-    frame.origin.y = contentTF.frame.size.height + contentTF.frame.origin.y - 5.0f;
+    frame.origin.y = contentTF.frame.size.height + contentTF.frame.origin.y ;
     frame.size.height = IMAGE_VIEW_HEIGHT;
     contentImage.frame = frame;
     
@@ -144,10 +98,6 @@
     [userNameLB release];
     [bgImage release];
     [contentImage release];
-    [retwitterMainV release];
-    [retwitterBgImage release];
-    [retwitterContentTF release];
-    [retwitterContentImage release];
     [cellIndexPath release];
     [countLB release];
     [fromLB release];

@@ -7,7 +7,6 @@
 //
 
 #import "TakePhotoViewController.h"
-//#import "GrayscaleContrastFilter.h"
 
 @implementation TakePhotoViewController {
     BOOL isStatic;

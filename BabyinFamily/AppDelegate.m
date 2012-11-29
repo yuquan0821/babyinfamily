@@ -28,12 +28,11 @@
     // Override point for customization after application launch.
     
     HomeViewController *vc1 = [[[HomeViewController alloc] init] autorelease];
-    
     HotViewController *vc2 = [[[HotViewController alloc] init] autorelease];
     TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
     MessageViewController *vc4 = [[[MessageViewController alloc] init] autorelease];
-    ProfileViewController *vc5 = [[[ProfileViewController alloc] init] autorelease];
-    
+    //ProfileViewController *vc5 = [[[ProfileViewController alloc] init] autorelease];
+    ProfileViewController *vc5 = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
     UINavigationController * nav1 = [[[UINavigationController alloc] initWithRootViewController:vc1] autorelease];
     UINavigationController * nav2 = [[[UINavigationController alloc] initWithRootViewController:vc2] autorelease];
     UINavigationController * nav3 = [[[UINavigationController alloc] initWithRootViewController:vc3] autorelease];

@@ -39,10 +39,10 @@
 @property (retain, nonatomic) IBOutlet UILabel *userNameLB;
 @property (retain, nonatomic) IBOutlet UIImageView *bgImage;
 @property (retain, nonatomic) IBOutlet UIImageView *contentImage;
-@property (retain, nonatomic) IBOutlet UIView *retwitterMainV;
-@property (retain, nonatomic) IBOutlet UIImageView *retwitterBgImage;
-@property (retain, nonatomic) IBOutlet UITextView *retwitterContentTF;
-@property (retain, nonatomic) IBOutlet UIImageView *retwitterContentImage;
+//@property (retain, nonatomic) IBOutlet UIView *retwitterMainV;
+//@property (retain, nonatomic) IBOutlet UIImageView *retwitterBgImage;
+//@property (retain, nonatomic) IBOutlet UITextView *retwitterContentTF;
+//@property (retain, nonatomic) IBOutlet UIImageView *retwitterContentImage;
 @property (assign, nonatomic) id<StatusCellDelegate> delegate;
 @property (retain, nonatomic) NSIndexPath *cellIndexPath;
 @property (retain, nonatomic) IBOutlet UILabel *fromLB;
