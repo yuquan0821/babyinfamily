@@ -31,8 +31,13 @@
     HotViewController *vc2 = [[[HotViewController alloc] init] autorelease];
     TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
     MessageViewController *vc4 = [[[MessageViewController alloc] init] autorelease];
+///<<<<<<< HEAD
     //ProfileViewController *vc5 = [[[ProfileViewController alloc] init] autorelease];
-    ProfileViewController *vc5 = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
+    //ProfileViewController *vc5 = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
+//=======
+    //ProfileViewController *vc5 = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
+    
+//>>>>>>> 4ad961d2fb20884ff66ef1aef42b3e12afbcc793
     UINavigationController * nav1 = [[[UINavigationController alloc] initWithRootViewController:vc1] autorelease];
     UINavigationController * nav2 = [[[UINavigationController alloc] initWithRootViewController:vc2] autorelease];
     UINavigationController * nav3 = [[[UINavigationController alloc] initWithRootViewController:vc3] autorelease];
