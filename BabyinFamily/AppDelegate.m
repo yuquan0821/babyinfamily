@@ -33,7 +33,7 @@
     MessageViewController *vc4 = [[[MessageViewController alloc] init] autorelease];
 ///<<<<<<< HEAD
     //ProfileViewController *vc5 = [[[ProfileViewController alloc] init] autorelease];
-    //ProfileViewController *vc5 = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
+    ProfileViewController *vc5 = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
 //=======
     //ProfileViewController *vc5 = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
     

@@ -100,7 +100,7 @@
     [SettingBtn release];
     table = self.tableView;
 //<<<<<<< HEAD
-   //[table setTableHeaderView:headerView];
+    [table setTableHeaderView:headerView];
 //=======
    // [table setTableHeaderView:headerView];
 //>>>>>>> 4ad961d2fb20884ff66ef1aef42b3e12afbcc793
