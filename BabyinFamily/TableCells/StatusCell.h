@@ -27,27 +27,18 @@
     UILabel *userNameLB;
     UIImageView *bgImage;
     UIImageView *contentImage;
-    UIView *retwitterMainV;
-    UIImageView *retwitterBgImage;
-    UITextView *retwitterContentTF;
-    UIImageView *retwitterContentImage;
     NSIndexPath *cellIndexPath;
 }
-@property (retain, nonatomic) IBOutlet UILabel *countLB;
-@property (retain, nonatomic) IBOutlet UIImageView *avatarImage;
-@property (retain, nonatomic) IBOutlet UITextView *contentTF;
-@property (retain, nonatomic) IBOutlet UILabel *userNameLB;
-@property (retain, nonatomic) IBOutlet UIImageView *bgImage;
-@property (retain, nonatomic) IBOutlet UIImageView *contentImage;
-//@property (retain, nonatomic) IBOutlet UIView *retwitterMainV;
-//@property (retain, nonatomic) IBOutlet UIImageView *retwitterBgImage;
-//@property (retain, nonatomic) IBOutlet UITextView *retwitterContentTF;
-//@property (retain, nonatomic) IBOutlet UIImageView *retwitterContentImage;
-@property (assign, nonatomic) id<StatusCellDelegate> delegate;
-@property (retain, nonatomic) NSIndexPath *cellIndexPath;
-@property (retain, nonatomic) IBOutlet UILabel *fromLB;
-@property (retain, nonatomic) IBOutlet UILabel *timeLB;
+@property (retain, nonatomic)  UILabel *countLB;
+@property (retain, nonatomic)  UIImageView *avatarImage;
+@property (retain, nonatomic)  UILabel *userNameLB;
+@property (retain, nonatomic)  UIImageView *bgImage;
+@property (retain, nonatomic)  UIImageView *contentImage;
+@property (assign, nonatomic)  id<StatusCellDelegate> delegate;
+@property (retain, nonatomic)  NSIndexPath *cellIndexPath;
+@property (retain, nonatomic)  UILabel *fromLB;
+@property (retain, nonatomic)  UILabel *timeLB;
 
--(CGFloat)setTFHeightWithImage:(BOOL)hasImage haveRetwitterImage:(BOOL)haveRetwitterImage;
+-(CGFloat)setTFHeightWithImage:(BOOL)hasImage;
 -(void)setupCell:(Status*)status avatarImageData:(NSData*)avatarData contentImageData:(NSData*)imageData;
 @end

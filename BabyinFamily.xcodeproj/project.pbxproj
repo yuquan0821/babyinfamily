@@ -35,7 +35,6 @@
 		2896C4471661E0B2004705A4 /* LPFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C43E1661E0B2004705A4 /* LPFriendCell.m */; };
 		2896C4481661E0B2004705A4 /* LPFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C43F1661E0B2004705A4 /* LPFriendCell.xib */; };
 		2896C4491661E0B2004705A4 /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C4411661E0B2004705A4 /* StatusCell.m */; };
-		2896C44A1661E0B2004705A4 /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C4421661E0B2004705A4 /* StatusCell.xib */; };
 		2896C44B1661E0B2004705A4 /* ZJTCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C4441661E0B2004705A4 /* ZJTCommentCell.m */; };
 		2896C44C1661E0B2004705A4 /* ZJTCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C4451661E0B2004705A4 /* ZJTCommentCell.xib */; };
 		2896C4511661E1EB004705A4 /* ZJTHelpler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C44E1661E1EB004705A4 /* ZJTHelpler.m */; };
@@ -186,7 +185,6 @@
 		2896C43F1661E0B2004705A4 /* LPFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LPFriendCell.xib; path = TableCells/LPFriendCell.xib; sourceTree = "<group>"; };
 		2896C4401661E0B2004705A4 /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusCell.h; path = TableCells/StatusCell.h; sourceTree = "<group>"; };
 		2896C4411661E0B2004705A4 /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusCell.m; path = TableCells/StatusCell.m; sourceTree = "<group>"; };
-		2896C4421661E0B2004705A4 /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusCell.xib; path = TableCells/StatusCell.xib; sourceTree = "<group>"; };
 		2896C4431661E0B2004705A4 /* ZJTCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZJTCommentCell.h; path = TableCells/ZJTCommentCell.h; sourceTree = "<group>"; };
 		2896C4441661E0B2004705A4 /* ZJTCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZJTCommentCell.m; path = TableCells/ZJTCommentCell.m; sourceTree = "<group>"; };
 		2896C4451661E0B2004705A4 /* ZJTCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ZJTCommentCell.xib; path = TableCells/ZJTCommentCell.xib; sourceTree = "<group>"; };
@@ -342,9 +340,9 @@
 		2896C4021661C0E2004705A4 /* OthersVCs */ = {
 			isa = PBXGroup;
 			children = (
+				2896C4831661E79E004705A4 /* AboutViewController.xib */,
 				2896C4811661E79E004705A4 /* AboutViewController.h */,
 				2896C4821661E79E004705A4 /* AboutViewController.m */,
-				2896C4831661E79E004705A4 /* AboutViewController.xib */,
 				2896C4841661E79E004705A4 /* AddCommentVC.h */,
 				2896C4851661E79E004705A4 /* AddCommentVC.m */,
 				2896C4861661E79E004705A4 /* AddCommentVC.xib */,
@@ -403,7 +401,6 @@
 				2896C43F1661E0B2004705A4 /* LPFriendCell.xib */,
 				2896C4401661E0B2004705A4 /* StatusCell.h */,
 				2896C4411661E0B2004705A4 /* StatusCell.m */,
-				2896C4421661E0B2004705A4 /* StatusCell.xib */,
 				2896C4431661E0B2004705A4 /* ZJTCommentCell.h */,
 				2896C4441661E0B2004705A4 /* ZJTCommentCell.m */,
 				2896C4451661E0B2004705A4 /* ZJTCommentCell.xib */,
@@ -520,8 +517,8 @@
 		28EA94A0165F6031009F69E5 /* VCS */ = {
 			isa = PBXGroup;
 			children = (
-				2896C4031661C0FE004705A4 /* ImageBrowers */,
 				2896C4021661C0E2004705A4 /* OthersVCs */,
+				2896C4031661C0FE004705A4 /* ImageBrowers */,
 				28EA94A1165F6058009F69E5 /* TabViewControllers */,
 			);
 			name = VCS;
@@ -793,7 +790,6 @@
 				28EA94B3165F7FC1009F69E5 /* TakePhotoViewController.xib in Resources */,
 				28EA94CB165F961F009F69E5 /* TakePhoto.bundle in Resources */,
 				2896C4481661E0B2004705A4 /* LPFriendCell.xib in Resources */,
-				2896C44A1661E0B2004705A4 /* StatusCell.xib in Resources */,
 				2896C44C1661E0B2004705A4 /* ZJTCommentCell.xib in Resources */,
 				2896C45E1661E282004705A4 /* OAuthWebView.xib in Resources */,
 				2896C4731661E40F004705A4 /* ImageBrowser.xib in Resources */,
