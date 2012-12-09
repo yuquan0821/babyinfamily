@@ -80,8 +80,8 @@
     if (![imageData isEqual:[NSNull null]])
     {
         rtText = CGRectMake(5, 35, 300, 400);
-        self.contentView.frame = rtText;
-        self.contentMode = UIViewContentModeScaleToFill;
+        self.contentImage.frame = rtText;
+        //self.contentMode = UIViewContentModeScaleToFill;
         self.contentImage.image = [UIImage imageWithData:imageData];
     }
         
@@ -102,6 +102,7 @@
     CGRect frame = contentImage.frame;
     frame.origin.y = contentImage.frame.size.height;
     frame.size.height = IMAGE_VIEW_HEIGHT;
+    frame.origin.y = 35;
     contentImage.frame = frame;
     
     //背景设置
