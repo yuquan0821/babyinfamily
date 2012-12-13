@@ -41,10 +41,11 @@
     //有转发
     if (retwitterStatus && ![retwitterStatus isEqual:[NSNull null]]) 
     {
+
         self.retwitterMainV.hidden = NO;
         self.retwitterContentTF.text = [NSString stringWithFormat:@"%@:%@",status.retweetedStatus.user.screenName,retwitterStatus.text];
         self.contentImage.hidden = YES;
-        
+
         if (![imageData isEqual:[NSNull null]]) 
         {
             self.retwitterContentImage.image = [UIImage imageWithData:imageData];
@@ -115,6 +116,7 @@
     frame.origin.y = contentTF.frame.size.height + contentTF.frame.origin.y - 5.0f;
     NSLog(@"%f", frame.size.height);
     frame.size.height = IMAGE_VIEW_HEIGHT;
+    frame.origin.y = 35;
     contentImage.frame = frame;
     
     //背景设置
