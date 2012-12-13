@@ -29,6 +29,7 @@
     User*           user; //作者信息
     int				commentsCount; // 评论数
 	int				retweetsCount; // 转发数
+    int             attitudesCount;// 表态数
 	Status*			retweetedStatus; //转发的博文，内容为status，如果不是转发，则没有此字段
 	
     BOOL            unread;
@@ -61,6 +62,7 @@
 @property (nonatomic, retain) User*         user; //作者信息
 @property (nonatomic, assign) int           commentsCount; //评论数
 @property (nonatomic, assign) int           retweetsCount; // 转发数
+@property (nonatomic, assign) int           attitudesCount;//表态数
 
 @property (nonatomic, retain) Status*       retweetedStatus; //转发的博文，内容为status，如果不是转发，则没有此字段
 

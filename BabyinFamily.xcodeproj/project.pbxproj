@@ -15,6 +15,8 @@
 		28849558166321800042C4CD /* weibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28849557166321800042C4CD /* weibo.bundle */; };
 		288495611663467E0042C4CD /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884955F1663467D0042C4CD /* ProfileViewController.m */; };
 		288495621663467E0042C4CD /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288495601663467D0042C4CD /* ProfileViewController.xib */; };
+		288659AB167430C0000EADCC /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 288659A9167430C0000EADCC /* StatusCell.m */; };
+		288659AC167430C0000EADCC /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288659AA167430C0000EADCC /* StatusCell.xib */; };
 		2896C40F1661C961004705A4 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C40A1661C961004705A4 /* NSDataAdditions.m */; };
 		2896C4101661C961004705A4 /* NSDictionaryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C40C1661C961004705A4 /* NSDictionaryAdditions.m */; };
 		2896C4111661C961004705A4 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C40E1661C961004705A4 /* NSStringAdditions.m */; };
@@ -34,7 +36,6 @@
 		2896C4461661E0B2004705A4 /* LPBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C43C1661E0B2004705A4 /* LPBaseCell.m */; };
 		2896C4471661E0B2004705A4 /* LPFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C43E1661E0B2004705A4 /* LPFriendCell.m */; };
 		2896C4481661E0B2004705A4 /* LPFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C43F1661E0B2004705A4 /* LPFriendCell.xib */; };
-		2896C4491661E0B2004705A4 /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C4411661E0B2004705A4 /* StatusCell.m */; };
 		2896C44B1661E0B2004705A4 /* ZJTCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C4441661E0B2004705A4 /* ZJTCommentCell.m */; };
 		2896C44C1661E0B2004705A4 /* ZJTCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C4451661E0B2004705A4 /* ZJTCommentCell.xib */; };
 		2896C4511661E1EB004705A4 /* ZJTHelpler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C44E1661E1EB004705A4 /* ZJTHelpler.m */; };
@@ -145,6 +146,9 @@
 		2884955E1663467C0042C4CD /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		2884955F1663467D0042C4CD /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		288495601663467D0042C4CD /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		288659A8167430C0000EADCC /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusCell.h; path = TableCells/StatusCell.h; sourceTree = "<group>"; };
+		288659A9167430C0000EADCC /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusCell.m; path = TableCells/StatusCell.m; sourceTree = "<group>"; };
+		288659AA167430C0000EADCC /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusCell.xib; path = TableCells/StatusCell.xib; sourceTree = "<group>"; };
 		2896C4091661C961004705A4 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDataAdditions.h; path = lib/Addtions/NSDataAdditions.h; sourceTree = SOURCE_ROOT; };
 		2896C40A1661C961004705A4 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDataAdditions.m; path = lib/Addtions/NSDataAdditions.m; sourceTree = SOURCE_ROOT; };
 		2896C40B1661C961004705A4 /* NSDictionaryAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDictionaryAdditions.h; path = lib/Addtions/NSDictionaryAdditions.h; sourceTree = SOURCE_ROOT; };
@@ -183,8 +187,6 @@
 		2896C43D1661E0B2004705A4 /* LPFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPFriendCell.h; path = TableCells/LPFriendCell.h; sourceTree = "<group>"; };
 		2896C43E1661E0B2004705A4 /* LPFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPFriendCell.m; path = TableCells/LPFriendCell.m; sourceTree = "<group>"; };
 		2896C43F1661E0B2004705A4 /* LPFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LPFriendCell.xib; path = TableCells/LPFriendCell.xib; sourceTree = "<group>"; };
-		2896C4401661E0B2004705A4 /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusCell.h; path = TableCells/StatusCell.h; sourceTree = "<group>"; };
-		2896C4411661E0B2004705A4 /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusCell.m; path = TableCells/StatusCell.m; sourceTree = "<group>"; };
 		2896C4431661E0B2004705A4 /* ZJTCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZJTCommentCell.h; path = TableCells/ZJTCommentCell.h; sourceTree = "<group>"; };
 		2896C4441661E0B2004705A4 /* ZJTCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZJTCommentCell.m; path = TableCells/ZJTCommentCell.m; sourceTree = "<group>"; };
 		2896C4451661E0B2004705A4 /* ZJTCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ZJTCommentCell.xib; path = TableCells/ZJTCommentCell.xib; sourceTree = "<group>"; };
@@ -340,9 +342,9 @@
 		2896C4021661C0E2004705A4 /* OthersVCs */ = {
 			isa = PBXGroup;
 			children = (
-				2896C4831661E79E004705A4 /* AboutViewController.xib */,
 				2896C4811661E79E004705A4 /* AboutViewController.h */,
 				2896C4821661E79E004705A4 /* AboutViewController.m */,
+				2896C4831661E79E004705A4 /* AboutViewController.xib */,
 				2896C4841661E79E004705A4 /* AddCommentVC.h */,
 				2896C4851661E79E004705A4 /* AddCommentVC.m */,
 				2896C4861661E79E004705A4 /* AddCommentVC.xib */,
@@ -399,8 +401,9 @@
 				2896C43D1661E0B2004705A4 /* LPFriendCell.h */,
 				2896C43E1661E0B2004705A4 /* LPFriendCell.m */,
 				2896C43F1661E0B2004705A4 /* LPFriendCell.xib */,
-				2896C4401661E0B2004705A4 /* StatusCell.h */,
-				2896C4411661E0B2004705A4 /* StatusCell.m */,
+				288659A8167430C0000EADCC /* StatusCell.h */,
+				288659A9167430C0000EADCC /* StatusCell.m */,
+				288659AA167430C0000EADCC /* StatusCell.xib */,
 				2896C4431661E0B2004705A4 /* ZJTCommentCell.h */,
 				2896C4441661E0B2004705A4 /* ZJTCommentCell.m */,
 				2896C4451661E0B2004705A4 /* ZJTCommentCell.xib */,
@@ -803,6 +806,7 @@
 				28D434A916646CC5005ED633 /* StatusViewControllerBase.xib in Resources */,
 				280ACCEB1664876B00774CCC /* FirstViewController.xib in Resources */,
 				280CF2861664CA250031262F /* SettingVC.xib in Resources */,
+				288659AC167430C0000EADCC /* StatusCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -851,7 +855,6 @@
 				2896C43A1661DB7F004705A4 /* PullRefreshTableViewController.m in Sources */,
 				2896C4461661E0B2004705A4 /* LPBaseCell.m in Sources */,
 				2896C4471661E0B2004705A4 /* LPFriendCell.m in Sources */,
-				2896C4491661E0B2004705A4 /* StatusCell.m in Sources */,
 				2896C44B1661E0B2004705A4 /* ZJTCommentCell.m in Sources */,
 				2896C4511661E1EB004705A4 /* ZJTHelpler.m in Sources */,
 				2896C4521661E1EB004705A4 /* ZJTStatusBarAlertWindow.m in Sources */,
@@ -875,6 +878,7 @@
 				288495611663467E0042C4CD /* ProfileViewController.m in Sources */,
 				28D434A816646CC5005ED633 /* StatusViewControllerBase.m in Sources */,
 				280CF2851664CA250031262F /* SettingVC.m in Sources */,
+				288659AB167430C0000EADCC /* StatusCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

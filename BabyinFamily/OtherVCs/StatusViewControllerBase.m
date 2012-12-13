@@ -295,11 +295,8 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger  row = indexPath.row;
-    static NSString *MyIdentifier = @"StatusCell";
-    StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil) {
-		cell = [[[StatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier] autorelease];
-	}
+    //static NSString *MyIdentifier = @"StatusCell";
+    StatusCell *cell = [self cellForTableView:tableView fromNib:self.statusCellNib];
 
     
     if (row >= [statuesArr count]) {

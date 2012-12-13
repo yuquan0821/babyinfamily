@@ -11,7 +11,7 @@
 @implementation Status
 @synthesize statusId, createdAt, text, source, sourceUrl, favorited, truncated, longitude, latitude, inReplyToStatusId;
 @synthesize inReplyToUserId, inReplyToScreenName, thumbnailPic, bmiddlePic, originalPic, user;
-@synthesize commentsCount, retweetsCount, retweetedStatus, unread, hasReply;
+@synthesize commentsCount, retweetsCount, attitudesCount, retweetedStatus, unread, hasReply;
 @synthesize statusKey;
 @synthesize hasRetwitter;
 @synthesize haveRetwitterImage;
@@ -84,6 +84,7 @@
 		
         commentsCount = [dic getIntValueForKey:@"comments_count" defaultValue:-1];
         retweetsCount = [dic getIntValueForKey:@"reposts_count" defaultValue:-1];
+        attitudesCount = [dic getIntValueForKey:@"attitudes_count" defaultValue:-1];
         
 		NSDictionary* userDic = [dic objectForKey:@"user"];
 		if (userDic) {
