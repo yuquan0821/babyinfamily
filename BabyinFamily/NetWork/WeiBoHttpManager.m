@@ -537,7 +537,7 @@
     }
     if (baseApp >= 0) {
         NSString *tempString = [NSString stringWithFormat:@"%d",baseApp];
-        [params setObject:tempString forKey:@"baseApp"];
+        [params setObject:tempString forKey:@"base_app"];
     }
     if (feature >= 0) {
         NSString *tempString = [NSString stringWithFormat:@"%d",feature];
@@ -583,7 +583,7 @@
     }
     if (baseApp >= 0) {
         NSString *tempString = [NSString stringWithFormat:@"%d",baseApp];
-        [params setObject:tempString forKey:@"baseApp"];
+        [params setObject:tempString forKey:@"base_app"];
     }
     if (feature >= 0) {
         NSString *tempString = [NSString stringWithFormat:@"%d",feature];
