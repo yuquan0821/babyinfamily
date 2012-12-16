@@ -343,16 +343,16 @@
 			isa = PBXGroup;
 			children = (
 				2896C4811661E79E004705A4 /* AboutViewController.h */,
+				280CF2821664CA240031262F /* SettingVC.h */,
 				2896C4821661E79E004705A4 /* AboutViewController.m */,
 				2896C4831661E79E004705A4 /* AboutViewController.xib */,
 				2896C4841661E79E004705A4 /* AddCommentVC.h */,
-				2896C4851661E79E004705A4 /* AddCommentVC.m */,
 				2896C4861661E79E004705A4 /* AddCommentVC.xib */,
+				2896C4851661E79E004705A4 /* AddCommentVC.m */,
 				280ACCEA1664876B00774CCC /* FirstViewController.xib */,
 				2884955216631CD30042C4CD /* FollowerVC.h */,
 				2884955316631CD30042C4CD /* FollowerVC.m */,
 				2884955416631CD30042C4CD /* FollowerVC.xib */,
-				280CF2821664CA240031262F /* SettingVC.h */,
 				280CF2831664CA240031262F /* SettingVC.m */,
 				280CF2841664CA250031262F /* SettingVC.xib */,
 				28D434A516646CC5005ED633 /* StatusViewControllerBase.h */,

@@ -7,8 +7,6 @@
 //
 
 #import "StatusViewControllerBase.h"
-//#import "GlobalConfig.h"
-
 
 #define kTextViewPadding            16.0
 #define kLineBreakMode              UILineBreakModeWordWrap
@@ -166,19 +164,20 @@
         [[HHNetDataCacheManager getInstance] getDataWithURL:member.user.profileImageUrl withIndex:i];
         
         //下载博文图片
-        if (member.thumbnailPic && [member.thumbnailPic length] != 0)
+        if (member.bmiddlePic && [member.bmiddlePic length] != 0)
         {
-            [[HHNetDataCacheManager getInstance] getDataWithURL:member.thumbnailPic withIndex:i];
+            [[HHNetDataCacheManager getInstance] getDataWithURL:member.bmiddlePic withIndex:i];
         }
         else
         {
             [imageDictionary setObject:[NSNull null] forKey:indexNumber];
+            //statuesArr[i].frame
         }
         
         //下载转发的图片
-        if (member.retweetedStatus.thumbnailPic && [member.retweetedStatus.thumbnailPic length] != 0)
+        if (member.retweetedStatus.bmiddlePic && [member.retweetedStatus.bmiddlePic length] != 0)
         {
-            [[HHNetDataCacheManager getInstance] getDataWithURL:member.retweetedStatus.thumbnailPic withIndex:i];
+            [[HHNetDataCacheManager getInstance] getDataWithURL:member.retweetedStatus.bmiddlePic withIndex:i];
         }
         else
         {
@@ -220,7 +219,7 @@
     }
     
     //得到的是博文图片
-    if([url isEqualToString:sts.thumbnailPic])
+    if([url isEqualToString:sts.bmiddlePic])
     {
         [imageDictionary setObject:data forKey:indexNumber];
     }
@@ -228,7 +227,7 @@
     //得到的是转发的图片
     if (sts.retweetedStatus && ![sts.retweetedStatus isEqual:[NSNull null]])
     {
-        if ([url isEqualToString:sts.retweetedStatus.thumbnailPic])
+        if ([url isEqualToString:sts.retweetedStatus.bmiddlePic])
         {
             [imageDictionary setObject:data forKey:indexNumber];
         }
@@ -263,7 +262,7 @@
     UIFont * font=[UIFont  systemFontOfSize:14];
     CGSize size=[contentText sizeWithFont:font constrainedToSize:CGSizeMake(with - kTextViewPadding, 300000.0f) lineBreakMode:kLineBreakMode];
     CGFloat height = size.height + 44;
-    return height;
+    return height = 200.0f;
 }
 
 - (id)cellForTableView:(UITableView *)tableView fromNib:(UINib *)nib {
@@ -334,8 +333,8 @@
     
     Status *status          = [statuesArr objectAtIndex:row];
     Status *retwitterStatus = status.retweetedStatus;
-    NSString *url = status.retweetedStatus.thumbnailPic;
-    NSString *url2 = status.thumbnailPic;
+    NSString *url = status.retweetedStatus.bmiddlePic;
+    NSString *url2 = status.bmiddlePic;
     
     CGFloat height = 0.0f;
     
