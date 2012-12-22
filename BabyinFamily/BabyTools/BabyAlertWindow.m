@@ -1,21 +1,21 @@
 //
-//  ZJTStatusBarAlertWindow.m
-//  zjtSinaWeiboClient
+//  BabyAlertWindow.m
+//  BabyinFamily
 //
-//  Created by Jianting Zhu on 12-5-5.
-//  Copyright (c) 2012年 ZUST. All rights reserved.
+//  Created by 范艳春 on 12-12-17.
+//
 //
 
-#import "ZJTStatusBarAlertWindow.h"
+#import "BabyAlertWindow.h"
 
-static ZJTStatusBarAlertWindow *instance = nil;
+static BabyAlertWindow *instance = nil;
 
-@interface ZJTStatusBarAlertWindow()
+@interface BabyAlertWindow()
 -(void)setupViewsAndDatas;
 -(void)removeViewsAndDatas;
 @end
 
-@implementation ZJTStatusBarAlertWindow
+@implementation BabyAlertWindow
 @synthesize window = _window;
 @synthesize label = _label;
 @synthesize backgroundImage = _backgroundImage;
@@ -40,7 +40,7 @@ static ZJTStatusBarAlertWindow *instance = nil;
 
 -(void)setDisplayString:(NSString *)displayString
 {
-    if (![displayString isEqualToString:_displayString]) 
+    if (![displayString isEqualToString:_displayString])
     {
         [_displayString release];
         _displayString = [displayString copy];
@@ -75,10 +75,10 @@ static ZJTStatusBarAlertWindow *instance = nil;
     return self;
 }
 
-+(ZJTStatusBarAlertWindow *) getInstance{
++(BabyAlertWindow *) getInstance{
     @synchronized(self) {
         if (instance == nil) {
-            instance = [[ZJTStatusBarAlertWindow alloc] init];
+            instance = [[BabyAlertWindow alloc] init];
         }
     }
     return instance;
@@ -97,7 +97,7 @@ static ZJTStatusBarAlertWindow *instance = nil;
     _window.backgroundColor = [UIColor blackColor];
     
     //backgroundImage
-    self.backgroundImage = [[UIImage imageNamed:@"weibo.bundle/WeiboImages/statusbar_background.png"] stretchableImageWithLeftCapWidth:2 topCapHeight:0]; 
+    self.backgroundImage = [[UIImage imageNamed:@"weibo.bundle/WeiboImages/statusbar_background.png"] stretchableImageWithLeftCapWidth:2 topCapHeight:0];
     
     //backgroundImageView
     [_backgroundImageView release];
@@ -169,7 +169,7 @@ static ZJTStatusBarAlertWindow *instance = nil;
         }
     }
     
-//    [self performSelector:@selector(removeViewsAndDatas) withObject:nil afterDelay:.7];
+    //    [self performSelector:@selector(removeViewsAndDatas) withObject:nil afterDelay:.7];
 }
 
 @end

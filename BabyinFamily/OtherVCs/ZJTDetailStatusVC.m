@@ -8,7 +8,7 @@
 
 #import "ZJTDetailStatusVC.h"
 #import "ZJTCommentCell.h"
-#import "ZJTHelpler.h"
+#import "BabyHelper.h"
 #import "WeiBoMessageManager.h"
 #import "Comment.h"
 #import "ProfileViewController.h"
@@ -127,7 +127,7 @@
     if (self.commentArr == nil) {
         [manager getCommentListWithID:status.statusId];
 //        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view]; 
-        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+        [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
 
 }
@@ -230,7 +230,7 @@
 - (void)refresh {
     [manager getCommentListWithID:status.statusId];
 //    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view]; 
-    [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+    [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
 }
 
 -(void)follow
@@ -309,7 +309,7 @@
 {
     [self stopLoading];
 //    [[SHKActivityIndicator currentIndicator] hide];
-    [[ZJTStatusBarAlertWindow getInstance] hide];
+    [[BabyAlertWindow getInstance] hide];
 }
 
 - (IBAction)addComment:(id)sender {
@@ -343,7 +343,7 @@
             countLB.text = [NSString stringWithFormat:@"评论:%d转发:%d",[count intValue],status.retweetsCount];
         }
 //        [[SHKActivityIndicator currentIndicator]hide];
-        [[ZJTStatusBarAlertWindow getInstance] hide];
+        [[BabyAlertWindow getInstance] hide];
         [table reloadData];
         [self stopLoading];
     }

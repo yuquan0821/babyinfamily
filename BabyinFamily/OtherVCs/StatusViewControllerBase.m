@@ -167,6 +167,7 @@
         if (member.bmiddlePic && [member.bmiddlePic length] != 0)
         {
             [[HHNetDataCacheManager getInstance] getDataWithURL:member.bmiddlePic withIndex:i];
+
         }
         else
         {
@@ -207,8 +208,7 @@
     }
     
     Status *sts = [statuesArr objectAtIndex:index];
-    User *user = sts.user;
-    
+    User *user = sts.user;    
     //得到的是头像图片
     if ([url isEqualToString:user.profileImageUrl])
     {
@@ -216,14 +216,12 @@
         user.avatarImage    = image;
         
         [headDictionary setObject:data forKey:indexNumber];
-    }
-    
+    }    
     //得到的是博文图片
     if([url isEqualToString:sts.bmiddlePic])
     {
         [imageDictionary setObject:data forKey:indexNumber];
     }
-    
     //得到的是转发的图片
     if (sts.retweetedStatus && ![sts.retweetedStatus isEqual:[NSNull null]])
     {
@@ -245,7 +243,7 @@
     [self stopLoading];
     [self doneLoadingTableViewData];
     //    [[SHKActivityIndicator currentIndicator] hide];
-    [[ZJTStatusBarAlertWindow getInstance] hide];
+    [[BabyAlertWindow getInstance] hide];
 }
 
 //上拉刷新
@@ -253,7 +251,7 @@
 {
     [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:-1];
     //    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
-    [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+    [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
 }
 
 //计算text field 的高度。
@@ -262,7 +260,7 @@
     UIFont * font=[UIFont  systemFontOfSize:14];
     CGSize size=[contentText sizeWithFont:font constrainedToSize:CGSizeMake(with - kTextViewPadding, 300000.0f) lineBreakMode:kLineBreakMode];
     CGFloat height = size.height + 44;
-    return height = 200.0f;
+    return height ;//= 200.0f;
 }
 
 - (id)cellForTableView:(UITableView *)tableView fromNib:(UINib *)nib {
@@ -294,27 +292,21 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger  row = indexPath.row;
-    //static NSString *MyIdentifier = @"StatusCell";
     StatusCell *cell = [self cellForTableView:tableView fromNib:self.statusCellNib];
-
-    
     if (row >= [statuesArr count]) {
         NSLog(@"cellForRowAtIndexPath error ,index = %d,count = %d",row,[statuesArr count]);
         return cell;
     }
-    
     NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath row]]];
     NSData *avatarData = [headDictionary objectForKey:[NSNumber numberWithInt:[indexPath row]]];
     Status *status = [statuesArr objectAtIndex:row];
     cell.delegate = self;
     cell.cellIndexPath = indexPath;
-    
     [cell setupCell:status avatarImageData:avatarData contentImageData:imageData];
-    
     //开始绘制第一个cell时，隐藏indecator.
     if (isFirstCell) {
         //        [[SHKActivityIndicator currentIndicator] hide];
-        [[ZJTStatusBarAlertWindow getInstance] hide];
+        [[BabyAlertWindow getInstance] hide];
         isFirstCell = NO;
     }
     return cell;
@@ -332,30 +324,18 @@
     }
     
     Status *status          = [statuesArr objectAtIndex:row];
-    Status *retwitterStatus = status.retweetedStatus;
-    NSString *url = status.retweetedStatus.bmiddlePic;
-    NSString *url2 = status.bmiddlePic;
-    
+    NSString *url = status.bmiddlePic;
+    StatusCell *cell = [self cellForTableView:tableView fromNib:self.statusCellNib];
+    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath row]]];
     CGFloat height = 0.0f;
     
-    //有转发的博文
-    if (retwitterStatus && ![retwitterStatus isEqual:[NSNull null]])
-    {
-        height = [self cellHeight:status.text with:320.0f] + [self cellHeight:[NSString stringWithFormat:@"%@:%@",status.retweetedStatus.user.screenName,retwitterStatus.text] with:300.0f] - 22.0f;
-    }
-    
-    //无转发的博文
-    else
-    {
-        height = [self cellHeight:status.text with:320.0f];
-    }
-    
     //
-    if ((url && [url length] != 0) || (url2 && [url2 length] != 0))
+    if (url && [url length] != 0)
     {
-        height = height + 80;
+        height = [cell setCellHeight: status contentImageData:imageData];
+        NSLog(@"hight is %f",height);
     }
-    return height + 30;
+    return height;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -504,7 +484,7 @@
     _reloading = YES;
 	[manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:-1];
     //    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
-    [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+    [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "WeiBoHttpManager.h"
-#import "ZJTStatusBarAlertWindow.h"
+#import "BabyAlertWindow.h"
 
 //获取最新的公共微博
 //返回成员为Status的NSArray

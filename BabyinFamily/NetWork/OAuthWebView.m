@@ -9,7 +9,7 @@
 #import "OAuthWebView.h"
 #import "WeiBoHttpManager.h"
 #import "SHKActivityIndicator.h"
-#import "ZJTStatusBarAlertWindow.h"
+#import "BabyAlertWindow.h"
 
 @implementation OAuthWebView
 @synthesize webV;

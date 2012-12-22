@@ -34,27 +34,30 @@
     if (![imageData isEqual:[NSNull null]])
     {
             self.contentImage.image = [UIImage imageWithData:imageData];
+            bgImage.image = [[UIImage imageNamed:@"weibo.bundle/WeiboImages/table_header_bg.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     }
-        
-    NSString *url = status.bmiddlePic;
-    self.contentImage.hidden = url != nil && [url length] != 0 ? NO : YES;
-    [self setTFHeightWithImage:url != nil && [url length] != 0 ? YES : NO
-                haveRetwitterImage:NO];//计算cell的高度，以及背景图的处理
 }
 
-//计算cell的高度，以及背景图的处理
--(CGFloat)setTFHeightWithImage:(BOOL)hasImage haveRetwitterImage:(BOOL)haveRetwitterImage
+//计算cell的高度
+-(CGFloat)setCellHeight:(Status *)status contentImageData:(NSData *)imageData
 {
+    CGFloat height = 0.0f;
     [contentImage layoutIfNeeded];
-        //正文的图片
     CGRect frame = contentImage.frame;
     frame.size.height = IMAGE_VIEW_HEIGHT;
-    frame.origin.y = 35;
+    frame.origin.y = self.avatarImage.frame.size.height + self.avatarImage.frame.origin.y + 9;
     contentImage.frame = frame;
-    
-    //背景设置
-    bgImage.image = [[UIImage imageNamed:@"weibo.bundle/WeiboImages/table_header_bg.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
-    return contentImage.frame.size.height;
+    if (![imageData isEqual:[NSNull null]])
+    {
+        //UIImage *TempImage;
+         self.contentImage.image = [UIImage imageWithData:imageData];
+         height =  self.contentImage.image.size.height;
+    }
+    else{
+        
+        height = self.contentImage.frame.size.height + self.contentImage.frame.origin.y;
+    }
+    return height;
 }
 
 -(IBAction)tapDetected:(id)sender
@@ -68,25 +71,13 @@
             [delegate cellImageDidTaped:self image:contentImage.image];
         }
     }
-    else if ([imageView isEqual:retwitterContentImage])
-    {
-        if ([delegate respondsToSelector:@selector(cellImageDidTaped:image:)])
-        {
-            [delegate cellImageDidTaped:self image:retwitterContentImage.image];
-        }
-    }
-}
+   }
 
 - (void)dealloc {
     [avatarImage release];
-    [contentTF release];
     [userNameLB release];
     [bgImage release];
     [contentImage release];
-    [retwitterMainV release];
-    [retwitterBgImage release];
-    [retwitterContentTF release];
-    [retwitterContentImage release];
     [cellIndexPath release];
     [countLB release];
     [fromLB release];

@@ -68,7 +68,7 @@
     NSString *content = theTextView.text;
     UIImage *image = theImageView.image;
     if (content != nil && [content length] != 0) {
-        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
+        [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
         if (!_shouldPostImage) {
             [manager postWithText:content];
         }
@@ -140,7 +140,7 @@
 {
     Status *sts = sender.object;
     if (sts.text != nil && [sts.text length] != 0) {
-        [[ZJTStatusBarAlertWindow getInstance] hide];
+        [[BabyAlertWindow getInstance] hide];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

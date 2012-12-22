@@ -14,7 +14,7 @@
 #import "HHNetDataCacheManager.h"
 #import "SHKActivityIndicator.h"
 #import "FollowerVC.h"
-#import "ZJTHelpler.h"
+#import "BabyHelper.h"
 
 @interface ProfileViewController ()
 
@@ -113,7 +113,7 @@
         
     }
     if (!user) {
-        self.user = [ZJTHelpler getInstance].user;
+        self.user = [BabyHelper getInstance].user;
     }
     self.headerVNameLB.text = user.screenName;
     self.weiboCount.text = [NSString stringWithFormat:@"%d",user.statusesCount];
@@ -128,7 +128,7 @@
     
     [manager getUserStatusUserID:userID sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:-1 feature:-1];
     //    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
-    [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+    [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     
     [defaultNotifCenter addObserver:self selector:@selector(didGetHomeLine:)    name:MMSinaGotUserStatus        object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
@@ -153,7 +153,7 @@
         shouldLoad = NO;
         [manager getUserStatusUserID:userID sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:-1 feature:-1];
         //        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
-        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+        [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
 }
 
@@ -235,7 +235,7 @@
    // self.statuesArr = sender.object;
  
     //    [[SHKActivityIndicator currentIndicator] hide];
-    [[ZJTStatusBarAlertWindow getInstance] hide];
+    [[BabyAlertWindow getInstance] hide];
     
     [imageDictionary removeAllObjects];
     
@@ -246,14 +246,14 @@
 {
     [self stopLoading];
     //    [[SHKActivityIndicator currentIndicator] hide];
-    [[ZJTStatusBarAlertWindow getInstance] hide];
+    [[BabyAlertWindow getInstance] hide];
 }
 
 -(void)refresh
 {
     [manager getUserStatusUserID:userID sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:-1 feature:-1];
     //    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
-    [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+    [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
 }
 
 //计算text field 的高度。

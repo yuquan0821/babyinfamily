@@ -1,15 +1,15 @@
 //
-//  ZJTHelpler.m
-//  zjtSinaWeiboClient
+//  BabyHelper.m
+//  BabyinFamily
 //
-//  Created by Zhu Jianting on 12-3-8.
-//  Copyright (c) 2012年 WS. All rights reserved.
+//  Created by 范艳春 on 12-12-17.
+//
 //
 
-#import "ZJTHelpler.h"
+#import "BabyHelper.h"
 
-static ZJTHelpler *instance = nil;
-@implementation ZJTHelpler
+static BabyHelper *instance = nil;
+@implementation BabyHelper
 @synthesize user;
 
 -(void)dealloc
@@ -19,7 +19,7 @@ static ZJTHelpler *instance = nil;
 }
 
 
-+(ZJTHelpler*)getInstance
++(BabyHelper*)getInstance
 {
     if (instance == nil) {
         instance = [[self alloc] init];
@@ -28,14 +28,14 @@ static ZJTHelpler *instance = nil;
 }
 
 + (CAAnimation *)animationWithScaleFrom:(CGFloat) from To:(CGFloat) to Duration:(CGFloat) duration BeginTime:(CGFloat)beginTime //大小变化动画
-{    
-    CABasicAnimation *theAnimation;    
-    theAnimation=[CABasicAnimation animationWithKeyPath:@"transform.scale"];    
-    theAnimation.duration=duration; 
-    theAnimation.beginTime = beginTime;    
-    theAnimation.repeatCount=0;    
-    theAnimation.autoreverses=NO;    
-    theAnimation.fromValue=[NSNumber numberWithFloat:from];    
+{
+    CABasicAnimation *theAnimation;
+    theAnimation=[CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    theAnimation.duration=duration;
+    theAnimation.beginTime = beginTime;
+    theAnimation.repeatCount=0;
+    theAnimation.autoreverses=NO;
+    theAnimation.fromValue=[NSNumber numberWithFloat:from];
     theAnimation.toValue=[NSNumber numberWithFloat:to];
     
     return theAnimation;
@@ -62,14 +62,14 @@ static ZJTHelpler *instance = nil;
 
 
 + (CAAnimation *)animationWithOpacityFrom:(CGFloat) from To:(CGFloat) to Duration:(CGFloat) duration BeginTime:(CGFloat)beginTime //透明度变化动画
-{    
-    CABasicAnimation *theAnimation;    
-    theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];    
-    theAnimation.duration=duration; 
-    theAnimation.beginTime = beginTime;    
-    theAnimation.repeatCount=0;    
-    theAnimation.autoreverses=NO;    
-    theAnimation.fromValue=[NSNumber numberWithFloat:from];    
+{
+    CABasicAnimation *theAnimation;
+    theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+    theAnimation.duration=duration;
+    theAnimation.beginTime = beginTime;
+    theAnimation.repeatCount=0;
+    theAnimation.autoreverses=NO;
+    theAnimation.fromValue=[NSNumber numberWithFloat:from];
     theAnimation.toValue=[NSNumber numberWithFloat:to];
     
     return theAnimation;

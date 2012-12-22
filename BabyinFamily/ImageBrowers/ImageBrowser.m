@@ -10,7 +10,7 @@
 #import "HHNetDataCacheManager.h"
 #import "GifView.h"
 #import "SHKActivityIndicator.h"
-#import "ZJTHelpler.h"
+#import "BabyHelper.h"
 
 @implementation ImageBrowser
 @synthesize image;

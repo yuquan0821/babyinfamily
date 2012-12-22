@@ -9,8 +9,8 @@
 
 
 #import "HomeViewController.h"
-#import "ZJTHelpler.h"
-#import "ZJTStatusBarAlertWindow.h"
+#import "BabyHelper.h"
+#import "BabyAlertWindow.h"
 
 @interface HomeViewController()
 -(void)timerOnActive;
@@ -39,10 +39,7 @@
     
     //如果未授权，则调入授权页面。
     NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
-    //if(NEED_LOG)
-    {
-        NSLog([manager isNeedToRefreshTheToken] == YES ? @"need to login":@"will login");
-    }
+    NSLog([manager isNeedToRefreshTheToken] == YES ? @"need to login":@"will login");
     if (authToken == nil || [manager isNeedToRefreshTheToken])
     {
         shouldLoad = YES;
@@ -56,7 +53,7 @@
         [manager getUserID];
         [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:3];
         //        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
-        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+        [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
     [defaultNotifCenter addObserver:self selector:@selector(didGetUserID:)      name:MMSinaGotUserID            object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(didGetHomeLine:)    name:MMSinaGotHomeLine          object:nil];
@@ -85,7 +82,7 @@
         [manager getUserID];
         [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:-1];
         //        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
-        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+        [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
 }
 
@@ -127,7 +124,7 @@
 -(void)didGetUserInfo:(NSNotification*)sender
 {
     User *user = sender.object;
-    [ZJTHelpler getInstance].user = user;
+    [BabyHelper getInstance].user = user;
     [[NSUserDefaults standardUserDefaults] setObject:user.screenName forKey:USER_STORE_USER_NAME];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -141,7 +138,7 @@
             if ([error isEqualToString:@"expired_token"])
             {
                 //                [[SHKActivityIndicator currentIndicator] hide];
-                [[ZJTStatusBarAlertWindow getInstance] hide];
+                [[BabyAlertWindow getInstance] hide];
                 shouldLoad = YES;
                 OAuthWebView *webV = [[OAuthWebView alloc]initWithNibName:@"OAuthWebView" bundle:nil];
                 webV.hidesBottomBarWhenPushed = YES;
@@ -161,7 +158,7 @@
     [self.tableView reloadData];
     
     //    [[SHKActivityIndicator currentIndicator] hide];
-    [[ZJTStatusBarAlertWindow getInstance] hide];
+    [[BabyAlertWindow getInstance] hide];
     
     [headDictionary  removeAllObjects];
     [imageDictionary removeAllObjects];
@@ -183,8 +180,8 @@
         return;
     }
     
-    [[ZJTStatusBarAlertWindow getInstance] showWithString:[NSString stringWithFormat:@"有%@条新微博",num]];
-    [[ZJTStatusBarAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:10];
+    [[BabyAlertWindow getInstance] showWithString:[NSString stringWithFormat:@"有%@条新微博",num]];
+    [[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:10];
 }
 
 @end
