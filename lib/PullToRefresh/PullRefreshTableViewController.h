@@ -41,7 +41,7 @@
 
 //
 #define UIEdgeInsetsOriginal    UIEdgeInsetsMake( 0, 0,-REFRESH_FOOTER_HEIGHT, 0)
-#define UIEdgeInsetsFinal       UIEdgeInsetsMake( 0, 0,0, 0)
+#define UIEdgeInsetsFinal       UIEdgeInsetsMake( 44, 0,0, 0)
 #define UIEdgeInsetsMiddle      UIEdgeInsetsMake(0, 0, -(scrollView.contentOffset.y - startOffset), 0)
 
 @interface PullRefreshTableViewController : UITableViewController {

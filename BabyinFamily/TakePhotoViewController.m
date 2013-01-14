@@ -7,7 +7,8 @@
 //
 
 #import "TakePhotoViewController.h"
-
+#import "SendAndSaveViewController.h"
+#import "StatusViewControllerBase.h"
 @implementation TakePhotoViewController {
     BOOL isStatic;
     BOOL hasBlur;
@@ -22,7 +23,6 @@
 @synthesize flashToggleButton;
 @synthesize cancelButton;
 @synthesize retakeButton;
-@synthesize filtersToggleButton;
 @synthesize libraryToggleButton;
 @synthesize filterScrollView;
 @synthesize filtersBackgroundImageView;
@@ -34,10 +34,8 @@
     self = [super initWithNibName:@"TakePhotoViewController" bundle:nil];
     
     if (self) {
-        self.title = @"拍照";
-       // [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-        self.navigationController.navigationBarHidden = YES;
-        //[self presentModalViewController:picker animated:YES];
+        self.wantsFullScreenLayout = YES;
+        [self.navigationController setNavigationBarHidden:YES animated:NO];
         self.outputJPEGQuality = 1.0;
     }
     
@@ -61,13 +59,12 @@
     self.topBar.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"TakePhoto.bundle/UI/photo_bar"]];
     //button states
     [self.blurToggleButton setSelected:NO];
-    [self.filtersToggleButton setSelected:NO];
     
     staticPictureOriginalOrientation = UIImageOrientationUp;
     
     hasBlur = NO;
     
-    [self loadFilters];
+    //[self loadFilters];
     
     //we need a crop filter for the live video
     cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.0f, 0.0f, 1.0f, 0.75f)];
@@ -296,7 +293,7 @@
     UIImagePickerController* imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePickerController.delegate = self;
-    imagePickerController.allowsEditing = YES;
+    //imagePickerController.allowsEditing = YES;
     [self presentViewController:imagePickerController animated:YES completion:NULL];
 }
 
@@ -375,12 +372,9 @@
                                                   staticPicture = [[GPUImagePicture alloc] initWithImage:processed smoothlyScaleOutput:YES];
                                                   staticPictureOriginalOrientation = processed.imageOrientation;
                                                   [self prepareFilter];
-                                                  [self.photoCaptureButton setTitle:@"Done" forState:UIControlStateNormal];
+                                                  [self.photoCaptureButton setTitle:@"完成" forState:UIControlStateNormal];
                                                   [self.photoCaptureButton setImage:nil forState:UIControlStateNormal];
                                                   [self.photoCaptureButton setEnabled:YES];
-                                                  if(![self.filtersToggleButton isSelected]){
-                                                      [self showFilters];
-                                                  }
                                               }
                                           });
                                       }];
@@ -424,20 +418,19 @@
     [self.photoCaptureButton setImage:[UIImage imageNamed:@"TakePhoto.bundle/UI/camera-icon"] forState:UIControlStateNormal];
     [self.photoCaptureButton setTitle:nil forState:UIControlStateNormal];
     
-    if ([self.filtersToggleButton isSelected]) {
-        [self hideFilters];
-    }
-    
     cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.0f, 0.0f, 1.0f, 0.75f)];
     [self setFilter:selectedFilter];
     [self prepareFilter];
 }
 
--(IBAction) cancel:(id)sender {
-    [self.delegate imagePickerControllerDidCancel:self];
+-(IBAction) cancel:(id)sender
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
--(IBAction) handlePan:(UIGestureRecognizer *) sender {
+-(IBAction) handlePan:(UIGestureRecognizer *) sender
+{
     if (hasBlur) {
         CGPoint tapPoint = [sender locationInView:imageView];
         GPUImageGaussianSelectiveBlurFilter* gpu =
@@ -467,7 +460,8 @@
     }
 }
 
--(IBAction) handlePinch:(UIPinchGestureRecognizer *) sender {
+-(IBAction) handlePinch:(UIPinchGestureRecognizer *) sender
+{
     if (hasBlur) {
         CGPoint midpoint = [sender locationInView:imageView];
         GPUImageGaussianSelectiveBlurFilter* gpu =
@@ -498,67 +492,6 @@
     }
 }
 
--(void) showFilters {
-    [self.filtersToggleButton setSelected:YES];
-    self.filtersToggleButton.enabled = NO;
-    CGRect imageRect = self.imageView.frame;
-    imageRect.origin.y -= 34;
-    CGRect sliderScrollFrame = self.filterScrollView.frame;
-    sliderScrollFrame.origin.y -= self.filterScrollView.frame.size.height;
-    CGRect sliderScrollFrameBackground = self.filtersBackgroundImageView.frame;
-    sliderScrollFrameBackground.origin.y -=
-    self.filtersBackgroundImageView.frame.size.height-3;
-    
-    self.filterScrollView.hidden = NO;
-    self.filtersBackgroundImageView.hidden = NO;
-    [UIView animateWithDuration:0.10
-                          delay:0.05
-                        options: UIViewAnimationCurveEaseOut
-                     animations:^{
-                         self.imageView.frame = imageRect;
-                         self.filterScrollView.frame = sliderScrollFrame;
-                         self.filtersBackgroundImageView.frame = sliderScrollFrameBackground;
-                     }
-                     completion:^(BOOL finished){
-                         self.filtersToggleButton.enabled = YES;
-                     }];
-}
-
--(void) hideFilters {
-    [self.filtersToggleButton setSelected:NO];
-    CGRect imageRect = self.imageView.frame;
-    imageRect.origin.y += 34;
-    CGRect sliderScrollFrame = self.filterScrollView.frame;
-    sliderScrollFrame.origin.y += self.filterScrollView.frame.size.height;
-    
-    CGRect sliderScrollFrameBackground = self.filtersBackgroundImageView.frame;
-    sliderScrollFrameBackground.origin.y += self.filtersBackgroundImageView.frame.size.height-3;
-    
-    [UIView animateWithDuration:0.10
-                          delay:0.05
-                        options: UIViewAnimationCurveEaseOut
-                     animations:^{
-                         self.imageView.frame = imageRect;
-                         self.filterScrollView.frame = sliderScrollFrame;
-                         self.filtersBackgroundImageView.frame = sliderScrollFrameBackground;
-                     }
-                     completion:^(BOOL finished){
-                         
-                         self.filtersToggleButton.enabled = YES;
-                         self.filterScrollView.hidden = YES;
-                         self.filtersBackgroundImageView.hidden = YES;
-                     }];
-}
-
--(IBAction) toggleFilters:(UIButton *)sender {
-    sender.enabled = NO;
-    if (sender.selected){
-        [self hideFilters];
-    } else {
-        [self showFilters];
-    }
-    
-}
 
 -(void) dealloc {
     [self removeAllTargets];
@@ -574,12 +507,43 @@
     [stillCamera stopCameraCapture];
     [super viewWillDisappear:animated];
 }
+#pragma mark AFPhotoEditorControllerDelegate
+- (void)photoEditor:(AFPhotoEditorController *)editor finishedWithImage:(UIImage *)image
+{
+    // Handle the result image here
+    if (image != nil) {
+        SendAndSaveViewController* viewController = [[SendAndSaveViewController alloc] initWithImage:image];
+        [self.navigationController pushViewController:viewController animated:NO];
+        //[self.navigationController popToViewController:viewController animated:NO];
+
+        [viewController release];
+    }
+    
+    //关闭图像选择器
+    [self dismissModalViewControllerAnimated:NO];
+}
+- (void)photoEditorCanceled:(AFPhotoEditorController *)editor
+{
+    // Handle cancelation here
+    [self dismissModalViewControllerAnimated:YES];
+}
 
 #pragma mark - UIImagePickerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    UIImage* outputImage = [info objectForKey:UIImagePickerControllerEditedImage];
+   
+#if 0
+    [self dismissModalViewControllerAnimated:NO];
+    //UIImage *image = [UIImage imageNamed:@"Default.png"];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self performSelector:@selector(showSingleImageView:) withObject:image afterDelay:0.5];
+#else
+    [self dismissModalViewControllerAnimated:NO];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self showSingleImageView:image];
+#endif
+    /*UIImage* outputImage = [info objectForKey:UIImagePickerControllerEditedImage];
     if (outputImage == nil) {
         outputImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
@@ -592,16 +556,24 @@
         [self.cameraToggleButton setEnabled:NO];
         [self.flashToggleButton setEnabled:NO];
         [self prepareStaticFilter];
-        [self.photoCaptureButton setTitle:@"Done" forState:UIControlStateNormal];
+        [self.photoCaptureButton setTitle:@"完成" forState:UIControlStateNormal];
         [self.photoCaptureButton setImage:nil forState:UIControlStateNormal];
         [self.photoCaptureButton setEnabled:YES];
-        if(![self.filtersToggleButton isSelected]){
-            [self showFilters];
-        }
         
-    }
+    }*/
 }
 
+-(void)showSingleImageView:(id)image
+{
+    if(image)
+    {
+        AFPhotoEditorController *editorController = [[AFPhotoEditorController alloc] initWithImage:image];
+        [editorController setDelegate:self];
+        [self presentModalViewController:editorController animated:YES];
+        [editorController release];
+    }
+    
+}
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     if (isStatic) {
         // TODO: fix this hack

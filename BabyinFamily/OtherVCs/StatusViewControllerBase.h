@@ -19,6 +19,7 @@
 #import "GifView.h"
 #import "SHKActivityIndicator.h"
 #import "ZJTDetailStatusVC.h"
+#import "BabyFullScreenScroll.h"
 
 
 @class WeiBoMessageManager;

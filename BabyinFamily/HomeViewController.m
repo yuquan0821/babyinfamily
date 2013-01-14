@@ -34,9 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-
-    
     //如果未授权，则调入授权页面。
     NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
     NSLog([manager isNeedToRefreshTheToken] == YES ? @"need to login":@"will login");
@@ -51,9 +48,9 @@
     else
     {
         [manager getUserID];
-        [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:3];
-        //        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
-        [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+        [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
+        //[[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
     [defaultNotifCenter addObserver:self selector:@selector(didGetUserID:)      name:MMSinaGotUserID            object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(didGetHomeLine:)    name:MMSinaGotHomeLine          object:nil];
@@ -80,9 +77,9 @@
     {
         shouldLoad = NO;
         [manager getUserID];
-        [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:-1];
-        //        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
-        [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+        [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
+        //[[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
 }
 
@@ -137,8 +134,8 @@
         if (error && ![error isEqual:[NSNull null]]) {
             if ([error isEqualToString:@"expired_token"])
             {
-                //                [[SHKActivityIndicator currentIndicator] hide];
-                [[BabyAlertWindow getInstance] hide];
+                [[SHKActivityIndicator currentIndicator] hide];
+                //[[BabyAlertWindow getInstance] hide];
                 shouldLoad = YES;
                 OAuthWebView *webV = [[OAuthWebView alloc]initWithNibName:@"OAuthWebView" bundle:nil];
                 webV.hidesBottomBarWhenPushed = YES;
@@ -157,8 +154,8 @@
     [table reloadData];
     [self.tableView reloadData];
     
-    //    [[SHKActivityIndicator currentIndicator] hide];
-    [[BabyAlertWindow getInstance] hide];
+    [[SHKActivityIndicator currentIndicator] hide];
+    //[[BabyAlertWindow getInstance] hide];
     
     [headDictionary  removeAllObjects];
     [imageDictionary removeAllObjects];
@@ -180,7 +177,7 @@
         return;
     }
     
-    [[BabyAlertWindow getInstance] showWithString:[NSString stringWithFormat:@"有%@条新微博",num]];
+    [[BabyAlertWindow getInstance] showWithString:[NSString stringWithFormat:@"您有%@条新图片",num]];
     [[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:10];
 }
 

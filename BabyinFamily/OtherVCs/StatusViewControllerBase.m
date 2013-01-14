@@ -7,15 +7,22 @@
 //
 
 #import "StatusViewControllerBase.h"
+#import "CellHeaderView.h"
+#import "TakePhotoViewController.h"
 
 #define kTextViewPadding            16.0
 #define kLineBreakMode              UILineBreakModeWordWrap
+#define HEADER_HEIGHT 48
+
 
 @interface StatusViewControllerBase()
 -(void)setup;
 @end
 
 @implementation StatusViewControllerBase
+{
+    BabyFullScreenScroll *_babyFullScreenScroll;
+}
 @synthesize table;
 @synthesize statusCellNib;
 @synthesize statuesArr;
@@ -112,13 +119,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 0, 0);
+    [self.navigationController.view layoutSubviews];
     [self setUpRefreshView];
     self.tableView.contentInset = UIEdgeInsetsOriginal;
+    
     NSLog(@" sts base table = %@,delegate = %@",self.tableView,self.tableView.delegate);
+    NSLog(@"navigation is height %f",self.navigationController.navigationBar.frame.size.height);
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(mmRequestFailed:)   name:MMSinaRequestFailed object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)       name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
+    _babyFullScreenScroll = [[BabyFullScreenScroll alloc] initWithViewController:self];
+    //self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 0, 0);
+
+    _babyFullScreenScroll.shouldShowUIBarsOnScrollUp = YES;
+    
 }
 
 -(void)viewDidUnload
@@ -133,11 +148,20 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if (self.toolbarItems.copy > 0) {
+        [self.navigationController setToolbarHidden:YES animated:animated];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    if (self.toolbarItems.count > 0) {
+        [self.navigationController setToolbarHidden:NO animated:animated];
+    }
+    
+    [_babyFullScreenScroll layoutTabBarController];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -213,7 +237,7 @@
     if ([url isEqualToString:user.profileImageUrl])
     {
         UIImage * image     = [UIImage imageWithData:data];
-        user.avatarImage    = image;
+       user.avatarImage    = image;
         
         [headDictionary setObject:data forKey:indexNumber];
     }    
@@ -221,6 +245,8 @@
     if([url isEqualToString:sts.bmiddlePic])
     {
         [imageDictionary setObject:data forKey:indexNumber];
+    
+         
     }
     //得到的是转发的图片
     if (sts.retweetedStatus && ![sts.retweetedStatus isEqual:[NSNull null]])
@@ -232,7 +258,7 @@
     }
     
     //reload table
-    NSIndexPath *indexPath  = [NSIndexPath indexPathForRow:index inSection:0];
+    NSIndexPath *indexPath  = [NSIndexPath indexPathForRow:0 inSection:index];
     NSArray     *arr        = [NSArray arrayWithObject:indexPath];
     [table reloadRowsAtIndexPaths:arr withRowAnimation:NO];
     [self.tableView reloadRowsAtIndexPaths:arr withRowAnimation:NO];
@@ -242,16 +268,16 @@
 {
     [self stopLoading];
     [self doneLoadingTableViewData];
-    //    [[SHKActivityIndicator currentIndicator] hide];
-    [[BabyAlertWindow getInstance] hide];
+    [[SHKActivityIndicator currentIndicator] hide];
+    //[[BabyAlertWindow getInstance] hide];
 }
 
 //上拉刷新
 -(void)refresh
 {
-    [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:-1];
-    //    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
-    [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+    [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
+    //[[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
 }
 
 //计算text field 的高度。
@@ -259,7 +285,7 @@
 {
     UIFont * font=[UIFont  systemFontOfSize:14];
     CGSize size=[contentText sizeWithFont:font constrainedToSize:CGSizeMake(with - kTextViewPadding, 300000.0f) lineBreakMode:kLineBreakMode];
-    CGFloat height = size.height + 44;
+    CGFloat height = size.height;
     return height ;//= 200.0f;
 }
 
@@ -281,41 +307,73 @@
 #pragma mark - UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if (statuesArr == nil) {
+        return 0;
+    }
+    return self.statuesArr.count;
+    NSLog(@"cellForRowAtIndexPath error count = %d",[statuesArr count]);
+
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [statuesArr count];
+    if (statuesArr == nil) {
+        return 0;
+    }
+    return 1;
 }
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    CellHeaderView *headview= [[CellHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, HEADER_HEIGHT)];
+    
+    if (section >= [statuesArr count]) {
+        NSLog(@"cellForRowAtIndexPath error ,index = %d,count = %d",section,[statuesArr count]);
+        return headview;
+    }
+    NSData *data = [headDictionary objectForKey:[NSNumber numberWithInt:section]];
+    headview.avatarImage = [UIImage imageWithData:data];
+    Status *status = [statuesArr objectAtIndex:section];
+    headview.status = status;
+    headview.nameLabel.text = status.user.name;
+    headview.locationLabel.text = status.user.location;
+    headview.timeLabel.text = status.timestamp;
+    //headview.avatarImage = status.user.avatarImage;
+
+
+    return headview;
+}
+
+
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger  row = indexPath.row;
+    NSInteger  row = indexPath.section;
     StatusCell *cell = [self cellForTableView:tableView fromNib:self.statusCellNib];
     if (row >= [statuesArr count]) {
         NSLog(@"cellForRowAtIndexPath error ,index = %d,count = %d",row,[statuesArr count]);
         return cell;
     }
-    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath row]]];
-    NSData *avatarData = [headDictionary objectForKey:[NSNumber numberWithInt:[indexPath row]]];
+    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath section]]];
+   // NSData *avatarData = [headDictionary objectForKey:[NSNumber numberWithInt:[indexPath section]]];
     Status *status = [statuesArr objectAtIndex:row];
     cell.delegate = self;
     cell.cellIndexPath = indexPath;
-    [cell setupCell:status avatarImageData:avatarData contentImageData:imageData];
+    [cell setupCell:status contentImageData:imageData];
+
     //开始绘制第一个cell时，隐藏indecator.
     if (isFirstCell) {
-        //        [[SHKActivityIndicator currentIndicator] hide];
-        [[BabyAlertWindow getInstance] hide];
+        [[SHKActivityIndicator currentIndicator] hide];
+       // [[BabyAlertWindow getInstance] hide];
         isFirstCell = NO;
     }
     return cell;
 }
 
+
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger  row = indexPath.row;
+    NSInteger  row = indexPath.section;
     
     if (row >= [statuesArr count])
     {
@@ -326,7 +384,7 @@
     Status *status          = [statuesArr objectAtIndex:row];
     NSString *url = status.bmiddlePic;
     StatusCell *cell = [self cellForTableView:tableView fromNib:self.statusCellNib];
-    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath row]]];
+    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath section]]];
     CGFloat height = 0.0f;
     
     //
@@ -337,10 +395,14 @@
     }
     return height;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return HEADER_HEIGHT;
+}
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+ -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger  row = indexPath.row;
+    NSInteger  row = indexPath.section;
     if (row >= [statuesArr count]) {
         NSLog(@"didSelectRowAtIndexPath error ,index = %d,count = %d",row,[statuesArr count]);
         return ;
@@ -350,10 +412,10 @@
     Status *status  = [statuesArr objectAtIndex:row];
     detailVC.status = status;
     
-    NSData *data = [headDictionary objectForKey:[NSNumber numberWithInt:[indexPath row]]];
+    NSData *data = [headDictionary objectForKey:[NSNumber numberWithInt:[indexPath section]]];
     detailVC.avatarImage = [UIImage imageWithData:data];
     
-    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath row]]];
+    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath section]]];
     if (![imageData isEqual:[NSNull null]])
     {
         detailVC.contentImage = [UIImage imageWithData:imageData];
@@ -361,6 +423,7 @@
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
     [detailVC release];
+   [_babyFullScreenScroll showUIBarsWithScrollView:tableView animated:YES];
 }
 
 #pragma mark - StatusCellDelegate
@@ -400,12 +463,12 @@
 {
     shouldShowIndicator = YES;
     
-    if ([theCell.cellIndexPath row] > [statuesArr count]) {
+    if ([theCell.cellIndexPath section] > [statuesArr count]) {
         NSLog(@"cellImageDidTaped error ,index = %d,count = %d",[theCell.cellIndexPath row],[statuesArr count]);
         return ;
     }
     
-    Status *sts = [statuesArr objectAtIndex:[theCell.cellIndexPath row]];
+    Status *sts = [statuesArr objectAtIndex:[theCell.cellIndexPath section]];
     BOOL isRetwitter = sts.retweetedStatus && sts.retweetedStatus.originalPic != nil;
     UIApplication *app = [UIApplication sharedApplication];
     
@@ -456,14 +519,30 @@
 
 #pragma mark -
 #pragma mark UIScrollViewDelegate Methods
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [_babyFullScreenScroll scrollViewWillBeginDragging:scrollView];
+}
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{    
     if (scrollView.contentOffset.y < 200) {
         [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     }
     else
         [super scrollViewDidScroll:scrollView];
+    [_babyFullScreenScroll scrollViewDidScroll:scrollView];
+
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    return [_babyFullScreenScroll scrollViewShouldScrollToTop:scrollView];
+}
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
+{
+    [_babyFullScreenScroll scrollViewDidScrollToTop:scrollView];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -482,9 +561,9 @@
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
     _reloading = YES;
-	[manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:-1];
-    //    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
-    [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+	[manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
+   // [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
@@ -497,6 +576,11 @@
 	
 	return [NSDate date]; // should return date data source was last changed
 	
+}
+- (void)photoEditorCanceled:(TakePhotoViewController *)editor
+{
+    // Handle cancelation here
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 
