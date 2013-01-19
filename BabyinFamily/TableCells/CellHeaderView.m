@@ -17,8 +17,6 @@
 @synthesize locationIcon;
 @synthesize locationLabel;
 @synthesize timeLabel;
-@synthesize status;
-@synthesize user;
 
 -(void) dealloc
 {
@@ -28,8 +26,6 @@
     [locationIcon release];
     [locationLabel release];
     [timeLabel release];
-    [status release];
-    [user release];
     [super dealloc];
 }
 
@@ -43,35 +39,47 @@
 }
 
 - (void)initializeState {
+
     self.alpha = 0.9;
     self.backgroundColor = [UIColor clearColor];
-    self.user = status.user;
     
-    self.avatarImage = status.user.avatarImage;//[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];//status.user.avatarImage;//[UIImage imageNamed:@"avatar.png"];
+    self.avatarImage = [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
     self.arrowImage = [UIImage imageNamed:@"weibo.bundle/WeiboImages/arrow.png"];
     self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 160, 28)];
     self.nameLabel.textColor = [UIColor brownColor];
     self.nameLabel.font = [UIFont boldSystemFontOfSize:17];
     self.nameLabel.backgroundColor = [UIColor clearColor];
-    self.nameLabel.text = self.user.screenName;//@"minifans";
     
     self.locationIcon = [UIImage imageNamed:@"weibo.bundle/WeiboImages/compose_locatebutton_background.png"];
+    
     self.locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(72,  self.nameLabel.frame.origin.y + self.nameLabel.frame.size.height - 4, 144, 21)];
     self.locationLabel.textColor = [UIColor blackColor];
     self.locationLabel.font = [UIFont systemFontOfSize: 12];
     self.locationLabel.backgroundColor = [UIColor clearColor];
-    self.locationLabel.text = self.user.location;//@"北京 海淀";
     
     self.timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.nameLabel.frame.origin.x + self.nameLabel.frame.size.width, 16, 80, 21)];
     self.timeLabel.textColor = [UIColor brownColor];
     self.timeLabel.font = [UIFont systemFontOfSize:12];
     self.timeLabel.textAlignment = UITextAlignmentRight;
     self.timeLabel.backgroundColor = [UIColor clearColor];
-    self.timeLabel.text = status.timestamp;//@"timeTamp";
-    
+        
     [self addSubview:nameLabel];
     [self addSubview:locationLabel];
     [self addSubview:timeLabel];
+}
+
+- (void)setupHeaderView:(Status *)status avatarImageData:(NSData *)avatarData
+{
+    if (![avatarData isEqual:[NSNull null]])
+    {
+        self.avatarImage= [UIImage imageWithData:avatarData];
+    }else{
+        self.avatarImage= [UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"];
+    }
+    self.nameLabel.text = status.user.screenName;
+    self.locationLabel.text = status.user.location;
+    self.timeLabel.text = status.timestamp;
+    
 }
 
 - (void)setUpArrow:(CGRect)frame {
@@ -80,6 +88,7 @@
     arrowImageView.alpha = 0.9;
     UIImageView *locationImageView = [[UIImageView alloc] initWithImage:self.locationIcon];
     locationImageView.frame =  CGRectMake(58, self.nameLabel.frame.origin.y + self.nameLabel.frame.size.height, 14, 14);
+    
     [self addSubview:arrowImageView];
     [self addSubview:locationImageView];
 }
