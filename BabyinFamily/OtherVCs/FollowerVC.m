@@ -143,7 +143,7 @@
     [self getAvatars];
     [self stopLoading];
 //    [[SHKActivityIndicator currentIndicator] hide];
-    [[ZJTStatusBarAlertWindow getInstance] hide];
+    [[BabyAlertWindow getInstance] hide];
 }
 
 -(void)gotFollowResult:(NSNotification*)sender
@@ -243,7 +243,7 @@
 {
     [self stopLoading];
 //    [[SHKActivityIndicator currentIndicator] hide];
-    [[ZJTStatusBarAlertWindow getInstance] hide];
+    [[BabyAlertWindow getInstance] hide];
 }
 
 -(void)getAvatars
@@ -280,7 +280,7 @@
     }
     if (self.userArr == nil) {
 //        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
-        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+        [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
 }
 

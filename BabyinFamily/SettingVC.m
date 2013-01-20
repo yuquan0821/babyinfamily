@@ -13,7 +13,6 @@
 #import "ZJTHotRepostViewController.h"
 #import "AboutViewController.h"
 
-//sections
 enum{
     kStatusSection = 0,
     kAccountSection,
@@ -26,16 +25,20 @@ enum{
 enum{
     kHotStatus = 0,
     kHotRetwitted,
+    kHotTrends,
+    //    kMetionsStatuses,
     kStatusRowsCount,
 };
 
 //kAccountSection
 enum {
     kCurrentUser = 0,
-    kChangeAccount,  
+    kChangeAccount,
+    kCleanCache,
     kAboutMe,
     kAccountRowsCount,
 };
+
 
 @interface SettingVC ()
 
@@ -53,7 +56,6 @@ enum {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"设置";
-        //self.tabBarItem.image = [UIImage imageNamed:@"First"];
         
     }
     return self;
@@ -74,7 +76,7 @@ enum {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfo:)    name:MMSinaGotUserInfo          object:nil];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -123,7 +125,7 @@ enum {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -139,6 +141,10 @@ enum {
             cell.textLabel.text = @"更换账号";
         }
         
+        else if (row == kCleanCache) {
+            cell.textLabel.text = @"清空缓存";
+        }
+        
         else if (row == kAboutMe) {
             cell.textLabel.text = @"关于";
         }
@@ -152,6 +158,14 @@ enum {
         else if (row == kHotRetwitted) {
             cell.textLabel.text = @"今日热门转发";
         }
+        
+        else if (row == kHotTrends) {
+            cell.textLabel.text = @"今日热门话题";
+        }
+        
+        //        else if (row == kMetionsStatuses) {
+        //            cell.textLabel.text = @"@我";
+        //        }
     }
     return cell;
 }
@@ -189,6 +203,14 @@ enum {
         
         else if (row == kChangeAccount) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定要更换账号吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"更换", nil];
+            alert.tag = 0;
+            [alert show];
+            [alert release];
+        }
+        
+        else if (row == kCleanCache) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定要清空缓存吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"清空", nil];
+            alert.tag = 1;
             [alert show];
             [alert release];
         }
@@ -202,7 +224,7 @@ enum {
     }
     
     else if (section == kStatusSection) {
-        if (row == kHotStatus) {        
+        if (row == kHotStatus) {
             ZJTHotRepostViewController *h = [[ZJTHotRepostViewController alloc] initWithType:kHotCommentDaily];
             h.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:h animated:YES];
@@ -215,6 +237,20 @@ enum {
             [self.navigationController pushViewController:h animated:YES];
             [h release];
         }
+        
+       // else if (row == kHotTrends) {
+         ///   HotTrendsVC *h = [[HotTrendsVC alloc] initWithStyle:UITableViewStylePlain];
+            //h.hidesBottomBarWhenPushed = YES;
+           // [self.navigationController pushViewController:h animated:YES];
+           // [h release];
+        //}
+        
+        //        else if (row == kMetionsStatuses) {
+        //            MetionsStatusesVC *m = [[MetionsStatusesVC alloc]initWithNibName:@"FirstViewController" bundle:nil];
+        //            m.hidesBottomBarWhenPushed = YES;
+        //            [self.navigationController pushViewController:m animated:YES];
+        //            [m release];
+        //        }
     }
 }
 

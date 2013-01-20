@@ -9,12 +9,16 @@
 
 #import "ProfileViewController.h"
 #import "WeiBoMessageManager.h"
+#import "Status.h"
 #import "User.h"
 #import "ASIHTTPRequest.h"
 #import "HHNetDataCacheManager.h"
+#import "ImageBrowser.h"
+#import "GifView.h"
 #import "SHKActivityIndicator.h"
+#import "ZJTDetailStatusVC.h"
 #import "FollowerVC.h"
-#import "ZJTHelpler.h"
+#import "BabyHelper.h"
 
 @interface ProfileViewController ()
 
@@ -25,6 +29,10 @@
 @implementation ProfileViewController
 @synthesize table;
 @synthesize userID;
+@synthesize statusCellNib;
+@synthesize statuesArr;
+@synthesize imageDictionary;
+@synthesize browserView;
 @synthesize headerView;
 @synthesize headerVImageV;
 @synthesize headerVNameLB;
@@ -38,16 +46,20 @@
 {
     self.avatarImage = nil;
     self.user = nil;
+    self.imageDictionary = nil;
+    self.statusCellNib = nil;
+    self.statuesArr = nil;
     self.userID = nil;
+    self.browserView = nil;
     self.table = nil;
     self.headerVImageV = nil;
     self.headerVNameLB = nil;
     self.weiboCount = nil;
     self.followerCount = nil;
     self.followingCount = nil;
-    
     self.headerView = nil;
     [super dealloc];
+
 }
 
 
@@ -71,6 +83,14 @@
     return self;
 }
 
+-(UINib*)statusCellNib
+{
+    if (statusCellNib == nil)
+    {
+        self.statusCellNib = [StatusCell nib];
+    }
+    return statusCellNib;
+}
 
 - (void)twitter
 {
@@ -90,15 +110,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (userID == [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID]) {
+        UIBarButtonItem *retwitterBtn = [[UIBarButtonItem alloc]initWithTitle:@"反馈" style:UIBarButtonItemStylePlain target:self action:@selector(twitter)];
+        self.navigationItem.rightBarButtonItem = retwitterBtn;
+        [retwitterBtn release];
+        
+        UIBarButtonItem *SettingBtn = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(setting)];
+        self.navigationItem.leftBarButtonItem = SettingBtn;
+        [SettingBtn release];
+        table = self.tableView;
+    }
     
-   UIBarButtonItem *retwitterBtn = [[UIBarButtonItem alloc]initWithTitle:@"反馈" style:UIBarButtonItemStylePlain target:self action:@selector(twitter)];
-    self.navigationItem.rightBarButtonItem = retwitterBtn;
-    [retwitterBtn release];
-    
-    UIBarButtonItem *SettingBtn = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(setting)];
-    self.navigationItem.leftBarButtonItem = SettingBtn;
-    [SettingBtn release];
-    table = self.tableView;
     [table setTableHeaderView:headerView];
 
     if (avatarImage) {
@@ -113,7 +135,7 @@
         
     }
     if (!user) {
-        self.user = [ZJTHelpler getInstance].user;
+        self.user = [BabyHelper getInstance].user;
     }
     self.headerVNameLB.text = user.screenName;
     self.weiboCount.text = [NSString stringWithFormat:@"%d",user.statusesCount];
@@ -126,9 +148,9 @@
     
     self.tableView.contentInset = UIEdgeInsetsOriginal;
     
-    [manager getUserStatusUserID:userID sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:-1 feature:-1];
+    [manager getUserStatusUserID:userID sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
     //    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
-    [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+    [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     
     [defaultNotifCenter addObserver:self selector:@selector(didGetHomeLine:)    name:MMSinaGotUserStatus        object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
@@ -151,9 +173,9 @@
     if (shouldLoad)
     {
         shouldLoad = NO;
-        [manager getUserStatusUserID:userID sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:-1 feature:-1];
+        [manager getUserStatusUserID:userID sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
         //        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
-        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+        [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
 }
 
@@ -186,7 +208,6 @@
  [followingVC release];
  }
 
-#pragma mark - Methods
 
 //异步加载图片
 -(void)getImages
@@ -194,6 +215,32 @@
     //下载头像图片
     [[HHNetDataCacheManager getInstance] getDataWithURL:user.profileLargeImageUrl];
     
+    //得到文字数据后，开始加载图片
+    for(int i=0;i<[statuesArr count];i++)
+    {
+        Status * member=[statuesArr objectAtIndex:i];
+        NSNumber *indexNumber = [NSNumber numberWithInt:i];
+        
+        //下载博文图片
+        if (member.thumbnailPic && [member.thumbnailPic length] != 0)
+        {
+            [[HHNetDataCacheManager getInstance] getDataWithURL:member.thumbnailPic withIndex:i];
+        }
+        else
+        {
+            [imageDictionary setObject:[NSNull null] forKey:indexNumber];
+        }
+        
+        //下载转发的图片
+        if (member.retweetedStatus.thumbnailPic && [member.retweetedStatus.thumbnailPic length] != 0)
+        {
+            [[HHNetDataCacheManager getInstance] getDataWithURL:member.retweetedStatus.thumbnailPic withIndex:i];
+        }
+        else
+        {
+            [imageDictionary setObject:[NSNull null] forKey:indexNumber];
+        }
+    }
 }
 
 //得到图片
@@ -202,6 +249,7 @@
     NSDictionary * dic = sender.object;
     NSString * url          = [dic objectForKey:HHNetDataCacheURLKey];
     NSNumber *indexNumber   = [dic objectForKey:HHNetDataCacheIndex];
+    NSInteger index = [indexNumber intValue];
     
     if([url isEqualToString:user.profileLargeImageUrl])
     {
@@ -212,11 +260,36 @@
     
     //当下载大图过程中，后退，又返回，如果此时收到大图的返回数据，会引起crash，在此做预防。
     if (indexNumber == nil) {
-        NSLog(@"profile indexNumber = nil");
+        NSLog(@"indexNumber = nil");
         return;
     }
     
-
+    if (index >= [statuesArr count]) {
+        //        NSLog(@"statues arr error ,index = %d,count = %d",index,[statuesArr count]);
+        return;
+    }
+    
+    Status *sts = [statuesArr objectAtIndex:index];
+    
+    //得到的是博文图片
+    if([url isEqualToString:sts.thumbnailPic])
+    {
+        [imageDictionary setObject:[dic objectForKey:HHNetDataCacheData] forKey:indexNumber];
+    }
+    
+    //得到的是转发的图片
+    if (sts.retweetedStatus && ![sts.retweetedStatus isEqual:[NSNull null]])
+    {
+        if ([url isEqualToString:sts.retweetedStatus.thumbnailPic])
+        {
+            [imageDictionary setObject:[dic objectForKey:HHNetDataCacheData] forKey:indexNumber];
+        }
+    }
+    
+    //reload table
+    NSIndexPath *indexPath  = [NSIndexPath indexPathForRow:index inSection:0];
+    NSArray     *arr        = [NSArray arrayWithObject:indexPath];
+    [table reloadRowsAtIndexPaths:arr withRowAnimation:NO];
 }
 
 -(void)didGetUserID:(NSNotification*)sender
@@ -226,16 +299,23 @@
     [manager getUserInfoWithUserID:[userID longLongValue]];
 }
 
+//-(void)didGetUserInfo:(NSNotification*)sender
+//{
+//    User *aUser = sender.object;
+//    if (self.title != @"我的微博") {
+//        self.title = aUser.screenName;
+//    }
+//}
 
 -(void)didGetHomeLine:(NSNotification*)sender
 {
     [self stopLoading];
     
     shouldLoadAvatar = YES;
-   // self.statuesArr = sender.object;
- 
+    self.statuesArr = sender.object;
+    [table reloadData];
     //    [[SHKActivityIndicator currentIndicator] hide];
-    [[ZJTStatusBarAlertWindow getInstance] hide];
+    [[BabyAlertWindow getInstance] hide];
     
     [imageDictionary removeAllObjects];
     
@@ -246,14 +326,14 @@
 {
     [self stopLoading];
     //    [[SHKActivityIndicator currentIndicator] hide];
-    [[ZJTStatusBarAlertWindow getInstance] hide];
+    [[BabyAlertWindow getInstance] hide];
 }
 
 -(void)refresh
 {
-    [manager getUserStatusUserID:userID sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:-1 feature:-1];
+    [manager getUserStatusUserID:userID sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
     //    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
-    [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+    [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
 }
 
 //计算text field 的高度。
@@ -265,6 +345,191 @@
     return height;
 }
 
+- (id)cellForTableView:(UITableView *)tableView fromNib:(UINib *)nib {
+    NSString *cellID = NSStringFromClass([StatusCell class]);
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (cell == nil) {
+        if (isFirstCell) {
+            //            [[SHKActivityIndicator currentIndicator] hide];
+            [[BabyAlertWindow getInstance] hide];
+            isFirstCell = NO;
+        }
+        NSLog(@"profile cell new");
+        NSArray *nibObjects = [nib instantiateWithOwner:nil options:nil];
+        cell = [nibObjects objectAtIndex:0];
+    }
+    else {
+        [(LPBaseCell *)cell reset];
+    }
+    
+    return cell;
+}
 
-   
+#pragma mark - UITableViewDataSource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [statuesArr count];
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger  row = indexPath.row;
+    StatusCell *cell = [self cellForTableView:table fromNib:self.statusCellNib];
+    
+    if (row >= [statuesArr count]) {
+        //        NSLog(@"cellForRowAtIndexPath error ,index = %d,count = %d",row,[statuesArr count]);
+        return cell;
+    }
+    
+    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath row]]];
+    Status *status = [statuesArr objectAtIndex:row];
+    cell.delegate = self;
+    cell.cellIndexPath = indexPath;
+    
+    [cell setupCell:status  contentImageData:imageData];
+    
+    //开始绘制第一个cell时，隐藏indecator.
+    if (isFirstCell) {
+        //        [[SHKActivityIndicator currentIndicator] hide];
+        [[BabyAlertWindow getInstance] hide];
+        isFirstCell = NO;
+    }
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger  row = indexPath.section;
+    
+    if (row >= [statuesArr count])
+    {
+        NSLog(@"heightForRowAtIndexPath error ,index = %d,count = %d",row,[statuesArr count]);
+        return 1;
+    }
+    
+    Status *status          = [statuesArr objectAtIndex:row];
+    NSString *url = status.bmiddlePic;
+    StatusCell *cell = [self cellForTableView:tableView fromNib:self.statusCellNib];
+    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath section]]];
+    CGFloat height = 0.0f;
+    
+    //
+    if (url && [url length] != 0)
+    {
+        height = [cell setCellHeight: status contentImageData:imageData];
+        NSLog(@"hight is %f",height);
+    }
+    return height;
+
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger  row = indexPath.row;
+    if (row >= [statuesArr count]) {
+        //        NSLog(@"didSelectRowAtIndexPath error ,index = %d,count = %d",row,[statuesArr count]);
+        return ;
+    }
+    
+    ZJTDetailStatusVC *detailVC = [[ZJTDetailStatusVC alloc] initWithNibName:@"ZJTDetailStatusVC" bundle:nil];
+    Status *status  = [statuesArr objectAtIndex:row];
+    detailVC.status = status;
+    detailVC.isFromProfileVC = YES;
+    detailVC.avatarImage = avatarImage;
+    
+    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath row]]];
+    if (![imageData isEqual:[NSNull null]])
+    {
+        detailVC.contentImage = [UIImage imageWithData:imageData];
+    }
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
+    [detailVC release];
+}
+
+#pragma mark - StatusCellDelegate
+
+-(void)browserDidGetOriginImage:(NSDictionary*)dic
+{
+    NSString * url=[dic objectForKey:HHNetDataCacheURLKey];
+    if ([url isEqualToString:browserView.bigImageURL])
+    {
+        [[SHKActivityIndicator currentIndicator] hide];
+        //        [[ZJTStatusBarAlertWindow getInstance] hide];
+        shouldShowIndicator = NO;
+        
+        UIImage * img=[UIImage imageWithData:[dic objectForKey:HHNetDataCacheData]];
+        [browserView.imageView setImage:img];
+        
+        NSLog(@"big url = %@",browserView.bigImageURL);
+        if ([browserView.bigImageURL hasSuffix:@".gif"])
+        {
+            UIImageView *iv = browserView.imageView; // your image view
+            CGSize imageSize = iv.image.size;
+            CGFloat imageScale = fminf(CGRectGetWidth(iv.bounds)/imageSize.width, CGRectGetHeight(iv.bounds)/imageSize.height);
+            CGSize scaledImageSize = CGSizeMake(imageSize.width*imageScale, imageSize.height*imageScale);
+            CGRect imageFrame = CGRectMake(floorf(0.5f*(CGRectGetWidth(iv.bounds)-scaledImageSize.width)), floorf(0.5f*(CGRectGetHeight(iv.bounds)-scaledImageSize.height)), scaledImageSize.width, scaledImageSize.height);
+            
+            GifView *gifView = [[GifView alloc]initWithFrame:imageFrame data:[dic objectForKey:HHNetDataCacheData]];
+            
+            gifView.userInteractionEnabled = NO;
+            gifView.tag = GIF_VIEW_TAG;
+            [browserView addSubview:gifView];
+            [gifView release];
+        }
+    }
+}
+
+-(void)cellImageDidTaped:(StatusCell *)theCell image:(UIImage *)image
+{
+    shouldShowIndicator = YES;
+    
+    if ([theCell.cellIndexPath row] > [statuesArr count]) {
+        //        NSLog(@"cellImageDidTaped error ,index = %d,count = %d",[theCell.cellIndexPath row],[statuesArr count]);
+        return ;
+    }
+    
+    Status *sts = [statuesArr objectAtIndex:[theCell.cellIndexPath row]];
+    BOOL isRetwitter = sts.retweetedStatus && sts.retweetedStatus.originalPic != nil;
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    CGRect frame = CGRectMake(0, 0, 320, 480);
+    if (browserView == nil) {
+        self.browserView = [[[ImageBrowser alloc]initWithFrame:frame] autorelease];
+        [browserView setUp];
+    }
+    
+    browserView.image = image;
+    browserView.theDelegate = self;
+    browserView.bigImageURL = isRetwitter ? sts.retweetedStatus.originalPic : sts.originalPic;
+    [browserView loadImage];
+    
+    app.statusBarHidden = YES;
+    UIWindow *window = nil;
+    for (UIWindow *win in app.windows) {
+        if (win.tag == 0) {
+            [win addSubview:browserView];
+            window = win;
+            [window makeKeyAndVisible];
+        }
+    }
+    
+    //animation
+    //    CAAnimation *anim = [ZJTHelpler animationWithOpacityFrom:0.0f To:1.0f Duration:0.3f BeginTime:0.0f];
+    //    [browserView.layer addAnimation:anim forKey:@"jtone"];
+    
+    if (shouldShowIndicator == YES && browserView) {
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:browserView];
+        //        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+    }
+    else shouldShowIndicator = YES;
+}
+
+
 @end

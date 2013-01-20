@@ -31,13 +31,8 @@
     HotViewController *vc2 = [[[HotViewController alloc] init] autorelease];
     TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
     MessageViewController *vc4 = [[[MessageViewController alloc] init] autorelease];
-///<<<<<<< HEAD
-    //ProfileViewController *vc5 = [[[ProfileViewController alloc] init] autorelease];
     ProfileViewController *vc5 = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
-//=======
-    //ProfileViewController *vc5 = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
     
-//>>>>>>> 4ad961d2fb20884ff66ef1aef42b3e12afbcc793
     UINavigationController * nav1 = [[[UINavigationController alloc] initWithRootViewController:vc1] autorelease];
     UINavigationController * nav2 = [[[UINavigationController alloc] initWithRootViewController:vc2] autorelease];
     UINavigationController * nav3 = [[[UINavigationController alloc] initWithRootViewController:vc3] autorelease];
@@ -46,15 +41,11 @@
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = @[nav1, nav2,nav3,nav4,nav5];
-    
     self.window.rootViewController = self.tabBarController;
-
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
     NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
     [self addCenterButtonWithImage:[UIImage imageNamed:fullpath] highlightImage:nil];
-    
     return YES;
 }
 -(void) addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage
@@ -77,12 +68,11 @@
     
     [self.tabBarController.view addSubview:button];
 }
-- (void)takePhoto{
+- (void)takePhoto
+{
     TakePhotoViewController *picker = [[TakePhotoViewController alloc] init];
-
     [self.tabBarController presentModalViewController:picker animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-
 }
 - (void)applicationWillResignActive:(UIApplication *)application
 {

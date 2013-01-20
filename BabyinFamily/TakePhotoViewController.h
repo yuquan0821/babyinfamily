@@ -9,6 +9,8 @@
 
 #import <Foundation/Foundation.h>
 #import "GPUImage.h"
+#import "AFPhotoEditorController.h"
+
 
 @class TakePhotoViewController;
 
@@ -16,9 +18,10 @@
 @optional
 - (void)imagePickerController:(TakePhotoViewController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
 - (void)imagePickerControllerDidCancel:(TakePhotoViewController *)picker;
+
 @end
 
-@interface TakePhotoViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface TakePhotoViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate,AFPhotoEditorControllerDelegate>
 {
     GPUImageStillCamera *stillCamera;
     GPUImageOutput<GPUImageInput> *filter;
@@ -36,7 +39,6 @@
 
 @property (retain, nonatomic) IBOutlet UIButton *cameraToggleButton;
 @property (retain, nonatomic) IBOutlet UIButton *blurToggleButton;
-@property (retain, nonatomic) IBOutlet UIButton *filtersToggleButton;
 @property (retain, nonatomic) IBOutlet UIButton *libraryToggleButton;
 @property (retain, nonatomic) IBOutlet UIButton *flashToggleButton;
 @property (retain, nonatomic) IBOutlet UIButton *retakeButton;

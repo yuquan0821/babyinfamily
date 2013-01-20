@@ -23,26 +23,22 @@
     id<StatusCellDelegate> delegate;
     
     UIImageView *avatarImage;
-    UITextView *contentTF;
     UILabel *userNameLB;
     UIImageView *bgImage;
     UIImageView *contentImage;
-    UIView *retwitterMainV;
-    UIImageView *retwitterBgImage;
-    UITextView *retwitterContentTF;
-    UIImageView *retwitterContentImage;
     NSIndexPath *cellIndexPath;
 }
 @property (retain, nonatomic) IBOutlet UILabel *countLB;
-@property (retain, nonatomic) IBOutlet UIImageView *avatarImage;
-@property (retain, nonatomic) IBOutlet UILabel *userNameLB;
+//@property (retain, nonatomic) IBOutlet UIImageView *avatarImage;
+//@property (retain, nonatomic) IBOutlet UILabel *userNameLB;
 @property (retain, nonatomic) IBOutlet UIImageView *bgImage;
 @property (retain, nonatomic) IBOutlet UIImageView *contentImage;
 @property (assign, nonatomic) id<StatusCellDelegate> delegate;
 @property (retain, nonatomic) NSIndexPath *cellIndexPath;
 @property (retain, nonatomic) IBOutlet UILabel *fromLB;
-@property (retain, nonatomic) IBOutlet UILabel *timeLB;
+//@property (retain, nonatomic) IBOutlet UILabel *timeLB;
+//@property (retain, nonatomic) IBOutlet UIButton *moreButton;
 
--(CGFloat)setTFHeightWithImage:(BOOL)hasImage haveRetwitterImage:(BOOL)haveRetwitterImage;
--(void)setupCell:(Status*)status avatarImageData:(NSData*)avatarData contentImageData:(NSData*)imageData;
+-(CGFloat)setCellHeight:(Status *)status contentImageData:(NSData *)imageData;
+-(void)setupCell:(Status*)status contentImageData:(NSData*)imageData;
 @end

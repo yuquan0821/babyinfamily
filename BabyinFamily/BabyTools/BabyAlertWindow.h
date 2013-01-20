@@ -1,15 +1,12 @@
 //
-//  ZJTStatusBarAlertWindow.h
-//  zjtSinaWeiboClient
+//  BabyAlertWindow.h
+//  BabyinFamily
 //
-//  Created by Jianting Zhu on 12-5-5.
-//  Copyright (c) 2012年 ZUST. All rights reserved.
+//  Created by 范艳春 on 12-12-17.
+//
 //
 
-#import <Foundation/Foundation.h>
-@class ZJTStatusBarAlertWindow;
-
-@interface ZJTStatusBarAlertWindow : NSObject{
+@interface BabyAlertWindow : NSObject{
     UIWindow        *_window;
     UILabel         *_label;
     UIImage         *_backgroundImage;
@@ -24,7 +21,7 @@
 @property (nonatomic,retain)UIImageView     *backgroundImageView;
 @property (nonatomic,copy)  NSString        *displayString;
 
-+(ZJTStatusBarAlertWindow *)getInstance;
++(BabyAlertWindow *)getInstance;
 
 -(void)showWithString:(NSString*)string;
 -(void)hide;
