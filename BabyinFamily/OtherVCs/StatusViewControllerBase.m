@@ -322,6 +322,8 @@
     }
     return 1;
 }
+
+//add cellHeaderView to section
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     CellHeaderView *headview= [[CellHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, HEADER_HEIGHT)];
@@ -331,20 +333,12 @@
         return headview;
     }
     NSData *data = [headDictionary objectForKey:[NSNumber numberWithInt:section]];
-    headview.avatarImage = [UIImage imageWithData:data];
     Status *status = [statuesArr objectAtIndex:section];
-    headview.status = status;
-    headview.nameLabel.text = status.user.name;
-    headview.locationLabel.text = status.user.location;
-    headview.timeLabel.text = status.timestamp;
-    //headview.avatarImage = status.user.avatarImage;
-
-
+    [headview setupHeaderView:status avatarImageData:data];
     return headview;
 }
 
-
-
+//add statusCell to sectionrows
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger  row = indexPath.section;

@@ -48,6 +48,7 @@
     [self addCenterButtonWithImage:[UIImage imageNamed:fullpath] highlightImage:nil];
     return YES;
 }
+
 -(void) addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage
 {
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -65,9 +66,9 @@
         center.y = center.y - heightDifference/2.0;
         button.center = center;
     }
-    
     [self.tabBarController.view addSubview:button];
 }
+
 - (void)takePhoto
 {
     TakePhotoViewController *picker = [[TakePhotoViewController alloc] init];
