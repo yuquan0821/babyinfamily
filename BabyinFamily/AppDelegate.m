@@ -29,7 +29,8 @@
     
     HomeViewController *vc1 = [[[HomeViewController alloc] init] autorelease];
     HotViewController *vc2 = [[[HotViewController alloc] init] autorelease];
-    TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
+    //这个vc3其实是没用的,放在这里是为了占位置,让TabBar显示为5个
+    BaseViewController *vc3 = [[[BaseViewController alloc] init] autorelease];
     MessageViewController *vc4 = [[[MessageViewController alloc] init] autorelease];
     ProfileViewController *vc5 = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
     
@@ -66,13 +67,18 @@
         center.y = center.y - heightDifference/2.0;
         button.center = center;
     }
-    [self.tabBarController.view addSubview:button];
+    [self.tabBarController.tabBar insertSubview:button atIndex:-1];
+    [self.tabBarController.tabBar bringSubviewToFront:button];
+//    [self.tabBarController.view addSubview:button];
 }
 
 - (void)takePhoto
 {
-    TakePhotoViewController *picker = [[TakePhotoViewController alloc] init];
-    [self.tabBarController presentModalViewController:picker animated:YES];
+    //takephoto中有push操作，所以这里需要有Navigation
+    TakePhotoViewController *picker = [[[TakePhotoViewController alloc] init] autorelease];
+    UINavigationController * nav = [[[UINavigationController alloc] initWithRootViewController:picker] autorelease];
+    [picker.navigationController setNavigationBarHidden:YES];
+    [self.tabBarController presentModalViewController:nav animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
 }
 - (void)applicationWillResignActive:(UIApplication *)application

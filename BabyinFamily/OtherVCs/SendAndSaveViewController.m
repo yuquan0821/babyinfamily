@@ -13,7 +13,7 @@
 
 
 @interface SendAndSaveViewController ()
-@property (assign, nonatomic) UIImage *mainImage;
+@property (retain, nonatomic) UIImage *mainImage;
 
 
 @end
@@ -29,7 +29,7 @@
 {
     if (self = [super initWithNibName:@"SendAndSaveViewController" bundle:nil]) {
         backGroundImageView.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/detail_image_background.png"];
-        mainImage = image;
+        self.mainImage = image;
     }
     return self;
 }

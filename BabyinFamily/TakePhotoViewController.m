@@ -233,7 +233,9 @@
     
     if (!staticPicture) {
         // TODO: fix this hack
-        [self performSelector:@selector(switchToLibrary:) withObject:nil afterDelay:0.5];
+        //这个地方不可理，不应该指定死延时时间,在内存紧张的情况下，容易发生崩溃,原因是多个presend动作同时执行了
+        //可以考虑其它的方式
+        [self performSelector:@selector(switchToLibrary:) withObject:nil afterDelay:1.5];
     }
     
     [staticPicture addTarget:filter];
@@ -514,9 +516,8 @@
     if (image != nil) {
         SendAndSaveViewController* viewController = [[SendAndSaveViewController alloc] initWithImage:image];
         [self.navigationController pushViewController:viewController animated:NO];
-        //[self.navigationController popToViewController:viewController animated:NO];
-
         [viewController release];
+
     }
     
     //关闭图像选择器
@@ -570,7 +571,9 @@
         AFPhotoEditorController *editorController = [[AFPhotoEditorController alloc] initWithImage:image];
         [editorController setDelegate:self];
         [self presentModalViewController:editorController animated:YES];
-        [editorController release];
+#warning Leaks
+        //这个地方应该release，但是只要release了，在push发送界面的时候就会崩溃,怀疑是这个AFPhotoEditorController这个类有问题.
+        //[editorController release];
     }
     
 }
