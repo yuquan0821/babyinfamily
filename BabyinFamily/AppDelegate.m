@@ -69,7 +69,7 @@
     }
     [self.tabBarController.tabBar insertSubview:button atIndex:-1];
     [self.tabBarController.tabBar bringSubviewToFront:button];
-//    [self.tabBarController.view addSubview:button];
+    [self.tabBarController.view addSubview:button];
 }
 
 - (void)takePhoto
