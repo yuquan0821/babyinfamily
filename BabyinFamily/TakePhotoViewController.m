@@ -8,7 +8,8 @@
 
 #import "TakePhotoViewController.h"
 #import "SendAndSaveViewController.h"
-#import "StatusViewControllerBase.h"
+#import "RaisedCenterButton.h"
+
 @implementation TakePhotoViewController {
     BOOL isStatic;
     BOOL hasBlur;
@@ -37,6 +38,9 @@
         self.wantsFullScreenLayout = YES;
         [self.navigationController setNavigationBarHidden:YES animated:NO];
         self.outputJPEGQuality = 1.0;
+        self.title = @"拍照";
+        NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
+        self.tabBarItem.image = [UIImage imageNamed:fullpath];
     }
     
     return self;
@@ -73,6 +77,10 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [self setUpCamera];
     });
+   // self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+
+
     
     
 }
@@ -426,6 +434,10 @@
 -(IBAction) cancel:(id)sender
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
+
+    self.tabBarController.tabBar.hidden = NO;
+    self.tabBarController.selectedIndex = 0;
+   // [self.tabBarController.selectedViewController.reloadData ];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -513,8 +525,12 @@
     // Handle the result image here
     if (image != nil) {
         SendAndSaveViewController* viewController = [[SendAndSaveViewController alloc] initWithImage:image];
-        [self.navigationController pushViewController:viewController animated:NO];
+        
+       [self.navigationController pushViewController:viewController animated:NO];
+        //[self presentModalViewController:viewController animated:NO];
         //[self.navigationController popToViewController:viewController animated:NO];
+          //NSLog(@"self navigation is %@", self.navigationController);
+       // NSLog(@"self superviewcontroll navigation is %@", self.parentViewController.navigationController);
 
         [viewController release];
     }

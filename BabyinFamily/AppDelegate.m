@@ -12,6 +12,7 @@
 #import "TakePhotoViewController.h"
 #import "MessageViewController.h"
 #import "ProfileViewController.h"
+#import "RaisedCenterButton.h"
 
 @implementation AppDelegate
 
@@ -27,11 +28,11 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     
-    HomeViewController *vc1 = [[[HomeViewController alloc] init] autorelease];
-    HotViewController *vc2 = [[[HotViewController alloc] init] autorelease];
+    HomeViewController *vc1      = [[[HomeViewController alloc] init] autorelease];
+    HotViewController *vc2       = [[[HotViewController alloc] init] autorelease];
     TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
-    MessageViewController *vc4 = [[[MessageViewController alloc] init] autorelease];
-    ProfileViewController *vc5 = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
+    MessageViewController *vc4   = [[[MessageViewController alloc] init] autorelease];
+    ProfileViewController *vc5   = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
     
     UINavigationController * nav1 = [[[UINavigationController alloc] initWithRootViewController:vc1] autorelease];
     UINavigationController * nav2 = [[[UINavigationController alloc] initWithRootViewController:vc2] autorelease];
@@ -41,40 +42,17 @@
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = @[nav1, nav2,nav3,nav4,nav5];
+    //添加button到tabbar上
+    NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
+    RaisedCenterButton *button = [RaisedCenterButton buttonWithImage:[UIImage imageNamed:fullpath] forTabBarController:self.tabBarController];
+    [self.tabBarController.tabBar addSubview:button];
     self.window.rootViewController = self.tabBarController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
-    [self addCenterButtonWithImage:[UIImage imageNamed:fullpath] highlightImage:nil];
     return YES;
 }
 
--(void) addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage
-{
-    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
-    button.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
-    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
-    [button setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
-    [button addTarget:self action:@selector(takePhoto) forControlEvents:UIControlEventTouchUpInside];
-    CGFloat heightDifference = buttonImage.size.height - self.tabBarController.tabBar.frame.size.height;
-    if (heightDifference < 0)
-        button.center = self.tabBarController.tabBar.center;
-    else
-    {
-        CGPoint center = self.tabBarController.tabBar.center;
-        center.y = center.y - heightDifference/2.0;
-        button.center = center;
-    }
-    [self.tabBarController.view addSubview:button];
-}
 
-- (void)takePhoto
-{
-    TakePhotoViewController *picker = [[TakePhotoViewController alloc] init];
-    [self.tabBarController presentModalViewController:picker animated:YES];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*

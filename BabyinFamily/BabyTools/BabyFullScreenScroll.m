@@ -12,7 +12,7 @@
 #define IS_PORTRAIT         UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)
 #define STATUS_BAR_HEIGHT   (IS_PORTRAIT ? [UIApplication sharedApplication].statusBarFrame.size.height : [UIApplication sharedApplication].statusBarFrame.size.width)
 
-#define MIN_SCROLL_DISTANCE_FOR_FULLSCREEN  20
+#define MIN_SCROLL_DISTANCE_FOR_FULLSCREEN  44
 
 @implementation BabyFullScreenScroll
 
@@ -110,13 +110,19 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    _prevContentOffsetY = scrollView.contentOffset.y;
+    _prevContentOffsetY = scrollView.contentOffset.y ;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+   // CGFloat sectionHeaderHeight = 48;
+
+    
+    //scrollView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0);
+
+   
     if (scrollView.dragging || _isScrollingTop) {
-        CGFloat deltaY = scrollView.contentOffset.y-_prevContentOffsetY;
+        CGFloat deltaY = scrollView.contentOffset.y - _prevContentOffsetY;
         _prevContentOffsetY = MAX(scrollView.contentOffset.y, -scrollView.contentInset.top);
         
         if (!self.shouldShowUIBarsOnScrollUp && deltaY < 0 && scrollView.contentOffset.y > 0 && !_isScrollingTop) {

@@ -103,7 +103,7 @@
 {
     if (_refreshHeaderView == nil) {
 		
-		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height -88.0f, self.view.frame.size.width, self.tableView.bounds.size.height)];
 		view.delegate = self;
 		[self.tableView addSubview:view];
 		_refreshHeaderView = [view retain];
@@ -119,7 +119,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 0, 0);
     [self.navigationController.view layoutSubviews];
     [self setUpRefreshView];
     self.tableView.contentInset = UIEdgeInsetsOriginal;
@@ -130,8 +129,6 @@
     [defaultNotifCenter addObserver:self selector:@selector(mmRequestFailed:)   name:MMSinaRequestFailed object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)       name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
     _babyFullScreenScroll = [[BabyFullScreenScroll alloc] initWithViewController:self];
-    //self.tableView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height, 0, 0, 0);
-
     _babyFullScreenScroll.shouldShowUIBarsOnScrollUp = YES;
     
 }
@@ -269,7 +266,7 @@
     [self stopLoading];
     [self doneLoadingTableViewData];
     [[SHKActivityIndicator currentIndicator] hide];
-    //[[BabyAlertWindow getInstance] hide];
+    [[BabyAlertWindow getInstance] hide];
 }
 
 //上拉刷新
@@ -519,13 +516,15 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{    
+{
+    
     if (scrollView.contentOffset.y < 200) {
         [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
     }
     else
         [super scrollViewDidScroll:scrollView];
     [_babyFullScreenScroll scrollViewDidScroll:scrollView];
+    
 
 }
 
@@ -571,11 +570,5 @@
 	return [NSDate date]; // should return date data source was last changed
 	
 }
-- (void)photoEditorCanceled:(TakePhotoViewController *)editor
-{
-    // Handle cancelation here
-    [self dismissModalViewControllerAnimated:YES];
-}
-
 
 @end

@@ -11,14 +11,14 @@
 
 @implementation StatusCell
 @synthesize countLB;
-//@synthesize avatarImage;
-//@synthesize userNameLB;
+@synthesize avatarImage;
+@synthesize userNameLB;
 @synthesize bgImage;
 @synthesize contentImage;
 @synthesize delegate;
 @synthesize cellIndexPath;
 @synthesize fromLB;
-//@synthesize timeLB;
+@synthesize timeLB;
 //@synthesize moreButton;
 
 
@@ -49,7 +49,7 @@
 -(CGFloat)setCellHeight:(Status *)status contentImageData:(NSData *)imageData
 {
     //CGRect frame;
-    CGFloat height = 400.0f;
+    CGFloat height = 385.0f;
    /*  CGSize size = [self getFrameOfImageView:contentImage].size;
     float zoom = 2 * size.width > size.height ? 250.0/size.width : 300.0/size.height;
     size = CGSizeMake(size.width * zoom, size.height * zoom);
@@ -177,14 +177,14 @@
    }
 
 - (void)dealloc {
-    //[avatarImage release];
-  //  [userNameLB release];
+    [avatarImage release];
+    [userNameLB release];
     [bgImage release];
     [contentImage release];
     [cellIndexPath release];
     [countLB release];
     [fromLB release];
-  //  [timeLB release];
+    [timeLB release];
    // [moreButton release];
     [super dealloc];
 }

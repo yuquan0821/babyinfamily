@@ -110,7 +110,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (userID == [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID]) {
+    if (userID == [[NSUserDefaults standardUserDefaults]integerForKey:@"userid"]) {
         UIBarButtonItem *retwitterBtn = [[UIBarButtonItem alloc]initWithTitle:@"反馈" style:UIBarButtonItemStylePlain target:self action:@selector(twitter)];
         self.navigationItem.rightBarButtonItem = retwitterBtn;
         [retwitterBtn release];

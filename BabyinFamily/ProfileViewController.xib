@@ -173,7 +173,7 @@
 					<object class="IBUILabel" id="5707644">
 						<reference key="NSNextResponder" ref="1068392760"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{149, 6}, {151, 40}}</string>
+						<string key="NSFrame">{{149, 18}, {151, 32}}</string>
 						<reference key="NSSuperview" ref="1068392760"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="50879389"/>
@@ -184,16 +184,19 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Label</string>
-						<reference key="IBUITextColor" ref="817557846"/>
+						<object class="NSColor" key="IBUITextColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC40MjEyMzcyNDQ5IDAuMjM0NTM5MTAxMSAwLjA2Nzg1NjkzODgAA</bytes>
+						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<int key="type">1</int>
+							<int key="type">2</int>
 							<double key="pointSize">18</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica</string>
+							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">18</double>
 							<int key="NSfFlags">16</int>
 						</object>
@@ -202,7 +205,7 @@
 					<object class="IBUIButton" id="18219897">
 						<reference key="NSNextResponder" ref="1068392760"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{198, 95}, {93, 29}}</string>
+						<string key="NSFrame">{{199, 91}, {92, 30}}</string>
 						<reference key="NSSuperview" ref="1068392760"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="156135343"/>
@@ -237,7 +240,7 @@
 					<object class="IBUIButton" id="410527020">
 						<reference key="NSNextResponder" ref="1068392760"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{199, 128}, {92, 30}}</string>
+						<string key="NSFrame">{{199, 127}, {92, 30}}</string>
 						<reference key="NSSuperview" ref="1068392760"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="226911947"/>
@@ -280,7 +283,7 @@
 					<object class="IBUILabel" id="226911947">
 						<reference key="NSNextResponder" ref="1068392760"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{208, 132}, {92, 21}}</string>
+						<string key="NSFrame">{{208, 131}, {92, 21}}</string>
 						<reference key="NSSuperview" ref="1068392760"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>

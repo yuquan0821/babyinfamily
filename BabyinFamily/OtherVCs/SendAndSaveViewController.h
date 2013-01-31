@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AFPhotoEditorController.h"
 @class WeiBoMessageManager;
+@protocol SendAndSaveViewControllerDelegate <NSObject>
+
+- (void)photoEditor:(AFPhotoEditorController *)editor finishedWithImage:(UIImage *)image;
+
+@end
 
 @interface SendAndSaveViewController : UIViewController<UIImagePickerControllerDelegate>
 {
@@ -18,6 +24,8 @@
 @property (retain, nonatomic) IBOutlet UIButton *sendImageButton;
 @property (retain, nonatomic) IBOutlet UIImageView *backGroundImageView;
 @property (retain, nonatomic) IBOutlet UIImageView *mainImageView;
+@property (nonatomic,assign) id<SendAndSaveViewControllerDelegate> delegate;
+
 -(id)initWithImage:(UIImage*)image;
 
 @end

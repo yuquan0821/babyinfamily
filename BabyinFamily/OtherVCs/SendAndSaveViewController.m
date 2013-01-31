@@ -24,6 +24,7 @@
 @synthesize backGroundImageView;
 @synthesize mainImageView;
 @synthesize mainImage;
+@synthesize delegate;
 
 -(id)initWithImage:(UIImage*)image
 {
@@ -31,6 +32,7 @@
         backGroundImageView.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/detail_image_background.png"];
         mainImage = image;
     }
+    manager = [WeiBoMessageManager getInstance];
     return self;
 }
 
@@ -59,7 +61,9 @@
 - (IBAction)savePhoto:(id)sender
 {
     UIImageWriteToSavedPhotosAlbum(self.mainImageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    self.tabBarController.selectedIndex = 0;
+    self.tabBarController.tabBar.hidden = NO;
+    [self dismissModalViewControllerAnimated:NO];
 
 }
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
@@ -83,19 +87,18 @@
 
 - (IBAction)sendPicture:(id)sender
 {
-    NSString *content = @"#家贝#";
-    UIImage *image = mainImageView.image;
-    if (content != nil && [content length] != 0) {
+    NSString *content = @"#家贝#宝贝每一个瞬间，都由家贝来记录！";
+    UIImage *image = self.mainImageView.image;
+    if (image != nil ) {
         [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
-        if (!_shouldPostImage) {
-            [manager postWithText:content];
-        }
-        else {
+        manager = [WeiBoMessageManager getInstance];
             [manager postWithText:content image:image];
-        }
-    }
-    [self.navigationController popToRootViewControllerAnimated:NO];
+        
+           }
+    self.tabBarController.selectedIndex = 0;
+    self.tabBarController.tabBar.hidden = NO;
 }
+
 
 - (void)dealloc {
     [saveImageButton release];
