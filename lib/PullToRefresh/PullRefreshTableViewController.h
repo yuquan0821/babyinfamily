@@ -69,7 +69,7 @@
 
 - (void)setupStrings;
 - (void)addPullToRefreshFooter;
-//- (void)startLoading;
+- (void)startLoading;
 - (void)stopLoading;
 - (void)refresh;
 @end

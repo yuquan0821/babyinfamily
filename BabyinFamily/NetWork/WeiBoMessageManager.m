@@ -357,6 +357,6 @@ static WeiBoMessageManager * instance=nil;
 -(void)didGetUnreadCount:(NSDictionary *)dic
 {
     NSNotification *notification = [NSNotification notificationWithName:MMSinaGotUnreadCount object:dic];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
+   // [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 @end

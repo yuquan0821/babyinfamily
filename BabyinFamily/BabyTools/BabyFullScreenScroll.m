@@ -118,7 +118,7 @@
    // CGFloat sectionHeaderHeight = 48;
 
     
-    //scrollView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0);
+   scrollView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0);
 
    
     if (scrollView.dragging || _isScrollingTop) {
