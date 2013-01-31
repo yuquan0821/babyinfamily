@@ -9,7 +9,10 @@
 #import "HotViewController.h"
 
 @interface HotViewController ()
+@property(nonatomic,retain)UITableView * tableview;
+@property(nonatomic,retain)NSMutableArray * datasource;
 
+- (void)dispatchModelToDatasource;
 @end
 
 @implementation HotViewController
@@ -28,13 +31,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [self.view addSubview:self.tableview];
+}
+
+- (void)dispatchModelToDatasource:(NSArray *)statusarray{
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [_tableview release];
+    [_datasource release];
 }
-
+#pragma mark
+#pragma Lazyload
+- (UITableView*)tableview{
+    if (!_tableview) {
+        _tableview = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    }
+    return _tableview;
+}
+- (NSMutableArray*)datasource{
+    if (!_datasource) {
+        _datasource = [[NSMutableArray array] retain];
+    }
+    return _datasource;
+}
 @end
