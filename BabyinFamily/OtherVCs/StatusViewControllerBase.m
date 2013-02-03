@@ -103,7 +103,7 @@
 {
     if (_refreshHeaderView == nil) {
 		
-		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height -44.0f, self.view.frame.size.width, self.tableView.bounds.size.height)];
+		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
 		view.delegate = self;
 		[self.tableView addSubview:view];
 		_refreshHeaderView = [view retain];
@@ -125,11 +125,12 @@
     
     NSLog(@" sts base table = %@,delegate = %@",self.tableView,self.tableView.delegate);
     NSLog(@"navigation is height %f",self.navigationController.navigationBar.frame.size.height);
+    
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(mmRequestFailed:)   name:MMSinaRequestFailed object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)       name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
-    _babyFullScreenScroll = [[BabyFullScreenScroll alloc] initWithViewController:self];
-    _babyFullScreenScroll.shouldShowUIBarsOnScrollUp = YES;
+    //_babyFullScreenScroll = [[BabyFullScreenScroll alloc] initWithViewController:self];
+    //_babyFullScreenScroll.shouldShowUIBarsOnScrollUp = YES;
     
 }
 
@@ -158,8 +159,24 @@
         [self.navigationController setToolbarHidden:NO animated:animated];
     }
     
-    [_babyFullScreenScroll layoutTabBarController];
+    //[_babyFullScreenScroll layoutTabBarController];
 }
+#pragma mark -
+
+#pragma mark Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // hide tabBar when pushed & show again when popped
+    self.hidesBottomBarWhenPushed = YES;
+    
+    double delayInSeconds = UINavigationControllerHideShowBarDuration;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        self.hidesBottomBarWhenPushed = NO;
+    });
+}
+
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -291,7 +308,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (cell == nil) {
         NSLog(@"statuss cell new");
-        NSArray *nibObjects = [nib instantiateWithOwner:nil options:nil];
+        NSArray *nibObjects = [nib instantiateWithOwner:Nil options:Nil];
         cell = [nibObjects objectAtIndex:0];
     }
     else {
@@ -524,9 +541,14 @@
     }
     else
         [super scrollViewDidScroll:scrollView];
-    [_babyFullScreenScroll scrollViewDidScroll:scrollView];
+    //[_babyFullScreenScroll scrollViewDidScroll:scrollView];
     
 
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    [_babyFullScreenScroll scrollViewWillEndDragging:scrollView withVelocity:velocity targetContentOffset:targetContentOffset];
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView

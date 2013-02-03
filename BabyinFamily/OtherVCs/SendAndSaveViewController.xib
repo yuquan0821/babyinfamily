@@ -39,7 +39,7 @@
 					<object class="IBUIImageView" id="896667391">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{320, 400}</string>
+						<string key="NSFrameSize">{320, 388}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -49,7 +49,7 @@
 					<object class="IBUIButton" id="535340707">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{236, 413}, {64, 37}}</string>
+						<string key="NSFrame">{{236, 403}, {64, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -84,7 +84,7 @@
 					<object class="IBUIButton" id="33487347">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 413}, {64, 37}}</string>
+						<string key="NSFrame">{{20, 403}, {64, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -106,7 +106,7 @@
 					<object class="IBUIImageView" id="5032166">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 12}, {280, 378}}</string>
+						<string key="NSFrame">{{5, 9}, {310, 370}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -114,7 +114,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrame">{{0, 20}, {320, 480}}</string>
+				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -202,9 +202,9 @@
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="896667391"/>
-							<reference ref="535340707"/>
-							<reference ref="33487347"/>
 							<reference ref="5032166"/>
+							<reference ref="33487347"/>
+							<reference ref="535340707"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

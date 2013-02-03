@@ -167,7 +167,7 @@
     }
 }
 
-/*-(void)didGetUnreadCount:(NSNotification*)sender
+-(void)didGetUnreadCount:(NSNotification*)sender
 {
     NSDictionary *dic = sender.object;
     NSNumber *num = [dic objectForKey:@"status"];
@@ -179,6 +179,6 @@
     
     [[BabyAlertWindow getInstance] showWithString:[NSString stringWithFormat:@"您有%@条新图片",num]];
     [[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:10];
-}*/
+}
 
 @end

@@ -10,6 +10,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "BabyAlertWindow.h"
 #import "WeiBoMessageManager.h"
+#import "Status.h"
+
 
 
 @interface SendAndSaveViewController ()
@@ -39,12 +41,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPost:) name:MMSinaGotPostResult object:nil];
+
     // Do any additional setup after loading the view from its nib.
     self.mainImageView.image = mainImage;
 }
 
 - (void)viewDidUnload
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPost:) name:MMSinaGotPostResult object:nil];
     [self setSaveImageButton:nil];
     [self setSendImageButton:nil];
     [self setBackGroundImageView:nil];
@@ -61,8 +66,8 @@
 - (IBAction)savePhoto:(id)sender
 {
     UIImageWriteToSavedPhotosAlbum(self.mainImageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    self.tabBarController.selectedIndex = 0;
     self.tabBarController.tabBar.hidden = NO;
+    self.tabBarController.selectedIndex = 0;
     [self dismissModalViewControllerAnimated:NO];
 
 }
@@ -87,16 +92,27 @@
 
 - (IBAction)sendPicture:(id)sender
 {
-    NSString *content = @"#家贝#宝贝每一个瞬间，都由家贝来记录！";
+    NSString *content = @"#家贝#记录宝贝的每一个瞬间！";
     UIImage *image = self.mainImageView.image;
-    if (image != nil ) {
+    if (image != nil && content != Nil && content.length !=0) {
         [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
-        manager = [WeiBoMessageManager getInstance];
-            [manager postWithText:content image:image];
-        
-           }
-    self.tabBarController.selectedIndex = 0;
-    self.tabBarController.tabBar.hidden = NO;
+        [manager postWithText:content image:image];
+    }
+}
+-(void)didPost:(NSNotification*)sender
+{
+
+    Status *sts = sender.object;
+    if (sts.text != nil && [sts.text length] != 0) {
+        [self.navigationController dismissModalViewControllerAnimated:NO];
+        self.tabBarController.tabBar.hidden = NO;
+        self.tabBarController.selectedIndex = 0;
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
 }
 
 

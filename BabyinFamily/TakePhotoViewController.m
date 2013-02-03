@@ -438,9 +438,9 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
 
     self.tabBarController.tabBar.hidden = NO;
-    self.tabBarController.selectedIndex = 0;
+    self.tabBarController.tabBar.selectedItem = 0;
    // [self.tabBarController.selectedViewController.reloadData ];
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:NO];
 }
 
 -(IBAction) handlePan:(UIGestureRecognizer *) sender
@@ -529,6 +529,7 @@
         SendAndSaveViewController* viewController = [[SendAndSaveViewController alloc] initWithImage:image];
         
        [self.navigationController pushViewController:viewController animated:NO];
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
         //[self presentModalViewController:viewController animated:NO];
         //[self.navigationController popToViewController:viewController animated:NO];
           //NSLog(@"self navigation is %@", self.navigationController);

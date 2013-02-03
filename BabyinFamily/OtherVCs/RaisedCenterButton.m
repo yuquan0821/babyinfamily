@@ -7,12 +7,13 @@
 //
 
 #import "RaisedCenterButton.h"
+#import "TakePhotoViewController.h"
 
 @interface RaisedCenterButton ()
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
-- (IBAction)buttonAction:(id)sender;
+- (void)buttonAction;
 
 @end
 
@@ -39,7 +40,6 @@
         
         self.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
         [self setBackgroundImage:buttonImage forState:UIControlStateNormal];
-        //[self setBackgroundColor:[UIColor clearColor]];
         self.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
         CGFloat heightDifference = buttonImage.size.height - self.tabBarController.tabBar.frame.size.height;
         if (heightDifference < 0)
@@ -50,18 +50,20 @@
             center.y = center.y - self.tabBarController.tabBar.frame.origin.y - heightDifference/2.0;
             self.center = center;
         }
-        [self addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     
 }
 
 // replicating the action of touching the center button on the tab bar.
-- (IBAction)buttonAction:(id)sender
+- (void)buttonAction
 {
-    [self.tabBarController setSelectedIndex:2];
-    
+    //fixed: presss takephoto button again,the page can not init
+    TakePhotoViewController *picker = [[[TakePhotoViewController alloc] init] autorelease];
+    UINavigationController * nav = [[[UINavigationController alloc] initWithRootViewController:picker] autorelease];
+    [picker.navigationController setNavigationBarHidden:YES];
+    [self.tabBarController presentModalViewController:nav animated:NO];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-    self.tabBarController.tabBar.hidden = YES;
 }
 
 

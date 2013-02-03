@@ -46,7 +46,7 @@
     RaisedCenterButton *button = [RaisedCenterButton buttonWithImage:[UIImage imageNamed:fullpath] forTabBarController:self.tabBarController];
     [self.tabBarController.tabBar addSubview:button];
     self.window.rootViewController = self.tabBarController;
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor redColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
