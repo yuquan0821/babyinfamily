@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AFPhotoEditorController.h"
 @class WeiBoMessageManager;
-@protocol SendAndSaveViewControllerDelegate <NSObject>
+@protocol SendAndSaveViewControllerDelegate <NSObject, UINavigationBarDelegate>
 
 - (void)photoEditor:(AFPhotoEditorController *)editor finishedWithImage:(UIImage *)image;
 

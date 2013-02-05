@@ -104,6 +104,7 @@
 
     Status *sts = sender.object;
     if (sts.text != nil && [sts.text length] != 0) {
+        [[BabyAlertWindow getInstance] hide];
         [self.navigationController dismissModalViewControllerAnimated:NO];
         self.tabBarController.tabBar.hidden = NO;
         self.tabBarController.selectedIndex = 0;
@@ -112,6 +113,10 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         [alert release];
+        [[BabyAlertWindow getInstance] hide];
+        [self.navigationController dismissModalViewControllerAnimated:NO];
+        self.tabBarController.tabBar.hidden = NO;
+        self.tabBarController.selectedIndex = 0;
     }
 }
 

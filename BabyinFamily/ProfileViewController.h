@@ -11,7 +11,7 @@
 #import "PullRefreshTableViewController.h"
 #import "User.h"
 #import "StatusCell.h"
-#import "TwitterVC.h"
+#import "FeedBackViewController.h"
 #import "SettingVC.h"
 #import "ImageBrowser.h"
 

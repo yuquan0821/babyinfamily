@@ -75,6 +75,7 @@ static HHNetDataCacheManager * instance;
         else
         {//unmatch
 //            NSLog(@"unmatch url = %@",url);
+            [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
             ASIHTTPRequest * request=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
             [request setDelegate:self];
             [request setDownloadCache:[ASIDownloadCache sharedCache]];

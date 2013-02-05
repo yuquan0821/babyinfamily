@@ -381,7 +381,7 @@
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 400;
+    return 385;
     NSInteger  row = indexPath.section;
     
     if (row >= [statuesArr count])

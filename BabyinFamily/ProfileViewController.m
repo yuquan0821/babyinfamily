@@ -94,7 +94,7 @@
 
 - (void)twitter
 {
-    TwitterVC *tv = [[TwitterVC alloc]initWithNibName:@"TwitterVC" bundle:nil];
+    FeedBackViewController *tv = [[FeedBackViewController alloc]initWithNibName:@"FeedBackViewController" bundle:nil];
     [self.navigationController pushViewController:tv animated:YES];
     [tv release];
 }

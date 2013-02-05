@@ -9,7 +9,6 @@
 
 #import <UIKit/UIKit.h>
 #import "StatusViewControllerBase.h"
-#import "TwitterVC.h"
 #import "OAuthWebView.h"
 
 @interface HomeViewController : StatusViewControllerBase
