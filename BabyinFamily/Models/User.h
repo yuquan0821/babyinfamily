@@ -1,4 +1,6 @@
 #import <UIKit/UIKit.h>
+#import "UserCoreDataItem.h"
+#import "StatusCoreDataItem.h"
 
 typedef enum {
     GenderUnknow = 0,
@@ -33,14 +35,14 @@ typedef enum {
 	BOOL		geoEnabled; //?
 }
 
-@property (nonatomic, assign) long long userId;
-@property (nonatomic, retain) NSNumber*	userKey;
+@property (nonatomic, assign) long long  userId;
+@property (nonatomic, retain) NSNumber*		userKey;
 @property (nonatomic, retain) NSString* screenName;
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, retain) NSString* province;
 @property (nonatomic, retain) NSString* city;
 @property (nonatomic, retain) NSString* location;
-@property (nonatomic, retain) NSString* description;
+@property (nonatomic, retain) NSString* description;//theDescription
 @property (nonatomic, retain) NSString* url;
 @property (nonatomic, retain) NSString* profileImageUrl;
 @property (nonatomic, retain) NSString* profileLargeImageUrl;
@@ -56,8 +58,17 @@ typedef enum {
 @property (nonatomic, assign) BOOL		allowAllActMsg;
 @property (nonatomic, assign) BOOL		geoEnabled;
 @property (nonatomic, retain) UIImage*    avatarImage;
+@property (nonatomic, retain) NSIndexPath *cellIndexPath;
+@property (nonatomic, assign) int topicCount;
+@property (nonatomic, copy) NSString *verifiedReason;
+@property (nonatomic, copy) NSString *pinyin;
+
+
 
 - (User*)initWithJsonDictionary:(NSDictionary*)dic;
 - (void)updateWithJSonDictionary:(NSDictionary*)dic;
 + (User*)userWithJsonDictionary:(NSDictionary*)dic;
+- (UserCoreDataItem*)updateUserCDItem:(UserCoreDataItem*)us;
+- (User*)updateUserFromUserCDItem:(UserCoreDataItem*)us;
+
 @end

@@ -16,7 +16,7 @@
 	NSString*		text; //评论内容
 	time_t			createdAt; //评论时间
 	NSString*		source; //评论来源
-	NSString*		sourceUrl; 
+	NSString*		sourceUrl;
 	BOOL			favorited; //是否收藏
 	BOOL			truncated; //是否被截断
 	User*			user; //评论人信息
@@ -36,6 +36,8 @@
 @property (nonatomic, retain) User*			user; //评论人信息
 @property (nonatomic, retain) Status*			status; //评论的微博
 @property (nonatomic, retain) Comment*		replyComment; //评论来源
+
+@property (nonatomic, retain) NSIndexPath *cellIndexPath;
 
 
 - (Comment*)initWithJsonDictionary:(NSDictionary*)dic;

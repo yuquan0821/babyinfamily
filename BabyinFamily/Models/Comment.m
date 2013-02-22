@@ -10,10 +10,10 @@
 
 
 @implementation Comment
-@synthesize commentId, commentKey, text, createdAt, source, sourceUrl, favorited, truncated, user, status, replyComment;
+@synthesize commentId, commentKey, text, createdAt, source, sourceUrl, favorited, truncated, user, status, replyComment,cellIndexPath;
 
 - (Comment*)initWithJsonDictionary:(NSDictionary*)dic {
-
+    
 	if (self = [super init]) {
 		commentId = [dic getLongLongValueValueForKey:@"id" defaultValue:-1];
 		commentKey = [[NSNumber alloc]initWithLongLong:commentId];
@@ -29,7 +29,7 @@
 			if (start.location != NSNotFound) {
 				int l = [src length];
 				NSRange fromRang = NSMakeRange(start.location + start.length, l-start.length-start.location);
-				end   = [src rangeOfString:@"\"" options:NSCaseInsensitiveSearch 
+				end   = [src rangeOfString:@"\"" options:NSCaseInsensitiveSearch
 									 range:fromRang];
 				if (end.location != NSNotFound) {
 					r.location = start.location + start.length;
@@ -42,7 +42,7 @@
 			}
 			else {
 				self.sourceUrl = @"";
-			}			
+			}
 			start = [src rangeOfString:@"\">"];
 			end   = [src rangeOfString:@"</a>"];
 			if (start.location != NSNotFound && end.location != NSNotFound) {
@@ -57,7 +57,7 @@
 		else {
 			self.source = src;
 		}
-
+        
 		favorited = [dic getBoolValueForKey:@"favorited" defaultValue:NO];
 		truncated = [dic getBoolValueForKey:@"truncated" defaultValue:NO];
 		
@@ -100,10 +100,10 @@
     if (distance < 60) {
         _timestamp = [NSString stringWithFormat:@"%d%@", distance, (distance == 1) ? @"秒前" : @"秒前"];
     }
-    else if (distance < 60 * 60) {  
+    else if (distance < 60 * 60) {
         distance = distance / 60;
         _timestamp = [NSString stringWithFormat:@"%d%@", distance, (distance == 1) ? @"分钟前" : @"分钟前"];
-    }  
+    }
     else if (distance < 60 * 60 * 24) {
         distance = distance / 60 / 60;
         _timestamp = [NSString stringWithFormat:@"%d%@", distance, (distance == 1) ? @"小时前" : @"小时前"];
@@ -124,13 +124,14 @@
             [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
         }
         
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:createdAt];        
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:createdAt];
         _timestamp = [dateFormatter stringFromDate:date];
     }
     return _timestamp;
 }
 
 - (void)dealloc {
+    [cellIndexPath release];
 	[commentKey release];
 	[text release];
 	[source release];
@@ -141,3 +142,4 @@
 	[super dealloc];
 }
 @end
+

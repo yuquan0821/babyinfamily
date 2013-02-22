@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "User.h"
 #import "NSDictionaryAdditions.h"
+#import "StatusCoreDataItem.h"
+#import "UserCoreDataItem.h"
+
 @interface Status : NSObject {
     long long		statusId; //微博ID
 	NSNumber		*statusKey;
@@ -40,6 +43,7 @@
     BOOL            hasImage;
     
 	NSString*		_formmatedText;
+    UIImage *       statusImage;
 }
 
 @property (nonatomic, assign) long long     statusId;
@@ -72,7 +76,9 @@
 @property (nonatomic, assign) BOOL          hasRetwitter;
 @property (nonatomic, assign) BOOL          haveRetwitterImage;
 @property (nonatomic, assign) BOOL          hasImage;
-
+@property (nonatomic,retain) UIImage        *statusImage;
+@property (nonatomic,retain) NSIndexPath    *cellIndexPath;
+@property (nonatomic,retain) NSString       *isRefresh;
 
 
 - (NSString*)timestamp;
@@ -80,5 +86,9 @@
 - (Status*)initWithJsonDictionary:(NSDictionary*)dic;
 
 + (Status*)statusWithJsonDictionary:(NSDictionary*)dic;
+
+- (StatusCoreDataItem*)updateStatusCDItem:(StatusCoreDataItem*)sts index:(int)theIndex isHomeLine:(BOOL) isHome;
+
+- (Status*)updataStatusFromStatusCDItem:(StatusCoreDataItem*)sts;
 
 @end

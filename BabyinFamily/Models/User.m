@@ -1,5 +1,7 @@
 #import "User.h"
 #import "StringUtil.h"
+//#import "ChineseToPinyin.h"
+
 @implementation User
 
 @synthesize userId;
@@ -25,7 +27,72 @@
 @synthesize geoEnabled;
 @synthesize userKey;
 @synthesize avatarImage;
+@synthesize cellIndexPath;
+@synthesize topicCount;
+@synthesize verifiedReason;
+@synthesize pinyin;
 
+- (UserCoreDataItem*)updateUserCDItem:(UserCoreDataItem*)us
+{
+    us.allowAllActMsg       = [NSNumber numberWithBool:self.allowAllActMsg];
+    us.avatarImage          = UIImageJPEGRepresentation(self.avatarImage, 1);
+    us.city                 = self.city;
+    us.createdAt            = [NSNumber numberWithLong:self.createdAt];
+    us.domain               = self.domain;
+    us.followersCount       = [NSNumber numberWithInt:self.followersCount];
+    us.favoritesCount       = [NSNumber numberWithInt:self.favoritesCount];
+    us.following            = [NSNumber numberWithBool:self.following];
+    us.friendsCount         = [NSNumber numberWithInt:self.friendsCount];
+    us.gender               = [NSNumber numberWithInt:self.gender];
+    us.geoEnabled           = [NSNumber numberWithBool:self.geoEnabled];
+    us.location             = self.location;
+    us.name                 = self.name;
+    us.profileImageUrl      = self.profileImageUrl;
+    us.profileLargeImageUrl = self.profileLargeImageUrl;
+    us.province             = self.province;
+    us.screenName           = self.screenName;
+    us.statusesCount        = [NSNumber numberWithInt:self.statusesCount];
+    us.theDescription       = self.description;
+    us.url                  = self.url;
+    us.userId               = [NSNumber numberWithLongLong:self.userId];
+    us.userKey              = self.userKey;
+    us.verified             = [NSNumber numberWithBool:self.verified];
+    
+    return us;
+}
+
+-(User*)updateUserFromUserCDItem:(UserCoreDataItem*)us
+{
+    self.allowAllActMsg = us.allowAllActMsg.boolValue;
+    
+    UIImage *img = [[UIImage alloc] initWithData:us.avatarImage];
+    self.avatarImage = img;
+    [img release];
+    
+    self.city = us.city;
+    self.createdAt = us.createdAt.longValue;
+    self.domain = us.domain;
+    self.followersCount = us.followersCount.intValue;
+    self.followersCount = us.favoritesCount.intValue;
+    self.following = us.following.boolValue;
+    self.friendsCount = us.friendsCount.intValue;
+    self.gender = us.gender.intValue;
+    self.geoEnabled = us.geoEnabled.boolValue;
+    self.location = us.location;
+    self.name = us.name;
+    self.profileImageUrl = us.profileImageUrl;
+    self.profileLargeImageUrl = us.profileLargeImageUrl;
+    self.province = us.province;
+    self.screenName = us.screenName;
+    self.statusesCount = us.statusesCount.intValue;
+    self.description = us.theDescription;
+    self.url = us.url;
+    self.userId = us.userId.longLongValue;
+    self.userKey = us.userKey;
+    self.verified = us.verified.boolValue;
+    
+    return self;
+}
 
 - (User*)initWithJsonDictionary:(NSDictionary*)dic
 {
@@ -53,8 +120,9 @@
     userId          = [[dic objectForKey:@"id"] longLongValue];
     userKey			= [[NSNumber alloc] initWithLongLong:userId];
 	screenName      = [dic objectForKey:@"screen_name"];
+    //self.pinyin          = [ChineseToPinyin pinyinFromChiniseString:screenName];
     name            = [dic objectForKey:@"name"];
-	
+	self.verifiedReason = [dic objectForKey:@"verified_reason"];
 	//int provinceId = [[dic objectForKey:@"province"] intValue];
 	//int cityId = [[dic objectForKey:@"city"] intValue];
 	province		= @"";
@@ -76,16 +144,16 @@
 	else {
 		gender = GenderUnknow;
 	}
-
+    
 	
     followersCount  = ([dic objectForKey:@"followers_count"] == [NSNull null]) ? 0 : [[dic objectForKey:@"followers_count"] longValue];
     friendsCount    = ([dic objectForKey:@"friends_count"]   == [NSNull null]) ? 0 : [[dic objectForKey:@"friends_count"] longValue];
     statusesCount   = ([dic objectForKey:@"statuses_count"]  == [NSNull null]) ? 0 : [[dic objectForKey:@"statuses_count"] longValue];
     favoritesCount  = ([dic objectForKey:@"favourites_count"]  == [NSNull null]) ? 0 : [[dic objectForKey:@"favourites_count"] longValue];
-
+    
     following       = ([dic objectForKey:@"following"]       == [NSNull null]) ? 0 : [[dic objectForKey:@"following"] boolValue];
     verified		= ([dic objectForKey:@"verified"]       == [NSNull null]) ? 0 : [[dic objectForKey:@"verified"] boolValue];
-    allowAllActMsg	= ([dic objectForKey:@"allow_all_act_msg"]       == [NSNull null]) ? 0 : [[dic objectForKey:@"allow_all_act_msg"] boolValue];  
+    allowAllActMsg	= ([dic objectForKey:@"allow_all_act_msg"]       == [NSNull null]) ? 0 : [[dic objectForKey:@"allow_all_act_msg"] boolValue];
     geoEnabled		= ([dic objectForKey:@"geo_enabled"]   == [NSNull null]) ? 0 : [[dic objectForKey:@"geo_enabled"] boolValue];
     
 	NSString *stringOfCreatedAt   = [dic objectForKey:@"created_at"];
@@ -128,6 +196,9 @@
 
 - (void)dealloc
 {
+    [pinyin release];
+    [verifiedReason release];
+    [cellIndexPath release];
 	[userKey release];
     [screenName release];
     [name release];
@@ -147,3 +218,4 @@
 
 
 @end
+
