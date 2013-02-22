@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
-#import "ASIDownloadCache.h"
 
 #define MaxCacheBufferSize 20
 #define HHNetDataCacheNotification @"HHNetDataCacheNotification"
@@ -17,10 +16,15 @@
 #define HHNetDataCacheData @"HHNetDataCacheData"
 #define HHNetDataCacheIndex @"HHNetDataCacheIndex"
 
+@class CoreDataManager;
+
 @interface HHNetDataCacheManager : NSObject<ASIHTTPRequestDelegate,ASIProgressDelegate>{
     NSMutableDictionary * cacheDic;
     NSMutableArray * cacheArray;
+    CoreDataManager *_CDManager;
 }
+
+@property (nonatomic,retain)CoreDataManager *CDManager;
 
 -(id) init;
 

@@ -7,16 +7,24 @@
 //
 
 #import "HHNetDataCacheManager.h"
+#import "CoreDataManager.h"
+#import "Images.h"
+#import "SHKActivityIndicator.h"
+
+@interface HHNetDataCacheManager()
+@end
 
 static HHNetDataCacheManager * instance;
 
 @implementation HHNetDataCacheManager
+@synthesize CDManager = _CDManager;
 
 -(id) init{
     self = [super init];
     if (self) {
         cacheDic=[[NSMutableDictionary alloc] init];
-        cacheArray=[[NSMutableArray alloc] init]; 
+        cacheArray=[[NSMutableArray alloc] init];
+        self.CDManager = [CoreDataManager getInstance];
     }
     return self;
 }
@@ -33,7 +41,7 @@ static HHNetDataCacheManager * instance;
 -(void) sendNotificationWithKey:(NSString *) url Data:(NSData *) data index:(NSNumber*)index{
     NSDictionary * post=[[NSDictionary alloc] initWithObjectsAndKeys:
                          url,   HHNetDataCacheURLKey,
-                         data,  HHNetDataCacheData, 
+                         data,  HHNetDataCacheData,
                          index, HHNetDataCacheIndex,nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:HHNetDataCacheNotification object:post];
     [post release];
@@ -46,40 +54,26 @@ static HHNetDataCacheManager * instance;
     [super dealloc];
 }
 
+
+
+
 -(void) getDataWithURL:(NSString *) url withIndex:(NSInteger)index
 {
     if (url==nil||[url length]==0) {
         return ;
     }
-    @synchronized(self) 
+    @synchronized(self)
     {
-        int i=0;
-        for (i=0; i<[cacheArray count]; i++) {
-            NSString * str=[cacheArray objectAtIndex:i];
-            if (str!=nil) {
-                if ([[cacheArray objectAtIndex:i] isEqualToString:url]) {
-                    break;
-                }
-            }
-        }
-        if (i<[cacheArray count]) 
-        {//match
-            NSData * result=[cacheDic objectForKey:[cacheArray objectAtIndex:i]];
+        Images *image= [_CDManager readImageFromCD:url];
+        if (image != nil && ![image isEqual:[NSNull null]])
+        {
             NSNumber *indexNumber = [NSNumber numberWithInt:index];
-            [self sendNotificationWithKey:url Data:result index:indexNumber];
-            //调整位置
-            //            NSString * key=[cacheArray objectAtIndex:i];
-            //            [cacheArray removeObjectAtIndex:i];
-            //            [cacheArray insertObject:key atIndex:0];
+            [self sendNotificationWithKey:url Data:image.data index:indexNumber];
         }
         else
-        {//unmatch
-//            NSLog(@"unmatch url = %@",url);
-            [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
-            ASIHTTPRequest * request=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+        {
+            ASIHTTPRequest * request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
             [request setDelegate:self];
-            [request setDownloadCache:[ASIDownloadCache sharedCache]];
-            [request setCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
             request.downloadProgressDelegate = self;
             request.uploadProgressDelegate = self;
             
@@ -113,24 +107,25 @@ static HHNetDataCacheManager * instance;
     NSNumber *indexNumber = [request.userInfo objectForKey:@"index"];
     
     NSData * data=[request responseData];
-    [self sendNotificationWithKey:url Data:data index:indexNumber];
-    //add to cache
-    @synchronized(self) {
-        [cacheArray insertObject:url atIndex:0];
-        [cacheDic setValue:data forKey:url];
-        if ([cacheArray count]>MaxCacheBufferSize) {
-            //remove
-            NSString * str=[cacheArray lastObject];
-            [cacheDic removeObjectForKey:str];
-            [cacheArray removeLastObject];
-        }
+    if ([url rangeOfString:@"/180/"].location == NSNotFound) {
+        [_CDManager insertImageToCD:data url:url];
     }
+    [self sendNotificationWithKey:url Data:data index:indexNumber];
 }
 
 //下载进度
 - (void)setProgress:(ASIHTTPRequest *)request newProgress:(float)newProgress
 {
-//    NSLog(@"progress = %f",newProgress);
+    NSDictionary *dic = request.userInfo;
+    NSObject *obj = [dic objectForKey:@"index"];
+    if (obj == nil)
+    {
+        NSString *progressStr = [NSString stringWithFormat:@"%.1f%%",newProgress*100];
+        NSLog(@"%@",progressStr);
+        if (newProgress > 0.0) {
+            [[SHKActivityIndicator currentIndicator]setSubMessage:progressStr];
+        }
+    }
 }
 
 
