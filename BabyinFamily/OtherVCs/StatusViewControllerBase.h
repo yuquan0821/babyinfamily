@@ -19,7 +19,7 @@
 #import "GifView.h"
 #import "SHKActivityIndicator.h"
 #import "ZJTDetailStatusVC.h"
-#import "BabyFullScreenScroll.h"
+#import "UIImageView+Resize.h"
 
 
 @class WeiBoMessageManager;
@@ -46,14 +46,15 @@
 	BOOL _reloading;
 }
 
-@property (retain, nonatomic)   IBOutlet UITableView    *table;
+@property (retain, nonatomic) IBOutlet UITableView *table;
+
 @property (nonatomic, retain)   UINib                   *statusCellNib;
 @property (nonatomic, retain)   NSMutableArray          *statuesArr;
 @property (nonatomic, retain)   NSMutableDictionary     *headDictionary;
 @property (nonatomic, retain)   NSMutableDictionary     *imageDictionary;
 @property (nonatomic, retain)   ImageBrowser            *browserView;
 
-- (void)getImages;
 - (void)doneLoadingTableViewData;
+-(void)refreshVisibleCellsImages;
 
 @end
