@@ -13,36 +13,24 @@
 @synthesize countLB;
 @synthesize avatarImage;
 @synthesize userNameLB;
+@synthesize locationLabel;
 @synthesize bgImage;
 @synthesize contentImage;
 @synthesize delegate;
 @synthesize cellIndexPath;
 @synthesize fromLB;
 @synthesize timeLB;
-//@synthesize moreButton;
+@synthesize moreButton;
 
 
--(void)setupCell:(Status *)status  contentImageData:(NSData *)imageData
+-(void)setupCell:(Status *)status  //contentImageData:(NSData *)imageData
 {
-    CGRect bgImageFrame = CGRectMake(5, 5, 310, 310);
-    bgImage.frame = bgImageFrame;
-    bgImage.image = [[UIImage imageNamed:@"weibo.bundle/WeiboImages/detail_image_background.png"] stretchableImageWithLeftCapWidth:5 topCapHeight:5];
-    bgImage.contentMode = UIViewContentModeScaleToFill;
-    
-    CGRect contentImageViewFrame = CGRectMake(bgImage.frame.origin.x + 5, bgImage.frame.origin.y + 5, bgImageFrame.size.width - 10, bgImageFrame.size.height - 10);
-    contentImage.frame = contentImageViewFrame;
-    NSLog(@"contentImage.frame is %f", contentImage.frame.size.width);
-    NSLog(@"bgImage.frame is %f", bgImage.frame.size.width);
-    
-    if (![imageData isEqual:[NSNull null]])
-    {
-       self.contentImage.image= [UIImageView imageWithImage:[UIImage imageWithData:imageData] scaledToSizeWithSameAspectRatio:self.contentImage.frame.size];
-    }else{
-       self.contentImage.image= [UIImageView imageWithImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"] scaledToSizeWithSameAspectRatio:self.contentImage.frame.size];
-    }
-
     countLB.text = [NSString stringWithFormat:@"评论:%d 转发:%d 赞:%d",status.commentsCount,status.retweetsCount,status.attitudesCount];
     fromLB.text = [NSString stringWithFormat:@"来自:%@",status.source];
+    userNameLB.text = status.user.screenName;
+    locationLabel.text = status.user.location;
+    timeLB.text = status.timestamp;
+
 }
 
 //计算cell的高度
@@ -185,7 +173,8 @@
     [countLB release];
     [fromLB release];
     [timeLB release];
-   // [moreButton release];
+    [moreButton release];
+    [locationLabel release];
     [super dealloc];
 }
 @end
