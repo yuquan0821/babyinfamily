@@ -122,7 +122,7 @@
     refreshFooterView.hidden = YES;
     NSLog(@" sts base table = %@,delegate = %@",self.tableView,self.tableView.delegate);
     NSLog(@"navigation is height %f",self.navigationController.navigationBar.frame.size.height);
-    
+    self.table = self.tableView;
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(mmRequestFailed:)   name:MMSinaRequestFailed object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)       name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];    
