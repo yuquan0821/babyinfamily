@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		280ACCEB1664876B00774CCC /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280ACCEA1664876B00774CCC /* FirstViewController.xib */; };
 		280CF2851664CA250031262F /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CF2831664CA240031262F /* SettingVC.m */; };
 		280CF2861664CA250031262F /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280CF2841664CA250031262F /* SettingVC.xib */; };
 		280FBA3D169BA87B0072741B /* BabyFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 280FBA3C169BA87A0072741B /* BabyFullScreenScroll.m */; };
@@ -19,6 +18,13 @@
 		280FBA52169BDD3C0072741B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280FBA51169BDD3B0072741B /* StoreKit.framework */; };
 		283654A416BFACDE00203578 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 283654A216BFACD900203578 /* FeedBackViewController.m */; };
 		283654A516BFACDE00203578 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283654A316BFACDB00203578 /* FeedBackViewController.xib */; };
+		284C910316DC5569000F2A48 /* StatusViewControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 284C910216DC5569000F2A48 /* StatusViewControllerBase.m */; };
+		284C911916DC5BDB000F2A48 /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 284C911816DC5BDB000F2A48 /* FirstViewController.xib */; };
+		2854E27D16D45FE1008B6E4B /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E27816D45FE1008B6E4B /* Images.m */; };
+		2854E27E16D45FE1008B6E4B /* StatusCoreDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E27A16D45FE1008B6E4B /* StatusCoreDataItem.m */; };
+		2854E27F16D45FE1008B6E4B /* UserCoreDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E27C16D45FE1008B6E4B /* UserCoreDataItem.m */; };
+		2854E28216D462DD008B6E4B /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E28116D462DD008B6E4B /* CoreDataManager.m */; };
+		2854E28516D46F2A008B6E4B /* ImageCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2854E28316D46F2A008B6E4B /* ImageCache.xcdatamodeld */; };
 		2884955516631CD30042C4CD /* FollowerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884955316631CD30042C4CD /* FollowerVC.m */; };
 		2884955616631CD30042C4CD /* FollowerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2884955416631CD30042C4CD /* FollowerVC.xib */; };
 		28849558166321800042C4CD /* weibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28849557166321800042C4CD /* weibo.bundle */; };
@@ -81,8 +87,7 @@
 		28CBA96716990FED00D704AC /* AsyncImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBA96616990FED00D704AC /* AsyncImageDownloader.m */; };
 		28D14F5D169CF53600B39793 /* SendAndSaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D14F5B169CF53600B39793 /* SendAndSaveViewController.m */; };
 		28D14F5E169CF53600B39793 /* SendAndSaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28D14F5C169CF53600B39793 /* SendAndSaveViewController.xib */; };
-		28D434A816646CC5005ED633 /* StatusViewControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D434A616646CC5005ED633 /* StatusViewControllerBase.m */; };
-		28D434A916646CC5005ED633 /* StatusViewControllerBase.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28D434A716646CC5005ED633 /* StatusViewControllerBase.xib */; };
+		28DD3F4916DC601D005396AB /* StatusViewControllerBase.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DD3F4816DC601D005396AB /* StatusViewControllerBase.xib */; };
 		28EA935E165F129A009F69E5 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EA935D165F129A009F69E5 /* AssetsLibrary.framework */; };
 		28EA9360165F12A0009F69E5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EA935F165F12A0009F69E5 /* AVFoundation.framework */; };
 		28EA9362165F12D6009F69E5 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EA9361165F12D6009F69E5 /* CoreMedia.framework */; };
@@ -151,7 +156,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		280ACCEA1664876B00774CCC /* FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
 		280CF2821664CA240031262F /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		280CF2831664CA240031262F /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		280CF2841664CA250031262F /* SettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingVC.xib; sourceTree = "<group>"; };
@@ -172,6 +176,18 @@
 		283654A116BFACD600203578 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedBackViewController.h; path = OtherVCs/FeedBackViewController.h; sourceTree = "<group>"; };
 		283654A216BFACD900203578 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedBackViewController.m; path = OtherVCs/FeedBackViewController.m; sourceTree = "<group>"; };
 		283654A316BFACDB00203578 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeedBackViewController.xib; path = OtherVCs/FeedBackViewController.xib; sourceTree = "<group>"; };
+		284C910116DC5569000F2A48 /* StatusViewControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusViewControllerBase.h; path = OtherVCs/StatusViewControllerBase.h; sourceTree = "<group>"; };
+		284C910216DC5569000F2A48 /* StatusViewControllerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusViewControllerBase.m; path = OtherVCs/StatusViewControllerBase.m; sourceTree = "<group>"; };
+		284C911816DC5BDB000F2A48 /* FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
+		2854E27716D45FE1008B6E4B /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Images.h; path = Models/Images.h; sourceTree = "<group>"; };
+		2854E27816D45FE1008B6E4B /* Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Images.m; path = Models/Images.m; sourceTree = "<group>"; };
+		2854E27916D45FE1008B6E4B /* StatusCoreDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusCoreDataItem.h; path = Models/StatusCoreDataItem.h; sourceTree = "<group>"; };
+		2854E27A16D45FE1008B6E4B /* StatusCoreDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusCoreDataItem.m; path = Models/StatusCoreDataItem.m; sourceTree = "<group>"; };
+		2854E27B16D45FE1008B6E4B /* UserCoreDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserCoreDataItem.h; path = Models/UserCoreDataItem.h; sourceTree = "<group>"; };
+		2854E27C16D45FE1008B6E4B /* UserCoreDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserCoreDataItem.m; path = Models/UserCoreDataItem.m; sourceTree = "<group>"; };
+		2854E28016D462DD008B6E4B /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = BabyTools/CoreDataManager.h; sourceTree = "<group>"; };
+		2854E28116D462DD008B6E4B /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = BabyTools/CoreDataManager.m; sourceTree = "<group>"; };
+		2854E28416D46F2A008B6E4B /* ImageCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImageCache.xcdatamodel; sourceTree = "<group>"; };
 		2884955216631CD30042C4CD /* FollowerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FollowerVC.h; path = OtherVCs/FollowerVC.h; sourceTree = "<group>"; };
 		2884955316631CD30042C4CD /* FollowerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FollowerVC.m; path = OtherVCs/FollowerVC.m; sourceTree = "<group>"; };
 		2884955416631CD30042C4CD /* FollowerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowerVC.xib; path = OtherVCs/FollowerVC.xib; sourceTree = "<group>"; };
@@ -281,9 +297,7 @@
 		28D14F5A169CF53600B39793 /* SendAndSaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendAndSaveViewController.h; path = OtherVCs/SendAndSaveViewController.h; sourceTree = "<group>"; };
 		28D14F5B169CF53600B39793 /* SendAndSaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendAndSaveViewController.m; path = OtherVCs/SendAndSaveViewController.m; sourceTree = "<group>"; };
 		28D14F5C169CF53600B39793 /* SendAndSaveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SendAndSaveViewController.xib; path = OtherVCs/SendAndSaveViewController.xib; sourceTree = "<group>"; };
-		28D434A516646CC5005ED633 /* StatusViewControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusViewControllerBase.h; path = OtherVCs/StatusViewControllerBase.h; sourceTree = "<group>"; };
-		28D434A616646CC5005ED633 /* StatusViewControllerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusViewControllerBase.m; path = OtherVCs/StatusViewControllerBase.m; sourceTree = "<group>"; };
-		28D434A716646CC5005ED633 /* StatusViewControllerBase.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusViewControllerBase.xib; path = OtherVCs/StatusViewControllerBase.xib; sourceTree = "<group>"; };
+		28DD3F4816DC601D005396AB /* StatusViewControllerBase.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusViewControllerBase.xib; path = OtherVCs/StatusViewControllerBase.xib; sourceTree = "<group>"; };
 		28EA935D165F129A009F69E5 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		28EA935F165F12A0009F69E5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		28EA9361165F12D6009F69E5 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -420,6 +434,19 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		2854E27616D45F98008B6E4B /* CoreDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				2854E27716D45FE1008B6E4B /* Images.h */,
+				2854E27816D45FE1008B6E4B /* Images.m */,
+				2854E27916D45FE1008B6E4B /* StatusCoreDataItem.h */,
+				2854E27A16D45FE1008B6E4B /* StatusCoreDataItem.m */,
+				2854E27B16D45FE1008B6E4B /* UserCoreDataItem.h */,
+				2854E27C16D45FE1008B6E4B /* UserCoreDataItem.m */,
+			);
+			name = CoreDataModels;
+			sourceTree = "<group>";
+		};
 		2896C4021661C0E2004705A4 /* OthersVCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -429,7 +456,6 @@
 				2896C4841661E79E004705A4 /* AddCommentVC.h */,
 				2896C4851661E79E004705A4 /* AddCommentVC.m */,
 				2896C4861661E79E004705A4 /* AddCommentVC.xib */,
-				280ACCEA1664876B00774CCC /* FirstViewController.xib */,
 				2884955216631CD30042C4CD /* FollowerVC.h */,
 				2884955316631CD30042C4CD /* FollowerVC.m */,
 				2884955416631CD30042C4CD /* FollowerVC.xib */,
@@ -439,9 +465,9 @@
 				280CF2821664CA240031262F /* SettingVC.h */,
 				280CF2831664CA240031262F /* SettingVC.m */,
 				280CF2841664CA250031262F /* SettingVC.xib */,
-				28D434A516646CC5005ED633 /* StatusViewControllerBase.h */,
-				28D434A616646CC5005ED633 /* StatusViewControllerBase.m */,
-				28D434A716646CC5005ED633 /* StatusViewControllerBase.xib */,
+				284C910116DC5569000F2A48 /* StatusViewControllerBase.h */,
+				284C910216DC5569000F2A48 /* StatusViewControllerBase.m */,
+				28DD3F4816DC601D005396AB /* StatusViewControllerBase.xib */,
 				2896C48C1661E79E004705A4 /* ZJTDetailStatusVC.h */,
 				2896C48D1661E79E004705A4 /* ZJTDetailStatusVC.m */,
 				2896C48E1661E79E004705A4 /* ZJTDetailStatusVC.xib */,
@@ -454,6 +480,7 @@
 				283654A316BFACDB00203578 /* FeedBackViewController.xib */,
 				28BAE94516C0DA3D00FA0F47 /* UIDeviceHardware.h */,
 				28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */,
+				284C911816DC5BDB000F2A48 /* FirstViewController.xib */,
 			);
 			name = OthersVCs;
 			sourceTree = "<group>";
@@ -601,6 +628,8 @@
 		28EA949F165F59E0009F69E5 /* babyTools */ = {
 			isa = PBXGroup;
 			children = (
+				2854E28016D462DD008B6E4B /* CoreDataManager.h */,
+				2854E28116D462DD008B6E4B /* CoreDataManager.m */,
 				288853F9167EAD67000ED11A /* BabyHelper.h */,
 				288853FA167EAD67000ED11A /* BabyHelper.m */,
 				28CA6683167F0A660087F45D /* BabyAlertWindow.h */,
@@ -727,6 +756,7 @@
 		B4227EC3162FE78D005F1700 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2854E27616D45F98008B6E4B /* CoreDataModels */,
 				2896C4251661CB1D004705A4 /* Comment.h */,
 				2896C4261661CB1D004705A4 /* Comment.m */,
 				2896C4271661CB1D004705A4 /* Draft.h */,
@@ -807,6 +837,7 @@
 			children = (
 				B44954B615A978F200FAA116 /* AppDelegate.h */,
 				B44954B715A978F200FAA116 /* AppDelegate.m */,
+				2854E28316D46F2A008B6E4B /* ImageCache.xcdatamodeld */,
 				B44954AF15A978F200FAA116 /* BabyinFamily-Info.plist */,
 				B44954B515A978F200FAA116 /* BabyinFamily-Prefix.pch */,
 				B40B1F701650ECD7000BC5DA /* Default-568h@2x.png */,
@@ -907,13 +938,13 @@
 				2884955616631CD30042C4CD /* FollowerVC.xib in Resources */,
 				28849558166321800042C4CD /* weibo.bundle in Resources */,
 				288495621663467E0042C4CD /* ProfileViewController.xib in Resources */,
-				28D434A916646CC5005ED633 /* StatusViewControllerBase.xib in Resources */,
-				280ACCEB1664876B00774CCC /* FirstViewController.xib in Resources */,
 				280CF2861664CA250031262F /* SettingVC.xib in Resources */,
 				288659AC167430C0000EADCC /* StatusCell.xib in Resources */,
 				280FBA4A169BD90E0072741B /* AviarySDKResources.bundle in Resources */,
 				28D14F5E169CF53600B39793 /* SendAndSaveViewController.xib in Resources */,
 				283654A516BFACDE00203578 /* FeedBackViewController.xib in Resources */,
+				284C911916DC5BDB000F2A48 /* FirstViewController.xib in Resources */,
+				28DD3F4916DC601D005396AB /* StatusViewControllerBase.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -979,7 +1010,6 @@
 				2896C49A1661E79E004705A4 /* ZJTHotRepostViewController.m in Sources */,
 				2884955516631CD30042C4CD /* FollowerVC.m in Sources */,
 				288495611663467E0042C4CD /* ProfileViewController.m in Sources */,
-				28D434A816646CC5005ED633 /* StatusViewControllerBase.m in Sources */,
 				280CF2851664CA250031262F /* SettingVC.m in Sources */,
 				288659AB167430C0000EADCC /* StatusCell.m in Sources */,
 				288853FB167EAD67000ED11A /* BabyHelper.m in Sources */,
@@ -995,6 +1025,12 @@
 				28ECD28516B8C1AA00CAA0DA /* RaisedCenterButton.m in Sources */,
 				283654A416BFACDE00203578 /* FeedBackViewController.m in Sources */,
 				28BAE94716C0DA3E00FA0F47 /* UIDeviceHardware.m in Sources */,
+				2854E27D16D45FE1008B6E4B /* Images.m in Sources */,
+				2854E27E16D45FE1008B6E4B /* StatusCoreDataItem.m in Sources */,
+				2854E27F16D45FE1008B6E4B /* UserCoreDataItem.m in Sources */,
+				2854E28216D462DD008B6E4B /* CoreDataManager.m in Sources */,
+				2854E28516D46F2A008B6E4B /* ImageCache.xcdatamodeld in Sources */,
+				284C910316DC5569000F2A48 /* StatusViewControllerBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1119,6 +1155,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2854E28316D46F2A008B6E4B /* ImageCache.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2854E28416D46F2A008B6E4B /* ImageCache.xcdatamodel */,
+			);
+			currentVersion = 2854E28416D46F2A008B6E4B /* ImageCache.xcdatamodel */;
+			path = ImageCache.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B449549A15A978F100FAA116 /* Project object */;
 }

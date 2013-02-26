@@ -39,7 +39,7 @@
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self != nil) {
-      [self setupStrings];
+        [self setupStrings];
     }
     return self;
 }
@@ -55,7 +55,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self != nil) {
-      [self setupStrings];
+        [self setupStrings];
     }
     return self;
 }
@@ -63,7 +63,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self != nil) {
-      [self setupStrings];
+        [self setupStrings];
     }
     return self;
 }
@@ -75,15 +75,15 @@
 }
 
 - (void)setupStrings{
-  textPull    = [[NSString alloc] initWithString:@"上拉可以刷新..."];
-  textRelease = [[NSString alloc] initWithString:@"松开即可刷新..."];
-  textLoading = [[NSString alloc] initWithString:@"加载中..."];
+    textPull    = [[NSString alloc] initWithString:@"上拉加载更多..."];
+    textRelease = [[NSString alloc] initWithString:@"松开即可加载..."];
+    textLoading = [[NSString alloc] initWithString:@"加载中..."];
 }
 
 - (void)addPullToRefreshFooter {
     refreshFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, REFRESH_FOOTER_HEIGHT)];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-//    self.tableView.backgroundColor = [UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0];
+    //    self.tableView.backgroundColor = [UIColor colorWithRed:226.0/255.0 green:231.0/255.0 blue:237.0/255.0 alpha:1.0];
     
     lastUpdatedLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, REFRESH_FOOTER_HEIGHT - 40.0f, 320.0f, 20.0f)];
     lastUpdatedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -94,6 +94,7 @@
     lastUpdatedLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     lastUpdatedLabel.backgroundColor = [UIColor clearColor];
     lastUpdatedLabel.textAlignment = UITextAlignmentCenter;
+    lastUpdatedLabel.hidden = YES;
     
     refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, REFRESH_FOOTER_HEIGHT - 55.0f, 320.0f, 20.0f)];
     refreshLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -103,16 +104,16 @@
     refreshLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     refreshLabel.backgroundColor = [UIColor clearColor];
     refreshLabel.textAlignment = UITextAlignmentCenter;
-
-    refreshArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/blueArrow.png"]];
+    
+    refreshArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"blueArrow.png"]];
     refreshArrow.frame = CGRectMake(floorf((REFRESH_FOOTER_HEIGHT - 30) / 2),
                                     (floorf(REFRESH_FOOTER_HEIGHT - 55) / 2),
                                     30, 55);
-
+    
     refreshSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     refreshSpinner.frame = CGRectMake(floorf(floorf(REFRESH_FOOTER_HEIGHT - 20) / 2), floorf((REFRESH_FOOTER_HEIGHT - 20) / 2), 20, 20);
     refreshSpinner.hidesWhenStopped = YES;
-
+    
     [refreshFooterView addSubview:lastUpdatedLabel];
     [refreshFooterView addSubview:refreshLabel];
     [refreshFooterView addSubview:refreshArrow];
@@ -129,7 +130,7 @@
     if (isLoading) {
         // Update the content inset, good for section headers
         if (contentOffsetY < 0)
-            self.tableView.contentInset = UIEdgeInsetsOriginal;        
+            self.tableView.contentInset = UIEdgeInsetsOriginal;
         else if (contentOffsetY <= REFRESH_FOOTER_HEIGHT)
             self.tableView.contentInset = UIEdgeInsetsMiddle;
     } else if (isDragging && contentOffsetY > 0) {

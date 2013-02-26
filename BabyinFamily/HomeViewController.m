@@ -83,7 +83,7 @@
     [defaultNotifCenter addObserver:self selector:@selector(didGetUserInfo:)    name:MMSinaGotUserInfo          object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(relogin)            name:NeedToReLogin              object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(didGetUnreadCount:) name:MMSinaGotUnreadCount       object:nil];
-    [defaultNotifCenter addObserver:self selector:@selector(appWillResign:)            name:UIApplicationWillResignActiveNotification             object:nil];
+    [defaultNotifCenter addObserver:self selector:@selector(appWillResign:)     name:UIApplicationWillResignActiveNotification             object:nil];
 }
 
 -(void)viewDidUnload
@@ -232,8 +232,8 @@
     refreshFooterView.hidden = NO;
     [self.tableView reloadData];
     [[SHKActivityIndicator currentIndicator] hide];
-   // [self refreshVisibleCellsImages];
-    [self getImages];
+    [self refreshVisibleCellsImages];
+    //[self getImages];
     if (timer == nil) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(timerOnActive) userInfo:nil repeats:YES];
     }
