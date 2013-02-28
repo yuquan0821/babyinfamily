@@ -90,6 +90,9 @@ typedef enum {
 //根据微博消息ID返回某条微博消息的评论列表
 -(void)didGetCommentList:(NSDictionary *)commentInfo;
 
+//获取当前登录用户所接收到的评论列表
+-(void)didGetCommetToMe:(NSString *)userID;
+
 //获取用户双向关注的用户ID列表，即互粉UID列表
 -(void)didGetBilateralIdList:(NSArray*)arr;
 
@@ -200,6 +203,9 @@ typedef enum {
 
 //根据微博消息ID返回某条微博消息的评论列表
 -(void)getCommentListWithID:(long long)weiboID maxID:(NSString*)max_id page:(int)page;
+
+//获取当前登录用户所接收到的评论列表
+-(void)didGetCommetToMe:(long long )uid maxID:(NSString*)max_id page:(int)page;
 
 //获取用户双向关注的用户ID列表，即互粉UID列表
 -(void)getBilateralIdListAll:(long long)uid sort:(int)sort;

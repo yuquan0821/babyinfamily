@@ -33,6 +33,7 @@
     TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
     MessageViewController *vc4   = [[[MessageViewController alloc] init] autorelease];
     ProfileViewController *vc5   = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
+    vc5.title = @"我的";
     UINavigationController * nav1 = [[[UINavigationController alloc] initWithRootViewController:vc1] autorelease];
     UINavigationController * nav2 = [[[UINavigationController alloc] initWithRootViewController:vc2] autorelease];
     UINavigationController * nav3 = [[[UINavigationController alloc] initWithRootViewController:vc3] autorelease];

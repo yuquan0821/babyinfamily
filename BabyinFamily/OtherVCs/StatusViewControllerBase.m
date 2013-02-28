@@ -161,9 +161,6 @@
 -(void)refreshVisibleCellsImages
 {
     NSArray *cellArr = [self.table visibleCells];
-    NSLog(@"table is %@",self.table);
-
-    NSLog(@"cell count is %d", cellArr.count);
     for (StatusCell *cell in cellArr) {
         NSIndexPath *inPath = [self.table indexPathForCell:cell];
         Status *status = [statuesArr objectAtIndex:inPath.row];
@@ -188,8 +185,6 @@
     }
 
 }
-
-
 
 //得到图片
 -(void)getAvatar:(NSNotification*)sender
@@ -229,8 +224,8 @@
     //得到的是博文图片
     if([url isEqualToString:sts.bmiddlePic])
     {
-        //CGSize size = CGSizeMake(300, 300);
-        //image = [UIImageView imageWithImage:[UIImage imageWithData:data] scaledToSizeWithSameAspectRatio:size];
+        CGSize size = CGSizeMake(300, 300);
+        image = [UIImageView imageWithImage:[UIImage imageWithData:data] scaledToSizeWithSameAspectRatio:size];
         sts.statusImage =image;
         cell.contentImage.image = sts.statusImage;
         // cell.retwitterContentImage.image = sts.statusImage;
@@ -449,16 +444,6 @@
     [browserView loadImage];
     [app.keyWindow addSubview:browserView];
     app.statusBarHidden = YES;
-    //    app.statusBarHidden = YES;
-    //    UIWindow *window = nil;
-    //    for (UIWindow *win in app.windows) {
-    //        if (win.tag == 0) {
-    //            [win addSubview:browserView];
-    //            window = win;
-    //            [window makeKeyAndVisible];
-    //        }
-    //    }
-    
     if (shouldShowIndicator == YES && browserView) {
         [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:browserView];
         //        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
@@ -541,5 +526,92 @@
 	return [NSDate date]; // should return date data source was last changed
 	
 }
+- (void)report
+{
+    /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+     PicShareEngine *engine = [PicShareEngine sharedEngine];
+     ErrorMessage *em = [engine reportPictureStatus:self.pictureStatus.psId];
+     if (em!=nil && em.ret==0 && em.errorcode == 0){
+     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"举报成功" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+     [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+     [alert release];
+     }
+     });*/
+}
+- (void)deletePicture
+{
+    
+    /* [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+     PicShareEngine *engine = [PicShareEngine sharedEngine];
+     ErrorMessage *em = [engine deletePictureStatus:self.pictureStatus.psId];
+     dispatch_async(dispatch_get_main_queue(), ^{
+     if (em!=nil && em.ret==0 && em.errorcode == 0) {
+     //send notification
+     
+     NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:self.pictureStatus.psId],@"psId", nil];
+     [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
+     [userInfo release];
+     [self.navigationController popViewControllerAnimated:YES];
+     }else{
+     [MBProgressHUD hideHUDForView:self.view animated:YES];
+     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+     [alert show];
+     [alert release];
+     }
+     });
+     });*/
+}
+
+- (void)moreButtonOnClick:(id)sender
+{
+    Status *status;
+    UIActionSheet *sheet;
+    NSInteger userId = [[NSUserDefaults standardUserDefaults] integerForKey:USER_STORE_USER_ID];
+    if (status.user.userId == userId) {
+        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"举报", nil];
+    }else{
+        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"举报" otherButtonTitles:nil];
+    }
+    UIWindow *window = [[UIApplication sharedApplication]keyWindow];
+    [sheet showInView:window];
+    [sheet release];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    Status *status;
+    NSLog(@"%d",buttonIndex);
+    NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:@"userid"];
+    if (status.user.userId == userId) {
+        //0：删除 1：举报 2：取消
+        switch (buttonIndex) {
+            case 0:
+                [self deletePicture];
+                break;
+            case 1:
+                [self report];
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
+    }else{
+        //0：举报 1：取消
+        switch (buttonIndex) {
+            case 0:
+                [self report];
+                break;
+            case 1:
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+
+
 
 @end

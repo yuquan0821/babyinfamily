@@ -24,7 +24,7 @@
 
 @class WeiBoMessageManager;
 
-@interface StatusViewControllerBase : PullRefreshTableViewController<EGORefreshTableHeaderDelegate,StatusCellDelegate,ImageBrowserDelegate>{
+@interface StatusViewControllerBase : PullRefreshTableViewController<EGORefreshTableHeaderDelegate,StatusCellDelegate,ImageBrowserDelegate,UIActionSheetDelegate>{
     
     WeiBoMessageManager *manager;
     NSNotificationCenter *defaultNotifCenter;
@@ -56,5 +56,7 @@
 
 - (void)doneLoadingTableViewData;
 -(void)refreshVisibleCellsImages;
+- (void)moreButtonOnClick:(id)sender;
+
 
 @end

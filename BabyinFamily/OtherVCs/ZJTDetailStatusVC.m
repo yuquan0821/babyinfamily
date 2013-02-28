@@ -300,7 +300,7 @@
     ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
     profile.userID = [NSString stringWithFormat:@"%lld",self.user.userId];
     profile.user = self.user;
-    profile.avatarImage = self.avatarImage;
+    profile.avatarImageView = self.avatarImage;
     [self.navigationController pushViewController:profile animated:YES];
     [profile release];
 }

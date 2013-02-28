@@ -31,5 +31,6 @@
 @property (nonatomic,retain) NSString *ios;
 @property (nonatomic,retain) NSString *iosVision;
 @property (nonatomic,retain) NSString *platform;
+@property (nonatomic,retain) NSString *APPVision;
 
 @end

@@ -7,53 +7,43 @@
 //
 
 
+
 #import <UIKit/UIKit.h>
-#import "PullRefreshTableViewController.h"
 #import "User.h"
-#import "StatusCell.h"
 #import "FeedBackViewController.h"
 #import "SettingVC.h"
-#import "ImageBrowser.h"
 
 
-@class WeiBoMessageManager;
-@class ImageBrowser;
+@class profileCell;
 
-#define kTextViewPadding            16.0
-#define kLineBreakMode              UILineBreakModeWordWrap
-
-@interface ProfileViewController : PullRefreshTableViewController<UITableViewDelegate,UITableViewDataSource,StatusCellDelegate,ImageBrowserDelegate>
+@interface ProfileViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
-    WeiBoMessageManager *manager;
-    NSNotificationCenter *defaultNotifCenter;
-    
-    UITableView         *table;
-    NSString            *userID;
-    UINib               *statusCellNib;
-    NSMutableArray      *statuesArr;
-    NSMutableDictionary *imageDictionary;
-    ImageBrowser        *browserView;
-    
-    
-    BOOL                shouldShowIndicator;
-    BOOL                shouldLoad;
-    BOOL                shouldLoadAvatar;
-    BOOL                isFirstCell;
-
 }
 @property (retain, nonatomic)   IBOutlet UITableView    *table;
-@property (nonatomic, copy)     NSString                *userID;
-@property (nonatomic, retain)   UINib                   *statusCellNib;
-@property (nonatomic, retain)   NSMutableArray          *statuesArr;
-@property (nonatomic, retain)   NSMutableDictionary     *imageDictionary;
-@property (nonatomic, retain)   ImageBrowser            *browserView;
-@property (nonatomic, retain) User *user;
-@property (nonatomic, retain) UIImage *avatarImage;
-@property (retain, nonatomic) IBOutlet UIView *headerView;
-@property (retain, nonatomic) IBOutlet UIImageView *headerVImageV;
-@property (retain, nonatomic) IBOutlet UILabel *headerVNameLB;
-@property (retain, nonatomic) IBOutlet UILabel *weiboCount;
-@property (retain, nonatomic) IBOutlet UILabel *followerCount;
-@property (retain, nonatomic) IBOutlet UILabel *followingCount;
+@property (retain, nonatomic)   IBOutlet UIImageView    *avatarImageView;
+@property (retain, nonatomic)   IBOutlet UIImageView    *genderIamgeView;
+@property (retain, nonatomic)   IBOutlet UILabel        *nameLabel;
+@property (retain, nonatomic)   IBOutlet UIButton       *followButton;
+@property (retain, nonatomic)   IBOutlet UIButton       *fansButton;
+@property (retain, nonatomic)   IBOutlet UIButton       *idolButton;
+@property (retain, nonatomic)   IBOutlet UIButton       *weiboButton;
+@property (retain, nonatomic)   IBOutlet UIButton       *topicButton;
+@property (retain, nonatomic)   IBOutlet UIView         *tableHeaderView;
+@property (nonatomic,retain)    NSString *screenName;
+@property (nonatomic, retain)   User *user;
+@property (retain, nonatomic)   IBOutlet profileCell *verifiedProfileCell;
+@property (retain, nonatomic)   IBOutlet profileCell *locationProfileCell;
+@property (retain, nonatomic)   IBOutlet profileCell *descriptionProfileCell;
 
+@property (nonatomic,retain)    NSArray *topicsArr;
+
+@property (nonatomic, copy)     NSString                *userID;
+
+
+@end
+
+@interface profileCell : UITableViewCell
+
+@property (nonatomic,retain) IBOutlet UILabel *contentLabel;
+@property (nonatomic,retain) IBOutlet UILabel *titleLabel;
 @end

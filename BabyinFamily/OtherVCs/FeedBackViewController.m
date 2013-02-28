@@ -27,6 +27,7 @@
 @synthesize ios;
 @synthesize iosVision;
 @synthesize platform;
+@synthesize APPVision;
 
 #pragma mark - Tool Methods
 - (void)addPhoto
@@ -114,6 +115,7 @@
     [ios release];
     [iosVision release];
     [platform release];
+    [APPVision release];
     [super dealloc];
 }
 
@@ -133,7 +135,8 @@
     self.ios = [[UIDevice currentDevice] systemName];
     self.iosVision = [[UIDevice currentDevice] systemVersion];
     self.platform = [[[[UIDeviceHardware alloc] init] platform] stringByAppendingString: [self.ios stringByAppendingString:self.iosVision]];
-    self.theTextView.text = [@"#家贝反馈# @fanyanchun " stringByAppendingString:self.platform];
+    self.APPVision = [@"版本:" stringByAppendingString: [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+    self.theTextView.text = [[@"#家贝反馈# @fanyanchun " stringByAppendingString: self.APPVision ] stringByAppendingString:self.platform];
     countLabel.text = [NSString stringWithFormat:@"%d",140 - theTextView.text.length];
     TVBackView.image = [[UIImage imageNamed:@"weibo.bundle/WeiboImages/input_window.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:15];
     
@@ -211,10 +214,6 @@
     }
     [UIView commitAnimations];
 }
-
-
-
-
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     NSDictionary* userInfo = [notification userInfo];

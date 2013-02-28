@@ -242,6 +242,32 @@
     [requestQueue addOperation:request];
     [request release];
 }
+-(void)didGetCommetToMe:(long long )uid maxID:(NSString*)max_id page:(int)page
+{
+    //https://api.weibo.com/2/comments/to_me.json
+    self.authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
+    self.userId = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID];
+    
+    NSMutableDictionary     *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       authToken,                                       @"access_token",
+                                       [NSString stringWithFormat:@"%lld",uid],     @"id",
+                                       nil];
+    if (max_id) {
+        [params setObject:max_id forKey:@"max_id"];
+    }
+    [params setObject:[NSString stringWithFormat:@"%d",page] forKey:@"page"];
+    NSString                *baseUrl =[NSString  stringWithFormat:@"%@/comments/to_me.json",SINA_V2_DOMAIN];
+    NSURL                   *url = [self generateURL:baseUrl params:params];
+    
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:url];
+    NSLog(@"url=%@",url);
+    [self setGetUserInfo:request withRequestType:SinaGetComment];
+    [requestQueue addOperation:request];
+    [request release];
+
+    
+}
+
 
 //获取用户双向关注的用户ID列表，即互粉UID列表
 -(void)getBilateralIdList:(long long)uid count:(int)count page:(int)page sort:(int)sort
