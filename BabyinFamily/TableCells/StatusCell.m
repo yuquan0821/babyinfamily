@@ -22,6 +22,7 @@
 @synthesize timeLB;
 @synthesize moreButton;
 @synthesize commentButton;
+@synthesize userNameButton;
 
 
 -(void)setupCell:(Status *)status  //contentImageData:(NSData *)imageData
@@ -90,6 +91,7 @@
     [moreButton release];
     [locationLabel release];
     [commentButton release];
+    [userNameButton release];
     [super dealloc];
 }
 @end

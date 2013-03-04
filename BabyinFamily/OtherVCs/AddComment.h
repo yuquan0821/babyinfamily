@@ -16,7 +16,7 @@
 @class WeiBoMessageManager;
 @class Comment;
 
-@interface AddComment :UIViewController <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
+@interface AddComment :UIViewController < UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
 {
     UINib  *commentCellNib;
     WeiBoMessageManager *manager;

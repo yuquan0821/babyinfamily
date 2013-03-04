@@ -191,6 +191,8 @@ enum  {
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter]removeObserver:self];
+    //self.view.keyboardTriggerOffset = 0;
+
 }
 
 -(UINib*)commentCellNib

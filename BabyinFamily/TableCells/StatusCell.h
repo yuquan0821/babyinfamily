@@ -31,6 +31,7 @@
 //@property (retain, nonatomic) IBOutlet UILabel *countLB;
 @property (retain, nonatomic) IBOutlet UIImageView *avatarImage;
 @property (retain, nonatomic) IBOutlet UILabel *userNameLB;
+@property (retain, nonatomic) IBOutlet UIButton *userNameButton;
 @property (retain, nonatomic) IBOutlet UILabel *locationLabel;
 @property (retain, nonatomic) IBOutlet UIImageView *bgImage;
 @property (retain, nonatomic) IBOutlet UIImageView *contentImage;
@@ -41,6 +42,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *moreButton;
 
 @property (retain, nonatomic) IBOutlet UIButton *commentButton;
+
 
 -(CGFloat)setCellHeight:(Status *)status contentImageData:(NSData *)imageData;
 -(void)setupCell:(Status*)status; //contentImageData:(NSData*)imageData;

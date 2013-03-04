@@ -8,6 +8,7 @@
 
 #import "StatusViewControllerBase.h"
 #import "UIImageView+Resize.h"
+#import "ProfileViewController.h"
 
 #define kTextViewPadding            16.0
 #define kLineBreakMode              UILineBreakModeWordWrap
@@ -296,6 +297,8 @@
     StatusCell *cell = [self cellForTableView:tableView fromNib:self.statusCellNib];
     [cell.moreButton addTarget:self action:@selector(moreButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.commentButton addTarget:self action:@selector(addComment:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.userNameButton addTarget:self action:@selector(goToProfile:) forControlEvents:UIControlEventTouchUpInside];
+
 
     if (row >= [statuesArr count]) {
         return cell;
@@ -555,9 +558,9 @@
     UIActionSheet *sheet;
     NSInteger userId = [[NSUserDefaults standardUserDefaults] integerForKey:USER_STORE_USER_ID];
     if (status.user.userId == userId) {
-        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"举报", nil];
+        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存", nil];
     }else{
-        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"举报" otherButtonTitles:nil];
+        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"保存" otherButtonTitles:nil];
     }
     UIWindow *window = [[UIApplication sharedApplication]keyWindow];
     [sheet showInView:window];
@@ -596,7 +599,8 @@
         }
     }
 }
-- (void)addComment:(id)sender {
+- (void)addComment:(id)sender
+{
     
     UIButton *button = (UIButton *)sender;
     StatusCell *cell = (StatusCell *)button.superview.superview;
@@ -611,7 +615,22 @@
     [add release];
 }
 
-
+- (void)goToProfile:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    StatusCell *cell = (StatusCell *)button.superview.superview;
+    NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    Status *status = [self.statuesArr objectAtIndex:path.row];
+    ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
+    profile.user = status.user;
+    if (profile.user.userId == [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID]) {
+        profile.followButton.hidden = YES;
+    }
+    profile.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:profile animated:YES];
+    [profile release];
+    
+}
 
 
 @end
