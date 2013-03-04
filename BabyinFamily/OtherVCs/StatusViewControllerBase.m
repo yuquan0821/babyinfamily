@@ -552,11 +552,14 @@
 - (void)moreButtonOnClick:(id)sender
 {
     UIButton *button = (UIButton *)sender;
-    StatusCell *cell = (StatusCell *)button.superview;
+    StatusCell *cell = (StatusCell *)button.superview.superview;
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
     Status *status = [self.statuesArr objectAtIndex:path.row];
     UIActionSheet *sheet;
     NSInteger userId = [[NSUserDefaults standardUserDefaults] integerForKey:USER_STORE_USER_ID];
+    
+    
+
     if (status.user.userId == userId) {
         sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存", nil];
     }else{

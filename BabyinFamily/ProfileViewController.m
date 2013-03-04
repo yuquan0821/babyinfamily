@@ -247,6 +247,7 @@ enum {
         self.user = theUser;
         [self updateWithUser:user];
         [table reloadData];
+        
     }
     
     if ([self.title isEqualToString:@"我的"]) {

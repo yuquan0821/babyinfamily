@@ -165,7 +165,7 @@
 
 -(void)timerOnActive
 {
-    //    [manager getUnreadCount:userID];
+     // [manager getUnreadCount:userID];
 }
 
 -(void)relogin
@@ -255,7 +255,7 @@
         return;
     }
     
-    [[BabyAlertWindow getInstance] showWithString:[NSString stringWithFormat:@"有%@条新微博",num]];
+    [[BabyAlertWindow getInstance] showWithString:[NSString stringWithFormat:@"有%@条评论",num]];
     [[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:10];
 }
 
