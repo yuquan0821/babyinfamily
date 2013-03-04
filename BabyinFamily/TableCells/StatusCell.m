@@ -10,7 +10,7 @@
 #import "UIImageView+Resize.h"
 
 @implementation StatusCell
-@synthesize countLB;
+//@synthesize countLB;
 @synthesize avatarImage;
 @synthesize userNameLB;
 @synthesize locationLabel;
@@ -18,15 +18,16 @@
 @synthesize contentImage;
 @synthesize delegate;
 @synthesize cellIndexPath;
-@synthesize fromLB;
+//@synthesize fromLB;
 @synthesize timeLB;
 @synthesize moreButton;
+@synthesize commentButton;
 
 
 -(void)setupCell:(Status *)status  //contentImageData:(NSData *)imageData
 {
-    countLB.text = [NSString stringWithFormat:@"评论:%d 转发:%d 赞:%d",status.commentsCount,status.retweetsCount,status.attitudesCount];
-    fromLB.text = [NSString stringWithFormat:@"来自:%@",status.source];
+   // countLB.text = [NSString stringWithFormat:@"评论:%d 转发:%d 赞:%d",status.commentsCount,status.retweetsCount,status.attitudesCount];
+    //fromLB.text = [NSString stringWithFormat:@"来自:%@",status.source];
     userNameLB.text = status.user.screenName;
     locationLabel.text = status.user.location;
     timeLB.text = status.timestamp;
@@ -83,11 +84,12 @@
     [bgImage release];
     [contentImage release];
     [cellIndexPath release];
-    [countLB release];
-    [fromLB release];
+  //  [countLB release];
+   // [fromLB release];
     [timeLB release];
     [moreButton release];
     [locationLabel release];
+    [commentButton release];
     [super dealloc];
 }
 @end
