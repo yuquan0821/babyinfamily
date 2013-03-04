@@ -13,7 +13,7 @@ typedef enum {
     kRepost = 0,        //转发微博
     kReplyAComment,     //回复一条评论
     kReplyAStatus,      //对一条微博进行评论
-}VCType;
+}VType;
 
 @interface AddCommentVC : UIViewController
 {
@@ -24,6 +24,6 @@ typedef enum {
 @property (retain, nonatomic) NSString *contentStr;
 @property (retain, nonatomic) NSString *weiboID;
 @property (retain, nonatomic) Status *status;
-@property (assign, nonatomic) VCType vctype;
+@property (assign, nonatomic) VType vctype;
 
 @end

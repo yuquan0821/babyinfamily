@@ -247,7 +247,6 @@
     [self stopLoading];
     [self doneLoadingTableViewData];
     [[SHKActivityIndicator currentIndicator] hide];
-    [[BabyAlertWindow getInstance] hide];
 }
 
 //上拉刷新
@@ -267,6 +266,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (cell == nil) {
         NSLog(@"statuss cell new");
+        
         NSArray *nibObjects = [nib instantiateWithOwner:Nil options:Nil];
         cell = [nibObjects objectAtIndex:0];
     }
@@ -294,7 +294,9 @@
 {
     NSInteger  row = indexPath.row;
     StatusCell *cell = [self cellForTableView:tableView fromNib:self.statusCellNib];
-    
+    [cell.moreButton addTarget:self action:@selector(moreButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.commentButton addTarget:self action:@selector(addComment:) forControlEvents:UIControlEventTouchUpInside];
+
     if (row >= [statuesArr count]) {
         return cell;
     }
@@ -304,7 +306,8 @@
     cell.delegate = self;
     cell.cellIndexPath = indexPath;
     [cell setupCell:status ];
-    if (self.table.dragging == NO && self.table.decelerating == NO)
+    if (self.table.dragging == NO && self.table.decelerating == NO) //只有scrollview没有滑动时才加载（节省流量）
+
     {
         if (status.user.avatarImage == nil)
         {
@@ -356,26 +359,6 @@
         NSLog(@"hight is %f",height);
     }
     return height;
-}
-
- -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSInteger  row = indexPath.row;
-    if (row >= [statuesArr count]) {
-        //        NSLog(@"didSelectRowAtIndexPath error ,index = %d,count = %d",row,[statuesArr count]);
-        return ;
-    }
-    
-    ZJTDetailStatusVC *detailVC = [[ZJTDetailStatusVC alloc] initWithNibName:@"ZJTDetailStatusVC" bundle:nil];
-    Status *status  = [statuesArr objectAtIndex:row];
-    detailVC.status = status;
-    
-    detailVC.avatarImage = status.user.avatarImage;
-    detailVC.contentImage = status.statusImage;
-    detailVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detailVC animated:YES];
-    [detailVC release];
-
 }
 
 #pragma mark - StatusCellDelegate
@@ -565,7 +548,10 @@
 
 - (void)moreButtonOnClick:(id)sender
 {
-    Status *status;
+    UIButton *button = (UIButton *)sender;
+    StatusCell *cell = (StatusCell *)button.superview;
+    NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    Status *status = [self.statuesArr objectAtIndex:path.row];
     UIActionSheet *sheet;
     NSInteger userId = [[NSUserDefaults standardUserDefaults] integerForKey:USER_STORE_USER_ID];
     if (status.user.userId == userId) {
@@ -582,7 +568,7 @@
 {
     Status *status;
     NSLog(@"%d",buttonIndex);
-    NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:@"userid"];
+    NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID];
     if (status.user.userId == userId) {
         //0：删除 1：举报 2：取消
         switch (buttonIndex) {
@@ -609,6 +595,20 @@
                 break;
         }
     }
+}
+- (void)addComment:(id)sender {
+    
+    UIButton *button = (UIButton *)sender;
+    StatusCell *cell = (StatusCell *)button.superview.superview;
+    NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    
+    Status *status = [self.statuesArr objectAtIndex:path.row];
+    
+    AddComment *add = [[AddComment alloc]initWithNibName:@"AddComment" bundle:nil];
+    add.status = status;
+    add.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:add animated:YES];
+    [add release];
 }
 
 

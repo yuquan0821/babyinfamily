@@ -188,7 +188,6 @@ enum {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:) name:HHNetDataCacheNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfo:)    name:MMSinaGotUserInfo          object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetuserTopics:)    name:MMSinaGotUserTopics          object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFollowByUserIDWithResult:) name:MMSinaFollowedByUserIDWithResult object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUnfollowByUserIDWithResult:) name:MMSinaUnfollowedByUserIDWithResult object:nil];
 }
@@ -259,16 +258,6 @@ enum {
     [table reloadData];
     
     [[WeiBoMessageManager getInstance] getTopicsOfUser:self.user];
-}
-
--(void)didGetuserTopics:(NSNotification*)sender
-{
-    NSArray *arr = sender.object;
-    if ([arr isKindOfClass:[NSArray class]]) {
-        self.topicsArr = arr;
-        user.topicCount = arr.count;
-        [self updateWithUser:user];
-    }
 }
 
 -(void)didUnfollowByUserIDWithResult:(NSNotification*)sender

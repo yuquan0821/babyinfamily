@@ -26,7 +26,7 @@ enum{
     kHotStatus = 0,
     kHotRetwitted,
     kHotTrends,
-    //    kMetionsStatuses,
+    kMetionsStatuses,
     kStatusRowsCount,
 };
 

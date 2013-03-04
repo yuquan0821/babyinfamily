@@ -5,9 +5,7 @@
 //  Created by Jianting Zhu on 12-5-9.
 //  Copyright (c) 2012年 ZUST. All rights reserved.
 //
-
 #import "StatusViewControllerBase.h"
-//#import "ZJTStatusBaseVC.h"
 
 typedef enum {
     kHotRepostDaily = 0,

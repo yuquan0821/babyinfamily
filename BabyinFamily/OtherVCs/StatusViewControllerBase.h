@@ -20,6 +20,7 @@
 #import "SHKActivityIndicator.h"
 #import "ZJTDetailStatusVC.h"
 #import "UIImageView+Resize.h"
+#import "AddComment.h"
 
 
 @class WeiBoMessageManager;
@@ -54,8 +55,9 @@
 @property (nonatomic, retain)   NSMutableDictionary     *imageDictionary;
 @property (nonatomic, retain)   ImageBrowser            *browserView;
 
+
 - (void)doneLoadingTableViewData;
--(void)refreshVisibleCellsImages;
+- (void)refreshVisibleCellsImages;
 - (void)moreButtonOnClick:(id)sender;
 
 

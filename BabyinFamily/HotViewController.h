@@ -6,8 +6,10 @@
 //
 //
 
-#import "BaseViewController.h"
-
-@interface HotViewController : BaseViewController <UITableViewDataSource,UITableViewDelegate>
+#import <UIKit/UIKit.h>
+#import "BDDynamicGridViewController.h"
+@interface HotViewController : BDDynamicGridViewController <BDDynamicGridViewDelegate>{
+    NSArray * _items;
+}
 
 @end

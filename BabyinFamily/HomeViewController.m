@@ -248,15 +248,15 @@
 -(void)didGetUnreadCount:(NSNotification*)sender
 {
     NSDictionary *dic = sender.object;
-    NSNumber *num = [dic objectForKey:@"status"];
+    NSNumber *num = [dic objectForKey:@"cmt"];
     
     NSLog(@"num = %@",num);
     if ([num intValue] == 0) {
         return;
     }
     
-   // [[BabyAlertWindow getInstance] showWithString:[NSString stringWithFormat:@"有%@条新微博",num]];
-    //[[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:10];
+    [[BabyAlertWindow getInstance] showWithString:[NSString stringWithFormat:@"有%@条新微博",num]];
+    [[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:10];
 }
 
 @end
