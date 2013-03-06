@@ -49,6 +49,10 @@ enum  {
 @synthesize commentArr;
 @synthesize isFromProfileVC;
 @synthesize clickedComment;
+@synthesize theScrollView;
+@synthesize sendButton;
+@synthesize textField;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -103,7 +107,7 @@ enum  {
     self.title = @"评论";
     //self.user = status.user;
     self.view.backgroundColor = [UIColor lightGrayColor];
-    
+    theScrollView.contentSize = CGSizeMake(320, 410);
     table = [[UITableView alloc] initWithFrame:CGRectMake(0.0f,
                                                                            0.0f,
                                                                            self.view.bounds.size.width,
@@ -121,7 +125,7 @@ enum  {
     toolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:toolBar];
     
-    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10.0f,
+    textField = [[UITextField alloc] initWithFrame:CGRectMake(10.0f,
                                                                            6.0f,
                                                                            toolBar.bounds.size.width - 20.0f - 68.0f,
                                                                            30.0f)];
@@ -129,13 +133,14 @@ enum  {
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [toolBar addSubview:textField];
     
-    UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    sendButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     sendButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     [sendButton setTitle:@"发送" forState:UIControlStateNormal];
     sendButton.frame = CGRectMake(toolBar.bounds.size.width - 68.0f,
                                   6.0f,
                                   58.0f,
                                   29.0f);
+    [sendButton addTarget:self action:@selector(sendButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [toolBar addSubview:sendButton];
     
     
@@ -178,6 +183,8 @@ enum  {
     [center addObserver:self selector:@selector(mmRequestFailed:) name:MMSinaRequestFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     [center addObserver:self selector:@selector(didCommentAStatus:) name:MMSinaCommentAStatus object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didComment:) name:MMSinaReplyAComment object:nil];
+
     if (self.commentArr == nil) {
         [manager getCommentListWithID:status.statusId maxID:nil page:1];
     }
@@ -215,6 +222,7 @@ enum  {
     self.avatarImage = nil;
     self.contentImage = nil;
     self.commentArr = nil;
+    self.theScrollView = nil;
     [super dealloc];
 }
 
@@ -277,7 +285,7 @@ enum  {
 
 -(void)didCommentAStatus:(NSNotification*)sender
 {
-    NSDictionary *dic = sender.object;
+    //NSDictionary *dic = sender.object;
 }
 
 -(void)didFollowByUserID:(NSNotification*)sender
@@ -305,6 +313,36 @@ enum  {
         user.following = NO;
         [self.navigationItem.rightBarButtonItem setTitle:@"关注"];
     }
+}
+
+-(void)didComment:(NSNotification*)sender
+{
+    NSNumber *num = sender.object;
+    if (num.boolValue == YES) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"评论成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"评论失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+}
+
+- (void)sendButtonAction
+{
+    NSString *content = textField.text;
+    NSString *weiboID = [NSString stringWithFormat:@"%lld",status.statusId];
+    if ( content != Nil && content.length !=0) {
+        
+        [manager commentAStatus:weiboID content:content];
+    }
+    [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
+    [[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:3];
+    [self.table reloadData];
+
 }
 
 //得到图片
@@ -378,7 +416,6 @@ enum  {
     
     cell.nameLB.text = comment.user.screenName;
     cell.contentLB.text = comment.text;
-    cell.vipImageView.hidden = !comment.user.verified;
     comment.cellIndexPath = indexPath;
     
     if (self.table.dragging == NO && self.table.decelerating == NO)
@@ -414,8 +451,7 @@ enum  {
 {
     int row = indexPath.row;
     self.clickedComment = [commentArr objectAtIndex:row];
-    
-    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复",@"查看资料",@"关注", nil];
+    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复",@"查看资料", nil];
     as.tag = kCommentClickActionSheet;
     [as showInView:self.view];
     [as release];
@@ -426,12 +462,13 @@ enum  {
     if (actionSheet.tag == kCommentClickActionSheet) {
         User *theUser = clickedComment.user;
         NSLog(@"%dtheUser name = %@",buttonIndex,theUser.screenName);
-        if (buttonIndex == kReplyComment) {
-            
-        }
-        else if (buttonIndex == kViewUserProfile) {
+        if (buttonIndex == kViewUserProfile) {
             ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
             profile.user = theUser;
+            NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID];
+            if (profile.user.userId == uid.longLongValue ) {
+                profile.followButton.hidden = YES;//为什followButton的属性为Null？
+            }
             profile.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:profile animated:YES];
             [profile release];
@@ -442,13 +479,7 @@ enum  {
     }
     else if (actionSheet.tag == kStatusReplyActionSheet)
     {
-        if (buttonIndex == kRetweet) {
-           /* TwitterVC *tv = [[TwitterVC alloc]initWithNibName:@"TwitterVC" bundle:nil];
-            [self.navigationController pushViewController:tv animated:YES];
-            [tv setupForRepost:[NSString stringWithFormat:@"%lld",self.status.statusId]];
-            [tv release];*/
-        }
-        else if(buttonIndex == kComment)
+        if(buttonIndex == kComment)
         {
             /*TwitterVC *tv = [[TwitterVC alloc]initWithNibName:@"TwitterVC" bundle:nil];
             [self.navigationController pushViewController:tv animated:YES];
@@ -465,18 +496,6 @@ enum  {
     [self refreshVisibleCellsImages];
 }
 
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
-{
-    //    [self refreshVisibleCellsImages];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
-    if (!decelerate)
-	{
-        [self refreshVisibleCellsImages];
-    }
-}
 
 
 

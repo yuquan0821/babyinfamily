@@ -38,6 +38,8 @@
 @property (retain, nonatomic) NSMutableArray        *commentArr;
 @property (assign, nonatomic) BOOL                  isFromProfileVC;
 @property (retain, nonatomic) Comment *clickedComment;
-
+@property (retain, nonatomic) UIScrollView *theScrollView;
+@property (retain, nonatomic) UIButton  *sendButton;
+@property (retain, nonatomic) UITextField *textField;
 
 @end

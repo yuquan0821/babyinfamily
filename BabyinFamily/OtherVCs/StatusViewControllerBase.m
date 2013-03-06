@@ -522,7 +522,13 @@
      [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
      [alert release];
      }
-     });*/
+     });
+  
+        UIImageWriteToSavedPhotosAlbum(self.mainImageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        self.tabBarController.tabBar.hidden = NO;
+        self.tabBarController.selectedIndex = 0;
+        [self dismissModalViewControllerAnimated:NO];*/
+        
 }
 - (void)deletePicture
 {
@@ -558,8 +564,6 @@
     UIActionSheet *sheet;
     NSInteger userId = [[NSUserDefaults standardUserDefaults] integerForKey:USER_STORE_USER_ID];
     
-    
-
     if (status.user.userId == userId) {
         sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存", nil];
     }else{
@@ -604,13 +608,10 @@
 }
 - (void)addComment:(id)sender
 {
-    
     UIButton *button = (UIButton *)sender;
     StatusCell *cell = (StatusCell *)button.superview.superview;
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
-    
     Status *status = [self.statuesArr objectAtIndex:path.row];
-    
     AddComment *add = [[AddComment alloc]initWithNibName:@"AddComment" bundle:nil];
     add.status = status;
     add.hidesBottomBarWhenPushed = YES;
@@ -626,8 +627,9 @@
     Status *status = [self.statuesArr objectAtIndex:path.row];
     ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
     profile.user = status.user;
-    if (profile.user.userId == [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID]) {
-        profile.followButton.hidden = YES;
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID];
+    if (profile.user.userId == uid.longLongValue ) {
+        profile.followButton.hidden = YES;//为什followButton的属性为Null？
     }
     profile.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:profile animated:YES];

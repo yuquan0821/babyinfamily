@@ -82,6 +82,7 @@ enum {
     if(screenName){
         [[WeiBoMessageManager getInstance] getUserInfoWithScreenName:self.screenName];
     }
+    
     if ([self.title isEqualToString:@"我的"]) {
         self.user = [BabyHelper getInstance].user;
         UIBarButtonItem *retwitterBtn = [[UIBarButtonItem alloc]initWithTitle:@"反馈" style:UIBarButtonItemStylePlain target:self action:@selector(feedBack)];
@@ -94,10 +95,7 @@ enum {
 
         followButton.hidden = YES;
     }
-    if (self.user) {
-        [[WeiBoMessageManager getInstance]getTopicsOfUser:self.user];
-    }
-        
+      
         UIImage *normalImage = [UIImage imageNamed:@"weibo.bundle/WeiboImages/details_edit_normal_btn.png"];
         UIImage *pressdImage = [UIImage imageNamed:@"weibo.bundle/WeiboImages/details_edit_normal_pressed.png"];
         [fansButton setBackgroundImage:[normalImage stretchableImageWithLeftCapWidth:71 topCapHeight:16] forState:UIControlStateNormal];
@@ -258,7 +256,6 @@ enum {
     [self updateWithUser:user];
     [table reloadData];
     
-    [[WeiBoMessageManager getInstance] getTopicsOfUser:self.user];
 }
 
 -(void)didUnfollowByUserIDWithResult:(NSNotification*)sender

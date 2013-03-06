@@ -15,7 +15,7 @@
 
 @end
 
-@interface SendAndSaveViewController : UIViewController<UIImagePickerControllerDelegate>
+@interface SendAndSaveViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     WeiBoMessageManager *manager;
     BOOL _shouldPostImage;

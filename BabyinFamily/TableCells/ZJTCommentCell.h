@@ -32,6 +32,5 @@
 @property (assign, nonatomic) id<ZJTCommentCellDelegate> delegate;
 @property (retain, nonatomic) NSIndexPath *cellIndexPath;
 @property (retain, nonatomic) IBOutlet UIImageView *avatarImage;
-@property (retain, nonatomic) IBOutlet UIImageView *vipImageView;
 
 @end

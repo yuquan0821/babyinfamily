@@ -165,7 +165,7 @@
 
 -(void)timerOnActive
 {
-     // [manager getUnreadCount:userID];
+      [manager getUnreadCount:userID];
 }
 
 -(void)relogin

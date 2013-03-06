@@ -19,7 +19,6 @@
 
 @synthesize cellIndexPath;
 @synthesize avatarImage;
-@synthesize vipImageView;
 
 -(IBAction)replyBtnClicked:(id)sender
 {
@@ -38,7 +37,6 @@
     [contentLB release];
     [replyBtn release];
     [avatarImage release];
-    [vipImageView release];
     [super dealloc];
 }
 

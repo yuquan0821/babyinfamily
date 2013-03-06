@@ -11,6 +11,7 @@
 #import "BabyAlertWindow.h"
 #import "WeiBoMessageManager.h"
 #import "Status.h"
+#import "HomeViewController.h"
 
 
 
