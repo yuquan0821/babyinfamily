@@ -84,6 +84,11 @@ static WeiBoMessageManager * instance=nil;
     [httpManager getCommentListWithID:weiboID maxID:max_id page:page];
 }
 
+//获取当前登陆用户接受到评论
+-(void)GetCommetListToMe
+{
+    [httpManager GetCommetListToMe];
+}
 
 //获取用户双向关注的用户ID列表，即互粉UID列表
 -(void)getBilateralIdListAll:(long long)uid sort:(int)sort
@@ -279,6 +284,13 @@ static WeiBoMessageManager * instance=nil;
 -(void)didGetCommentList:(NSDictionary *)commentInfo
 {
     NSNotification *notification = [NSNotification notificationWithName:MMSinaGotCommentList object:commentInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
+//获取登陆用户接受到的评论列表
+-(void)didGetCommetToMe:(NSString *)userID
+{
+    NSNotification *notification = [NSNotification notificationWithName:MMSinaToMeCommentList object:userID];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 

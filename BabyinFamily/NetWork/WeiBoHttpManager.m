@@ -242,30 +242,23 @@
     [requestQueue addOperation:request];
     [request release];
 }
--(void)didGetCommetToMe:(long long )uid maxID:(NSString*)max_id page:(int)page
+-(void)GetCommetListToMe
 {
     //https://api.weibo.com/2/comments/to_me.json
     self.authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
     self.userId = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID];
-    
     NSMutableDictionary     *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       authToken,                                       @"access_token",
-                                       [NSString stringWithFormat:@"%lld",uid],     @"id",
+                                       authToken,   @"access_token",
                                        nil];
-    if (max_id) {
-        [params setObject:max_id forKey:@"max_id"];
-    }
-    [params setObject:[NSString stringWithFormat:@"%d",page] forKey:@"page"];
+
     NSString                *baseUrl =[NSString  stringWithFormat:@"%@/comments/to_me.json",SINA_V2_DOMAIN];
     NSURL                   *url = [self generateURL:baseUrl params:params];
     
     ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:url];
     NSLog(@"url=%@",url);
-    [self setGetUserInfo:request withRequestType:SinaGetComment];
+    [self setGetUserInfo:request withRequestType:SinaGetCommentToMe];
     [requestQueue addOperation:request];
-    [request release];
-
-    
+    [request release];    
 }
 
 
@@ -1013,6 +1006,26 @@
         if ([delegate respondsToSelector:@selector(didGetCommentList:)]) {
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:commentArr,@"commentArrary",count,@"count", nil];
             [delegate didGetCommentList:dic];
+        }
+        [commentArr release];
+    }
+    //获取当前登陆用户接受到的评论列表
+    if (requestType == SinaGetCommentToMe) {
+        
+        NSArray     *arr = [userInfo objectForKey:@"comments"];
+        NSNumber    *count = [userInfo objectForKey:@"number_tome"];
+        if (arr == nil || [arr isEqual:[NSNull null]]) {
+            return;
+        }
+        
+        NSMutableArray  *commentArr = [[NSMutableArray alloc]initWithCapacity:0];
+        for (id item in arr) {
+            Comment *comm = [Comment commentWithJsonDictionary:item];
+            [commentArr addObject:comm];
+        }
+        if ([delegate respondsToSelector:@selector(didGetCommetToMe:)]) {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:commentArr,@"commentArraryToMe",count,@"count", nil];
+            [delegate didGetCommetToMe:dic];
         }
         [commentArr release];
     }

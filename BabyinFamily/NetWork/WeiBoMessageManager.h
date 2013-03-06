@@ -26,6 +26,10 @@
 //返回成员为comment的NSArray.
 #define MMSinaGotCommentList @"MMSinaGotCommentList"
 
+//返回发送给当前用户的评论列表
+//返回成员为comment的NSArray.
+#define MMSinaToMeCommentList @"MMSinaToMeCommentList"
+
 //获取用户双向关注的用户ID列表，即互粉UID列表
 //返回成员为UID(NSNumber)的NSArray。
 #define MMSinaGotBilateralIdList @"MMSinaGotBilateralIdList"
@@ -153,6 +157,9 @@
 
 //根据微博消息ID返回某条微博消息的评论列表
 -(void)getCommentListWithID:(long long)weiboID maxID:(NSString*)max_id page:(int)page;
+
+//获得当前登陆用户接受到的评论；
+-(void)GetCommetListToMe;
 
 //获取用户双向关注的用户ID列表，即互粉UID列表
 -(void)getBilateralIdListAll:(long long)uid sort:(int)sort;
