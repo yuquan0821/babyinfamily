@@ -242,7 +242,7 @@
     [requestQueue addOperation:request];
     [request release];
 }
--(void)GetCommetListToMe
+-(void)getCommetListToMe:(NSString *)max_id page:(int)page
 {
     //https://api.weibo.com/2/comments/to_me.json
     self.authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
@@ -250,7 +250,10 @@
     NSMutableDictionary     *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                        authToken,   @"access_token",
                                        nil];
-
+    if (max_id) {
+        [params setObject:max_id forKey:@"max_id"];
+    }
+    [params setObject:[NSString stringWithFormat:@"%d",page] forKey:@"page"];
     NSString                *baseUrl =[NSString  stringWithFormat:@"%@/comments/to_me.json",SINA_V2_DOMAIN];
     NSURL                   *url = [self generateURL:baseUrl params:params];
     
@@ -260,6 +263,32 @@
     [requestQueue addOperation:request];
     [request release];    
 }
+
+//获取当前登录用户使用次客户所接收到的评论列表
+-(void)getCommetToMeFromTheApp:(NSString*)source maxID:(NSString *)max_id page:(int)page
+{
+    //https://api.weibo.com/2/comments/to_me.json
+    self.authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
+    self.userId = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID];
+    NSMutableDictionary     *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       authToken,   @"access_token",nil];
+    if (source) {
+        [params setObject:source forKey:@"client_id"];
+    }
+    if (max_id) {
+        [params setObject:max_id forKey:@"max_id"];
+    }
+    [params setObject:[NSString stringWithFormat:@"%d",page] forKey:@"page"];
+    NSString                *baseUrl =[NSString  stringWithFormat:@"%@/comments/to_me.json",SINA_V2_DOMAIN];
+    NSURL                   *url = [self generateURL:baseUrl params:params];
+    
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:url];
+    NSLog(@"url=%@",url);
+    [self setGetUserInfo:request withRequestType:SInaGetCommentToMeFromTheApp];
+    [requestQueue addOperation:request];
+    [request release];
+}
+
 
 
 //获取用户双向关注的用户ID列表，即互粉UID列表
@@ -882,6 +911,21 @@
     [requestQueue addOperation:item];
     [item release];
 }
+//根据微博ID删除指定微博
+-(void)destroyAPictureStatus:(NSString *)weiboID
+{
+    //https://api.weibo.com/2/statuses/destroy.json
+    NSURL *url = [NSURL URLWithString:@"https://api.weibo.com/2/comments/create.json"];
+    ASIFormDataRequest *item = [[ASIFormDataRequest alloc] initWithURL:url];
+    self.authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
+    
+    [item setPostValue:authToken    forKey:@"access_token"];
+    [item setPostValue:weiboID forKey:@"id"];
+    
+    [self setPostUserInfo:item withRequestType:SinaDestroyAPictureStatus];
+    [requestQueue addOperation:item];
+    [item release];
+}
 
 #pragma mark - Operate queue
 - (BOOL)isRunning
@@ -1013,7 +1057,7 @@
     if (requestType == SinaGetCommentToMe) {
         
         NSArray     *arr = [userInfo objectForKey:@"comments"];
-        NSNumber    *count = [userInfo objectForKey:@"number_tome"];
+        NSNumber    *count = [userInfo objectForKey:@"total_number"];
         if (arr == nil || [arr isEqual:[NSNull null]]) {
             return;
         }
@@ -1026,6 +1070,26 @@
         if ([delegate respondsToSelector:@selector(didGetCommetToMe:)]) {
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:commentArr,@"commentArraryToMe",count,@"count", nil];
             [delegate didGetCommetToMe:dic];
+        }
+        [commentArr release];
+    }
+    //获取基于本App登陆用户接收到的评论列表
+    if (requestType == SInaGetCommentToMeFromTheApp) {
+        
+        NSArray     *arr = [userInfo objectForKey:@"comments"];
+        NSNumber    *count = [userInfo objectForKey:@"total_number"];
+        if (arr == nil || [arr isEqual:[NSNull null]]) {
+            return;
+        }
+        
+        NSMutableArray  *commentArr = [[NSMutableArray alloc]initWithCapacity:0];
+        for (id item in arr) {
+            Comment *comm = [Comment commentWithJsonDictionary:item];
+            [commentArr addObject:comm];
+        }
+        if ([delegate respondsToSelector:@selector(didGetCommetToMeFromTheApp::)]) {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:commentArr,@"commentArraryToMeFromTheApp",count,@"count", nil];
+            [delegate didGetCommetToMeFromTheApp:dic];
         }
         [commentArr release];
     }
@@ -1379,6 +1443,32 @@
                 [delegate didCommentAStatus:NO];
             }
         }
+    }
+    //根据微博ID删除指定微博
+    if (requestType == SinaDestroyAPictureStatus) {
+        
+        int result = 1;
+        id ID = [userInfo objectForKey:@"id"];
+        
+        if (ID != nil && ID != [NSNull null]) {
+            result = 0; //succeed
+        }
+        else
+        {
+            result = 1; //failed
+        }
+        
+        NSString *id = [userInformation objectForKey:@"id"];
+        NSMutableDictionary *dic = [[[NSMutableDictionary alloc]initWithCapacity:0] autorelease];
+        [dic setObject:[NSNumber numberWithInt:result] forKey:@"result"];
+        if (id != nil) {
+            [dic setObject:id forKey:@"id"];
+        }
+        
+        if ([delegate respondsToSelector:@selector(didDestroyAPictureStatus:)]) {
+            [delegate didDestroyAPictureStatus:YES];
+        }
+
     }
 }
 

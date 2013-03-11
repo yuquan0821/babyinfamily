@@ -1,23 +1,47 @@
 //
-//  AddComment.m
+//  DetailStatusViewController.m
 //  BabyinFamily
 //
-//  Created by 范艳春 on 13-3-3.
+//  Created by 范艳春 on 13-3-6.
 //
 //
 
-#import "AddComment.h"
-#import "DAKeyboardControl.h"
+#import "DetailStatusViewController.h"
 #import "ZJTCommentCell.h"
 #import "BabyHelper.h"
 #import "WeiBoMessageManager.h"
 #import "Comment.h"
+#import "ProfileViewController.h"
 #import "AddCommentVC.h"
 #import "SHKActivityIndicator.h"
 #import "GifView.h"
 #import "HHNetDataCacheManager.h"
 #import "NSStringAdditions.h"
-#import "ProfileViewController.h"
+
+@interface DetailStatusViewController ()
+-(void)setViewsHeight;
+-(CGRect)getFrameOfImageView:(UIImageView*)imgView;
+@end
+
+@implementation DetailStatusViewController
+@synthesize fromLB;
+@synthesize headerBackgroundView;
+@synthesize headerView;
+@synthesize table;
+@synthesize avatarImageV;
+@synthesize contentImageV;
+@synthesize countLB;
+@synthesize commentCellNib;
+@synthesize status;
+@synthesize user;
+@synthesize avatarImage;
+@synthesize contentImage;
+@synthesize commentArr;
+@synthesize isFromProfileVC;
+@synthesize browserView;
+@synthesize contentImageBackgroundView;
+@synthesize clickedComment;
+
 
 enum{
     kCommentClickActionSheet = 0,
@@ -34,23 +58,6 @@ enum  {
     kRetweet = 0,
     kComment,
 };
-
-@interface AddComment ()
-@end
-
-@implementation AddComment
-@synthesize table;
-@synthesize commentCellNib;
-@synthesize status;
-@synthesize user;
-@synthesize avatarImage;
-@synthesize contentImage;
-@synthesize commentArr;
-@synthesize isFromProfileVC;
-@synthesize clickedComment;
-@synthesize theScrollView;
-@synthesize sendButton;
-@synthesize textField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,6 +76,15 @@ enum  {
     [super didReceiveMemoryWarning];
 }
 
+-(CGRect)getFrameOfImageView:(UIImageView*)imgView
+{
+    UIImageView *iv = imgView; // your image view
+    CGSize imageSize = iv.image.size;
+    CGFloat imageScale = fminf(CGRectGetWidth(iv.bounds)/imageSize.width, CGRectGetHeight(iv.bounds)/imageSize.height);
+    CGSize scaledImageSize = CGSizeMake(imageSize.width*imageScale, imageSize.height*imageScale);
+    CGRect imageFrame = CGRectMake(floorf(0.5f*(CGRectGetWidth(iv.bounds)-scaledImageSize.width)), floorf(0.5f*(CGRectGetHeight(iv.bounds)-scaledImageSize.height)), scaledImageSize.width, scaledImageSize.height);
+    return imageFrame;
+}
 
 -(void)refreshVisibleCellsImages
 {
@@ -88,99 +104,56 @@ enum  {
     }
 }
 
+#pragma mark - View lifecycle
+
+-(void)resetCountLBFrame
+{
+    countLB.text = [NSString stringWithFormat:@"%d",status.commentsCount];
+    
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     manager = [WeiBoMessageManager getInstance];
-
-    self.title = @"评论";
-    //self.user = status.user;
-    self.view.backgroundColor = [UIColor lightGrayColor];
-    theScrollView.contentSize = CGSizeMake(320, 410);
-    table = [[UITableView alloc] initWithFrame:CGRectMake(0.0f,
-                                                                           0.0f,
-                                                                           self.view.bounds.size.width,
-                                                                           self.view.bounds.size.height - 40.0f)];
     
-    table.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    table.dataSource = self;
-    table.delegate = self;
-    [self.view addSubview:table];
-    
-    UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f,
-                                                                     self.view.bounds.size.height - 40.0f,
-                                                                     self.view.bounds.size.width,
-                                                                     40.0f)];
-    toolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:toolBar];
-    
-    textField = [[UITextField alloc] initWithFrame:CGRectMake(10.0f,
-                                                                           6.0f,
-                                                                           toolBar.bounds.size.width - 20.0f - 68.0f,
-                                                                           30.0f)];
-    textField.borderStyle = UITextBorderStyleRoundedRect;
-    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [toolBar addSubview:textField];
-    
-    sendButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    sendButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-    [sendButton setTitle:@"发送" forState:UIControlStateNormal];
-    sendButton.frame = CGRectMake(toolBar.bounds.size.width - 68.0f,
-                                  6.0f,
-                                  58.0f,
-                                  29.0f);
-    [sendButton addTarget:self action:@selector(sendButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    [toolBar addSubview:sendButton];
-    
-    
-    self.view.keyboardTriggerOffset = toolBar.bounds.size.height;
-    
-    [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
-        /*
-         Try not to call "self" inside this block (retain cycle).
-         But if you do, make sure to remove DAKeyboardControl
-         when you are done with the view controller by calling:
-         [self.view removeKeyboardControl];
-         */
-        
-        CGRect toolBarFrame = toolBar.frame;
-        toolBarFrame.origin.y = keyboardFrameInView.origin.y - toolBarFrame.size.height;
-        toolBar.frame = toolBarFrame;
-        
-        CGRect tableViewFrame = table.frame;
-        tableViewFrame.size.height = toolBarFrame.origin.y;
-        table.frame = tableViewFrame;
-    }];
+    self.user = status.user;
+    self.title = user.screenName;
+    _hasImage       = status.hasImage;
+    twitterNameLB.text = user.screenName;
+    twitterNameLB.hidden = NO;
+    [self resetCountLBFrame];
+    avatarImageV.image = avatarImage;
+    if (_hasImage) {
+        contentImageV.image = contentImage;
+    }
+    [self setViewsHeight];
+    [self.table setTableHeaderView:headerView];
+    CGRect frame = table.frame;
+    frame.size.height = frame.size.height + REFRESH_FOOTER_HEIGHT;
+    table.frame = frame;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+-(void)viewDidUnload
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    else
-        return YES;
+    [self setContentImageBackgroundView:nil];
+    [super viewDidUnload];
 }
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];    
+    [super viewWillAppear:animated];
+    self.tableView.contentInset = UIEdgeInsetsOriginal;
+    
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(didGetComments:) name:MMSinaGotCommentList object:nil];
     [center addObserver:self selector:@selector(didFollowByUserID:) name:MMSinaFollowedByUserIDWithResult object:nil];
     [center addObserver:self selector:@selector(didUnfollowByUserID:) name:MMSinaUnfollowedByUserIDWithResult object:nil];
     [center addObserver:self selector:@selector(mmRequestFailed:) name:MMSinaRequestFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didComment:) name:MMSinaReplyAComment object:nil];
-
     if (self.commentArr == nil) {
         [manager getCommentListWithID:status.statusId maxID:nil page:1];
     }
-}
-
-- (void)refresh {
-    [manager getCommentListWithID:status.statusId maxID:_maxID page:_page];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -202,17 +175,117 @@ enum  {
     _maxID = nil;
     self.clickedComment = nil;
     
+    self.headerBackgroundView = nil;
     self.table = nil;
+    self.avatarImageV = nil;
+    
+    self.contentImageV = nil;
+    self.fromLB = nil;
+    self.countLB = nil;
     self.commentCellNib = nil;
     self.status = nil;
     self.user = nil;
     self.avatarImage = nil;
     self.contentImage = nil;
     self.commentArr = nil;
-    self.theScrollView = nil;
+    self.headerView = nil;
+    [contentImageBackgroundView release];
     [super dealloc];
 }
 
+#pragma mark - Methods
+-(void)replyActionSheet
+{
+    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"转发",@"评论", nil];
+    as.tag = kStatusReplyActionSheet;
+    [as showInView:self.view];
+    [as release];
+}
+
+-(void)setViewsHeight
+{
+    //博文Text
+    CGRect frame;
+       
+    
+    //背景设置
+    //    headerBackgroundView.image = [[UIImage imageNamed:@"table_header_bg.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:5];
+    contentImageBackgroundView.image = [[UIImage imageNamed:@"detail_image_background.png"] stretchableImageWithLeftCapWidth:50 topCapHeight:50];
+}
+
+- (void)refresh {
+    [manager getCommentListWithID:status.statusId maxID:_maxID page:_page];
+}
+
+-(void)follow
+{
+    if (user.following == YES) {
+        [manager unfollowByUserID:user.userId inTableView:@""];
+    }
+    else {
+        [manager followByUserID:user.userId inTableView:@""];
+    }
+}
+
+- (IBAction)tapDetected:(id)sender {
+    shouldShowIndicator = YES;
+    
+    UITapGestureRecognizer*tap = (UITapGestureRecognizer*)sender;
+    
+    UIImageView *imageView = (UIImageView*)tap.view;
+    
+    Status *sts = status;
+    BOOL isRetwitter = sts.retweetedStatus && sts.retweetedStatus.originalPic != nil;
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    CGRect frame = CGRectMake(0, 0, 320, 480);
+    
+    if (browserView == nil) {
+        self.browserView = [[[ImageBrowser alloc]initWithFrame:frame] autorelease];
+        [browserView setUp];
+    }
+    
+    if ([imageView isEqual:contentImageV]) {
+        browserView.image = contentImageV.image;
+    }
+    
+    browserView.theDelegate = self;
+    browserView.bigImageURL = isRetwitter ? sts.retweetedStatus.originalPic : sts.originalPic;
+    [browserView loadImage];
+    [app.keyWindow addSubview:browserView];
+    app.statusBarHidden = YES;
+    if (shouldShowIndicator == YES && browserView) {
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:browserView];
+    }
+    else shouldShowIndicator = YES;
+}
+
+- (IBAction)gotoProfileView:(id)sender
+{
+    if (isFromProfileVC) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
+    profile.user = user;
+    profile.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:profile animated:YES];
+    [profile release];
+}
+
+-(void)mmRequestFailed:(id)sender
+{
+    [self stopLoading];
+    [[SHKActivityIndicator currentIndicator] hide];
+}
+
+- (IBAction)addComment:(id)sender {
+    AddCommentVC *add = [[AddCommentVC alloc]initWithNibName:@"AddCommentVC" bundle:nil];
+    add.status = self.status;
+    add.weiboID = [NSString stringWithFormat:@"%lld",status.statusId];
+    [self.navigationController pushViewController:add animated:YES];
+    [add release];
+}
 
 //计算text field 的高度。
 -(CGFloat)cellHeight:(NSString*)contentText with:(CGFloat)with
@@ -222,7 +295,6 @@ enum  {
     CGFloat height = size.height + 0.;
     return height;
 }
-
 
 #pragma mark HTTP Response
 -(void)didGetComments:(NSNotification*)sender
@@ -247,11 +319,12 @@ enum  {
         {
             NSNumber *count = [dic objectForKey:@"count"];
             status.commentsCount = [count intValue];
-            //[self resetCountLBFrame];
+            [self resetCountLBFrame];
         }
         [[SHKActivityIndicator currentIndicator]hide];
+        //        [[ZJTStatusBarAlertWindow getInstance] hide];
         [table reloadData];
-        //[self stopLoading];
+        [self stopLoading];
         [self performSelector:@selector(refreshVisibleCellsImages) withObject:nil afterDelay:0.5];
     }
 }
@@ -296,36 +369,6 @@ enum  {
     }
 }
 
--(void)didComment:(NSNotification*)sender
-{
-    NSNumber *num = sender.object;
-    if (num.boolValue == YES) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"评论成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"评论失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-    }
-}
-
-- (void)sendButtonAction
-{
-    NSString *content = textField.text;
-    NSString *weiboID = [NSString stringWithFormat:@"%lld",status.statusId];
-    if ( content != Nil && content.length !=0) {
-        
-        [manager commentAStatus:weiboID content:content];
-    }
-    [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
-    [[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:3];
-    [self.table reloadData];
-
-}
-
 //得到图片
 -(void)getAvatar:(NSNotification*)sender
 {
@@ -363,13 +406,6 @@ enum  {
     }
 }
 
--(void)mmRequestFailed:(id)sender
-{
-    //[self stopLoading];
-    [[SHKActivityIndicator currentIndicator] hide];
-    //    [[ZJTStatusBarAlertWindow getInstance] hide];
-}
-
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -389,6 +425,7 @@ enum  {
     }
     else if (row >= [commentArr count] || [commentArr count] == 0)
     {
+        //        NSLog(@"cellForRowAtIndexPath error ,index = %d,count = %d",row,[commentArr count]);
         return cell;
     }
     
@@ -431,7 +468,8 @@ enum  {
 {
     int row = indexPath.row;
     self.clickedComment = [commentArr objectAtIndex:row];
-    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复",@"查看资料", nil];
+    
+    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复",@"查看资料",@"关注", nil];
     as.tag = kCommentClickActionSheet;
     [as showInView:self.view];
     [as release];
@@ -442,13 +480,12 @@ enum  {
     if (actionSheet.tag == kCommentClickActionSheet) {
         User *theUser = clickedComment.user;
         NSLog(@"%dtheUser name = %@",buttonIndex,theUser.screenName);
-        if (buttonIndex == kViewUserProfile) {
+        if (buttonIndex == kReplyComment) {
+            
+        }
+        else if (buttonIndex == kViewUserProfile) {
             ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
             profile.user = theUser;
-            NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID];
-            if (profile.user.userId == uid.longLongValue ) {
-                profile.followButton.hidden = YES;//为什followButton的属性为Null？
-            }
             profile.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:profile animated:YES];
             [profile release];
@@ -459,9 +496,15 @@ enum  {
     }
     else if (actionSheet.tag == kStatusReplyActionSheet)
     {
-        if(buttonIndex == kComment)
-        {
+        if (buttonIndex == kRetweet) {
             /*TwitterVC *tv = [[TwitterVC alloc]initWithNibName:@"TwitterVC" bundle:nil];
+            [self.navigationController pushViewController:tv animated:YES];
+            [tv setupForRepost:[NSString stringWithFormat:@"%lld",self.status.statusId]];
+            [tv release];*/
+        }
+        else if(buttonIndex == kComment)
+        {
+           /* TwitterVC *tv = [[TwitterVC alloc]initWithNibName:@"TwitterVC" bundle:nil];
             [self.navigationController pushViewController:tv animated:YES];
             [tv setupForComment:[NSString stringWithFormat:@"%lld",clickedComment.commentId]
                         weiboID:[NSString stringWithFormat:@"%lld",self.status.statusId]];
@@ -470,13 +513,70 @@ enum  {
     }
 }
 
+-(void)browserDidGetOriginImage:(NSDictionary*)dic
+{
+    NSString * url=[dic objectForKey:HHNetDataCacheURLKey];
+    if ([url isEqualToString:browserView.bigImageURL])
+    {
+        [[SHKActivityIndicator currentIndicator] hide];
+        //        [[ZJTStatusBarAlertWindow getInstance] hide];
+        shouldShowIndicator = NO;
+        
+        UIImage * img=[UIImage imageWithData:[dic objectForKey:HHNetDataCacheData]];
+        [browserView.imageView setImage:img];
+        [browserView zoomToFit];
+        contentImageV.image = img;
+        
+        NSLog(@"big url = %@",browserView.bigImageURL);
+        if ([browserView.bigImageURL hasSuffix:@".gif"])
+        {
+            CGFloat zoom = 320.0/browserView.imageView.image.size.width;
+            CGSize size = CGSizeMake(320.0, browserView.imageView.image.size.height * zoom);
+            
+            CGRect frame = browserView.imageView.frame;
+            frame.size = size;
+            frame.origin.x = 0;
+            CGFloat y = (480.0 - size.height)/2.0;
+            frame.origin.y = y >= 0 ? y:0;
+            browserView.imageView.frame = frame;
+            if (browserView.imageView.frame.size.height > 480) {
+                browserView.aScrollView.contentSize = CGSizeMake(320, browserView.imageView.frame.size.height);
+            }
+            
+            GifView *gifView = [[GifView alloc]initWithFrame:frame data:[dic objectForKey:HHNetDataCacheData]];
+            
+            gifView.userInteractionEnabled = NO;
+            gifView.tag = GIF_VIEW_TAG;
+            [browserView addSubview:gifView];
+            [gifView release];
+        }
+    }
+}
+
+#pragma mark - Swipe Gesture delegate
+
+- (IBAction)popViewC:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self refreshVisibleCellsImages];
 }
 
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    //    [self refreshVisibleCellsImages];
+}
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    if (!decelerate)
+	{
+        [self refreshVisibleCellsImages];
+    }
+}
 
 
 @end

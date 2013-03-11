@@ -21,7 +21,7 @@
 		text = [[dic getStringValueForKey:@"text" defaultValue:@""] retain];
 		
 		// parse source parameter
-		NSString *src = [dic getStringValueForKey:@"source" defaultValue:@""];
+		NSString *src = [dic getStringValueForKey:@"source" defaultValue:@"3651188584"];
 		NSRange r = [src rangeOfString:@"<a href"];
 		NSRange end;
 		if (r.location != NSNotFound) {

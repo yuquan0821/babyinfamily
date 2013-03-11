@@ -7,14 +7,19 @@
 //
 
 #import "HotViewController.h"
-#import "HotViewController+Private.h"
-#import "BDRowInfo.h"
+#import "HotPicCell.h"
 
-@interface HotViewController ()
-@end
+static int MaxPage = 1;
 
 @implementation HotViewController
+@synthesize stylizedView;
 
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Release any cached data, images, etc that aren't in use.
+}
 - (id)init
 {
     self = [super init];
@@ -26,59 +31,166 @@
     return self;
 }
 
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.delegate = self;
+	// Do any additional setup after loading the view, typically from a nib.
     
-    self.onLongPress = ^(UIView* view, NSInteger viewIndex){
-        NSLog(@"Long press on %@, at %d", view, viewIndex);
-    };
+    randomSizes = [[NSMutableArray alloc] initWithCapacity:100];
+    for (int i = 0; i < 100; i++) {
+        CGFloat h = arc4random() % 200 + 100.f;
+        CGFloat w = arc4random() % 200 + 100.f;
+        [randomSizes addObject:[NSValue valueWithCGSize:CGSizeMake(w, h)]];
+    }
+    stylizedView.scrollsToTop = YES;
     
-    self.onDoubleTap = ^(UIView* view, NSInteger viewIndex){
-        NSLog(@"Double tap on %@, at %d", view, viewIndex);
-    };
-    [self _demoAsyncDataLoading];
-    [self buildBarButtons];
 }
 
-- (void)animateReload
+- (void)viewDidUnload
 {
-    _items = [NSArray new];
-    [self _demoAsyncDataLoading];
+    [self setStylizedView:nil];
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
 }
 
-- (NSUInteger)numberOfViews
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //[stylizedView reloadData];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return _items.count;
+    // Return YES for supported orientations
+    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
--(NSUInteger)maximumViewsPerCell
+- (NSInteger)numberOfCellsInStylizedView:(CHStylizedView *)stylizedView {
+    
+    return [randomSizes count];
+}
+
+
+- (UIView<CHResusableCell> *)stylizedView:(CHStylizedView *)aStylizedView cellAtIndex:(NSInteger)index {
+    
+    NSString *CellID =  @"HotPicCell";
+    
+    HotPicCell *cell;
+    
+    cell = (HotPicCell *)[aStylizedView dequeueReusableCellWithIdentifier:CellID];
+    
+    if (cell == nil) {
+        cell = [[HotPicCell alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        cell.reuseIdentifier = CellID;
+    }
+    
+    cell.label.text = [NSString stringWithFormat:@"%d",index];
+    
+    return cell;
+}
+
+- (CGSize)stylizedView:(CHStylizedView *)stylizedView sizeForCellAtIndex:(NSInteger)index {
+    NSValue *value = [randomSizes objectAtIndex:index];
+    return value.CGSizeValue;
+}
+
+- (UIView *)headerForStylizedView:(CHStylizedView *)stylizedView
 {
-    return 5;
+    HotPicCell *header = [[HotPicCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - CELL_PADDING * 2, 60)];
+    header.label.text = @"This is the header";
+    
+    return header;
 }
 
-- (UIView *)viewAtIndex:(NSUInteger)index rowInfo:(BDRowInfo *)rowInfo
+- (UIView *)footerForStylizedView:(CHStylizedView *)stylizedView
 {
-    UIImageView * imageView = [_items objectAtIndex:index];
-    return imageView;
+    if (page <= MaxPage) {
+        HotPicCell *footer = [[HotPicCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - CELL_PADDING * 2, 60)];
+        footer.label.text = @"This is the footer";
+        
+        return footer;
+    } else {
+        return nil;
+    }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+
+- (void)didSelectCellInStylizedView:(CHStylizedView *)aStylizedView celAtIndex:(NSInteger)index withInfo:(CHStylizedViewCellInfo *)info {
+    
+    
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    CGRect imgFrame = [window convertRect:info.frame fromView:aStylizedView];
+    
+    CHDemoView *blackView = [[CHDemoView alloc] initWithFrame:imgFrame];
+    blackView.backgroundColor = [UIColor blackColor];
+    blackView.originRect = imgFrame;
+    [window addSubview:blackView];
+    
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         blackView.frame = window.frame;
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+    
+    
+}
+
+
+
+
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    ScrollDirection scrollDirection;
+    
+    if (scrollView.contentOffset.y >= 0 && scrollView.contentOffset.y <= scrollView.contentSize.height - self.view.frame.size.height) {
+        if (self.lastContentOffsetY > scrollView.contentOffset.y) {
+            scrollDirection = ScrollDirectionUp;
+            //Show navigation bar
+            if (self.navigationController.navigationBarHidden) {
+                [self.navigationController setNavigationBarHidden:NO animated:YES];
+            }
+            
+        }
+        else if (self.lastContentOffsetY < scrollView.contentOffset.y) {
+            scrollDirection = ScrollDirectionDown;
+            if (!self.navigationController.navigationBarHidden) {
+                [self.navigationController setNavigationBarHidden:YES animated:YES];
+            }
+            
+        }
+        
+        self.lastContentOffsetY = scrollView.contentOffset.y;
+    }
+    
+    
+}
+
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    if (ABS(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < 3
+//        && page <= MaxPage) {
+//        for (int i = 0; i < 100; i++) {
+//            CGFloat h = arc4random() % 200 + 50.f;
+//            [randomHeights addObject:[NSNumber numberWithFloat:h]];
+//        }
+//
+//        page++;
+//
+//        [stream reloadData];
+//    }
+//}
+//
+- (void)dealloc
 {
-    //Call super when overriding this method, in order to benefit from auto layout.
-    [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
-    return YES;
+    [stylizedView release];
+    [super dealloc];
 }
-
-- (CGFloat)rowHeightForRowInfo:(BDRowInfo *)rowInfo
-{
-    //    if (rowInfo.viewsPerCell == 1) {
-    //        return 125  + (arc4random() % 55);
-    //    }else {
-    //        return 100;
-    //    }
-    return 55 + (arc4random() % 125);
-}
-
 @end

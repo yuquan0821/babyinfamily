@@ -29,6 +29,9 @@
 //返回发送给当前用户的评论列表
 //返回成员为comment的NSArray.
 #define MMSinaToMeCommentList @"MMSinaToMeCommentList"
+//返回基于本App发送给当前用户的评论列表
+//返回成员为comment的NSArray.
+#define MMSinaToMeCommentListFromTheApp @"MMSinaToMeCommentListFromTheApp"
 
 //获取用户双向关注的用户ID列表，即互粉UID列表
 //返回成员为UID(NSNumber)的NSArray。
@@ -130,6 +133,9 @@
 //对一条微博进行评论
 #define MMSinaCommentAStatus @"MMSinaCommentAStatus"
 
+// 根据微博ID删除指定微博
+#define MMSinaDestroyAStatus @"MMSinaDestroyAStatus"
+
 @interface WeiBoMessageManager : NSObject <WeiBoHttpDelegate>
 {
     WeiBoHttpManager *httpManager;
@@ -159,7 +165,9 @@
 -(void)getCommentListWithID:(long long)weiboID maxID:(NSString*)max_id page:(int)page;
 
 //获得当前登陆用户接受到的评论；
--(void)GetCommetListToMe;
+-(void)getCommetListToMe:(NSString*)max_id page:(int)page;
+//获取基于本App发送给当前用户的评论列表
+-(void)getCommetToMeFromTheApp:(NSString *)source maxID:(NSString *)max_id page:(int)page;
 
 //获取用户双向关注的用户ID列表，即互粉UID列表
 -(void)getBilateralIdListAll:(long long)uid sort:(int)sort;
@@ -241,4 +249,8 @@
 
 //对一条微博进行评论
 -(void)commentAStatus:(NSString*)weiboID content:(NSString*)content;
+
+// 根据微博ID删除指定微博
+-(void)destroyAstatus:(NSString*)weiboID;
+
 @end

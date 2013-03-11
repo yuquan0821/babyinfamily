@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BDDynamicGridViewController.h"
-@interface HotViewController : BDDynamicGridViewController <BDDynamicGridViewDelegate>{
-    NSArray * _items;
+#import "CHStylizedView.h"
+
+@interface HotViewController : UIViewController <CHStylizedViewDelegate>
+
+{
+    NSMutableArray *randomSizes;
+    int page;
 }
 
+@property ( nonatomic ,retain) IBOutlet CHStylizedView *stylizedView;
+@property (nonatomic,assign)float lastContentOffsetY;
 @end

@@ -85,9 +85,15 @@ static WeiBoMessageManager * instance=nil;
 }
 
 //获取当前登陆用户接受到评论
--(void)GetCommetListToMe
+-(void)getCommetListToMe:(NSString *)max_id page:(int)page
 {
-    [httpManager GetCommetListToMe];
+    [httpManager getCommetListToMe:max_id page:page];
+}
+//获取基于本App发送给当前用户的评论列表
+-(void)getCommetToMeFromTheApp:(NSString *)source maxID:(NSString *)max_id page:(int)page
+{
+    [httpManager getCommetToMeFromTheApp:source maxID:max_id page:page];
+
 }
 
 //获取用户双向关注的用户ID列表，即互粉UID列表
@@ -255,6 +261,11 @@ static WeiBoMessageManager * instance=nil;
 {
     [httpManager commentAStatus:weiboID content:content];
 }
+// 根据微博ID删除指定微博
+-(void)destroyAstatus:(NSString *)weiboID
+{
+    [httpManager destroyAPictureStatus:weiboID];
+}
 
 #pragma mark - WeiBoHttpDelegate
 //获取最新的公共微博
@@ -288,10 +299,16 @@ static WeiBoMessageManager * instance=nil;
 }
 
 //获取登陆用户接受到的评论列表
--(void)didGetCommetToMe:(NSString *)userID
+-(void)didGetCommetToMe:(NSDictionary *)commentInfo
 {
-    NSNotification *notification = [NSNotification notificationWithName:MMSinaToMeCommentList object:userID];
+    NSNotification *notification = [NSNotification notificationWithName:MMSinaToMeCommentList object:commentInfo];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+//获取基于本App发送给当前用户的评论列表
+-(void)didGetCommetToMeFromTheApp:(NSDictionary *)commentInfo
+{
+    NSNotification *notification = [NSNotification notificationWithName:MMSinaToMeCommentListFromTheApp object:commentInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];    
 }
 
 //获取用户双向关注的用户ID列表，即互粉UID列表
@@ -462,6 +479,12 @@ static WeiBoMessageManager * instance=nil;
 -(void)didCommentAStatus:(BOOL)isOK
 {
     NSNotification *notification = [NSNotification notificationWithName:MMSinaCommentAStatus object:[NSNumber numberWithBool:isOK]];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+// 根据微博ID删除指定微博
+-(void)didDestroyAPictureStatus:(BOOL)isOK
+{
+    NSNotification *notification = [NSNotification notificationWithName:MMSinaDestroyAStatus object:[NSNumber numberWithBool:isOK]];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 

@@ -18,22 +18,6 @@
 #import "NSStringAdditions.h"
 #import "ProfileViewController.h"
 
-enum{
-    kCommentClickActionSheet = 0,
-    kStatusReplyActionSheet,
-};
-
-enum{
-    kReplyComment = 0,
-    kViewUserProfile,
-    kFollowTheUser,
-};
-
-enum  {
-    kRetweet = 0,
-    kComment,
-};
-
 @interface MessageViewController ()
 @end
 
@@ -57,6 +41,8 @@ enum  {
         isFromProfileVC = NO;
         shouldShowIndicator = YES;
         _page = 1;
+      source =  [ NSString stringWithFormat:@"%d",[[NSUserDefaults standardUserDefaults]integerForKey:SINA_APP_KEY]];
+        NSLog(@"source is %@",source);
     }
     return self;
 }
@@ -107,7 +93,6 @@ enum  {
     table.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     table.dataSource = self;
     table.delegate = self;
-    //[self.view addSubview:table];
     table = self.tableView;
 
     
@@ -131,12 +116,12 @@ enum  {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     
     if (self.commentArr == nil) {
-        [manager GetCommetListToMe];
+        [manager getCommetListToMe:nil page:1];
     }
 }
 
 - (void)refresh {
-    [manager GetCommetListToMe];
+    [manager getCommetListToMe:_maxID page:_page];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -203,7 +188,6 @@ enum  {
         {
             NSNumber *count = [dic objectForKey:@"count"];
             status.commentsCount = [count intValue];
-            //[self resetCountLBFrame];
         }
         [[SHKActivityIndicator currentIndicator]hide];
         [table reloadData];
@@ -332,61 +316,6 @@ enum  {
     [self refreshVisibleCellsImages];
 }
 
-
-
-
 @end
 
-/*@interface MessageViewController ()
-@property(nonatomic,retain)UITableView *tableview;
-@property(nonatomic,retain)NSMutableArray *datasource;
 
-- (void)dispachModelToDatasource;
-
-@end
-
-@implementation MessageViewController
-
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        self.title = @"消息";
-        NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_msg"];
-        self.tabBarItem.image = [UIImage imageNamed:fullpath];
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self.view addSubview:self.tableview];
-}
-
-- (void)dispatchModelToDatasource:(NSArray *)statusarray{
-    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    [_tableview release];
-    [_datasource release];
-}
-#pragma mark
-#pragma Lazyload
-- (UITableView*)tableview{
-    if (!_tableview) {
-        _tableview = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    }
-    return _tableview;
-}
-- (NSMutableArray*)datasource{
-    if (!_datasource) {
-        _datasource = [[NSMutableArray array] retain];
-    }
-    return _datasource;
-}
-
-@end*/

@@ -54,6 +54,7 @@ typedef enum {
     SinaGetHomeLine,                //获取当前登录用户及其所关注用户的最新微博
     SinaGetComment,                 //根据微博消息ID返回某条微博消息的评论列表
     SinaGetCommentToMe,             //获取给当前用户的评论
+    SInaGetCommentToMeFromTheApp,   //获取基于本App给当期用户的评论
     SinaGetUserStatus,              //获取某个用户最新发表的微博列表
     SinaRepost,                     //转发一条微博
     SinaGetFollowingUserList,       //获取用户的关注列表
@@ -68,6 +69,7 @@ typedef enum {
     SinaGetUserTopics,              //获取某人的话题列表
     SinaReplyAComment,              //回复一条评论
     SinaCommentAStatus,             //对一条微博进行评论
+    SinaDestroyAPictureStatus,      //根据微博ID删除指定微博
 }RequestType;
 
 @class ASINetworkQueue;
@@ -92,7 +94,10 @@ typedef enum {
 -(void)didGetCommentList:(NSDictionary *)commentInfo;
 
 //获取当前登录用户所接收到的评论列表
--(void)didGetCommetToMe:(NSString *)userID;
+-(void)didGetCommetToMe:(NSDictionary *)commentInfo;
+
+//获取当前登录用户使用次客户所接收到的评论列表
+-(void)didGetCommetToMeFromTheApp:(NSDictionary *)commentInfo;
 
 //获取用户双向关注的用户ID列表，即互粉UID列表
 -(void)didGetBilateralIdList:(NSArray*)arr;
@@ -162,6 +167,10 @@ typedef enum {
 
 //对一条微博进行评论
 -(void)didCommentAStatus:(BOOL)isOK;
+
+//根据微博ID删除指定微博
+-(void)didDestroyAPictureStatus:(BOOL)isOK;
+
 @end
 
 @interface WeiBoHttpManager : NSObject
@@ -206,7 +215,10 @@ typedef enum {
 -(void)getCommentListWithID:(long long)weiboID maxID:(NSString*)max_id page:(int)page;
 
 //获取当前登录用户所接收到的评论列表
--(void)GetCommetListToMe;
+-(void)getCommetListToMe:(NSString *)max_id page:(int)page;
+
+//获取当前登录用户使用次客户所接收到的评论列表
+-(void)getCommetToMeFromTheApp:(NSString *)source maxID:(NSString *)max_id page:(int)page;
 
 //获取用户双向关注的用户ID列表，即互粉UID列表
 -(void)getBilateralIdListAll:(long long)uid sort:(int)sort;
@@ -288,6 +300,9 @@ typedef enum {
 
 //对一条微博进行评论
 -(void)commentAStatus:(NSString*)weiboID content:(NSString*)content;
+
+//根据微博ID删除指定微博
+-(void)destroyAPictureStatus:(NSString *)weiboID;
 
 @end
 

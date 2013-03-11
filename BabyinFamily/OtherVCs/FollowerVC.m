@@ -156,7 +156,6 @@
     
     [self refreshVisibleCellsImages];
     
-    //    [[ZJTStatusBarAlertWindow getInstance] hide];
 }
 
 -(void)gotFollowResult:(NSNotification*)sender
@@ -337,15 +336,6 @@
 {
     NSInteger row = indexPath.row;
     User *user = [_userArr objectAtIndex:row];
-    
-    //    ProfileVC *profile = [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil];
-    //    profile.userID = [NSString stringWithFormat:@"%lld",user.userId];
-    //    profile.user = user;
-    //    profile.avatarImage = user.avatarImage;
-    //    profile.hidesBottomBarWhenPushed = YES;
-    //    [self.navigationController pushViewController:profile animated:YES];
-    //    [profile release];
-    
     ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
     profile.user = user;
     profile.hidesBottomBarWhenPushed = YES;

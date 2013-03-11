@@ -497,8 +497,7 @@
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
     _reloading = YES;
 	[manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
-        //[[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
-   // [[BabyAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
@@ -530,29 +529,23 @@
         [self dismissModalViewControllerAnimated:NO];*/
         
 }
-- (void)deletePicture
+- (void)deletePicture:(NSIndexPath *)indexPath
 {
     
-    /* [MBProgressHUD showHUDAddedTo:self.view animated:YES];
      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-     PicShareEngine *engine = [PicShareEngine sharedEngine];
-     ErrorMessage *em = [engine deletePictureStatus:self.pictureStatus.psId];
      dispatch_async(dispatch_get_main_queue(), ^{
-     if (em!=nil && em.ret==0 && em.errorcode == 0) {
-     //send notification
-     
-     NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:self.pictureStatus.psId],@"psId", nil];
+     NSInteger  row = indexPath.row;
+     if (row >= [statuesArr count]) {
+             return ;
+         }
+     Status *status = [statuesArr objectAtIndex:row];
+     status.cellIndexPath = indexPath;
+     NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:status.statusId],@"id", nil];
      [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
      [userInfo release];
      [self.navigationController popViewControllerAnimated:YES];
-     }else{
-     [MBProgressHUD hideHUDForView:self.view animated:YES];
-     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-     [alert show];
-     [alert release];
-     }
      });
-     });*/
+     });
 }
 
 - (void)moreButtonOnClick:(id)sender
@@ -567,7 +560,7 @@
     if (status.user.userId == userId) {
         sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存", nil];
     }else{
-        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"保存" otherButtonTitles:nil];
+        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存",nil];
     }
     UIWindow *window = [[UIApplication sharedApplication]keyWindow];
     [sheet showInView:window];
@@ -576,14 +569,17 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    Status *status;
+    StatusCell *cell = (StatusCell*) actionSheet.superview.superview;
+    NSLog(@"action sheet superview is %@",actionSheet.superview.superview);
+    NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    Status *status = [self.statuesArr objectAtIndex:path.row];
     NSLog(@"%d",buttonIndex);
     NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID];
     if (status.user.userId == userId) {
-        //0：删除 1：举报 2：取消
+        //0：删除 1：保存 2：取消
         switch (buttonIndex) {
             case 0:
-                [self deletePicture];
+                [self deletePicture:path];
                 break;
             case 1:
                 [self report];
@@ -594,7 +590,7 @@
                 break;
         }
     }else{
-        //0：举报 1：取消
+        //0：保存 1：取消
         switch (buttonIndex) {
             case 0:
                 [self report];

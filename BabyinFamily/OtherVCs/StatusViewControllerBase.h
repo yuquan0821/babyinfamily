@@ -18,7 +18,6 @@
 #import "HHNetDataCacheManager.h"
 #import "GifView.h"
 #import "SHKActivityIndicator.h"
-#import "ZJTDetailStatusVC.h"
 #import "UIImageView+Resize.h"
 #import "AddComment.h"
 

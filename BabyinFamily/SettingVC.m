@@ -10,7 +10,6 @@
 #import "OAuthWebView.h"
 #import "WeiBoMessageManager.h"
 #import "User.h"
-#import "ZJTHotRepostViewController.h"
 #import "AboutViewController.h"
 
 enum{
@@ -225,7 +224,7 @@ enum {
     
     else if (section == kStatusSection) {
         if (row == kHotStatus) {
-            ZJTHotRepostViewController *h = [[ZJTHotRepostViewController alloc] initWithType:kHotCommentDaily];
+           /* ZJTHotRepostViewController *h = [[ZJTHotRepostViewController alloc] initWithType:kHotCommentDaily];
             h.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:h animated:YES];
             [h release];
@@ -235,7 +234,7 @@ enum {
             ZJTHotRepostViewController *h = [[ZJTHotRepostViewController alloc] initWithType:kHotRepostDaily];
             h.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:h animated:YES];
-            [h release];
+            [h release];*/
         }
         
        // else if (row == kHotTrends) {
