@@ -77,7 +77,7 @@
             [delegate cellImageDidTaped:self image:contentImage.image];
         }
     }
-   }
+}
 
 - (void)dealloc {
     [avatarImage release];

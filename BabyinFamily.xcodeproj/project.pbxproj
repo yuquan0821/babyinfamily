@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		280CF2851664CA250031262F /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CF2831664CA240031262F /* SettingVC.m */; };
 		280CF2861664CA250031262F /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280CF2841664CA250031262F /* SettingVC.xib */; };
-		280FBA3D169BA87B0072741B /* BabyFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 280FBA3C169BA87A0072741B /* BabyFullScreenScroll.m */; };
-		280FBA40169BA8F30072741B /* UIView+BabyFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 280FBA3F169BA8F30072741B /* UIView+BabyFullScreenScroll.m */; };
 		280FBA4A169BD90E0072741B /* AviarySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 280FBA49169BD90E0072741B /* AviarySDKResources.bundle */; };
 		280FBA4C169BD91F0072741B /* libAviarySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 280FBA4B169BD91F0072741B /* libAviarySDK.a */; };
 		280FBA4E169BDCD80072741B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280FBA4D169BDCD80072741B /* CoreImage.framework */; };
@@ -20,7 +18,6 @@
 		2828531916E72D530062EC83 /* DetailStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2828531716E72D520062EC83 /* DetailStatusViewController.xib */; };
 		283654A416BFACDE00203578 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 283654A216BFACD900203578 /* FeedBackViewController.m */; };
 		283654A516BFACDE00203578 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283654A316BFACDB00203578 /* FeedBackViewController.xib */; };
-		28487E1516DF415700BFB194 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 28487E1416DF415700BFB194 /* placeholder.png */; };
 		284C910316DC5569000F2A48 /* StatusViewControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 284C910216DC5569000F2A48 /* StatusViewControllerBase.m */; };
 		2854E27D16D45FE1008B6E4B /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E27816D45FE1008B6E4B /* Images.m */; };
 		2854E27E16D45FE1008B6E4B /* StatusCoreDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E27A16D45FE1008B6E4B /* StatusCoreDataItem.m */; };
@@ -85,7 +82,6 @@
 		2896C4941661E79E004705A4 /* AddCommentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C4861661E79E004705A4 /* AddCommentVC.xib */; };
 		28BAE94716C0DA3E00FA0F47 /* UIDeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */; };
 		28CA6685167F0A660087F45D /* BabyAlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CA6684167F0A660087F45D /* BabyAlertWindow.m */; };
-		28CBA96416990F6E00D704AC /* UIImageView+AsyncImageContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBA96316990F6E00D704AC /* UIImageView+AsyncImageContainer.m */; };
 		28CBA96716990FED00D704AC /* AsyncImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBA96616990FED00D704AC /* AsyncImageDownloader.m */; };
 		28D14F5D169CF53600B39793 /* SendAndSaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D14F5B169CF53600B39793 /* SendAndSaveViewController.m */; };
 		28D14F5E169CF53600B39793 /* SendAndSaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28D14F5C169CF53600B39793 /* SendAndSaveViewController.xib */; };
@@ -163,10 +159,6 @@
 		280CF2821664CA240031262F /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		280CF2831664CA240031262F /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		280CF2841664CA250031262F /* SettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingVC.xib; sourceTree = "<group>"; };
-		280FBA3B169BA87A0072741B /* BabyFullScreenScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyFullScreenScroll.h; path = BabyTools/BabyFullScreenScroll.h; sourceTree = "<group>"; };
-		280FBA3C169BA87A0072741B /* BabyFullScreenScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyFullScreenScroll.m; path = BabyTools/BabyFullScreenScroll.m; sourceTree = "<group>"; };
-		280FBA3E169BA8F20072741B /* UIView+BabyFullScreenScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+BabyFullScreenScroll.h"; path = "BabyTools/UIView+BabyFullScreenScroll.h"; sourceTree = "<group>"; };
-		280FBA3F169BA8F30072741B /* UIView+BabyFullScreenScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+BabyFullScreenScroll.m"; path = "BabyTools/UIView+BabyFullScreenScroll.m"; sourceTree = "<group>"; };
 		280FBA44169BD8DD0072741B /* AFPhotoEditorContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorContext.h; path = AviarySDK/Headers/AFPhotoEditorContext.h; sourceTree = "<group>"; };
 		280FBA45169BD8DD0072741B /* AFPhotoEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorController.h; path = AviarySDK/Headers/AFPhotoEditorController.h; sourceTree = "<group>"; };
 		280FBA46169BD8DD0072741B /* AFPhotoEditorControllerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorControllerOptions.h; path = AviarySDK/Headers/AFPhotoEditorControllerOptions.h; sourceTree = "<group>"; };
@@ -183,7 +175,6 @@
 		283654A116BFACD600203578 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedBackViewController.h; path = OtherVCs/FeedBackViewController.h; sourceTree = "<group>"; };
 		283654A216BFACD900203578 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedBackViewController.m; path = OtherVCs/FeedBackViewController.m; sourceTree = "<group>"; };
 		283654A316BFACDB00203578 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeedBackViewController.xib; path = OtherVCs/FeedBackViewController.xib; sourceTree = "<group>"; };
-		28487E1416DF415700BFB194 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		284C910116DC5569000F2A48 /* StatusViewControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusViewControllerBase.h; path = OtherVCs/StatusViewControllerBase.h; sourceTree = "<group>"; };
 		284C910216DC5569000F2A48 /* StatusViewControllerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusViewControllerBase.m; path = OtherVCs/StatusViewControllerBase.m; sourceTree = "<group>"; };
 		2854E27716D45FE1008B6E4B /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Images.h; path = Models/Images.h; sourceTree = "<group>"; };
@@ -297,8 +288,6 @@
 		28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIDeviceHardware.m; path = OtherVCs/UIDeviceHardware.m; sourceTree = "<group>"; };
 		28CA6683167F0A660087F45D /* BabyAlertWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyAlertWindow.h; path = BabyTools/BabyAlertWindow.h; sourceTree = "<group>"; };
 		28CA6684167F0A660087F45D /* BabyAlertWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyAlertWindow.m; path = BabyTools/BabyAlertWindow.m; sourceTree = "<group>"; };
-		28CBA96216990F6E00D704AC /* UIImageView+AsyncImageContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AsyncImageContainer.h"; path = "BabyTools/UIImageView+AsyncImageContainer.h"; sourceTree = "<group>"; };
-		28CBA96316990F6E00D704AC /* UIImageView+AsyncImageContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AsyncImageContainer.m"; path = "BabyTools/UIImageView+AsyncImageContainer.m"; sourceTree = "<group>"; };
 		28CBA96516990FED00D704AC /* AsyncImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncImageDownloader.h; path = NetWork/AsyncImageDownloader.h; sourceTree = "<group>"; };
 		28CBA96616990FED00D704AC /* AsyncImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncImageDownloader.m; path = NetWork/AsyncImageDownloader.m; sourceTree = "<group>"; };
 		28D14F5A169CF53600B39793 /* SendAndSaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendAndSaveViewController.h; path = OtherVCs/SendAndSaveViewController.h; sourceTree = "<group>"; };
@@ -639,7 +628,6 @@
 		28EA949D165F5962009F69E5 /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				28487E1416DF415700BFB194 /* placeholder.png */,
 				B4C94EEE164C057100722F37 /* sourcekit.bundle */,
 				28EA94CA165F961F009F69E5 /* TakePhoto.bundle */,
 				28849557166321800042C4CD /* weibo.bundle */,
@@ -668,12 +656,6 @@
 				28CA6684167F0A660087F45D /* BabyAlertWindow.m */,
 				2889B7791696919B00D8FF16 /* UIImageView+Resize.h */,
 				2889B77A1696919B00D8FF16 /* UIImageView+Resize.m */,
-				28CBA96216990F6E00D704AC /* UIImageView+AsyncImageContainer.h */,
-				28CBA96316990F6E00D704AC /* UIImageView+AsyncImageContainer.m */,
-				280FBA3B169BA87A0072741B /* BabyFullScreenScroll.h */,
-				280FBA3C169BA87A0072741B /* BabyFullScreenScroll.m */,
-				280FBA3E169BA8F20072741B /* UIView+BabyFullScreenScroll.h */,
-				280FBA3F169BA8F30072741B /* UIView+BabyFullScreenScroll.m */,
 			);
 			name = babyTools;
 			sourceTree = "<group>";
@@ -696,8 +678,8 @@
 				B4C94EDB164C015100722F37 /* HomeViewController.h */,
 				B4C94EDC164C015100722F37 /* HomeViewController.m */,
 				B4C94EDE164C017800722F37 /* HotViewController.h */,
-				28874D7516EDB7AF0021B75E /* HotViewController.xib */,
 				B4C94EDF164C017800722F37 /* HotViewController.m */,
+				28874D7516EDB7AF0021B75E /* HotViewController.xib */,
 				B4C94EE4164C02E900722F37 /* MessageViewController.h */,
 				B4C94EE5164C02E900722F37 /* MessageViewController.m */,
 				2884955E1663467C0042C4CD /* ProfileViewController.h */,
@@ -977,7 +959,6 @@
 				28D14F5E169CF53600B39793 /* SendAndSaveViewController.xib in Resources */,
 				283654A516BFACDE00203578 /* FeedBackViewController.xib in Resources */,
 				28DD3F4916DC601D005396AB /* StatusViewControllerBase.xib in Resources */,
-				28487E1516DF415700BFB194 /* placeholder.png in Resources */,
 				2828531916E72D530062EC83 /* DetailStatusViewController.xib in Resources */,
 				28874D7616EDB7AF0021B75E /* HotViewController.xib in Resources */,
 			);
@@ -1048,12 +1029,9 @@
 				288853FB167EAD67000ED11A /* BabyHelper.m in Sources */,
 				28CA6685167F0A660087F45D /* BabyAlertWindow.m in Sources */,
 				2889B77B1696919B00D8FF16 /* UIImageView+Resize.m in Sources */,
-				28CBA96416990F6E00D704AC /* UIImageView+AsyncImageContainer.m in Sources */,
 				28CBA96716990FED00D704AC /* AsyncImageDownloader.m in Sources */,
 				2889E7E7169A5BB000885875 /* CellHeaderView.m in Sources */,
 				2889E7FA169ACC7800885875 /* POI.m in Sources */,
-				280FBA3D169BA87B0072741B /* BabyFullScreenScroll.m in Sources */,
-				280FBA40169BA8F30072741B /* UIView+BabyFullScreenScroll.m in Sources */,
 				28D14F5D169CF53600B39793 /* SendAndSaveViewController.m in Sources */,
 				28ECD28516B8C1AA00CAA0DA /* RaisedCenterButton.m in Sources */,
 				283654A416BFACDE00203578 /* FeedBackViewController.m in Sources */,

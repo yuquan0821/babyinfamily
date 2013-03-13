@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "CHStylizedView.h"
+#import "Status.h"
 
 @interface HotPicCell : UIView<CHResusableCell>
 {
     NSString *reuseIdentifier;
+    
 }
 
-@property (nonatomic, readonly) UILabel *label;
-
+@property (nonatomic, retain)   UIImageView *contentImage;
+@property (nonatomic, assign)   NSUInteger index;
 @end
 
 @interface CHDemoView : UIView

@@ -16,7 +16,7 @@
 
 @implementation HotPicCell
 
-@synthesize label, reuseIdentifier;
+@synthesize  reuseIdentifier, contentImage,index;
 
 
 
@@ -28,21 +28,28 @@
         CGRect bgFrame = CGRectInset(self.bounds, 0.0f, 0.0f);
         UIView *bgView = [[UIView alloc] initWithFrame:bgFrame];
         bgView.layer.borderColor = [UIColor blackColor].CGColor;
-        bgView.layer.borderWidth = 2.0f;
-        [self addSubview:bgView];
+        bgView.layer.borderWidth = 1.0f;
         bgView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        CGRect contentFrame = CGRectMake(bgView.frame.origin.x + 1, bgView.frame.origin.y + 1, bgView.frame.size.width -2, bgView.frame.size.height -2);
+        contentImage = [[UIImageView alloc] initWithFrame:contentFrame];
+        contentImage.backgroundColor = [UIColor clearColor];
+        contentImage.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"];
+        contentImage.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
+        [bgView addSubview:contentImage];
+        [self addSubview:bgView];
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, bgFrame.size.width, 20)];
-        label.center = CGPointMake(self.frame.size.width/ 2, self.frame.size.height/2);
-        label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-        label.backgroundColor = [UIColor clearColor];
-        label.textAlignment = UITextAlignmentCenter;
-        [self addSubview:label];
     }
     
     return self;
 }
 
+- (void)dealloc
+{
+    //[index release];
+    [contentImage release];
+    [super dealloc];
+}
 
 
 @end
@@ -74,6 +81,10 @@
         
         
     }
+}
+- (void)dealloc
+{
+    [super dealloc];
 }
 
 @end

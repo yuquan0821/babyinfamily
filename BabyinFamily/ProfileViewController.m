@@ -151,7 +151,7 @@ enum {
         [followButton setTitle:@"取消关注" forState:UIControlStateNormal];
     }
     else {
-        [followButton setTitle:@"+加关注" forState:UIControlStateNormal];
+        [followButton setTitle:@"加关注" forState:UIControlStateNormal];
     }
     
     if (user.gender == GenderMale) {
@@ -266,7 +266,7 @@ enum {
     if (uid == nil) {
         return;
     }
-    [followButton setTitle:@"+加关注" forState:UIControlStateNormal];
+    [followButton setTitle:@"加关注" forState:UIControlStateNormal];
 }
 
 -(void)didFollowByUserIDWithResult:(NSNotification*)sender
@@ -286,7 +286,7 @@ enum {
     if ([button.titleLabel.text isEqualToString:@"取消关注"]) {
         [[WeiBoMessageManager getInstance] unfollowByUserID:self.user.userId inTableView:@""];
     }
-    else if([button.titleLabel.text isEqualToString:@"+加关注"]){
+    else if([button.titleLabel.text isEqualToString:@"加关注"]){
         [[WeiBoMessageManager getInstance] followByUserID:self.user.userId inTableView:@""];
     }
 }
@@ -386,9 +386,6 @@ enum {
     if (indexPath.row == kSelfDescriptionRow) {
         height = [self cellHeight:user.description with:206.0f] + 35;
     }
-    //    else if (indexPath.row == kSinaVerifiedRow) {
-    //        height = [self cellHeight:user.verifiedReason with:206.0f] + 35;
-    //    }
     if (height < 50.) {
         height = 50.;
     }
@@ -406,10 +403,7 @@ enum {
         if (user.verifiedReason == NULL) {
             cell.hidden = YES;
         }
-        //        CGRect frame = cell.contentLabel.frame;
-        //        frame.size.height = [self cellHeight:user.verifiedReason with:206];
-        //        cell.contentLabel.frame = frame;
-    }
+}
     
     else if (indexPath.row == kLocationRow) {
         cell = self.locationProfileCell;

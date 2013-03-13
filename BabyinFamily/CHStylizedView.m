@@ -32,6 +32,11 @@
 {
     return [NSString stringWithFormat:@"<%@: index: %d>",NSStringFromClass([self class]), index];
 }
+- (void)dealloc
+{
+    [cell release];
+    [super dealloc];
+}
 
 @end
 
@@ -54,6 +59,7 @@
 
 @synthesize delegate, visibleCellInfo, cellCache;
 @synthesize headerView, footerView,contentView;
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -310,7 +316,17 @@
     }
 }
 
-
+- (void) dealloc
+{
+    [visibleCellInfo release];
+    [delegate release];
+    [cellCache release];
+    [headerView release];
+    [footerView release];
+    [contentView release];
+    [super dealloc];
+    
+}
 
 @end
 
@@ -441,6 +457,12 @@
     if ([stylizedView.delegate respondsToSelector:@selector(scrollViewDidScrollToTop:)])
         [stylizedView.delegate scrollViewDidScrollToTop:stylizedView];
     
+}
+
+- (void) dealloc
+{
+    [stylizedView release];
+    [super dealloc];
 }
 
 

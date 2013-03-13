@@ -40,8 +40,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"粉丝列表";
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
         _isFollowingViewController = NO;
         _manager = [WeiBoMessageManager getInstance];
     }
@@ -264,7 +262,6 @@
     }
     if (self.userArr == nil) {
         [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
-        //        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
 }
 
@@ -354,10 +351,10 @@
     User *user = [_userArr objectAtIndex:index];
     
     if (user.following) {
-        [_manager unfollowByUserID:user.userId inTableView:nil];
+        [_manager unfollowByUserID:user.userId inTableView:@"table"];
     }
     else {
-        [_manager followByUserID:user.userId inTableView:nil];
+        [_manager followByUserID:user.userId inTableView:@"table"];
     }
 }
 

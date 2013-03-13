@@ -106,7 +106,6 @@
         [manager getUserID];
         [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
         [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
-        //        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
 }
 
@@ -142,7 +141,6 @@
         }
         
         [manager getUserID];
-        [manager getHOtTrendsDaily];
     }
 }
 
