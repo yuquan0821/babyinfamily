@@ -116,11 +116,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     
     if (self.commentArr == nil) {
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
+
         [manager getCommetListToMe:nil page:1];
     }
 }
 
 - (void)refresh {
+   [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
+
     [manager getCommetListToMe:_maxID page:_page];
 }
 

@@ -201,7 +201,6 @@
             if ([error isEqualToString:@"expired_token"])
             {
                 [[SHKActivityIndicator currentIndicator] hide];
-                //                [[ZJTStatusBarAlertWindow getInstance] hide];
                 shouldLoad = YES;
                 OAuthWebView *webV = [[OAuthWebView alloc]initWithNibName:@"OAuthWebView" bundle:nil];
                 webV.hidesBottomBarWhenPushed = YES;

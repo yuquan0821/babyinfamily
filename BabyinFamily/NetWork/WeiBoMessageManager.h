@@ -29,6 +29,7 @@
 //返回发送给当前用户的评论列表
 //返回成员为comment的NSArray.
 #define MMSinaToMeCommentList @"MMSinaToMeCommentList"
+
 //返回基于本App发送给当前用户的评论列表
 //返回成员为comment的NSArray.
 #define MMSinaToMeCommentListFromTheApp @"MMSinaToMeCommentListFromTheApp"

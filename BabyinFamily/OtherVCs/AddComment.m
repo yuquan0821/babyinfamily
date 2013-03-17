@@ -14,7 +14,6 @@
 #import "Comment.h"
 #import "AddCommentVC.h"
 #import "SHKActivityIndicator.h"
-#import "GifView.h"
 #import "HHNetDataCacheManager.h"
 #import "NSStringAdditions.h"
 #import "ProfileViewController.h"
@@ -95,7 +94,6 @@ enum  {
     manager = [WeiBoMessageManager getInstance];
 
     self.title = @"评论";
-    //self.user = status.user;
     self.view.backgroundColor = [UIColor lightGrayColor];
     theScrollView.contentSize = CGSizeMake(320, 410);
     table = [[UITableView alloc] initWithFrame:CGRectMake(0.0f,

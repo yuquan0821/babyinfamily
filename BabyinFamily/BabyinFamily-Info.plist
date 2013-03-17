@@ -8,8 +8,8 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleGetInfoString</key>
-	<string></string>
+	<key>CFBundleIconFile</key>
+	<string>icon80.png</string>
 	<key>CFBundleIconFiles</key>
 	<array/>
 	<key>CFBundleIdentifier</key>
@@ -30,6 +30,8 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -38,5 +40,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>item0</key>
+	<string>icoc80.png</string>
 </dict>
 </plist>

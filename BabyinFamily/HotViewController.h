@@ -7,35 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CHStylizedView.h"
 #import "Status.h"
 #import "WeiBoMessageManager.h"
 #import "HHNetDataCacheManager.h"
 #import "ImageBrowser.h"
 #import "SHKActivityIndicator.h"
 #import "CoreDataManager.h"
+#import "WaterflowView.h"
 
-
-
-
-@class WeiBoMessageManager;
-
-@interface HotViewController : UIViewController <CHStylizedViewDelegate>
-
+@interface HotViewController : UIViewController<WaterflowViewDelegate,WaterflowViewDatasource,UIScrollViewDelegate>
 {
-    WeiBoHttpManager *manager;
+    int count;
+    WeiBoMessageManager *manager;
     NSNotificationCenter *defaultNotifCenter;
 
-    NSMutableArray *randomSizes;
-    long long _maxID;
-
-    int page;
+    WaterflowView *flowView;
 }
-
-@property ( nonatomic ,retain) IBOutlet CHStylizedView *stylizedView;
 @property (nonatomic, retain)   NSMutableArray          *statuesArr;
-@property (nonatomic,assign)float lastContentOffsetY;
-@property (nonatomic, retain)   ImageBrowser            *browserView;
 
+@property (nonatomic, retain)   NSMutableDictionary     *imageDictionary;
 
 @end

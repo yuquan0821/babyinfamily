@@ -271,10 +271,9 @@
     self.authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
     self.userId = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID];
     NSMutableDictionary     *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       authToken,   @"access_token",nil];
-    if (source) {
-        [params setObject:source forKey:@"client_id"];
-    }
+                                       authToken,   @"access_token",
+                                       source,     @"source",
+                                       nil];
     if (max_id) {
         [params setObject:max_id forKey:@"max_id"];
     }
@@ -1087,7 +1086,7 @@
             Comment *comm = [Comment commentWithJsonDictionary:item];
             [commentArr addObject:comm];
         }
-        if ([delegate respondsToSelector:@selector(didGetCommetToMeFromTheApp::)]) {
+        if ([delegate respondsToSelector:@selector(didGetCommetToMeFromTheApp:)]) {
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:commentArr,@"commentArraryToMeFromTheApp",count,@"count", nil];
             [delegate didGetCommetToMeFromTheApp:dic];
         }
