@@ -96,15 +96,15 @@ enum  {
     self.title = @"评论";
     self.view.backgroundColor = [UIColor lightGrayColor];
     theScrollView.contentSize = CGSizeMake(320, 410);
-    table = [[UITableView alloc] initWithFrame:CGRectMake(0.0f,
+    self.table = [[UITableView alloc] initWithFrame:CGRectMake(0.0f,
                                                                            0.0f,
                                                                            self.view.bounds.size.width,
                                                                            self.view.bounds.size.height - 40.0f)];
     
-    table.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    table.dataSource = self;
-    table.delegate = self;
-    [self.view addSubview:table];
+    self.table.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.table.dataSource = self;
+    self.table.delegate = self;
+    [self.view addSubview:self.table];
     
     UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f,
                                                                      self.view.bounds.size.height - 40.0f,

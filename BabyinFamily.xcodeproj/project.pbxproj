@@ -25,6 +25,7 @@
 		2854E27F16D45FE1008B6E4B /* UserCoreDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E27C16D45FE1008B6E4B /* UserCoreDataItem.m */; };
 		2854E28216D462DD008B6E4B /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E28116D462DD008B6E4B /* CoreDataManager.m */; };
 		2854E28516D46F2A008B6E4B /* ImageCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2854E28316D46F2A008B6E4B /* ImageCache.xcdatamodeld */; };
+		2871907F16F7011B00A3527B /* AddComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2871907E16F7011B00A3527B /* AddComment.xib */; };
 		2884955516631CD30042C4CD /* FollowerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884955316631CD30042C4CD /* FollowerVC.m */; };
 		2884955616631CD30042C4CD /* FollowerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2884955416631CD30042C4CD /* FollowerVC.xib */; };
 		28849558166321800042C4CD /* weibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28849557166321800042C4CD /* weibo.bundle */; };
@@ -190,6 +191,7 @@
 		2854E28016D462DD008B6E4B /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = BabyTools/CoreDataManager.h; sourceTree = "<group>"; };
 		2854E28116D462DD008B6E4B /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = BabyTools/CoreDataManager.m; sourceTree = "<group>"; };
 		2854E28416D46F2A008B6E4B /* ImageCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImageCache.xcdatamodel; sourceTree = "<group>"; };
+		2871907E16F7011B00A3527B /* AddComment.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddComment.xib; path = OtherVCs/AddComment.xib; sourceTree = "<group>"; };
 		2884955216631CD30042C4CD /* FollowerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FollowerVC.h; path = OtherVCs/FollowerVC.h; sourceTree = "<group>"; };
 		2884955316631CD30042C4CD /* FollowerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FollowerVC.m; path = OtherVCs/FollowerVC.m; sourceTree = "<group>"; };
 		2884955416631CD30042C4CD /* FollowerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowerVC.xib; path = OtherVCs/FollowerVC.xib; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */,
 				28D3387716E33FA70027B7F9 /* AddComment.h */,
 				28D3387816E33FA70027B7F9 /* AddComment.m */,
+				2871907E16F7011B00A3527B /* AddComment.xib */,
 				2828531516E72D520062EC83 /* DetailStatusViewController.h */,
 				2828531616E72D520062EC83 /* DetailStatusViewController.m */,
 				2828531716E72D520062EC83 /* DetailStatusViewController.xib */,
@@ -977,6 +980,7 @@
 				2828531916E72D530062EC83 /* DetailStatusViewController.xib in Resources */,
 				2887249B16F02C5E00693E0B /* icon80.png in Resources */,
 				283A8D0316F5A9E300E72753 /* HotViewController.xib in Resources */,
+				2871907F16F7011B00A3527B /* AddComment.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

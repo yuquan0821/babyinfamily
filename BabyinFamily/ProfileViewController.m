@@ -193,6 +193,8 @@ enum {
 -(void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [table reloadData];
+
     [super viewWillDisappear:animated];
 }
 
