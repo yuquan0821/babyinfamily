@@ -26,7 +26,6 @@
 @synthesize headDictionary;
 @synthesize imageDictionary;
 @synthesize browserView;
-@synthesize selectedIndexPath;
 @synthesize clickedStatus;
 
 -(void)dealloc
@@ -39,7 +38,6 @@
     _refreshHeaderView=nil;
     [table release];
     table = nil;
-    [selectedIndexPath release];
     [clickedStatus release];
     [super dealloc];
 }
@@ -522,8 +520,7 @@
 {
     UIButton *button = (UIButton *)sender;
     StatusCell *cell = (StatusCell *)button.superview.superview;
-    NSIndexPath *path = [self.tableView indexPathForCell:cell];
-    selectedIndexPath = path;    
+    NSIndexPath *path = [self.table indexPathForCell:cell];
     Status *status = [self.statuesArr objectAtIndex:path.row];
     self.clickedStatus = status;
     UIActionSheet *sheet;
@@ -542,9 +539,8 @@
 //save picture
 
 - (void)savePicture
-{
-    Status *status = [self.statuesArr objectAtIndex:selectedIndexPath.row];
-    StatusCell *cell = (StatusCell *)[self.table cellForRowAtIndexPath:status.cellIndexPath];
+{    
+    StatusCell *cell = (StatusCell *)[self.table cellForRowAtIndexPath:clickedStatus.cellIndexPath];
     NSLog(@"cell is %@",cell);
     UIImageWriteToSavedPhotosAlbum(cell.contentImage.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     self.tabBarController.tabBar.hidden = NO;
@@ -557,15 +553,11 @@
 - (void)deletePicture
 {
      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-         Status *status = [self.statuesArr objectAtIndex:selectedIndexPath.row];
-         NSString *weiboID =[NSString stringWithFormat:@"%lld",status.statusId];
+         NSString *weiboID =[NSString stringWithFormat:@"%lld",clickedStatus.statusId];
          [manager destroyAstatus:weiboID];
          dispatch_async(dispatch_get_main_queue(), ^{
-           NSInteger  row = selectedIndexPath.row;
-           if (row >= [statuesArr count]) {
-             return ;
-           }
-            NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:status.statusId],@"id", nil];
+          
+            NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:clickedStatus.statusId],@"id", nil];
            [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
           [userInfo release];
           [self.navigationController popViewControllerAnimated:YES];
@@ -579,11 +571,8 @@
 {
  
     NSLog(@"%d",buttonIndex);
-
-    Status *status = [self.statuesArr objectAtIndex:selectedIndexPath.row];
-    NSLog(@"selected indexpath in action sheet is %@",selectedIndexPath);
-    NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID];
-    if (status.user.userId == userId) {
+        NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID];
+    if (clickedStatus.user.userId == userId) {
         //0：删除 1：保存 2：取消
         switch (buttonIndex) {
             case 0:
@@ -616,7 +605,7 @@
 {
     UIButton *button = (UIButton *)sender;
     StatusCell *cell = (StatusCell *)button.superview.superview;
-    NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    NSIndexPath *path = [self.table indexPathForCell:cell];
     Status *status = [self.statuesArr objectAtIndex:path.row];
     AddComment *add = [[AddComment alloc]initWithNibName:@"AddComment" bundle:nil];
     add.status = status;
@@ -629,7 +618,7 @@
 {
     UIButton *button = (UIButton *)sender;
     StatusCell *cell = (StatusCell *)button.superview.superview;
-    NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    NSIndexPath *path = [self.table indexPathForCell:cell];
     Status *status = [self.statuesArr objectAtIndex:path.row];
     ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
     profile.user = status.user;

@@ -53,7 +53,6 @@
 @property (nonatomic, retain)   NSMutableDictionary     *headDictionary;
 @property (nonatomic, retain)   NSMutableDictionary     *imageDictionary;
 @property (nonatomic, retain)   ImageBrowser            *browserView;
-@property (nonatomic, retain)   NSIndexPath             *selectedIndexPath;
 @property (nonatomic, retain)   Status                  *clickedStatus;
 
 
