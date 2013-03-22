@@ -87,7 +87,7 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
--(void)getImages
+-(void)getHotImagesUrl
 {
     self.imageUrls = [NSMutableArray arrayWithCapacity:20];
     NSString *url;
@@ -114,10 +114,9 @@
 
 -(void)didGetHomeLine:(NSNotification*)sender
 {
-    
     self.statuesArr = sender.object;
     [[SHKActivityIndicator currentIndicator] hide];
-    [self getImages];
+    [self getHotImagesUrl];
     [flowView reloadData];
 
 }

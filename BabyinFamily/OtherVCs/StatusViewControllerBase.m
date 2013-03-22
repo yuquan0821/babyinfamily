@@ -126,6 +126,7 @@
     NSLog(@" sts base table = %@,delegate = %@",self.tableView,self.tableView.delegate);
     NSLog(@"navigation is height %f",self.navigationController.navigationBar.frame.size.height);
     self.table = self.tableView;
+    [defaultNotifCenter addObserver:self selector:@selector(receiveDeletePicNotification:) name:@"DeletedPic" object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(mmRequestFailed:)   name:MMSinaRequestFailed object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)       name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];    
@@ -231,7 +232,6 @@
         image = [UIImageView imageWithImage:[UIImage imageWithData:data] scaledToSizeWithSameAspectRatio:size];
         sts.statusImage =image;
         cell.contentImage.image = sts.statusImage;
-        // cell.retwitterContentImage.image = sts.statusImage;
     }
     
     //得到的是转发的图片
@@ -240,7 +240,6 @@
         if ([url isEqualToString:sts.retweetedStatus.thumbnailPic])
         {
             sts.statusImage = image;
-            // cell.retwitterContentImage.image = sts.statusImage;
         }
     }
 }
@@ -251,9 +250,6 @@
     [self doneLoadingTableViewData];
     [[SHKActivityIndicator currentIndicator] hide];
 }
-
-//上拉刷新
-
 
 //计算text field 的高度。
 -(CGFloat)cellHeight:(NSString*)contentText with:(CGFloat)with
@@ -434,7 +430,6 @@
     app.statusBarHidden = YES;
     if (shouldShowIndicator == YES && browserView) {
         [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:browserView];
-        //        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
     else shouldShowIndicator = YES;
 }
@@ -539,13 +534,16 @@
 //save picture
 
 - (void)savePicture
-{    
-    StatusCell *cell = (StatusCell *)[self.table cellForRowAtIndexPath:clickedStatus.cellIndexPath];
-    NSLog(@"cell is %@",cell);
-    UIImageWriteToSavedPhotosAlbum(cell.contentImage.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    self.tabBarController.tabBar.hidden = NO;
-    self.tabBarController.selectedIndex = 0;
-    [self dismissModalViewControllerAnimated:NO];        
+{
+    NSIndexPath * clickedIndexPath = clickedStatus.cellIndexPath;
+    StatusCell *cell = (StatusCell *)[self.table cellForRowAtIndexPath:clickedIndexPath];
+    if (clickedStatus.statusImage == nil)
+    {
+        [[HHNetDataCacheManager getInstance] getDataWithURL:clickedStatus.bmiddlePic withIndex:clickedIndexPath.row];
+    }
+    
+    cell.contentImage.image = clickedStatus.statusImage;
+    UIImageWriteToSavedPhotosAlbum(cell.contentImage.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);        
 }
 
 //destroy status
@@ -556,7 +554,6 @@
          NSString *weiboID =[NSString stringWithFormat:@"%lld",clickedStatus.statusId];
          [manager destroyAstatus:weiboID];
          dispatch_async(dispatch_get_main_queue(), ^{
-          
             NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:clickedStatus.statusId],@"id", nil];
            [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
           [userInfo release];
@@ -569,7 +566,6 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
- 
     NSLog(@"%d",buttonIndex);
         NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID];
     if (clickedStatus.user.userId == userId) {
@@ -600,6 +596,7 @@
     }
 }
 
+//查看图片的评论和做出评理
 
 - (void)addComment:(id)sender
 {
@@ -613,6 +610,8 @@
     [self.navigationController pushViewController:add animated:YES];
     [add release];
 }
+
+//跳转到用户介绍页面
 
 - (void)goToProfile:(id)sender
 {
@@ -631,6 +630,51 @@
     [profile release];
     
 }
+//监听保存结果
 
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    UIAlertView *alert;
+    
+    // Unable to save the image
+    if (error)
+        alert = [[UIAlertView alloc] initWithTitle:nil
+                                           message:@"保存失败！"
+                                          delegate:self cancelButtonTitle:@"确认"
+                                 otherButtonTitles:nil];
+    else // All is well
+        alert = [[UIAlertView alloc] initWithTitle:nil
+                                           message:@"保存成功"
+                                          delegate:self cancelButtonTitle:@"确认"
+                                 otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
+
+//监听完成删除后的，主页的操作
+- (void)receiveDeletePicNotification:(NSNotification *)notification
+{
+    int deletedPsId = [[notification.userInfo objectForKey:@"id"]intValue];
+    NSLog(@"receiveDeletePicNotification, deleted:%d",deletedPsId);
+    int index = -1;
+    for (int i=0; i<self.statuesArr.count; i++) {
+        Status *status = [self.statuesArr objectAtIndex:i];
+        if (status.statusId == deletedPsId) {
+            index = i;
+            break;
+        }
+    }
+    if (index==-1) {
+        return;
+    }
+    [self.statuesArr removeObjectAtIndex:index];
+    //[self.pictures removeObjectAtIndex:index];
+    [self.table reloadData];
+    NSArray *indexPathsToDelete = [[NSArray alloc]initWithObjects:[NSIndexPath indexPathForRow:index inSection:0], nil];
+    [self.table beginUpdates];
+    [self.table deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationNone];
+    [self.table endUpdates];
+    [indexPathsToDelete release];
+}
 
 @end

@@ -36,6 +36,7 @@
         self.mainImage = image;
     }
     manager = [WeiBoMessageManager getInstance];
+    self.title = @"save and send";
     return self;
 }
 

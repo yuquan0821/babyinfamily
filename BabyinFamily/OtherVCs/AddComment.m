@@ -363,9 +363,8 @@ enum  {
 
 -(void)mmRequestFailed:(id)sender
 {
-    //[self stopLoading];
+    //[self.table stopLoading];
     [[SHKActivityIndicator currentIndicator] hide];
-    //    [[ZJTStatusBarAlertWindow getInstance] hide];
 }
 
 #pragma mark - UITableViewDataSource
