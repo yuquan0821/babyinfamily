@@ -26,6 +26,8 @@
 @synthesize headDictionary;
 @synthesize imageDictionary;
 @synthesize browserView;
+@synthesize selectedIndexPath;
+@synthesize clickedStatus;
 
 -(void)dealloc
 {
@@ -37,6 +39,8 @@
     _refreshHeaderView=nil;
     [table release];
     table = nil;
+    [selectedIndexPath release];
+    [clickedStatus release];
     [super dealloc];
 }
 
@@ -511,49 +515,17 @@
 	return [NSDate date]; // should return date data source was last changed
 	
 }
-- (void)report
-{
-    /*dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-     PicShareEngine *engine = [PicShareEngine sharedEngine];
-     ErrorMessage *em = [engine reportPictureStatus:self.pictureStatus.psId];
-     if (em!=nil && em.ret==0 && em.errorcode == 0){
-     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"举报成功" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-     [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-     [alert release];
-     }
-     });
-  
-        UIImageWriteToSavedPhotosAlbum(self.mainImageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-        self.tabBarController.tabBar.hidden = NO;
-        self.tabBarController.selectedIndex = 0;
-        [self dismissModalViewControllerAnimated:NO];*/
-        
-}
-- (void)deletePicture:(NSIndexPath *)indexPath
-{
-    
-     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-     dispatch_async(dispatch_get_main_queue(), ^{
-     NSInteger  row = indexPath.row;
-     if (row >= [statuesArr count]) {
-             return ;
-         }
-     Status *status = [statuesArr objectAtIndex:row];
-     status.cellIndexPath = indexPath;
-     NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:status.statusId],@"id", nil];
-     [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
-     [userInfo release];
-     [self.navigationController popViewControllerAnimated:YES];
-     });
-     });
-}
+
+//clicked morebutton
 
 - (void)moreButtonOnClick:(id)sender
 {
     UIButton *button = (UIButton *)sender;
     StatusCell *cell = (StatusCell *)button.superview.superview;
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    selectedIndexPath = path;    
     Status *status = [self.statuesArr objectAtIndex:path.row];
+    self.clickedStatus = status;
     UIActionSheet *sheet;
     NSInteger userId = [[NSUserDefaults standardUserDefaults] integerForKey:USER_STORE_USER_ID];
     
@@ -567,22 +539,58 @@
     [sheet release];
 }
 
+//save picture
+
+- (void)savePicture
+{
+    Status *status = [self.statuesArr objectAtIndex:selectedIndexPath.row];
+    StatusCell *cell = (StatusCell *)[self.table cellForRowAtIndexPath:status.cellIndexPath];
+    NSLog(@"cell is %@",cell);
+    UIImageWriteToSavedPhotosAlbum(cell.contentImage.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    self.tabBarController.tabBar.hidden = NO;
+    self.tabBarController.selectedIndex = 0;
+    [self dismissModalViewControllerAnimated:NO];        
+}
+
+//destroy status
+
+- (void)deletePicture
+{
+     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+         Status *status = [self.statuesArr objectAtIndex:selectedIndexPath.row];
+         NSString *weiboID =[NSString stringWithFormat:@"%lld",status.statusId];
+         [manager destroyAstatus:weiboID];
+         dispatch_async(dispatch_get_main_queue(), ^{
+           NSInteger  row = selectedIndexPath.row;
+           if (row >= [statuesArr count]) {
+             return ;
+           }
+            NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:status.statusId],@"id", nil];
+           [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
+          [userInfo release];
+          [self.navigationController popViewControllerAnimated:YES];
+        });
+     });
+}
+
+
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    StatusCell *cell = (StatusCell*) actionSheet.superview.superview;
-    NSLog(@"action sheet superview is %@",actionSheet.superview.superview);
-    NSIndexPath *path = [self.tableView indexPathForCell:cell];
-    Status *status = [self.statuesArr objectAtIndex:path.row];
+ 
     NSLog(@"%d",buttonIndex);
+
+    Status *status = [self.statuesArr objectAtIndex:selectedIndexPath.row];
+    NSLog(@"selected indexpath in action sheet is %@",selectedIndexPath);
     NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID];
     if (status.user.userId == userId) {
         //0：删除 1：保存 2：取消
         switch (buttonIndex) {
             case 0:
-                [self deletePicture:path];
+                [self deletePicture];
                 break;
             case 1:
-                [self report];
+                [self savePicture];
                 break;
             case 2:
                 break;
@@ -593,7 +601,7 @@
         //0：保存 1：取消
         switch (buttonIndex) {
             case 0:
-                [self report];
+                [self savePicture];
                 break;
             case 1:
                 break;
@@ -602,6 +610,8 @@
         }
     }
 }
+
+
 - (void)addComment:(id)sender
 {
     UIButton *button = (UIButton *)sender;
@@ -623,8 +633,8 @@
     Status *status = [self.statuesArr objectAtIndex:path.row];
     ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
     profile.user = status.user;
-    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID];
-    if (profile.user.userId == uid.longLongValue ) {
+    NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID];
+    if (profile.user.userId == userId ) {
         profile.followButton.hidden = YES;//为什followButton的属性为Null？
     }
     profile.hidesBottomBarWhenPushed = YES;

@@ -107,10 +107,8 @@ enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section == kStatusSection) {
-        return kStatusRowsCount;
-    }
-    else if (section == kAccountSection) {
+    
+    if (section == kAccountSection) {
         return kAccountRowsCount;
     }
     return 0;
@@ -149,23 +147,6 @@ enum {
         }
     }
     
-    else if (section == kStatusSection) {
-        if (row == kHotStatus) {
-            cell.textLabel.text = @"今日热门评论";
-        }
-        
-        else if (row == kHotRetwitted) {
-            cell.textLabel.text = @"今日热门转发";
-        }
-        
-        else if (row == kHotTrends) {
-            cell.textLabel.text = @"今日热门话题";
-        }
-        
-        //        else if (row == kMetionsStatuses) {
-        //            cell.textLabel.text = @"@我";
-        //        }
-    }
     return cell;
 }
 
@@ -222,35 +203,7 @@ enum {
         }
     }
     
-    else if (section == kStatusSection) {
-        if (row == kHotStatus) {
-           /* ZJTHotRepostViewController *h = [[ZJTHotRepostViewController alloc] initWithType:kHotCommentDaily];
-            h.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:h animated:YES];
-            [h release];
-        }
-        
-        else if (row == kHotRetwitted) {
-            ZJTHotRepostViewController *h = [[ZJTHotRepostViewController alloc] initWithType:kHotRepostDaily];
-            h.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:h animated:YES];
-            [h release];*/
-        }
-        
-       // else if (row == kHotTrends) {
-         ///   HotTrendsVC *h = [[HotTrendsVC alloc] initWithStyle:UITableViewStylePlain];
-            //h.hidesBottomBarWhenPushed = YES;
-           // [self.navigationController pushViewController:h animated:YES];
-           // [h release];
-        //}
-        
-        //        else if (row == kMetionsStatuses) {
-        //            MetionsStatusesVC *m = [[MetionsStatusesVC alloc]initWithNibName:@"FirstViewController" bundle:nil];
-        //            m.hidesBottomBarWhenPushed = YES;
-        //            [self.navigationController pushViewController:m animated:YES];
-        //            [m release];
-        //        }
-    }
+   
 }
 
 #pragma mark - UIAlertViewDelegate

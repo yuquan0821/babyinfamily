@@ -92,7 +92,7 @@
     self.imageUrls = [NSMutableArray arrayWithCapacity:20];
     NSString *url;
     //开始加载图片
-    for(int i=0;i<[statuesArr count];i++)
+    for(int i=0;i<20;i++)
     {
         Status * status=[statuesArr objectAtIndex:i];
         NSNumber *indexNumber = [NSNumber numberWithInt:i];
@@ -109,8 +109,6 @@
         }
         
     }
-    NSLog(@"member urls is %@",self.imageUrls);
-    NSLog(@"count is %d",statuesArr.count);
     
 }
 
@@ -150,7 +148,7 @@
 		[cell addSubview:imageView];
         imageView.contentMode = UIViewContentModeScaleToFill;
 		imageView.layer.borderColor = [[UIColor blackColor] CGColor];
-		imageView.layer.borderWidth = 2;
+		imageView.layer.borderWidth = 1;
 		[imageView release];
 		imageView.tag = 1001;
 	}

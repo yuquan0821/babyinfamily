@@ -914,7 +914,7 @@
 -(void)destroyAPictureStatus:(NSString *)weiboID
 {
     //https://api.weibo.com/2/statuses/destroy.json
-    NSURL *url = [NSURL URLWithString:@"https://api.weibo.com/2/comments/create.json"];
+    NSURL *url = [NSURL URLWithString:@"https://api.weibo.com/2/statuses/destroy.json"];
     ASIFormDataRequest *item = [[ASIFormDataRequest alloc] initWithURL:url];
     self.authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
     
