@@ -230,7 +230,6 @@
     [self.tableView reloadData];
     [[SHKActivityIndicator currentIndicator] hide];
     [self refreshVisibleCellsImages];
-    //[self getImages];
     if (timer == nil) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(timerOnActive) userInfo:nil repeats:YES];
     }

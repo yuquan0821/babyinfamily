@@ -118,6 +118,10 @@ enum  {
                                                                            toolBar.bounds.size.width - 20.0f - 68.0f,
                                                                            30.0f)];
     textField.borderStyle = UITextBorderStyleRoundedRect;
+    textField.font = [UIFont systemFontOfSize:13.0];
+    textField.textAlignment = UITextAlignmentLeft;
+    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    textField.placeholder = @"请输入评论";
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [toolBar addSubview:textField];
     
@@ -318,8 +322,11 @@ enum  {
         
         [manager commentAStatus:weiboID content:content];
     }
+    self.textField.text = @"";
+
     [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
     [[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:3];
+    [self refresh];
     [self.table reloadData];
 
 }

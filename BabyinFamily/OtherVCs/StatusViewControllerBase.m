@@ -126,10 +126,11 @@
     NSLog(@" sts base table = %@,delegate = %@",self.tableView,self.tableView.delegate);
     NSLog(@"navigation is height %f",self.navigationController.navigationBar.frame.size.height);
     self.table = self.tableView;
-    [defaultNotifCenter addObserver:self selector:@selector(receiveDeletePicNotification:) name:@"DeletedPic" object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(mmRequestFailed:)   name:MMSinaRequestFailed object:nil];
-    [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)       name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];    
+    [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)       name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
+    [defaultNotifCenter addObserver:self selector:@selector(receiveDeletePicNotification:) name:@"DeletedPic" object:nil];
+
 }
 
 -(void)viewDidUnload
@@ -553,11 +554,12 @@
      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
          NSString *weiboID =[NSString stringWithFormat:@"%lld",clickedStatus.statusId];
          [manager destroyAstatus:weiboID];
+         NSLog(@"clicked status id is %lld",clickedStatus.statusId);
          dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:clickedStatus.statusId],@"id", nil];
+            NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:weiboID,@"weiboID", nil];
+             NSLog(@"usr info is %@",userInfo);
            [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
           [userInfo release];
-          [self.navigationController popViewControllerAnimated:YES];
         });
      });
 }
@@ -652,14 +654,15 @@
 }
 
 //监听完成删除后的，主页的操作
+
 - (void)receiveDeletePicNotification:(NSNotification *)notification
 {
-    int deletedPsId = [[notification.userInfo objectForKey:@"id"]intValue];
-    NSLog(@"receiveDeletePicNotification, deleted:%d",deletedPsId);
+    long long deletedWeiboID = [[notification.userInfo objectForKey:@"weiboID"]longLongValue];
+    NSLog(@"receiveDeletePicNotification, deleted:%lld",deletedWeiboID);
     int index = -1;
     for (int i=0; i<self.statuesArr.count; i++) {
         Status *status = [self.statuesArr objectAtIndex:i];
-        if (status.statusId == deletedPsId) {
+        if (status.statusId == deletedWeiboID) {
             index = i;
             break;
         }
@@ -668,11 +671,10 @@
         return;
     }
     [self.statuesArr removeObjectAtIndex:index];
-    //[self.pictures removeObjectAtIndex:index];
-    [self.table reloadData];
+    //[self.table reloadData];
     NSArray *indexPathsToDelete = [[NSArray alloc]initWithObjects:[NSIndexPath indexPathForRow:index inSection:0], nil];
     [self.table beginUpdates];
-    [self.table deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationNone];
+    [self.table deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationBottom];
     [self.table endUpdates];
     [indexPathsToDelete release];
 }

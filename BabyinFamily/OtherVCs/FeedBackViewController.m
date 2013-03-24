@@ -233,20 +233,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-    }
-}
-
--(void)didComment:(NSNotification*)sender
-{
-    NSNumber *num = sender.object;
-    if (num.boolValue == YES) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"评论失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         [alert release];
     }

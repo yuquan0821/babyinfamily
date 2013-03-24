@@ -79,12 +79,12 @@
     
     // Unable to save the image
     if (error)
-        alert = [[UIAlertView alloc] initWithTitle:@"错误"
+        alert = [[UIAlertView alloc] initWithTitle:nil
                                            message:@"保存失败！"
                                           delegate:self cancelButtonTitle:@"确认"
                                  otherButtonTitles:nil];
     else // All is well
-        alert = [[UIAlertView alloc] initWithTitle:@"成功"
+        alert = [[UIAlertView alloc] initWithTitle:nil
                                            message:@"保存成功"
                                           delegate:self cancelButtonTitle:@"确认"
                                  otherButtonTitles:nil];
@@ -112,7 +112,7 @@
         self.tabBarController.selectedIndex = 0;
     }
     else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         [alert release];
         [[BabyAlertWindow getInstance] hide];
