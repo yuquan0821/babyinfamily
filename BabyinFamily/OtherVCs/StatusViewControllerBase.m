@@ -155,6 +155,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self.table reloadData];
 }
 
 #pragma mark - Methods
@@ -371,7 +372,6 @@
     if ([url isEqualToString:browserView.bigImageURL])
     {
         [[SHKActivityIndicator currentIndicator] hide];
-        //        [[ZJTStatusBarAlertWindow getInstance] hide];
         shouldShowIndicator = NO;
         
         UIImage * img=[UIImage imageWithData:[dic objectForKey:HHNetDataCacheData]];
@@ -554,10 +554,8 @@
      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
          NSString *weiboID =[NSString stringWithFormat:@"%lld",clickedStatus.statusId];
          [manager destroyAstatus:weiboID];
-         NSLog(@"clicked status id is %lld",clickedStatus.statusId);
          dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:weiboID,@"weiboID", nil];
-             NSLog(@"usr info is %@",userInfo);
            [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
           [userInfo release];
         });
@@ -623,10 +621,6 @@
     Status *status = [self.statuesArr objectAtIndex:path.row];
     ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
     profile.user = status.user;
-    NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID];
-    if (profile.user.userId == userId ) {
-        profile.followButton.hidden = YES;//为什followButton的属性为Null？
-    }
     profile.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:profile animated:YES];
     [profile release];
@@ -671,12 +665,12 @@
         return;
     }
     [self.statuesArr removeObjectAtIndex:index];
-    //[self.table reloadData];
-    NSArray *indexPathsToDelete = [[NSArray alloc]initWithObjects:[NSIndexPath indexPathForRow:index inSection:0], nil];
+    [self.table reloadData];
+    /*NSArray *indexPathsToDelete = [[NSArray alloc]initWithObjects:[NSIndexPath indexPathForRow:index inSection:0], nil];
     [self.table beginUpdates];
     [self.table deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationBottom];
     [self.table endUpdates];
-    [indexPathsToDelete release];
+    [indexPathsToDelete release];*/
 }
 
 @end
