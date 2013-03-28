@@ -92,7 +92,9 @@ enum {
         UIBarButtonItem *SettingBtn = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(setting)];
         self.navigationItem.leftBarButtonItem = SettingBtn;
         [SettingBtn release];
-
+    }
+    NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID];
+    if (user.userId == userId ) {
         followButton.hidden = YES;
     }
       
