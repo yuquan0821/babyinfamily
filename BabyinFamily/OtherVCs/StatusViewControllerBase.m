@@ -130,6 +130,8 @@
     [defaultNotifCenter addObserver:self selector:@selector(mmRequestFailed:)   name:MMSinaRequestFailed object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)       name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(receiveDeletePicNotification:) name:@"DeletedPic" object:nil];
+   // [defaultNotifCenter addObserver:self selector:@selector(receiveSendPicNotification::) name:@"sendPicture" object:nil];
+
 
 }
 
@@ -647,7 +649,7 @@
     [alert release];
 }
 
-//监听完成删除后的，主页的操作
+//监听完成删除后的，主页的刷新操作
 
 - (void)receiveDeletePicNotification:(NSNotification *)notification
 {
@@ -671,6 +673,14 @@
     [self.table deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationBottom];
     [self.table endUpdates];
     [indexPathsToDelete release];*/
+}
+
+//监听发送完成后，主页的刷新操作
+
+- (void)receiveSendPicNotification:(NSNotification *)notification
+{
+    [self.table reloadData];
+
 }
 
 @end
