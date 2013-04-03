@@ -50,6 +50,7 @@ enum  {
 @synthesize theScrollView;
 @synthesize sendButton;
 @synthesize textField;
+@synthesize successAddComment;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -123,11 +124,13 @@ enum  {
     textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     textField.placeholder = @"请输入评论";
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    textField.delegate = self;
     [toolBar addSubview:textField];
     
     sendButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     sendButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     [sendButton setTitle:@"发送" forState:UIControlStateNormal];
+    sendButton.enabled = NO;
     sendButton.frame = CGRectMake(toolBar.bounds.size.width - 68.0f,
                                   6.0f,
                                   58.0f,
@@ -301,11 +304,11 @@ enum  {
 -(void)didComment:(NSNotification*)sender
 {
     NSNumber *num = sender.object;
+    [self.table reloadData];
     if (num.boolValue == YES) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"评论成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         [alert release];
-        [self.navigationController popViewControllerAnimated:YES];
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"评论失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -313,6 +316,8 @@ enum  {
         [alert release];
     }
 }
+
+
 
 - (void)sendButtonAction
 {
@@ -324,8 +329,8 @@ enum  {
     }
     self.textField.text = @"";
 
-    [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
-    [[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:3];
+    //[[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
+    //[[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:3];
     [self refresh];
     [self.table reloadData];
 
@@ -449,10 +454,6 @@ enum  {
         if (buttonIndex == kViewUserProfile) {
             ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
             profile.user = theUser;
-            NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID];
-            if (profile.user.userId == uid.longLongValue ) {
-                profile.followButton.hidden = YES;//为什followButton的属性为Null？
-            }
             profile.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:profile animated:YES];
             [profile release];
@@ -480,6 +481,48 @@ enum  {
     [self refreshVisibleCellsImages];
 }
 
+#pragma mark - UiTextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField1 shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSMutableString *newValue = [[textField1.text mutableCopy] autorelease];
+    [newValue replaceCharactersInRange:range withString:string];//string是当前输入的字符，newValue是当前输入框中的字符
+    if ([newValue length]== 0)
+    {
+        self.sendButton.enabled = NO;
+    }
+    else
+    {
+        self.sendButton.enabled  = YES;
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField1
+{
+    if (textField1.text.length == 0) {
+        self.sendButton.enabled = NO;
+    }
+    else {
+        self.sendButton.enabled = YES;
+    }
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField1
+{
+    NSString *temp = textField1.text;
+    if (temp.length != 0) {
+        self.sendButton.enabled = YES;
+    }
+    else {
+        self.sendButton.enabled = NO;
+    }
+    
+    if (temp.length > 140) {
+        textField1.text = [temp substringToIndex:140];
+    }
+}
 
 
 

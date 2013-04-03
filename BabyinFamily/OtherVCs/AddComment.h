@@ -16,7 +16,7 @@
 @class WeiBoMessageManager;
 @class Comment;
 
-@interface AddComment :UIViewController < UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
+@interface AddComment :UIViewController < UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UITextFieldDelegate>
 {
     UINib  *commentCellNib;
     WeiBoMessageManager *manager;
@@ -41,5 +41,6 @@
 @property (retain, nonatomic) UIScrollView *theScrollView;
 @property (retain, nonatomic) UIButton  *sendButton;
 @property (retain, nonatomic) UITextField *textField;
+@property (assign, nonatomic) BOOL                   successAddComment;
 
 @end
