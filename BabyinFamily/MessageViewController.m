@@ -41,8 +41,6 @@
         isFromProfileVC = NO;
         shouldShowIndicator = YES;
         _page = 1;
-      source =  [ NSString stringWithFormat:@"%d",[[NSUserDefaults standardUserDefaults]integerForKey:SINA_APP_KEY]];
-        NSLog(@"source is %@",source);
     }
     return self;
 }

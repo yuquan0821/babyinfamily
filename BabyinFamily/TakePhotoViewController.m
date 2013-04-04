@@ -591,7 +591,7 @@
         [editorController setDelegate:self];
         [self presentModalViewController:editorController animated:YES];
         //这个地方应该release，但是只要release了，在push发送界面的时候就会崩溃,怀疑是这个AFPhotoEditorController这个类有问题.
-        [editorController release];
+        //[editorController release];
     }
     
 }

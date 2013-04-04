@@ -177,7 +177,7 @@ enum  {
     [center addObserver:self selector:@selector(didUnfollowByUserID:) name:MMSinaUnfollowedByUserIDWithResult object:nil];
     [center addObserver:self selector:@selector(mmRequestFailed:) name:MMSinaRequestFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didComment:) name:MMSinaReplyAComment object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didComment:) name:MMSinaCommentAStatus object:nil];
 
     if (self.commentArr == nil) {
         [manager getCommentListWithID:status.statusId maxID:nil page:1];
@@ -279,7 +279,7 @@ enum  {
     NSDictionary *dic = sender.object;
     NSNumber *result = [dic objectForKey:@"result"];
     if (result.intValue == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"关注成功！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"关注成功！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(dismissAlert:) userInfo:alert repeats:NO];
     }
@@ -303,21 +303,13 @@ enum  {
 
 -(void)didComment:(NSNotification*)sender
 {
-    NSNumber *num = sender.object;
+   // NSNumber *num = sender.object;
+    self.sendButton.enabled = NO;
+    [self.commentArr removeAllObjects];
+    [manager getCommentListWithID:status.statusId maxID:nil page:1];
     [self.table reloadData];
-    if (num.boolValue == YES) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"评论成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"评论失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-    }
+    
 }
-
-
 
 - (void)sendButtonAction
 {
@@ -328,12 +320,6 @@ enum  {
         [manager commentAStatus:weiboID content:content];
     }
     self.textField.text = @"";
-
-    //[[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
-    //[[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:3];
-    [self refresh];
-    [self.table reloadData];
-
 }
 
 //得到图片
@@ -440,13 +426,20 @@ enum  {
 {
     int row = indexPath.row;
     self.clickedComment = [commentArr objectAtIndex:row];
-    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复",@"查看资料", nil];
-    as.tag = kCommentClickActionSheet;
-    [as showInView:self.view];
-    [as release];
+    User *theUser = clickedComment.user;
+    ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
+    profile.user = theUser;
+    profile.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:profile animated:YES];
+    [profile release];
+
+    //UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复",@"查看资料", nil];
+    //as.tag = kCommentClickActionSheet;
+    //[as showInView:self.view];
+    //[as release];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+/*- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (actionSheet.tag == kCommentClickActionSheet) {
         User *theUser = clickedComment.user;
@@ -458,24 +451,21 @@ enum  {
             [self.navigationController pushViewController:profile animated:YES];
             [profile release];
         }
-        else if(buttonIndex == kFollowTheUser){
-            [manager followByUserID:theUser.userId inTableView:@""];
-        }
     }
     else if (actionSheet.tag == kStatusReplyActionSheet)
     {
         if(buttonIndex == kComment)
         {
-            /*TwitterVC *tv = [[TwitterVC alloc]initWithNibName:@"TwitterVC" bundle:nil];
+            TwitterVC *tv = [[TwitterVC alloc]initWithNibName:@"TwitterVC" bundle:nil];
             [self.navigationController pushViewController:tv animated:YES];
             [tv setupForComment:[NSString stringWithFormat:@"%lld",clickedComment.commentId]
                         weiboID:[NSString stringWithFormat:@"%lld",self.status.statusId]];
-            [tv release];*/
+            [tv release];
         }
     }
 }
 
-
+*/
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self refreshVisibleCellsImages];

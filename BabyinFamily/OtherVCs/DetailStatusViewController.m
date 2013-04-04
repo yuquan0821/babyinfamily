@@ -205,7 +205,7 @@ enum  {
 -(void)setViewsHeight
 {
     //博文Text
-    CGRect frame;
+   // CGRect frame;
        
     
     //背景设置

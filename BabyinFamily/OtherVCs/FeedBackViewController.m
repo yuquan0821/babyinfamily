@@ -250,7 +250,7 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [picker dismissModalViewControllerAnimated:YES];
+    [picker dismissModalViewControllerAnimated:NO];
 }
 
 #pragma mark - UIAlertViewDelegate

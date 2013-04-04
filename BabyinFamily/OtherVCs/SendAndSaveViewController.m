@@ -94,16 +94,44 @@
 
 - (IBAction)sendPicture:(id)sender
 {
-    NSString *content = @"#家贝#记录宝贝的每一个瞬间！";
-    UIImage *image = self.mainImageView.image;
-    if (image != nil && content != Nil && content.length !=0) {
-        [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
-        [manager postWithText:content image:image];
-    }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            NSString *content =@"#家贝#记录宝贝的每一个瞬间！"  ;
+            switch (arc4random() % 5) {
+                case 0:
+                    content = @"#家贝#记录宝贝的生活点滴！";
+                    break;
+                case 1:
+                    content = @"#家贝#记录宝贝的生活一点一滴！";
+                    break;
+                case 2:
+                    content = @"#家贝#记录家庭的温馨！";
+                    break;
+                case 3:
+                    content = @"#家贝#记录宝贝们奇迹的时刻！";
+                    break;
+                case 4:
+                    content = @"#家贝#记录宝贝的每一个瞬间！";
+                    break;
+                default:
+                    break;
+            }
+            
+            UIImage *image = self.mainImageView.image;
+            if (image != nil && content != Nil && content.length !=0) {
+                [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
+                [manager postWithText:content image:image];
+                
+            }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"sendPicture" object:self];
+        });
+    });
+
+
 }
 -(void)didPost:(NSNotification*)sender
 {
-
     Status *sts = sender.object;
     if (sts.text != nil && [sts.text length] != 0) {
         [[BabyAlertWindow getInstance] hide];

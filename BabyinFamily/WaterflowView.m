@@ -380,7 +380,7 @@
         self.loadingmore = YES;
         self.loadFooterView.showActivityIndicator = YES;
         
-        currentPage ++;
+        //currentPage ++;
         [self performSelector:@selector(reloadData) withObject:self afterDelay:1.0f]; //make a delay to show loading process for a while
     }
 }

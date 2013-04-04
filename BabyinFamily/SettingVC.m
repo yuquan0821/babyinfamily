@@ -156,6 +156,9 @@ enum {
     webV.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webV animated:YES];
     [webV release];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:USER_STORE_USER_ID];
+    [defaults removeObjectForKey:USER_STORE_USER_NAME];
 }
 
 -(void)didGetUserInfo:(NSNotification*)sender

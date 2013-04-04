@@ -19,6 +19,8 @@
 		283654A416BFACDE00203578 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 283654A216BFACD900203578 /* FeedBackViewController.m */; };
 		283654A516BFACDE00203578 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283654A316BFACDB00203578 /* FeedBackViewController.xib */; };
 		283A8D0316F5A9E300E72753 /* HotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283A8D0216F5A9E300E72753 /* HotViewController.xib */; };
+		284393471706C30C00675BD5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 284393461706C30C00675BD5 /* Icon.png */; };
+		284393491706C31A00675BD5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 284393481706C31A00675BD5 /* Icon@2x.png */; };
 		284C910316DC5569000F2A48 /* StatusViewControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 284C910216DC5569000F2A48 /* StatusViewControllerBase.m */; };
 		2854E27D16D45FE1008B6E4B /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E27816D45FE1008B6E4B /* Images.m */; };
 		2854E27E16D45FE1008B6E4B /* StatusCoreDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E27A16D45FE1008B6E4B /* StatusCoreDataItem.m */; };
@@ -33,7 +35,6 @@
 		288495621663467E0042C4CD /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288495601663467D0042C4CD /* ProfileViewController.xib */; };
 		288659AB167430C0000EADCC /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 288659A9167430C0000EADCC /* StatusCell.m */; };
 		288659AC167430C0000EADCC /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288659AA167430C0000EADCC /* StatusCell.xib */; };
-		2887249B16F02C5E00693E0B /* icon80.png in Resources */ = {isa = PBXBuildFile; fileRef = 2887249A16F02C5E00693E0B /* icon80.png */; };
 		288853FB167EAD67000ED11A /* BabyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 288853FA167EAD67000ED11A /* BabyHelper.m */; };
 		28885409167EB768000ED11A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28885408167EB767000ED11A /* CoreData.framework */; };
 		2889B77B1696919B00D8FF16 /* UIImageView+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889B77A1696919B00D8FF16 /* UIImageView+Resize.m */; };
@@ -179,6 +180,8 @@
 		283654A216BFACD900203578 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedBackViewController.m; path = OtherVCs/FeedBackViewController.m; sourceTree = "<group>"; };
 		283654A316BFACDB00203578 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeedBackViewController.xib; path = OtherVCs/FeedBackViewController.xib; sourceTree = "<group>"; };
 		283A8D0216F5A9E300E72753 /* HotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotViewController.xib; sourceTree = "<group>"; };
+		284393461706C30C00675BD5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		284393481706C31A00675BD5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		284C910116DC5569000F2A48 /* StatusViewControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusViewControllerBase.h; path = OtherVCs/StatusViewControllerBase.h; sourceTree = "<group>"; };
 		284C910216DC5569000F2A48 /* StatusViewControllerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusViewControllerBase.m; path = OtherVCs/StatusViewControllerBase.m; sourceTree = "<group>"; };
 		2854E27716D45FE1008B6E4B /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Images.h; path = Models/Images.h; sourceTree = "<group>"; };
@@ -201,7 +204,6 @@
 		288659A8167430C0000EADCC /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusCell.h; path = TableCells/StatusCell.h; sourceTree = "<group>"; };
 		288659A9167430C0000EADCC /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusCell.m; path = TableCells/StatusCell.m; sourceTree = "<group>"; };
 		288659AA167430C0000EADCC /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusCell.xib; path = TableCells/StatusCell.xib; sourceTree = "<group>"; };
-		2887249A16F02C5E00693E0B /* icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon80.png; sourceTree = "<group>"; };
 		288853F9167EAD67000ED11A /* BabyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyHelper.h; path = BabyTools/BabyHelper.h; sourceTree = "<group>"; };
 		288853FA167EAD67000ED11A /* BabyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyHelper.m; path = BabyTools/BabyHelper.m; sourceTree = "<group>"; };
 		28885408167EB767000ED11A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -477,8 +479,8 @@
 				2896C4811661E79E004705A4 /* AboutViewController.h */,
 				2896C4821661E79E004705A4 /* AboutViewController.m */,
 				2896C4831661E79E004705A4 /* AboutViewController.xib */,
-				2896C4841661E79E004705A4 /* AddCommentVC.h */,
 				2896C4851661E79E004705A4 /* AddCommentVC.m */,
+				2896C4841661E79E004705A4 /* AddCommentVC.h */,
 				2896C4861661E79E004705A4 /* AddCommentVC.xib */,
 				2884955216631CD30042C4CD /* FollowerVC.h */,
 				2884955316631CD30042C4CD /* FollowerVC.m */,
@@ -640,7 +642,8 @@
 		28EA949D165F5962009F69E5 /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				2887249A16F02C5E00693E0B /* icon80.png */,
+				284393461706C30C00675BD5 /* Icon.png */,
+				284393481706C31A00675BD5 /* Icon@2x.png */,
 				B4C94EEE164C057100722F37 /* sourcekit.bundle */,
 				28EA94CA165F961F009F69E5 /* TakePhoto.bundle */,
 				28849557166321800042C4CD /* weibo.bundle */,
@@ -904,7 +907,7 @@
 		B449549A15A978F100FAA116 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = B449549D15A978F100FAA116 /* Build configuration list for PBXProject "BabyinFamily" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -973,9 +976,10 @@
 				283654A516BFACDE00203578 /* FeedBackViewController.xib in Resources */,
 				28DD3F4916DC601D005396AB /* StatusViewControllerBase.xib in Resources */,
 				2828531916E72D530062EC83 /* DetailStatusViewController.xib in Resources */,
-				2887249B16F02C5E00693E0B /* icon80.png in Resources */,
 				283A8D0316F5A9E300E72753 /* HotViewController.xib in Resources */,
 				2871907F16F7011B00A3527B /* AddComment.xib in Resources */,
+				284393471706C30C00675BD5 /* Icon.png in Resources */,
+				284393491706C31A00675BD5 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1093,8 +1097,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: fan chun (GMTD4D4BTA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fan chun (GMTD4D4BTA)";
+				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1106,10 +1115,15 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "lib/GPUImage/framework/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "65DA86A0-97A4-4116-89AE-4FC8EEACB4B3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65DA86A0-97A4-4116-89AE-4FC8EEACB4B3";
 				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -1118,16 +1132,25 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: fan chun";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: fan chun";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "lib/GPUImage/framework/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1136,15 +1159,18 @@
 		B44954BC15A978F200FAA116 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: fan chun (GMTD4D4BTA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BabyinFamily/BabyinFamily-Prefix.pch";
 				INFOPLIST_FILE = "BabyinFamily/BabyinFamily-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/BabyinFamily/AviarySDK\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "家贝";
+				PROVISIONING_PROFILE = "65DA86A0-97A4-4116-89AE-4FC8EEACB4B3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1152,15 +1178,17 @@
 		B44954BD15A978F200FAA116 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: fan chun";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BabyinFamily/BabyinFamily-Prefix.pch";
 				INFOPLIST_FILE = "BabyinFamily/BabyinFamily-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/BabyinFamily/AviarySDK\"",
 				);
 				PRODUCT_NAME = "家贝";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1175,7 +1203,7 @@
 				B44954BA15A978F200FAA116 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B44954BB15A978F200FAA116 /* Build configuration list for PBXNativeTarget "BabyinFamily" */ = {
 			isa = XCConfigurationList;
@@ -1184,7 +1212,7 @@
 				B44954BD15A978F200FAA116 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

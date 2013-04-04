@@ -28,7 +28,6 @@
     
     int                 _page;
     NSString            *_maxID;
-    NSString            *source;
 }
 @property (retain, nonatomic) UITableView           *table;
 @property (retain, nonatomic) UINib                 *commentCellNib;

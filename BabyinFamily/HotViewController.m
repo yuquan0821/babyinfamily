@@ -46,6 +46,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [defaultNotifCenter addObserver:self selector:@selector(didGetHomeLine:)    name:MMSinaGotHomeLine          object:nil];
+
 	// Do any additional setup after loading the view, typically from a nib.
     flowView = [[WaterflowView alloc] initWithFrame:self.view.frame];
     flowView.flowdatasource = self;
@@ -77,7 +79,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [defaultNotifCenter addObserver:self selector:@selector(didGetHomeLine:)    name:MMSinaGotHomeLine          object:nil];
     [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
     [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
 }
