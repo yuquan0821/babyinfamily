@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="12C3006" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12D78" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Images" syncable="YES">
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -8,7 +8,7 @@
     <entity name="StatusCoreDataItem" syncable="YES">
         <attribute name="bmiddlePic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="commentsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="createAt" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="favorited" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="hasImage" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="hasReply" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -62,7 +62,7 @@
     </entity>
     <elements>
         <element name="Images" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="UserCoreDataItem" positionX="160" positionY="192" width="128" height="390"/>
         <element name="StatusCoreDataItem" positionX="160" positionY="192" width="128" height="465"/>
+        <element name="UserCoreDataItem" positionX="160" positionY="192" width="128" height="390"/>
     </elements>
 </model>
