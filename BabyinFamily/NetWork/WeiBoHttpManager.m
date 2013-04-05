@@ -1064,7 +1064,9 @@
         NSMutableArray  *commentArr = [[NSMutableArray alloc]initWithCapacity:0];
         for (id item in arr) {
             Comment *comm = [Comment commentWithJsonDictionary:item];
-            [commentArr addObject:comm];
+            if ([comm.status.source isEqualToString:@"未通过审核应用"]) {
+                [commentArr addObject:comm];
+            }
         }
         if ([delegate respondsToSelector:@selector(didGetCommetToMe:)]) {
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:commentArr,@"commentArraryToMe",count,@"count", nil];

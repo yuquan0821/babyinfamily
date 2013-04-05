@@ -312,6 +312,18 @@
     }
     return height;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int row = indexPath.row;
+    self.clickedComment = [commentArr objectAtIndex:row];
+    User *theUser = clickedComment.user;
+    ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
+    profile.user = theUser;
+    profile.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:profile animated:YES];
+    [profile release];
+}
+
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
