@@ -133,10 +133,10 @@
     theScrollView.contentSize = CGSizeMake(320, 410);
     theTextView.delegate = self;
     self.ios = [[UIDevice currentDevice] systemName];
-    self.iosVision = [[UIDevice currentDevice] systemVersion];
-    self.platform = [[[[UIDeviceHardware alloc] init] platform] stringByAppendingString: [self.ios stringByAppendingString:self.iosVision]];
-    self.APPVision = [@"版本:" stringByAppendingString: [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
-    self.theTextView.text = [[@"#家贝反馈# @fanyanchun " stringByAppendingString: self.APPVision ] stringByAppendingString:self.platform];
+    self.iosVision = [[[UIDevice currentDevice] systemVersion] stringByAppendingString:@" "];
+    self.platform = [[[[[UIDeviceHardware alloc] init] platform] stringByAppendingString:@" " ] stringByAppendingString:[[self.ios stringByAppendingString:@" "] stringByAppendingString:self.iosVision]];
+    self.APPVision = [@" 版本:" stringByAppendingString: [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+    self.theTextView.text = [[[@"#家贝反馈# @fanyanchun " stringByAppendingString: self.APPVision ] stringByAppendingString:@" " ]stringByAppendingString:self.platform];
     countLabel.text = [NSString stringWithFormat:@"%d",140 - theTextView.text.length];
     TVBackView.image = [[UIImage imageNamed:@"weibo.bundle/WeiboImages/input_window.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:15];
     

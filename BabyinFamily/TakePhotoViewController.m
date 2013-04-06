@@ -25,8 +25,6 @@
 @synthesize cancelButton;
 @synthesize retakeButton;
 @synthesize libraryToggleButton;
-@synthesize filterScrollView;
-@synthesize filtersBackgroundImageView;
 @synthesize photoBar;
 @synthesize topBar;
 @synthesize outputJPEGQuality;
@@ -85,39 +83,6 @@
     
 }
 
--(void) loadFilters {
-    for(int i = 0; i < 10; i++) {
-        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"TakePhoto.bundle/FilterSamples/%d.jpg", i + 1]] forState:UIControlStateNormal];
-        button.frame = CGRectMake(10+i*(60+10), 5.0f, 60.0f, 60.0f);
-        button.layer.cornerRadius = 7.0f;
-        
-        //use bezier path instead of maskToBounds on button.layer
-        UIBezierPath *bi = [UIBezierPath bezierPathWithRoundedRect:button.bounds
-                                                 byRoundingCorners:UIRectCornerAllCorners
-                                                       cornerRadii:CGSizeMake(7.0,7.0)];
-        
-        CAShapeLayer *maskLayer = [CAShapeLayer layer];
-        maskLayer.frame = button.bounds;
-        maskLayer.path = bi.CGPath;
-        button.layer.mask = maskLayer;
-        
-        button.layer.borderWidth = 1;
-        button.layer.borderColor = [[UIColor blackColor] CGColor];
-        
-        [button addTarget:self
-                   action:@selector(filterClicked:)
-         forControlEvents:UIControlEventTouchUpInside];
-        button.tag = i;
-        [button setTitle:@"*" forState:UIControlStateSelected];
-        if(i == 0){
-            [button setSelected:YES];
-        }
-		[self.filterScrollView addSubview:button];
-	}
-	[self.filterScrollView setContentSize:CGSizeMake(10 + 10*(60+10), 75.0)];
-}
-
 
 -(void) setUpCamera {
     
@@ -154,21 +119,6 @@
         });
     }
     
-}
-
--(void) filterClicked:(UIButton *) sender {
-    for(UIView *view in self.filterScrollView.subviews){
-        if([view isKindOfClass:[UIButton class]]){
-            [(UIButton *)view setSelected:NO];
-        }
-    }
-    
-    [sender setSelected:YES];
-    [self removeAllTargets];
-    
-    selectedFilter = sender.tag;
-    [self setFilter:sender.tag];
-    [self prepareFilter];
 }
 
 
@@ -303,7 +253,6 @@
     UIImagePickerController* imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePickerController.delegate = self;
-    //imagePickerController.allowsEditing = YES;
     [self presentViewController:imagePickerController animated:YES completion:NULL];
 }
 
@@ -557,13 +506,13 @@
     [self dismissModalViewControllerAnimated:NO];
     //UIImage *image = [UIImage imageNamed:@"Default.png"];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    [self performSelector:@selector(showSingleImageView:) withObject:image afterDelay:0.5];
+    [self performSelector:@selector(displayEditorForImage:) withObject:image afterDelay:0.5];
 #else
     [self dismissModalViewControllerAnimated:NO];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    [self showSingleImageView:image];
+    [self displayEditorForImage:image];
 #endif
-    /*UIImage* outputImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage* outputImage = [info objectForKey:UIImagePickerControllerEditedImage];
     if (outputImage == nil) {
         outputImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
@@ -580,21 +529,15 @@
         [self.photoCaptureButton setImage:nil forState:UIControlStateNormal];
         [self.photoCaptureButton setEnabled:YES];
         
-    }*/
+    }
+}
+- (void)displayEditorForImage:(UIImage *)imageToEdit
+{
+    AFPhotoEditorController *editorController = [[AFPhotoEditorController alloc] initWithImage:imageToEdit];
+    [editorController setDelegate:self];
+    [self presentViewController:editorController animated:YES completion:nil];
 }
 
--(void)showSingleImageView:(id)image
-{
-    if(image)
-    {
-        AFPhotoEditorController *editorController = [[AFPhotoEditorController alloc] initWithImage:image];
-        [editorController setDelegate:self];
-        [self presentModalViewController:editorController animated:YES];
-        //这个地方应该release，但是只要release了，在push发送界面的时候就会崩溃,怀疑是这个AFPhotoEditorController这个类有问题.
-        //[editorController release];
-    }
-    
-}
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     if (isStatic) {
         // TODO: fix this hack

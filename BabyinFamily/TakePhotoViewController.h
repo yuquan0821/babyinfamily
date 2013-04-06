@@ -43,8 +43,6 @@
 @property (retain, nonatomic) IBOutlet UIButton *flashToggleButton;
 @property (retain, nonatomic) IBOutlet UIButton *retakeButton;
 
-@property (retain, nonatomic) IBOutlet UIScrollView *filterScrollView;
-@property (retain, nonatomic) IBOutlet UIImageView *filtersBackgroundImageView;
 @property (retain, nonatomic) IBOutlet UIView *photoBar;
 @property (retain, nonatomic) IBOutlet UIView *topBar;
 
