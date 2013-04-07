@@ -22,6 +22,7 @@
 		28368F13170FB2D3008C4CC1 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28368F12170FB2D3008C4CC1 /* CoreText.framework */; };
 		28368F15170FB2F0008C4CC1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28368F14170FB2F0008C4CC1 /* libsqlite3.0.dylib */; };
 		28368F17170FB2FE008C4CC1 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28368F16170FB2FE008C4CC1 /* libz.1.2.5.dylib */; };
+		28368F1F171054F9008C4CC1 /* BlurOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28368F1E171054F9008C4CC1 /* BlurOverlayView.m */; };
 		283A8D0316F5A9E300E72753 /* HotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283A8D0216F5A9E300E72753 /* HotViewController.xib */; };
 		284393471706C30C00675BD5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 284393461706C30C00675BD5 /* Icon.png */; };
 		284393491706C31A00675BD5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 284393481706C31A00675BD5 /* Icon@2x.png */; };
@@ -187,6 +188,8 @@
 		28368F12170FB2D3008C4CC1 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		28368F14170FB2F0008C4CC1 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		28368F16170FB2FE008C4CC1 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		28368F1D171054F9008C4CC1 /* BlurOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurOverlayView.h; sourceTree = "<group>"; };
+		28368F1E171054F9008C4CC1 /* BlurOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurOverlayView.m; sourceTree = "<group>"; };
 		283A8D0216F5A9E300E72753 /* HotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotViewController.xib; sourceTree = "<group>"; };
 		284393461706C30C00675BD5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		284393481706C31A00675BD5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -488,6 +491,8 @@
 		2896C4021661C0E2004705A4 /* OthersVCs */ = {
 			isa = PBXGroup;
 			children = (
+				28368F1D171054F9008C4CC1 /* BlurOverlayView.h */,
+				28368F1E171054F9008C4CC1 /* BlurOverlayView.m */,
 				2896C4811661E79E004705A4 /* AboutViewController.h */,
 				2896C4821661E79E004705A4 /* AboutViewController.m */,
 				2896C4831661E79E004705A4 /* AboutViewController.xib */,
@@ -1083,6 +1088,7 @@
 				28A1030016F480F700C326C5 /* AsyncImageView.m in Sources */,
 				28A1030116F480F700C326C5 /* FullyLoaded.m in Sources */,
 				28A1030416F4BA7C00C326C5 /* LoadingMoreFooterView.m in Sources */,
+				28368F1F171054F9008C4CC1 /* BlurOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

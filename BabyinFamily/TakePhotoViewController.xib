@@ -40,9 +40,10 @@
 					<object class="IBUIView" id="342531034">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{0, 56}, {320, 376}}</string>
+						<string key="NSFrame">{{0, 62}, {320, 356}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="655632998"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="468485692">
 							<int key="NSColorSpace">3</int>
@@ -53,7 +54,7 @@
 					</object>
 					<object class="IBUIView" id="655632998">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">266</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIButton" id="883660090">
 								<reference key="NSNextResponder" ref="655632998"/>
@@ -160,7 +161,7 @@
 					</object>
 					<object class="IBUIView" id="839797797">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">290</int>
 						<array class="NSMutableArray" key="NSSubviews"/>
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="191373211"/>
@@ -274,6 +275,10 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="863099638"/>
+						<object class="NSCustomResource" key="IBUISelectedImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">TakePhoto.bundle/UI/flash.png</string>
+						</object>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">TakePhoto.bundle/UI/flash-off.png</string>
@@ -607,6 +612,7 @@
 				<string key="27.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="2" key="27.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="28.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="2" key="28.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="31.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="33.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.CustomClassName">GPUImageView</string>
@@ -631,50 +637,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">TakePhotoViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="cancel:">id</string>
-						<string key="handlePan:">UIGestureRecognizer</string>
-						<string key="handlePinch:">UIPinchGestureRecognizer</string>
-						<string key="retakePhoto:">UIButton</string>
-						<string key="switchToLibrary:">id</string>
-						<string key="takePhoto:">id</string>
-						<string key="toggleBlur:">UIButton</string>
-						<string key="toggleFlash:">UIButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="cancel:">
-							<string key="name">cancel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="handlePan:">
-							<string key="name">handlePan:</string>
-							<string key="candidateClassName">UIGestureRecognizer</string>
-						</object>
-						<object class="IBActionInfo" key="handlePinch:">
-							<string key="name">handlePinch:</string>
-							<string key="candidateClassName">UIPinchGestureRecognizer</string>
-						</object>
-						<object class="IBActionInfo" key="retakePhoto:">
-							<string key="name">retakePhoto:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="switchToLibrary:">
-							<string key="name">switchToLibrary:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="takePhoto:">
-							<string key="name">takePhoto:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="toggleBlur:">
-							<string key="name">toggleBlur:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="toggleFlash:">
-							<string key="name">toggleFlash:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="blurToggleButton">UIButton</string>
 						<string key="cameraToggleButton">UIButton</string>
@@ -738,10 +700,6 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1552" key="NS.object.0"/>
-		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
@@ -751,6 +709,7 @@
 			<string key="TakePhoto.bundle/UI/camera-icon.png">{16, 16}</string>
 			<string key="TakePhoto.bundle/UI/close.png">{16, 16}</string>
 			<string key="TakePhoto.bundle/UI/flash-off.png">{16, 16}</string>
+			<string key="TakePhoto.bundle/UI/flash.png">{16, 16}</string>
 			<string key="TakePhoto.bundle/UI/front-camera.png">{16, 16}</string>
 			<string key="TakePhoto.bundle/UI/library.png">{16, 16}</string>
 		</dictionary>

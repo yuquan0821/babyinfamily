@@ -10,6 +10,8 @@
 #import <Foundation/Foundation.h>
 #import "GPUImage.h"
 #import "AFPhotoEditorController.h"
+#import "BlurOverlayView.h"
+
 
 
 @class TakePhotoViewController;
@@ -46,6 +48,7 @@
 @property (retain, nonatomic) IBOutlet UIView *photoBar;
 @property (retain, nonatomic) IBOutlet UIView *topBar;
 
+@property (nonatomic, strong) BlurOverlayView *blurOverlayView;
 @property (nonatomic, assign) CGFloat outputJPEGQuality;
 
 @end

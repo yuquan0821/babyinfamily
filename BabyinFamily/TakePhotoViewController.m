@@ -28,6 +28,7 @@
 @synthesize photoBar;
 @synthesize topBar;
 @synthesize outputJPEGQuality;
+@synthesize blurOverlayView;
 
 -(id) init {
     self = [super initWithNibName:@"TakePhotoViewController" bundle:nil];
@@ -64,6 +65,12 @@
     
     staticPictureOriginalOrientation = UIImageOrientationUp;
     
+    self.blurOverlayView = [[BlurOverlayView alloc] initWithFrame:CGRectMake(0, 0,
+                                                                             self.imageView.frame.size.width,
+                                                                             self.imageView.frame.size.height)];
+    self.blurOverlayView.alpha = 0;
+    [self.imageView addSubview:self.blurOverlayView];
+    
     hasBlur = NO;
     
     //[self loadFilters];
@@ -74,15 +81,13 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [self setUpCamera];
-    });
-   // self.navigationController.navigationBarHidden = YES;
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-
-
-    
-    
+    });    
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+    [super viewWillAppear:animated];
+}
 
 -(void) setUpCamera {
     
@@ -94,17 +99,7 @@
         stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
         runOnMainQueueWithoutDeadlocking(^{
             [stillCamera startCameraCapture];
-            if([stillCamera.inputCamera hasFlash]){
-                [self.flashToggleButton setEnabled:NO];
-                [stillCamera.inputCamera lockForConfiguration:nil];
-                if([stillCamera.inputCamera flashMode] == AVCaptureFlashModeOff){
-                    [self.flashToggleButton setImage:[UIImage imageNamed:@"TakePhoto.bundle/UI/flash-off"] forState:UIControlStateNormal];
-                }else if([stillCamera.inputCamera flashMode] == AVCaptureFlashModeAuto){
-                    [self.flashToggleButton setImage:[UIImage imageNamed:@"TakePhoto.bundle/UI/flash-auto"] forState:UIControlStateNormal];
-                }else{
-                    [self.flashToggleButton setImage:[UIImage imageNamed:@"TakePhoto.bundle/UI/flash"] forState:UIControlStateNormal];
-                }
-                [stillCamera.inputCamera unlockForConfiguration];
+            if([stillCamera.inputCamera hasTorch]){
                 [self.flashToggleButton setEnabled:YES];
             }else{
                 [self.flashToggleButton setEnabled:NO];
@@ -193,7 +188,7 @@
         // TODO: fix this hack
         //这个地方不可理，不应该指定死延时时间,在内存紧张的情况下，容易发生崩溃,原因是多个presend动作同时执行了
         //可以考虑其它的方式
-        [self performSelector:@selector(switchToLibrary:) withObject:nil afterDelay:1.5];
+        [self performSelector:@selector(switchToLibrary:) withObject:nil afterDelay:0.5];
     }
     
     [staticPicture addTarget:filter];
@@ -256,27 +251,9 @@
     [self presentViewController:imagePickerController animated:YES completion:NULL];
 }
 
--(IBAction)toggleFlash:(UIButton *)sender{
+-(IBAction)toggleFlash:(UIButton *)button{
     
-    if([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]
-       && stillCamera
-       && [stillCamera.inputCamera hasFlash]) {
-        [self.flashToggleButton setEnabled:NO];
-        [stillCamera.inputCamera lockForConfiguration:nil];
-        if([stillCamera.inputCamera flashMode] == AVCaptureFlashModeOff){
-            [stillCamera.inputCamera setFlashMode:AVCaptureFlashModeAuto];
-            [self.flashToggleButton setImage:[UIImage imageNamed:@"TakePhoto.bundle/UI/flash-auto"] forState:UIControlStateNormal];
-        }else if([stillCamera.inputCamera flashMode] == AVCaptureFlashModeAuto){
-            [stillCamera.inputCamera setFlashMode:AVCaptureFlashModeOn];
-            [self.flashToggleButton setImage:[UIImage imageNamed:@"TakePhoto.bundle/UI/flash"] forState:UIControlStateNormal];
-        }else{
-            [stillCamera.inputCamera setFlashMode:AVCaptureFlashModeOff];
-            [self.flashToggleButton setImage:[UIImage imageNamed:@"TakePhoto.bundle/UI/flash-off"] forState:UIControlStateNormal];
-        }
-        [stillCamera.inputCamera unlockForConfiguration];
-        [self.flashToggleButton setEnabled:YES];
-    }
-    
+    [button setSelected:!button.selected];
 }
 
 -(IBAction) toggleBlur:(UIButton*)blurButton {
@@ -286,6 +263,7 @@
     
     if (hasBlur) {
         hasBlur = NO;
+        [self showBlurOverlay:NO];
         [self.blurToggleButton setSelected:NO];
     } else {
         if (!blurFilter) {
@@ -297,6 +275,8 @@
         }
         hasBlur = YES;
         [self.blurToggleButton setSelected:YES];
+        [self flashBlurOverlay];
+
     }
     
     [self prepareFilter];
@@ -311,32 +291,64 @@
     [self.cameraToggleButton setEnabled:NO];
     [stillCamera rotateCamera];
     [self.cameraToggleButton setEnabled:YES];
+    self.flashToggleButton.hidden = NO;
+
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera] && stillCamera) {
+        if ([stillCamera.inputCamera hasFlash] && [stillCamera.inputCamera hasTorch]) {
+            [self.flashToggleButton setEnabled:YES];
+        } else {
+            //[self.flashToggleButton setEnabled:NO];
+            self.flashToggleButton.hidden = YES;
+        }
+    }
 }
+
+
+-(void) prepareForCapture {
+    [stillCamera.inputCamera lockForConfiguration:nil];
+    if(self.flashToggleButton.selected &&
+       [stillCamera.inputCamera hasTorch]){
+        [stillCamera.inputCamera setTorchMode:AVCaptureTorchModeOn];
+        [self performSelector:@selector(captureImage)
+                   withObject:nil
+                   afterDelay:0.25];
+    }else{
+        [self captureImage];
+    }
+}
+
+
+-(void)captureImage {
+    UIImage *img = [cropFilter imageFromCurrentlyProcessedOutput];
+    [stillCamera.inputCamera unlockForConfiguration];
+    [stillCamera stopCameraCapture];
+    [self removeAllTargets];
+    [self displayEditorForImage:img];
+    
+    staticPicture = [[GPUImagePicture alloc] initWithImage:img
+                                       smoothlyScaleOutput:YES];
+    
+    staticPictureOriginalOrientation = img.imageOrientation;
+    
+    [self prepareFilter];
+    [self.retakeButton setHidden:NO];
+    [self.photoCaptureButton setTitle:@"完成" forState:UIControlStateNormal];
+    [self.photoCaptureButton setImage:nil forState:UIControlStateNormal];
+    [self.photoCaptureButton setEnabled:YES];
+    
+}
+
 
 -(IBAction) takePhoto:(id)sender{
     [self.photoCaptureButton setEnabled:NO];
     
     if (!isStatic) {
-        [stillCamera capturePhotoAsImageProcessedUpToFilter:cropFilter
-                                      withCompletionHandler:^(UIImage *processed, NSError *error) {
-                                          isStatic = YES;
-                                          runOnMainQueueWithoutDeadlocking(^{
-                                              @autoreleasepool {
-                                                  [stillCamera stopCameraCapture];
-                                                  [self removeAllTargets];
-                                                  [self.retakeButton setHidden:NO];
-                                                  [self.libraryToggleButton setHidden:YES];
-                                                  [self.cameraToggleButton setEnabled:NO];
-                                                  [self.flashToggleButton setEnabled:NO];
-                                                  staticPicture = [[GPUImagePicture alloc] initWithImage:processed smoothlyScaleOutput:YES];
-                                                  staticPictureOriginalOrientation = processed.imageOrientation;
-                                                  [self prepareFilter];
-                                                  [self.photoCaptureButton setTitle:@"完成" forState:UIControlStateNormal];
-                                                  [self.photoCaptureButton setImage:nil forState:UIControlStateNormal];
-                                                  [self.photoCaptureButton setEnabled:YES];
-                                              }
-                                          });
-                                      }];
+        isStatic = YES;
+        
+        [self.libraryToggleButton setHidden:YES];
+        [self.cameraToggleButton setEnabled:NO];
+        [self.flashToggleButton setEnabled:NO];
+        [self prepareForCapture];
         
     } else {
         
@@ -377,7 +389,6 @@
     [self.photoCaptureButton setImage:[UIImage imageNamed:@"TakePhoto.bundle/UI/camera-icon"] forState:UIControlStateNormal];
     [self.photoCaptureButton setTitle:nil forState:UIControlStateNormal];
     
-    cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.0f, 0.0f, 1.0f, 0.75f)];
     [self setFilter:selectedFilter];
     [self prepareFilter];
 }
@@ -401,6 +412,8 @@
         
         if ([sender state] == UIGestureRecognizerStateBegan) {
             //NSLog(@"Start tap");
+            [self showBlurOverlay:YES];
+            [gpu setBlurSize:0.0f];
             if (isStatic) {
                 [staticPicture processImage];
             }
@@ -408,14 +421,15 @@
         
         if ([sender state] == UIGestureRecognizerStateBegan || [sender state] == UIGestureRecognizerStateChanged) {
             //NSLog(@"Moving tap");
-            [gpu setBlurSize:5.0f];
+            [gpu setBlurSize:0.0f];
+            [self.blurOverlayView setCircleCenter:tapPoint];
             [gpu setExcludeCirclePoint:CGPointMake(tapPoint.x/320.0f, tapPoint.y/320.0f)];
         }
         
         if([sender state] == UIGestureRecognizerStateEnded){
             //NSLog(@"Done tap");
             [gpu setBlurSize:5.0f];
-            
+            [self showBlurOverlay:NO];
             if (isStatic) {
                 [staticPicture processImage];
             }
@@ -432,22 +446,26 @@
         
         if ([sender state] == UIGestureRecognizerStateBegan) {
             //NSLog(@"Start tap");
+            [self showBlurOverlay:YES];
+            [gpu setBlurSize:0.0f];
             if (isStatic) {
                 [staticPicture processImage];
             }
         }
         
         if ([sender state] == UIGestureRecognizerStateBegan || [sender state] == UIGestureRecognizerStateChanged) {
-            [gpu setBlurSize:10.0f];
+            [gpu setBlurSize:0.0f];
             [gpu setExcludeCirclePoint:CGPointMake(midpoint.x/320.0f, midpoint.y/320.0f)];
-            CGFloat radius = MIN(sender.scale*[gpu excludeCircleRadius], 0.6f);
+            self.blurOverlayView.circleCenter = CGPointMake(midpoint.x, midpoint.y);
+            CGFloat radius = MAX(MIN(sender.scale*[gpu excludeCircleRadius], 0.6f), 0.15f);
+            self.blurOverlayView.radius = radius*320.f;
             [gpu setExcludeCircleRadius:radius];
             sender.scale = 1.0f;
         }
         
         if ([sender state] == UIGestureRecognizerStateEnded) {
             [gpu setBlurSize:5.0f];
-            
+            [self showBlurOverlay:NO];
             if (isStatic) {
                 [staticPicture processImage];
             }
@@ -455,6 +473,34 @@
     }
 }
 
+-(void) showBlurOverlay:(BOOL)show{
+    if(show){
+        [UIView animateWithDuration:0.2 delay:0 options:0 animations:^{
+            self.blurOverlayView.alpha = 0.6;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }else{
+        [UIView animateWithDuration:0.35 delay:0.2 options:0 animations:^{
+            self.blurOverlayView.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+}
+
+
+-(void) flashBlurOverlay {
+    [UIView animateWithDuration:0.2 delay:0 options:0 animations:^{
+        self.blurOverlayView.alpha = 0.6;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.35 delay:0.2 options:0 animations:^{
+            self.blurOverlayView.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
+}
 
 -(void) dealloc {
     [self removeAllTargets];
@@ -463,12 +509,15 @@
     filter = nil;
     blurFilter = nil;
     staticPicture = nil;
+    self.blurOverlayView = nil;
     [super dealloc];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [stillCamera stopCameraCapture];
     [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
+
 }
 #pragma mark AFPhotoEditorControllerDelegate
 - (void)photoEditor:(AFPhotoEditorController *)editor finishedWithImage:(UIImage *)image
@@ -476,18 +525,10 @@
     // Handle the result image here
     if (image != nil) {
         SendAndSaveViewController* viewController = [[SendAndSaveViewController alloc] initWithImage:image];
-        
        [self.navigationController pushViewController:viewController animated:NO];
         [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
-        //[self presentModalViewController:viewController animated:NO];
-        //[self.navigationController popToViewController:viewController animated:NO];
-          //NSLog(@"self navigation is %@", self.navigationController);
-       // NSLog(@"self superviewcontroll navigation is %@", self.parentViewController.navigationController);
-
         [viewController release];
-
     }
-    
     //关闭图像选择器
     [self dismissModalViewControllerAnimated:NO];
 }
@@ -495,6 +536,8 @@
 {
     // Handle cancelation here
     [self dismissModalViewControllerAnimated:YES];
+    [self retakePhoto:nil];
+
 }
 
 #pragma mark - UIImagePickerDelegate
@@ -512,25 +555,8 @@
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self displayEditorForImage:image];
 #endif
-    UIImage* outputImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    if (outputImage == nil) {
-        outputImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    }
-    
-    if (outputImage) {
-        staticPicture = [[GPUImagePicture alloc] initWithImage:outputImage smoothlyScaleOutput:YES];
-        staticPictureOriginalOrientation = outputImage.imageOrientation;
-        isStatic = YES;
-        [self dismissModalViewControllerAnimated:YES];
-        [self.cameraToggleButton setEnabled:NO];
-        [self.flashToggleButton setEnabled:NO];
-        [self prepareStaticFilter];
-        [self.photoCaptureButton setTitle:@"完成" forState:UIControlStateNormal];
-        [self.photoCaptureButton setImage:nil forState:UIControlStateNormal];
-        [self.photoCaptureButton setEnabled:YES];
-        
-    }
 }
+
 - (void)displayEditorForImage:(UIImage *)imageToEdit
 {
     AFPhotoEditorController *editorController = [[AFPhotoEditorController alloc] initWithImage:imageToEdit];
