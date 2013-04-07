@@ -66,7 +66,23 @@
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
+    // ios6中文输入后锁屏之后就会crash，加上之后不会
+    UIDevice * device = [UIDevice currentDevice];
+    BOOL backgroundSupported = NO;
+    if ([device respondsToSelector:@selector(isMultitaskingSupported)]) {
+        backgroundSupported = device.multitaskingSupported;
+    }
+    
+    __block UIBackgroundTaskIdentifier backgroundTask;
+    
+    if (backgroundSupported) {
+        backgroundTask = [application beginBackgroundTaskWithExpirationHandler:^{
+            [application endBackgroundTask:backgroundTask];
+            backgroundTask = UIBackgroundTaskInvalid;
+        }];
+    }
 }
+
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
