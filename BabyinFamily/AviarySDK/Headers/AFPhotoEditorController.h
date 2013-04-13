@@ -8,7 +8,7 @@
 #import "AFPhotoEditorControllerOptions.h"
 #import "AFPhotoEditorSession.h"
 #import "AFPhotoEditorContext.h"
-#import "AFPhotoEditorStyle.h"
+#import "AFOpenGLManager.h"
 
 @class AFPhotoEditorController;
 
@@ -54,20 +54,13 @@
 /**
  The photo editor's delegate. 
  */
-@property (nonatomic, assign) id<AFPhotoEditorControllerDelegate> delegate;
+@property (nonatomic, weak) id<AFPhotoEditorControllerDelegate> delegate;
 
 /**
  An AFPhotoEditorSession instance that tracks user actions within the photo editor. This can be used for high-resolution
  processing.
  */
 @property (nonatomic, strong, readonly) AFPhotoEditorSession *session;
-
-/**
- Deprecated. 
- 
- Please use AFPhotoEditorCustomization to configure the options.
- */
-@property (nonatomic, strong, readonly) AFPhotoEditorStyle *style DEPRECATED_ATTRIBUTE;
 
 /**
  Deprecated

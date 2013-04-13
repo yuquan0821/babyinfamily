@@ -16,7 +16,7 @@
  Calling render: on a context causes all modifications tracked in the AFPhotoEditorSession (which tracks user generated photo-editing actions in 
  an AFPhotoEditorController) to be replayed on the context's input image asynchronously. When rendering is complete, the completion block passed 
  into render: will be called with the finalized image, whose size will match the context's size. If the session contains no tracked actions (i.e., the user made 
- no edits before pressing "Done" or pressed "Cancel"), the result image will be `nil`.
+ no edits before pressing "Done" or pressed "Cancel"), the result image will be `nil`. Note: render: may only be called once per context.
 
  By default, contexts take advantage of GPU acceleration. If an input image is too large to be represented as an OpenGL texture, an attempt to render 
  an image will cause the context to silently fall back to CPU rendering. Maximum texture size is measured by the maximum dimension of an image, and 
@@ -39,13 +39,23 @@
 @interface AFPhotoEditorContext : NSObject
 
 /// The session that the context was generated from.
-@property (nonatomic, assign, readonly) AFPhotoEditorSession *session;
+@property (nonatomic, weak, readonly) AFPhotoEditorSession *session;
+
 /// The size that the context's image will be output at.
 @property (nonatomic, assign, readonly) CGSize size;
+
 /// Specifies if the context's rendering has been cancelled.
 @property (nonatomic, assign, readonly, getter=isCanceled) BOOL canceled;
+
 /// Specifies if the context's session has been modified.
 @property (nonatomic, assign, readonly, getter=isModified) BOOL modified;
+
+/** 
+ Specifies whether rendering has begun on the context.
+ 
+ If YES, any render: call will have no effect.
+*/
+@property (nonatomic, assign, readonly) BOOL hasBegunRendering;
 
 /**
  Replays all actions tracked by the generating AFPhotoEditorSession on the context's image. 
@@ -54,6 +64,9 @@
  `session`. If the user pressed "Cancel" or took no actions before pressing "Done", the `result` UImage in the completion block will be nil. Otherwise, it 
  will contain the rendered image. The context will try to render the image on the GPU, but it will fall back to the CPU if necessary. See the discussion in 
  AFPhotoEditorContext for more details.
+ 
+ Note: This method may be called once per context, as it would not make sense to run the same actions on the same image twice. Check hasBegunRendering to 
+ see if render has been called.
  
  @param completion The block to be called when the image's render is complete. 
  

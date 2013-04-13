@@ -10,6 +10,11 @@
 #import "HotViewController.h"
 
 #define NUMBER_OF_COLUMNS 3
+#define ScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define ScreenWidth [[UIScreen mainScreen] bounds].size.width
+#define StateBarHeight 20
+#define MainHeight (ScreenHeight - StateBarHeight)
+#define MainWidth ScreenWidth
 
 @interface HotViewController ()
 @property (nonatomic,readwrite) int currentPage;
@@ -50,7 +55,7 @@
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     
 	// Do any additional setup after loading the view, typically from a nib.
-    waterFlow = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, 0, 320, 460-82)];
+    waterFlow = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, 0, MainWidth, MainHeight-82)];
     waterFlow.waterFlowViewDelegate = self;
     waterFlow.waterFlowViewDatasource = self;
     waterFlow.backgroundColor = [UIColor whiteColor];
