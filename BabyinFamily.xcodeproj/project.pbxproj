@@ -227,6 +227,9 @@
 		288960981719037600819399 /* WaterFlowViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterFlowViewCell.m; sourceTree = "<group>"; };
 		288960991719037600819399 /* WaterFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterFlowView.h; sourceTree = "<group>"; };
 		2889609A1719037600819399 /* WaterFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterFlowView.m; sourceTree = "<group>"; };
+		288960AD1719AB3000819399 /* AFOpenGLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFOpenGLManager.h; path = AviarySDK/Headers/AFOpenGLManager.h; sourceTree = "<group>"; };
+		288960AE1719AB4300819399 /* AFPhotoEditorCustomization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorCustomization.h; path = AviarySDK/Headers/AFPhotoEditorCustomization.h; sourceTree = "<group>"; };
+		288960AF1719AB5100819399 /* AFPhotoEditorSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorSession.h; path = AviarySDK/Headers/AFPhotoEditorSession.h; sourceTree = "<group>"; };
 		2889B7791696919B00D8FF16 /* UIImageView+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Resize.h"; path = "BabyTools/UIImageView+Resize.h"; sourceTree = "<group>"; };
 		2889B77A1696919B00D8FF16 /* UIImageView+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Resize.m"; path = "BabyTools/UIImageView+Resize.m"; sourceTree = "<group>"; };
 		2889E7F8169ACC7700885875 /* POI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POI.h; path = Models/POI.h; sourceTree = "<group>"; };
@@ -444,9 +447,12 @@
 		280FBA42169BD8A50072741B /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				288960AD1719AB3000819399 /* AFOpenGLManager.h */,
 				280FBA44169BD8DD0072741B /* AFPhotoEditorContext.h */,
 				280FBA45169BD8DD0072741B /* AFPhotoEditorController.h */,
 				280FBA46169BD8DD0072741B /* AFPhotoEditorControllerOptions.h */,
+				288960AE1719AB4300819399 /* AFPhotoEditorCustomization.h */,
+				288960AF1719AB5100819399 /* AFPhotoEditorSession.h */,
 				280FBA47169BD8DD0072741B /* AFPhotoEditorSession.h */,
 				280FBA48169BD8DD0072741B /* AFPhotoEditorStyle.h */,
 			);
