@@ -11,6 +11,11 @@
 #import "GifView.h"
 #import "SHKActivityIndicator.h"
 #import "BabyHelper.h"
+#define ScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define ScreenWidth [[UIScreen mainScreen] bounds].size.width
+#define StateBarHeight 20
+#define MainHeight (ScreenHeight - StateBarHeight)
+#define MainWidth ScreenWidth
 
 @implementation ImageBrowser
 @synthesize image;
@@ -36,8 +41,8 @@
     self = [super initWithFrame:frame];
     if (self) 
     {
-        aScrollView = [[CustomScrollView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        aScrollView = [[CustomScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
         aScrollView.userInteractionEnabled = YES;
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismiss)];
@@ -64,7 +69,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:HHNetDataCacheNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self       name:@"tapClicked"              object:nil];
     [UIApplication sharedApplication].statusBarHidden = NO;
-    aScrollView.contentSize = CGSizeMake(320, 480);
+    aScrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight);
     [self removeFromSuperview];
 }
 
@@ -82,20 +87,20 @@
 
 -(void)zoomToFit
 {
-    CGFloat zoom = 320.0/imageView.image.size.width;
-    CGSize size = CGSizeMake(320.0, imageView.image.size.height * zoom);
+    CGFloat zoom = ScreenWidth/imageView.image.size.width;
+    CGSize size = CGSizeMake(ScreenWidth, imageView.image.size.height * zoom);
     
     CGRect frame = imageView.frame;
     frame.size = size;
     frame.origin.x = 0;
-    CGFloat y = (480.0 - size.height)/2.0;
+    CGFloat y = (ScreenHeight - size.height)/2.0;
     frame.origin.y = y >= 0 ? y:0;
     imageView.frame = frame;
-    if (self.imageView.frame.size.height > 480) {
-        aScrollView.contentSize = CGSizeMake(320, self.imageView.frame.size.height);
+    if (self.imageView.frame.size.height > ScreenHeight) {
+        aScrollView.contentSize = CGSizeMake(ScreenWidth, self.imageView.frame.size.height);
     }
     else {
-        aScrollView.contentSize = CGSizeMake(320, 480);
+        aScrollView.contentSize = CGSizeMake(ScreenWidth, 480);
     }
 }
 

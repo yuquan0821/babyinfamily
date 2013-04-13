@@ -29,70 +29,12 @@
 @synthesize platform;
 @synthesize APPVision;
 
-#pragma mark - Tool Methods
-- (void)addPhoto
-{
-    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
-    imagePickerController.navigationBar.tintColor = [UIColor colorWithRed:72.0/255.0 green:106.0/255.0 blue:154.0/255.0 alpha:1.0];
-	imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	imagePickerController.delegate = self;
-	imagePickerController.allowsEditing = NO;
-	[self presentModalViewController:imagePickerController animated:NO];
-	[imagePickerController release];
-}
-
-- (void)takePhoto
-{
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"该设备不支持拍照功能"
-                                                       delegate:nil
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"好", nil];
-        [alert show];
-        [alert release];
-    }
-    else
-    {
-        UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePickerController.delegate = self;
-        imagePickerController.allowsEditing = NO;
-        [self presentModalViewController:imagePickerController animated:NO];
-        [imagePickerController release];
-    }
-}
-
--(IBAction)addImageAlert
-{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"插入图片" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"系统相册",@"拍摄", nil];
-    [alert show];
-    [alert release];
-}
-
-- (void)send:(id)sender
-{
-    
-    NSString *content = theTextView.text;
-    
-        UIImage *image = theImageView.image;
-        if (content != nil && [content length] != 0)
-        {
-            if (!_shouldPostImage) {
-                [manager postWithText:content];
-            }
-            else {
-                [manager postWithText:content image:image];
-            }
-        }
-}
 
 #pragma mark - Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:@"FeedBackViewController" bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         _shouldPostImage = NO;
@@ -177,6 +119,65 @@
     [self setCountLabel:nil];
     [self setPhotoButton:nil];
     [super viewDidUnload];
+}
+
+#pragma mark - Tool Methods
+- (void)addPhoto
+{
+    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
+    imagePickerController.navigationBar.tintColor = [UIColor colorWithRed:72.0/255.0 green:106.0/255.0 blue:154.0/255.0 alpha:1.0];
+	imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+	imagePickerController.delegate = self;
+	imagePickerController.allowsEditing = NO;
+	[self presentModalViewController:imagePickerController animated:NO];
+	[imagePickerController release];
+}
+
+- (void)takePhoto
+{
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"该设备不支持拍照功能"
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"好", nil];
+        [alert show];
+        [alert release];
+    }
+    else
+    {
+        UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = NO;
+        [self presentModalViewController:imagePickerController animated:NO];
+        [imagePickerController release];
+    }
+}
+
+-(IBAction)addImageAlert
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"插入图片" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"系统相册",@"拍摄", nil];
+    [alert show];
+    [alert release];
+}
+
+- (void)send:(id)sender
+{
+    
+    NSString *content = theTextView.text;
+    
+    UIImage *image = theImageView.image;
+    if (content != nil && [content length] != 0)
+    {
+        if (!_shouldPostImage) {
+            [manager postWithText:content];
+        }
+        else {
+            [manager postWithText:content image:image];
+        }
+    }
 }
 
 

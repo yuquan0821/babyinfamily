@@ -11,6 +11,7 @@
 @synthesize linesDetectedBlock;
 @synthesize edgeThreshold;
 @synthesize lineDetectionThreshold;
+@synthesize intermediateImages = _intermediateImages;
 
 - (id)init;
 {
@@ -190,8 +191,10 @@
     }
 }
 
-#pragma mark -
-#pragma mark Accessors
+- (BOOL)wantsMonochromeInput;
+{
+    return YES;
+}
 
 #pragma mark -
 #pragma mark Accessors

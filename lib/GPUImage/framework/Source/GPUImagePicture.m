@@ -5,6 +5,30 @@
 #pragma mark -
 #pragma mark Initialization and teardown
 
+- (id)initWithURL:(NSURL *)url;
+{
+    NSData *imageData = [[NSData alloc] initWithContentsOfURL:url];
+    
+    if (!(self = [self initWithData:imageData]))
+    {
+        return nil;
+    }
+
+    return self;
+}
+
+- (id)initWithData:(NSData *)imageData;
+{
+    UIImage *inputImage = [[UIImage alloc] initWithData:imageData];
+    
+    if (!(self = [self initWithImage:inputImage]))
+    {
+		return nil;
+    }
+    
+    return self;
+}
+
 - (id)initWithImage:(UIImage *)newImageSource;
 {
     if (!(self = [self initWithImage:newImageSource smoothlyScaleOutput:NO]))
@@ -45,7 +69,7 @@
     CGFloat heightOfImage = CGImageGetHeight(newImageSource);
     pixelSizeOfImage = CGSizeMake(widthOfImage, heightOfImage);
     CGSize pixelSizeToUseForTexture = pixelSizeOfImage;
-
+    
     BOOL shouldRedrawUsingCoreGraphics = YES;
     
     // For now, deal with images larger than the maximum texture size by resizing to be within that limit
@@ -67,12 +91,12 @@
         
         shouldRedrawUsingCoreGraphics = YES;
     }
-
+    
     GLubyte *imageData = NULL;
     CFDataRef dataFromImageDataProvider;
-
-//    CFAbsoluteTime elapsedTime, startTime = CFAbsoluteTimeGetCurrent();
-
+    
+    //    CFAbsoluteTime elapsedTime, startTime = CFAbsoluteTimeGetCurrent();
+    
     if (shouldRedrawUsingCoreGraphics)
     {
         // For resized image, redraw
@@ -81,7 +105,7 @@
         CGColorSpaceRef genericRGBColorspace = CGColorSpaceCreateDeviceRGB();
         
         CGContextRef imageContext = CGBitmapContextCreate(imageData, (size_t)pixelSizeToUseForTexture.width, (size_t)pixelSizeToUseForTexture.height, 8, (size_t)pixelSizeToUseForTexture.width * 4, genericRGBColorspace,  kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
-//        CGContextSetBlendMode(imageContext, kCGBlendModeCopy); // From Technical Q&A QA1708: http://developer.apple.com/library/ios/#qa/qa1708/_index.html
+        //        CGContextSetBlendMode(imageContext, kCGBlendModeCopy); // From Technical Q&A QA1708: http://developer.apple.com/library/ios/#qa/qa1708/_index.html
         CGContextDrawImage(imageContext, CGRectMake(0.0, 0.0, pixelSizeToUseForTexture.width, pixelSizeToUseForTexture.height), newImageSource);
         CGContextRelease(imageContext);
         CGColorSpaceRelease(genericRGBColorspace);
@@ -91,29 +115,29 @@
         // Access the raw image bytes directly
         dataFromImageDataProvider = CGDataProviderCopyData(CGImageGetDataProvider(newImageSource));
         imageData = (GLubyte *)CFDataGetBytePtr(dataFromImageDataProvider);
-    }    
+    }
     
-//    elapsedTime = (CFAbsoluteTimeGetCurrent() - startTime) * 1000.0;
-//    NSLog(@"Core Graphics drawing time: %f", elapsedTime);
-
-//    CGFloat currentRedTotal = 0.0f, currentGreenTotal = 0.0f, currentBlueTotal = 0.0f, currentAlphaTotal = 0.0f;
-//	NSUInteger totalNumberOfPixels = round(pixelSizeToUseForTexture.width * pixelSizeToUseForTexture.height);
-//    
-//    for (NSUInteger currentPixel = 0; currentPixel < totalNumberOfPixels; currentPixel++)
-//    {
-//        currentBlueTotal += (CGFloat)imageData[(currentPixel * 4)] / 255.0f;
-//        currentGreenTotal += (CGFloat)imageData[(currentPixel * 4) + 1] / 255.0f;
-//        currentRedTotal += (CGFloat)imageData[(currentPixel * 4 + 2)] / 255.0f;
-//        currentAlphaTotal += (CGFloat)imageData[(currentPixel * 4) + 3] / 255.0f;
-//    }
-//    
-//    NSLog(@"Debug, average input image red: %f, green: %f, blue: %f, alpha: %f", currentRedTotal / (CGFloat)totalNumberOfPixels, currentGreenTotal / (CGFloat)totalNumberOfPixels, currentBlueTotal / (CGFloat)totalNumberOfPixels, currentAlphaTotal / (CGFloat)totalNumberOfPixels);
+    //    elapsedTime = (CFAbsoluteTimeGetCurrent() - startTime) * 1000.0;
+    //    NSLog(@"Core Graphics drawing time: %f", elapsedTime);
+    
+    //    CGFloat currentRedTotal = 0.0f, currentGreenTotal = 0.0f, currentBlueTotal = 0.0f, currentAlphaTotal = 0.0f;
+    //	NSUInteger totalNumberOfPixels = round(pixelSizeToUseForTexture.width * pixelSizeToUseForTexture.height);
+    //
+    //    for (NSUInteger currentPixel = 0; currentPixel < totalNumberOfPixels; currentPixel++)
+    //    {
+    //        currentBlueTotal += (CGFloat)imageData[(currentPixel * 4)] / 255.0f;
+    //        currentGreenTotal += (CGFloat)imageData[(currentPixel * 4) + 1] / 255.0f;
+    //        currentRedTotal += (CGFloat)imageData[(currentPixel * 4 + 2)] / 255.0f;
+    //        currentAlphaTotal += (CGFloat)imageData[(currentPixel * 4) + 3] / 255.0f;
+    //    }
+    //
+    //    NSLog(@"Debug, average input image red: %f, green: %f, blue: %f, alpha: %f", currentRedTotal / (CGFloat)totalNumberOfPixels, currentGreenTotal / (CGFloat)totalNumberOfPixels, currentBlueTotal / (CGFloat)totalNumberOfPixels, currentAlphaTotal / (CGFloat)totalNumberOfPixels);
     
     runSynchronouslyOnVideoProcessingQueue(^{
         [GPUImageOpenGLESContext useImageProcessingContext];
         
         [self initializeOutputTextureIfNeeded];
-
+        
         glBindTexture(GL_TEXTURE_2D, outputTexture);
         if (self.shouldSmoothlyScaleOutput)
         {
@@ -124,9 +148,9 @@
         if (self.shouldSmoothlyScaleOutput)
         {
             glGenerateMipmap(GL_TEXTURE_2D);
-        }        
+        }
     });
-
+    
     if (shouldRedrawUsingCoreGraphics)
     {
         free(imageData);
@@ -139,6 +163,8 @@
     return self;
 }
 
+// ARC forbids explicit message send of 'release'; since iOS 6 even for dispatch_release() calls: stripping it out in that case is required.
+#if ( (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0) || (!defined(__IPHONE_6_0)) )
 - (void)dealloc;
 {
     if (imageUpdateSemaphore != NULL)
@@ -146,6 +172,7 @@
         dispatch_release(imageUpdateSemaphore);
     }
 }
+#endif
 
 #pragma mark -
 #pragma mark Image rendering
@@ -159,15 +186,15 @@
 - (void)processImage;
 {
     hasProcessedImage = YES;
-  
-//    dispatch_semaphore_wait(imageUpdateSemaphore, DISPATCH_TIME_FOREVER);
-
+    
+    //    dispatch_semaphore_wait(imageUpdateSemaphore, DISPATCH_TIME_FOREVER);
+    
     if (dispatch_semaphore_wait(imageUpdateSemaphore, DISPATCH_TIME_NOW) != 0)
     {
         return;
     }
-
-    dispatch_async([GPUImageOpenGLESContext sharedOpenGLESQueue], ^{
+    
+    runAsynchronouslyOnVideoProcessingQueue(^{
         
         if (MAX(pixelSizeOfImage.width, pixelSizeOfImage.height) > 1000.0)
         {
@@ -195,7 +222,7 @@
 - (void)addTarget:(id<GPUImageInput>)newTarget atTextureLocation:(NSInteger)textureLocation;
 {
     [super addTarget:newTarget atTextureLocation:textureLocation];
-
+    
     if (hasProcessedImage)
     {
         [newTarget setInputSize:pixelSizeOfImage atIndex:textureLocation];

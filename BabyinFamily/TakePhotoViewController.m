@@ -34,8 +34,6 @@
     self = [super initWithNibName:@"TakePhotoViewController" bundle:nil];
     
     if (self) {
-        self.wantsFullScreenLayout = YES;
-        [self.navigationController setNavigationBarHidden:YES animated:NO];
         self.outputJPEGQuality = 1.0;
         self.title = @"拍照";
         NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
@@ -48,9 +46,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CGRect mainScreenFrame = CGRectMake(0,0,320,480);
-    [[UIScreen mainScreen] bounds];
-	[[GPUImageView alloc] initWithFrame:mainScreenFrame];
+   // CGRect mainScreenFrame = [[UIScreen mainScreen] bounds];
+	//[[GPUImageView alloc] initWithFrame:mainScreenFrame];
     self.wantsFullScreenLayout = YES;
     //set background color
     self.view.backgroundColor = [UIColor colorWithPatternImage:
@@ -85,8 +82,10 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+   // [stillCamera stopCameraCapture];
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+
 }
 
 -(void) setUpCamera {
@@ -270,7 +269,7 @@
             blurFilter = [[GPUImageGaussianSelectiveBlurFilter alloc] init];
             [(GPUImageGaussianSelectiveBlurFilter*)blurFilter setExcludeCircleRadius:80.0/320.0];
             [(GPUImageGaussianSelectiveBlurFilter*)blurFilter setExcludeCirclePoint:CGPointMake(0.5f, 0.5f)];
-            [(GPUImageGaussianSelectiveBlurFilter*)blurFilter setBlurSize:5.0f];
+            [(GPUImageGaussianSelectiveBlurFilter*)blurFilter setBlurSize:2.0f];
             [(GPUImageGaussianSelectiveBlurFilter*)blurFilter setAspectRatio:1.0f];
         }
         hasBlur = YES;
@@ -281,10 +280,6 @@
     
     [self prepareFilter];
     [self.blurToggleButton setEnabled:YES];
-    
-    if (isStatic) {
-        [staticPicture processImage];
-    }
 }
 
 -(IBAction) switchCamera {
@@ -382,7 +377,7 @@
     
     if([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]
        && stillCamera
-       && [stillCamera.inputCamera hasFlash]) {
+       && [stillCamera.inputCamera hasTorch]) {
         [self.flashToggleButton setEnabled:YES];
     }
     
@@ -428,7 +423,7 @@
         
         if([sender state] == UIGestureRecognizerStateEnded){
             //NSLog(@"Done tap");
-            [gpu setBlurSize:5.0f];
+            [gpu setBlurSize:2.0f];
             [self showBlurOverlay:NO];
             if (isStatic) {
                 [staticPicture processImage];
@@ -464,7 +459,7 @@
         }
         
         if ([sender state] == UIGestureRecognizerStateEnded) {
-            [gpu setBlurSize:5.0f];
+            [gpu setBlurSize:2.0f];
             [self showBlurOverlay:NO];
             if (isStatic) {
                 [staticPicture processImage];
@@ -561,7 +556,7 @@
 {
     AFPhotoEditorController *editorController = [[AFPhotoEditorController alloc] initWithImage:imageToEdit];
     [editorController setDelegate:self];
-    [self presentViewController:editorController animated:YES completion:nil];
+    [self presentViewController:editorController animated:NO completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

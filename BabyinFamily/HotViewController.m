@@ -90,7 +90,7 @@
 
 -(void)getHotImagesUrl
 {
-    self.imageUrls = [NSMutableArray arrayWithCapacity:20];
+    self.imageUrls = [NSMutableArray arrayWithCapacity:0];
     NSString *url;
     //开始加载图片
     for(int i=0;i<20;i++)
@@ -128,6 +128,7 @@
 - (NSInteger)numberOfColumnsInFlowView:(WaterflowView *)flowView
 {
     return NUMBER_OF_COLUMNS;
+    
 }
 
 - (NSInteger)flowView:(WaterflowView *)flowView numberOfRowsInColumn:(NSInteger)column

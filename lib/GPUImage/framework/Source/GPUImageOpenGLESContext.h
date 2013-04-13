@@ -16,12 +16,15 @@ typedef enum { kGPUImageNoRotation, kGPUImageRotateLeft, kGPUImageRotateRight, k
 @property(readonly, nonatomic) dispatch_queue_t contextQueue;
 @property(readwrite, retain, nonatomic) GLProgram *currentShaderProgram;
 
++ (void *)contextKey;
 + (GPUImageOpenGLESContext *)sharedImageProcessingOpenGLESContext;
 + (dispatch_queue_t)sharedOpenGLESQueue;
 + (void)useImageProcessingContext;
 + (void)setActiveShaderProgram:(GLProgram *)shaderProgram;
 + (GLint)maximumTextureSizeForThisDevice;
 + (GLint)maximumTextureUnitsForThisDevice;
++ (BOOL)deviceSupportsOpenGLESExtension:(NSString *)extension;
++ (BOOL)deviceSupportsRedTextures;
 + (CGSize)sizeThatFitsWithinATextureForSize:(CGSize)inputSize;
 
 - (void)presentBufferForDisplay;
@@ -48,6 +51,8 @@ typedef enum { kGPUImageNoRotation, kGPUImageRotateLeft, kGPUImageRotateRight, k
 - (BOOL)shouldIgnoreUpdatesToThisTarget;
 - (BOOL)enabled;
 - (void)conserveMemoryForNextFrame;
+- (BOOL)wantsMonochromeInput;
+- (void)setCurrentlyReceivingMonochromeInput:(BOOL)newValue;
 @end
 
 @protocol GPUImageTextureDelegate <NSObject>

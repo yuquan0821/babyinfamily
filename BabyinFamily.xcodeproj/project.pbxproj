@@ -32,6 +32,8 @@
 		2854E27F16D45FE1008B6E4B /* UserCoreDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E27C16D45FE1008B6E4B /* UserCoreDataItem.m */; };
 		2854E28216D462DD008B6E4B /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E28116D462DD008B6E4B /* CoreDataManager.m */; };
 		2854E28516D46F2A008B6E4B /* ImageCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2854E28316D46F2A008B6E4B /* ImageCache.xcdatamodeld */; };
+		286883C21718409A00A92BE7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286883C11718409A00A92BE7 /* AdSupport.framework */; };
+		286883C4171840F000A92BE7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286883C3171840F000A92BE7 /* MessageUI.framework */; };
 		2871907F16F7011B00A3527B /* AddComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2871907E16F7011B00A3527B /* AddComment.xib */; };
 		2884955516631CD30042C4CD /* FollowerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884955316631CD30042C4CD /* FollowerVC.m */; };
 		2884955616631CD30042C4CD /* FollowerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2884955416631CD30042C4CD /* FollowerVC.xib */; };
@@ -204,6 +206,8 @@
 		2854E28016D462DD008B6E4B /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = BabyTools/CoreDataManager.h; sourceTree = "<group>"; };
 		2854E28116D462DD008B6E4B /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = BabyTools/CoreDataManager.m; sourceTree = "<group>"; };
 		2854E28416D46F2A008B6E4B /* ImageCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImageCache.xcdatamodel; sourceTree = "<group>"; };
+		286883C11718409A00A92BE7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		286883C3171840F000A92BE7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2871907E16F7011B00A3527B /* AddComment.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddComment.xib; path = OtherVCs/AddComment.xib; sourceTree = "<group>"; };
 		2884955216631CD30042C4CD /* FollowerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FollowerVC.h; path = OtherVCs/FollowerVC.h; sourceTree = "<group>"; };
 		2884955316631CD30042C4CD /* FollowerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FollowerVC.m; path = OtherVCs/FollowerVC.m; sourceTree = "<group>"; };
@@ -396,6 +400,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				286883C4171840F000A92BE7 /* MessageUI.framework in Frameworks */,
+				286883C21718409A00A92BE7 /* AdSupport.framework in Frameworks */,
 				28368F17170FB2FE008C4CC1 /* libz.1.2.5.dylib in Frameworks */,
 				28368F15170FB2F0008C4CC1 /* libsqlite3.0.dylib in Frameworks */,
 				28368F13170FB2D3008C4CC1 /* CoreText.framework in Frameworks */,
@@ -491,17 +497,28 @@
 		2896C4021661C0E2004705A4 /* OthersVCs */ = {
 			isa = PBXGroup;
 			children = (
-				28368F1D171054F9008C4CC1 /* BlurOverlayView.h */,
-				28368F1E171054F9008C4CC1 /* BlurOverlayView.m */,
 				2896C4811661E79E004705A4 /* AboutViewController.h */,
 				2896C4821661E79E004705A4 /* AboutViewController.m */,
 				2896C4831661E79E004705A4 /* AboutViewController.xib */,
-				2896C4851661E79E004705A4 /* AddCommentVC.m */,
+				28D3387716E33FA70027B7F9 /* AddComment.h */,
+				28D3387816E33FA70027B7F9 /* AddComment.m */,
+				2871907E16F7011B00A3527B /* AddComment.xib */,
 				2896C4841661E79E004705A4 /* AddCommentVC.h */,
+				2896C4851661E79E004705A4 /* AddCommentVC.m */,
 				2896C4861661E79E004705A4 /* AddCommentVC.xib */,
+				28368F1D171054F9008C4CC1 /* BlurOverlayView.h */,
+				28368F1E171054F9008C4CC1 /* BlurOverlayView.m */,
+				2828531516E72D520062EC83 /* DetailStatusViewController.h */,
+				2828531616E72D520062EC83 /* DetailStatusViewController.m */,
+				2828531716E72D520062EC83 /* DetailStatusViewController.xib */,
+				283654A116BFACD600203578 /* FeedBackViewController.h */,
+				283654A216BFACD900203578 /* FeedBackViewController.m */,
+				283654A316BFACDB00203578 /* FeedBackViewController.xib */,
 				2884955216631CD30042C4CD /* FollowerVC.h */,
 				2884955316631CD30042C4CD /* FollowerVC.m */,
 				2884955416631CD30042C4CD /* FollowerVC.xib */,
+				28ECD28316B8C1AA00CAA0DA /* RaisedCenterButton.h */,
+				28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */,
 				28D14F5A169CF53600B39793 /* SendAndSaveViewController.h */,
 				28D14F5B169CF53600B39793 /* SendAndSaveViewController.m */,
 				28D14F5C169CF53600B39793 /* SendAndSaveViewController.xib */,
@@ -511,19 +528,8 @@
 				284C910116DC5569000F2A48 /* StatusViewControllerBase.h */,
 				284C910216DC5569000F2A48 /* StatusViewControllerBase.m */,
 				28DD3F4816DC601D005396AB /* StatusViewControllerBase.xib */,
-				28ECD28316B8C1AA00CAA0DA /* RaisedCenterButton.h */,
-				28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */,
-				283654A116BFACD600203578 /* FeedBackViewController.h */,
-				283654A216BFACD900203578 /* FeedBackViewController.m */,
-				283654A316BFACDB00203578 /* FeedBackViewController.xib */,
 				28BAE94516C0DA3D00FA0F47 /* UIDeviceHardware.h */,
 				28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */,
-				28D3387716E33FA70027B7F9 /* AddComment.h */,
-				28D3387816E33FA70027B7F9 /* AddComment.m */,
-				2871907E16F7011B00A3527B /* AddComment.xib */,
-				2828531516E72D520062EC83 /* DetailStatusViewController.h */,
-				2828531616E72D520062EC83 /* DetailStatusViewController.m */,
-				2828531716E72D520062EC83 /* DetailStatusViewController.xib */,
 			);
 			name = OthersVCs;
 			sourceTree = "<group>";
@@ -840,31 +846,33 @@
 		B44954A615A978F200FAA116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				28368F16170FB2FE008C4CC1 /* libz.1.2.5.dylib */,
-				28368F14170FB2F0008C4CC1 /* libsqlite3.0.dylib */,
-				28368F12170FB2D3008C4CC1 /* CoreText.framework */,
+				286883C3171840F000A92BE7 /* MessageUI.framework */,
+				286883C11718409A00A92BE7 /* AdSupport.framework */,
 				28368F0E170FB2C8008C4CC1 /* Accelerate.framework */,
-				280FBA4D169BDCD80072741B /* CoreImage.framework */,
-				280FBA4F169BDCF50072741B /* libz.1.1.3.dylib */,
-				280FBA51169BDD3B0072741B /* StoreKit.framework */,
 				28EA935D165F129A009F69E5 /* AssetsLibrary.framework */,
 				28EA935F165F12A0009F69E5 /* AVFoundation.framework */,
 				B40B1F681650EA5B000BC5DA /* CFNetwork.framework */,
 				28885408167EB767000ED11A /* CoreData.framework */,
 				B44954AB15A978F200FAA116 /* CoreGraphics.framework */,
+				280FBA4D169BDCD80072741B /* CoreImage.framework */,
 				28EA9361165F12D6009F69E5 /* CoreMedia.framework */,
+				28368F12170FB2D3008C4CC1 /* CoreText.framework */,
 				28EA9363165F12DE009F69E5 /* CoreVideo.framework */,
 				B44954A915A978F200FAA116 /* Foundation.framework */,
 				28EA9369165F1340009F69E5 /* GPUImage.xcodeproj */,
 				2896C4791661E5FC004705A4 /* ImageIO.framework */,
 				B4227EC0162FE718005F1700 /* lib */,
 				2896C47F1661E653004705A4 /* libicucore.dylib */,
+				28368F14170FB2F0008C4CC1 /* libsqlite3.0.dylib */,
 				2896C47D1661E63D004705A4 /* libsqlite3.dylib */,
+				280FBA4F169BDCF50072741B /* libz.1.1.3.dylib */,
+				28368F16170FB2FE008C4CC1 /* libz.1.2.5.dylib */,
 				B40B1F6E1650ECCA000BC5DA /* libz.dylib */,
 				B40B1F6C1650EB6B000BC5DA /* MobileCoreServices.framework */,
 				28EA9365165F12F5009F69E5 /* OpenGLES.framework */,
 				28EA9367165F1305009F69E5 /* QuartzCore.framework */,
 				2896C47B1661E616004705A4 /* Security.framework */,
+				280FBA51169BDD3B0072741B /* StoreKit.framework */,
 				B40B1F6A1650EAB6000BC5DA /* SystemConfiguration.framework */,
 				B44954A715A978F200FAA116 /* UIKit.framework */,
 			);
@@ -1181,6 +1189,10 @@
 		B44954BC15A978F200FAA116 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Developer: fan chun (GMTD4D4BTA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BabyinFamily/BabyinFamily-Prefix.pch";
@@ -1204,6 +1216,10 @@
 		B44954BD15A978F200FAA116 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: fan chun";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BabyinFamily/BabyinFamily-Prefix.pch";
