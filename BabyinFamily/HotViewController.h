@@ -13,15 +13,16 @@
 #import "ImageBrowser.h"
 #import "SHKActivityIndicator.h"
 #import "CoreDataManager.h"
-#import "WaterflowView.h"
+#import "WaterFlowView.h"
+#import "ImageViewCell.h"
 
-@interface HotViewController : UIViewController<WaterflowViewDelegate,WaterflowViewDatasource,UIScrollViewDelegate>
+@interface HotViewController : UIViewController<WaterFlowViewDelegate,WaterFlowViewDataSource,UIScrollViewDelegate>
 {
     int count;
     WeiBoMessageManager *manager;
     NSNotificationCenter *defaultNotifCenter;
-
-    WaterflowView *flowView;
+    
+    WaterFlowView *waterFlow;
 }
 @property (nonatomic, retain)   NSMutableArray          *statuesArr;
 

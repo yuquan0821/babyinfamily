@@ -44,6 +44,9 @@
 		288659AC167430C0000EADCC /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288659AA167430C0000EADCC /* StatusCell.xib */; };
 		288853FB167EAD67000ED11A /* BabyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 288853FA167EAD67000ED11A /* BabyHelper.m */; };
 		28885409167EB768000ED11A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28885408167EB767000ED11A /* CoreData.framework */; };
+		2889609B1719037600819399 /* ImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 288960961719037600819399 /* ImageViewCell.m */; };
+		2889609C1719037600819399 /* WaterFlowViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 288960981719037600819399 /* WaterFlowViewCell.m */; };
+		2889609D1719037600819399 /* WaterFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889609A1719037600819399 /* WaterFlowView.m */; };
 		2889B77B1696919B00D8FF16 /* UIImageView+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889B77A1696919B00D8FF16 /* UIImageView+Resize.m */; };
 		2889E7FA169ACC7800885875 /* POI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889E7F9169ACC7700885875 /* POI.m */; };
 		2896C40F1661C961004705A4 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C40A1661C961004705A4 /* NSDataAdditions.m */; };
@@ -87,10 +90,6 @@
 		2896C4921661E79E004705A4 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C4831661E79E004705A4 /* AboutViewController.xib */; };
 		2896C4931661E79E004705A4 /* AddCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C4851661E79E004705A4 /* AddCommentVC.m */; };
 		2896C4941661E79E004705A4 /* AddCommentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C4861661E79E004705A4 /* AddCommentVC.xib */; };
-		28A102FA16F4808000C326C5 /* WaterflowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A102F916F4808000C326C5 /* WaterflowView.m */; };
-		28A1030016F480F700C326C5 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A102FD16F480F700C326C5 /* AsyncImageView.m */; };
-		28A1030116F480F700C326C5 /* FullyLoaded.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A102FF16F480F700C326C5 /* FullyLoaded.m */; };
-		28A1030416F4BA7C00C326C5 /* LoadingMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A1030316F4BA7C00C326C5 /* LoadingMoreFooterView.m */; };
 		28BAE94716C0DA3E00FA0F47 /* UIDeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */; };
 		28CA6685167F0A660087F45D /* BabyAlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CA6684167F0A660087F45D /* BabyAlertWindow.m */; };
 		28CBA96716990FED00D704AC /* AsyncImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBA96616990FED00D704AC /* AsyncImageDownloader.m */; };
@@ -222,6 +221,12 @@
 		288853F9167EAD67000ED11A /* BabyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyHelper.h; path = BabyTools/BabyHelper.h; sourceTree = "<group>"; };
 		288853FA167EAD67000ED11A /* BabyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyHelper.m; path = BabyTools/BabyHelper.m; sourceTree = "<group>"; };
 		28885408167EB767000ED11A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		288960951719037600819399 /* ImageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewCell.h; sourceTree = "<group>"; };
+		288960961719037600819399 /* ImageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewCell.m; sourceTree = "<group>"; };
+		288960971719037600819399 /* WaterFlowViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterFlowViewCell.h; sourceTree = "<group>"; };
+		288960981719037600819399 /* WaterFlowViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterFlowViewCell.m; sourceTree = "<group>"; };
+		288960991719037600819399 /* WaterFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterFlowView.h; sourceTree = "<group>"; };
+		2889609A1719037600819399 /* WaterFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterFlowView.m; sourceTree = "<group>"; };
 		2889B7791696919B00D8FF16 /* UIImageView+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+Resize.h"; path = "BabyTools/UIImageView+Resize.h"; sourceTree = "<group>"; };
 		2889B77A1696919B00D8FF16 /* UIImageView+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+Resize.m"; path = "BabyTools/UIImageView+Resize.m"; sourceTree = "<group>"; };
 		2889E7F8169ACC7700885875 /* POI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POI.h; path = Models/POI.h; sourceTree = "<group>"; };
@@ -300,15 +305,6 @@
 		2896C4841661E79E004705A4 /* AddCommentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCommentVC.h; path = OtherVCs/AddCommentVC.h; sourceTree = "<group>"; };
 		2896C4851661E79E004705A4 /* AddCommentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddCommentVC.m; path = OtherVCs/AddCommentVC.m; sourceTree = "<group>"; };
 		2896C4861661E79E004705A4 /* AddCommentVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddCommentVC.xib; path = OtherVCs/AddCommentVC.xib; sourceTree = "<group>"; };
-		28A102F816F4808000C326C5 /* WaterflowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterflowView.h; sourceTree = "<group>"; };
-		28A102F916F4808000C326C5 /* WaterflowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterflowView.m; sourceTree = "<group>"; };
-		28A102FB16F480F700C326C5 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		28A102FC16F480F700C326C5 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
-		28A102FD16F480F700C326C5 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
-		28A102FE16F480F700C326C5 /* FullyLoaded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullyLoaded.h; sourceTree = "<group>"; };
-		28A102FF16F480F700C326C5 /* FullyLoaded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullyLoaded.m; sourceTree = "<group>"; };
-		28A1030216F4BA7C00C326C5 /* LoadingMoreFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingMoreFooterView.h; sourceTree = "<group>"; };
-		28A1030316F4BA7C00C326C5 /* LoadingMoreFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingMoreFooterView.m; sourceTree = "<group>"; };
 		28BAE94516C0DA3D00FA0F47 /* UIDeviceHardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIDeviceHardware.h; path = OtherVCs/UIDeviceHardware.h; sourceTree = "<group>"; };
 		28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIDeviceHardware.m; path = OtherVCs/UIDeviceHardware.m; sourceTree = "<group>"; };
 		28CA6683167F0A660087F45D /* BabyAlertWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyAlertWindow.h; path = BabyTools/BabyAlertWindow.h; sourceTree = "<group>"; };
@@ -468,15 +464,12 @@
 		28487DFF16DF3A5A00BFB194 /* WaterFllow */ = {
 			isa = PBXGroup;
 			children = (
-				28A102FB16F480F700C326C5 /* SynthesizeSingleton.h */,
-				28A1030216F4BA7C00C326C5 /* LoadingMoreFooterView.h */,
-				28A1030316F4BA7C00C326C5 /* LoadingMoreFooterView.m */,
-				28A102FC16F480F700C326C5 /* AsyncImageView.h */,
-				28A102FD16F480F700C326C5 /* AsyncImageView.m */,
-				28A102FE16F480F700C326C5 /* FullyLoaded.h */,
-				28A102FF16F480F700C326C5 /* FullyLoaded.m */,
-				28A102F816F4808000C326C5 /* WaterflowView.h */,
-				28A102F916F4808000C326C5 /* WaterflowView.m */,
+				288960951719037600819399 /* ImageViewCell.h */,
+				288960961719037600819399 /* ImageViewCell.m */,
+				288960971719037600819399 /* WaterFlowViewCell.h */,
+				288960981719037600819399 /* WaterFlowViewCell.m */,
+				288960991719037600819399 /* WaterFlowView.h */,
+				2889609A1719037600819399 /* WaterFlowView.m */,
 			);
 			name = WaterFllow;
 			sourceTree = "<group>";
@@ -1092,11 +1085,10 @@
 				28D3387616E33EAD0027B7F9 /* DAKeyboardControl.m in Sources */,
 				28D3387916E33FA80027B7F9 /* AddComment.m in Sources */,
 				2828531816E72D530062EC83 /* DetailStatusViewController.m in Sources */,
-				28A102FA16F4808000C326C5 /* WaterflowView.m in Sources */,
-				28A1030016F480F700C326C5 /* AsyncImageView.m in Sources */,
-				28A1030116F480F700C326C5 /* FullyLoaded.m in Sources */,
-				28A1030416F4BA7C00C326C5 /* LoadingMoreFooterView.m in Sources */,
 				28368F1F171054F9008C4CC1 /* BlurOverlayView.m in Sources */,
+				2889609B1719037600819399 /* ImageViewCell.m in Sources */,
+				2889609C1719037600819399 /* WaterFlowViewCell.m in Sources */,
+				2889609D1719037600819399 /* WaterFlowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

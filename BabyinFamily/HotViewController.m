@@ -8,34 +8,34 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "HotViewController.h"
-#import "AsyncImageView.h"
 
 #define NUMBER_OF_COLUMNS 3
 
 @interface HotViewController ()
-@property (nonatomic,retain) NSMutableArray *imageUrls;
 @property (nonatomic,readwrite) int currentPage;
 @end
 
 @implementation HotViewController
-@synthesize imageUrls=_imageUrls;
 @synthesize currentPage=_currentPage;
 @synthesize statuesArr;
 @synthesize imageDictionary;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
-        //init data
-        defaultNotifCenter = [NSNotificationCenter defaultCenter];
         manager = [WeiBoMessageManager getInstance];
+        defaultNotifCenter = [NSNotificationCenter defaultCenter];
+        imageDictionary = [[NSMutableDictionary alloc] initWithCapacity:100];
+        
         self.title = @"热门";
         NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_hot"];
         self.tabBarItem.image = [UIImage imageNamed:fullpath];
     }
     return self;
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -47,12 +47,17 @@
 {
     [super viewDidLoad];
     [defaultNotifCenter addObserver:self selector:@selector(didGetHomeLine:)    name:MMSinaGotHomeLine          object:nil];
-
+    [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
+    
 	// Do any additional setup after loading the view, typically from a nib.
-    flowView = [[WaterflowView alloc] initWithFrame:self.view.frame];
-    flowView.flowdatasource = self;
-    flowView.flowdelegate = self;
-    [self.view addSubview:flowView];
+    waterFlow = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, 0, 320, 460-82)];
+    waterFlow.waterFlowViewDelegate = self;
+    waterFlow.waterFlowViewDatasource = self;
+    waterFlow.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:waterFlow];
+    [waterFlow release];
+    
+    [self getImages];
     
     self.currentPage = 1;
     
@@ -60,7 +65,6 @@
 
 - (void)dealloc
 {
-    self.imageUrls = nil;
     self.statuesArr = nil;
     self.imageDictionary = nil;
     [super dealloc];
@@ -69,12 +73,14 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    [defaultNotifCenter removeObserver:self name:MMSinaGotUserStatus        object:nil];
+    [defaultNotifCenter removeObserver:self name:HHNetDataCacheNotification object:nil];
     // Release any retained subviews of the main view.
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [flowView reloadData];  //safer to do it here, in case it may delay viewDidLoad
+    [waterFlow reloadData];  //safer to do it here, in case it may delay viewDidLoad
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -88,21 +94,20 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
--(void)getHotImagesUrl
+//异步加载图片
+-(void)getImages
 {
-    self.imageUrls = [NSMutableArray arrayWithCapacity:0];
-    NSString *url;
-    //开始加载图片
-    for(int i=0;i<20;i++)
+    
+    //得到文字数据后，开始加载图片
+    for(int i=0;i<[statuesArr count];i++)
     {
-        Status * status=[statuesArr objectAtIndex:i];
+        Status * member=[statuesArr objectAtIndex:i];
         NSNumber *indexNumber = [NSNumber numberWithInt:i];
         
         //下载博文图片
-        if (status.thumbnailPic && [status.thumbnailPic length] != 0)
+        if (member.thumbnailPic && [member.thumbnailPic length] != 0)
         {
-            url = status.thumbnailPic;
-            [self.imageUrls addObject:url];
+            [[HHNetDataCacheManager getInstance] getDataWithURL:member.thumbnailPic withIndex:i];
         }
         else
         {
@@ -110,163 +115,114 @@
         }
         
     }
-    
 }
 
+//得到图片
+-(void)getAvatar:(NSNotification*)sender
+{
+    NSDictionary * dic = sender.object;
+    NSString * url          = [dic objectForKey:HHNetDataCacheURLKey];
+    NSNumber *indexNumber   = [dic objectForKey:HHNetDataCacheIndex];
+    NSInteger index = [indexNumber intValue];
+    
+    
+    //当下载大图过程中，后退，又返回，如果此时收到大图的返回数据，会引起crash，在此做预防。
+    if (indexNumber == nil) {
+        NSLog(@"indexNumber = nil");
+        return;
+    }
+    
+    if (index >= [statuesArr count]) {
+        //        NSLog(@"statues arr error ,index = %d,count = %d",index,[statuesArr count]);
+        return;
+    }
+    
+    Status *sts = [statuesArr objectAtIndex:index];
+    
+    //得到的是博文图片
+    if([url isEqualToString:sts.thumbnailPic])
+    {
+        [imageDictionary setObject:[dic objectForKey:HHNetDataCacheData] forKey:indexNumber];
+    }
+    
+    NSLog(@"sts is %@",sts);
+    
+    //reload table
+    [waterFlow reloadData];
+    
+}
 -(void)didGetHomeLine:(NSNotification*)sender
 {
     self.statuesArr = sender.object;
     [[SHKActivityIndicator currentIndicator] hide];
-    [self getHotImagesUrl];
-    [flowView reloadData];
-
+    [imageDictionary removeAllObjects];
+    
+    [self getImages];
+    [waterFlow reloadData];
+    
 }
 
-#pragma mark-
-#pragma mark- WaterflowDataSource
-
-- (NSInteger)numberOfColumnsInFlowView:(WaterflowView *)flowView
-{
+#pragma mark WaterFlowViewDataSource
+- (NSInteger)numberOfColumsInWaterFlowView:(WaterFlowView *)waterFlowView{
+    
     return NUMBER_OF_COLUMNS;
-    
 }
 
-- (NSInteger)flowView:(WaterflowView *)flowView numberOfRowsInColumn:(NSInteger)column
-{
-    return 6;
+- (NSInteger)numberOfAllWaterFlowView:(WaterFlowView *)waterFlowView{
+    
+    return [statuesArr count];
 }
 
-- (WaterFlowCell *)flowView:(WaterflowView *)flowView_ cellForRowAtIndex:(NSInteger)index
-{
-    static NSString *CellIdentifier = @"Cell";
-	WaterFlowCell *cell = [flowView_ dequeueReusableCellWithIdentifier:CellIdentifier];
-	
-	if(cell == nil)
-	{
-		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
-		
-		AsyncImageView *imageView = [[AsyncImageView alloc] initWithFrame:CGRectZero];
-		[cell addSubview:imageView];
-        imageView.contentMode = UIViewContentModeScaleToFill;
-		imageView.layer.borderColor = [[UIColor blackColor] CGColor];
-		imageView.layer.borderWidth = 1;
-		[imageView release];
-		imageView.tag = 1001;
-	}
+- (UIView *)waterFlowView:(WaterFlowView *)waterFlowView cellForRowAtIndexPath:(IndexPath *)indexPath{
     
-    float height = [self flowView:nil heightForCellAtIndex:index];
+    ImageViewCell *view = [[ImageViewCell alloc] initWithIdentifier:nil];
     
-    AsyncImageView *imageView  = (AsyncImageView *)[cell viewWithTag:1001];
-	imageView.frame = CGRectMake(0, 0, self.view.frame.size.width / NUMBER_OF_COLUMNS, height);
-    
-    [imageView loadImage:[self.imageUrls objectAtIndex:index ]];
-	
-	return cell;
-    
+    return view;
 }
 
-- (WaterFlowCell*)flowView:(WaterflowView *)flowView_ cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-	WaterFlowCell *cell = [flowView_ dequeueReusableCellWithIdentifier:CellIdentifier];
-	
-	if(cell == nil)
-	{
-		cell  = [[[WaterFlowCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
-		
-		AsyncImageView *imageView = [[AsyncImageView alloc] initWithFrame:CGRectZero];
-		[cell addSubview:imageView];
-        imageView.contentMode = UIViewContentModeScaleToFill;
-		imageView.layer.borderColor = [[UIColor blackColor] CGColor];
-		imageView.layer.borderWidth = 1;
-		[imageView release];
-		imageView.tag = 1001;
-	}
-	
-	float height = [self flowView:nil heightForRowAtIndexPath:indexPath];
-	
-	AsyncImageView *imageView  = (AsyncImageView *)[cell viewWithTag:1001];
-	imageView.frame = CGRectMake(0, 0, self.view.frame.size.width / 3, height);
-    [imageView loadImage:[self.imageUrls objectAtIndex:(indexPath.row + indexPath.section)]];
-	
-	return cell;
+
+-(void)waterFlowView:(WaterFlowView *)waterFlowView  relayoutCellSubview:(UIView *)view withIndexPath:(IndexPath *)indexPath{
     
-}
-
-#pragma mark-
-#pragma mark- WaterflowDelegate
-
-- (CGFloat)flowView:(WaterflowView *)flowView heightForCellAtIndex:(NSInteger)index
-{
-    float height = 0;
-	switch (index  % 5) {
-		case 0:
-			height = 127;
-			break;
-		case 1:
-			height = 100;
-			break;
-		case 2:
-			height = 87;
-			break;
-		case 3:
-			height = 114;
-			break;
-		case 4:
-			height = 140;
-			break;
-		case 5:
-			height = 158;
-			break;
-		default:
-			break;
-	}
-	
-	return height;
-}
-
--(CGFloat)flowView:(WaterflowView *)flowView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+    //arrIndex是某个数据在总数组中的索引
+    int arrIndex = indexPath.row * waterFlowView.columnCount + indexPath.column;
     
-	float height = 0;
-	switch ((indexPath.row + indexPath.section )  % 5) {
-		case 0:
-			height = 127;
-			break;
-		case 1:
-			height = 100;
-			break;
-		case 2:
-			height = 87;
-			break;
-		case 3:
-			height = 114;
-			break;
-		case 4:
-			height = 140;
-			break;
-		case 5:
-			height = 158;
-			break;
-		default:
-			break;
-	}
-	
-	height += indexPath.row + indexPath.section;
-	
-	return height;
     
+    // NSDictionary *object = [statuesArr objectAtIndex:arrIndex];
+    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:arrIndex]];
+    
+    ImageViewCell *imageViewCell = (ImageViewCell *)view;
+    imageViewCell.indexPath = indexPath;
+    imageViewCell.columnCount = waterFlowView.columnCount;
+    [imageViewCell relayoutViews];
+    [(ImageViewCell *)view setImageWithData:imageData];
 }
 
-- (void)flowView:(WaterflowView *)flowView didSelectAtCell:(WaterFlowCell *)cell ForIndex:(int)index
-{
+
+#pragma mark WaterFlowViewDelegate
+- (CGFloat)waterFlowView:(WaterFlowView *)waterFlowView heightForRowAtIndexPath:(IndexPath *)indexPath{
     
+    int arrIndex = indexPath.row * waterFlowView.columnCount + indexPath.column;
+    NSDictionary *dict = [statuesArr objectAtIndex:arrIndex];
+    
+    float width = 0.0f;
+    float height = 0.0f;
+    if (dict) {
+        
+        width = 80;//[[dict objectForKey:@"width"] floatValue];
+        height = 80;//[[dict objectForKey:@"height"] floatValue];
+    }
+    
+    return waterFlowView.cellWidth * (height/width);
 }
 
-- (void)flowView:(WaterflowView *)_flowView willLoadData:(int)page
-{
-    [flowView reloadData];
+- (void)waterFlowView:(WaterFlowView *)waterFlowView didSelectRowAtIndexPath:(IndexPath *)indexPath{
+    
+    NSLog(@"indexpath row == %d,column == %d",indexPath.row,indexPath.column);
 }
+
+
+
+
 
 @end
 
