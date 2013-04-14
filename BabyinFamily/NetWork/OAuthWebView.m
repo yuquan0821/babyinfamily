@@ -147,13 +147,11 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
-//    [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [[SHKActivityIndicator currentIndicator] hide];
-//    [[ZJTStatusBarAlertWindow getInstance] hide];
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     NSLog(@"webview error=%@",error);

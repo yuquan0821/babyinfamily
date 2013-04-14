@@ -11,22 +11,13 @@
 #import "WeiBoMessageManager.h"
 #import "User.h"
 #import "AboutViewController.h"
+#import "CoreDataManager.h"
+
 
 enum{
     kStatusSection = 0,
     kAccountSection,
     kSectionsCount,
-};
-
-//rows
-
-//status
-enum{
-    kHotStatus = 0,
-    kHotRetwitted,
-    kHotTrends,
-    kMetionsStatuses,
-    kStatusRowsCount,
 };
 
 //kAccountSection
@@ -152,13 +143,18 @@ enum {
 
 -(void)logout
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:USER_STORE_USER_ID];
+    [defaults removeObjectForKey:USER_STORE_USER_NAME];
+    [defaults removeObjectForKey:USER_STORE_ACCESS_TOKEN];
+    WeiBoMessageManager *manager = [WeiBoMessageManager getInstance];
+    manager.httpManager.userId =nil;
+    manager.httpManager.authToken = nil;
+    
     OAuthWebView *webV = [[OAuthWebView alloc]initWithNibName:@"OAuthWebView" bundle:nil];
     webV.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webV animated:YES];
     [webV release];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:USER_STORE_USER_ID];
-    [defaults removeObjectForKey:USER_STORE_USER_NAME];
 }
 
 -(void)didGetUserInfo:(NSNotification*)sender
@@ -212,8 +208,20 @@ enum {
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1) {
-        [self logout];
+    if (alertView.tag == 0) {
+        if (buttonIndex == 1) {
+            [self logout];
+        }
     }
+    
+    else if (alertView.tag == 1)
+    {
+        if (buttonIndex == 1) {
+            [[CoreDataManager getInstance]cleanEntityRecords:@"Images"];
+            [[CoreDataManager getInstance]cleanEntityRecords:@"UserCoreDataItem"];
+            [[CoreDataManager getInstance]cleanEntityRecords:@"StatusCoreDataItem"];
+        }
+    }
+
 }
 @end

@@ -172,8 +172,6 @@
 		280FBA44169BD8DD0072741B /* AFPhotoEditorContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorContext.h; path = AviarySDK/Headers/AFPhotoEditorContext.h; sourceTree = "<group>"; };
 		280FBA45169BD8DD0072741B /* AFPhotoEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorController.h; path = AviarySDK/Headers/AFPhotoEditorController.h; sourceTree = "<group>"; };
 		280FBA46169BD8DD0072741B /* AFPhotoEditorControllerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorControllerOptions.h; path = AviarySDK/Headers/AFPhotoEditorControllerOptions.h; sourceTree = "<group>"; };
-		280FBA47169BD8DD0072741B /* AFPhotoEditorSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorSession.h; path = AviarySDK/Headers/AFPhotoEditorSession.h; sourceTree = "<group>"; };
-		280FBA48169BD8DD0072741B /* AFPhotoEditorStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorStyle.h; path = AviarySDK/Headers/AFPhotoEditorStyle.h; sourceTree = "<group>"; };
 		280FBA49169BD90E0072741B /* AviarySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AviarySDKResources.bundle; path = AviarySDK/Resources/AviarySDKResources.bundle; sourceTree = "<group>"; };
 		280FBA4B169BD91F0072741B /* libAviarySDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAviarySDK.a; path = AviarySDK/libAviarySDK.a; sourceTree = "<group>"; };
 		280FBA4D169BDCD80072741B /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -453,8 +451,6 @@
 				280FBA46169BD8DD0072741B /* AFPhotoEditorControllerOptions.h */,
 				288960AE1719AB4300819399 /* AFPhotoEditorCustomization.h */,
 				288960AF1719AB5100819399 /* AFPhotoEditorSession.h */,
-				280FBA47169BD8DD0072741B /* AFPhotoEditorSession.h */,
-				280FBA48169BD8DD0072741B /* AFPhotoEditorStyle.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
