@@ -523,9 +523,9 @@
     Status *status = [self.statuesArr objectAtIndex:path.row];
     self.clickedStatus = status;
     UIActionSheet *sheet;
-    NSInteger userId = [[NSUserDefaults standardUserDefaults] integerForKey:USER_STORE_USER_ID];
+    NSString *userId = [[NSUserDefaults standardUserDefaults] stringForKey:USER_STORE_USER_ID];
     
-    if (status.user.userId == userId) {
+    if (status.user.userId == userId.longLongValue) {
         sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存", nil];
     }else{
         sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存",nil];
@@ -570,8 +570,8 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"%d",buttonIndex);
-        NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID];
-    if (clickedStatus.user.userId == userId) {
+        NSString *userId = [[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID];
+    if (clickedStatus.user.userId == userId.longLongValue) {
         //0：删除 1：保存 2：取消
         switch (buttonIndex) {
             case 0:
