@@ -54,7 +54,6 @@ enum {
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        //self.title = @"我的";
         NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_profile"];
         self.tabBarItem.image = [UIImage imageNamed:fullpath];
     }
@@ -93,8 +92,8 @@ enum {
         self.navigationItem.leftBarButtonItem = SettingBtn;
         [SettingBtn release];
     }
-    NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:USER_STORE_USER_ID];
-    if (user.userId == userId ) {
+    userID = [[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID];
+    if (user.userId == userID.longLongValue ) {
         followButton.hidden = YES;
     }
       

@@ -78,6 +78,8 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }
+    [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewControllerWithAnimate:) withObject:[NSNumber numberWithBool:NO]];
+
 }
 
 #pragma mark - View lifecycle

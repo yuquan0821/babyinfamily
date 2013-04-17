@@ -51,7 +51,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [defaultNotifCenter addObserver:self selector:@selector(didGetHomeLine:)    name:MMSinaGotHomeLine          object:nil];
+    [defaultNotifCenter addObserver:self selector:@selector(didGetHotLine:)    name:MMSinaGotUserStatus          object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     
 	// Do any additional setup after loading the view, typically from a nib.
@@ -90,7 +90,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+    [manager getUserStatusUserID:@"1659171315" sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
     [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
 }
 
@@ -156,7 +156,7 @@
     [waterFlow reloadData];
     
 }
--(void)didGetHomeLine:(NSNotification*)sender
+-(void)didGetHotLine:(NSNotification*)sender
 {
     self.statuesArr = sender.object;
     [[SHKActivityIndicator currentIndicator] hide];

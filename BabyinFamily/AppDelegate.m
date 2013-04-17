@@ -15,11 +15,17 @@
 #import "RaisedCenterButton.h"
 
 @implementation AppDelegate
+@synthesize window;
+@synthesize tabBarController;
+@synthesize oauthWebView;
+//@synthesize manager;
 
 - (void)dealloc
 {
-    [_window release];
-    [_tabBarController release];
+    [window release];
+    [tabBarController release];
+    [oauthWebView release];
+    // [manager release];
     [super dealloc];
 }
 
@@ -27,27 +33,17 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    
-    HomeViewController *vc1      = [[[HomeViewController alloc] init] autorelease];
-    HotViewController *vc2       = [[[HotViewController alloc] init] autorelease];
-    TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
-    MessageViewController *vc4   = [[[MessageViewController alloc] init] autorelease];
-    ProfileViewController *vc5   = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
-    vc5.title = @"我的";
-    UINavigationController * nav1 = [[[UINavigationController alloc] initWithRootViewController:vc1] autorelease];
-    UINavigationController * nav2 = [[[UINavigationController alloc] initWithRootViewController:vc2] autorelease];
-    UINavigationController * nav3 = [[[UINavigationController alloc] initWithRootViewController:vc3] autorelease];
-    UINavigationController * nav4 = [[[UINavigationController alloc] initWithRootViewController:vc4] autorelease];
-    UINavigationController * nav5 = [[[UINavigationController alloc] initWithRootViewController:vc5] autorelease];
-    
-    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.tabBarController.viewControllers = @[nav1, nav2,nav3,nav4,nav5];
-    //添加button到tabbar上
-    NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
-    RaisedCenterButton *button = [RaisedCenterButton buttonWithImage:[UIImage imageNamed:fullpath] forTabBarController:self.tabBarController];
-    [self.tabBarController.tabBar addSubview:button];
-    self.window.rootViewController = self.tabBarController;
-    self.window.backgroundColor = [UIColor redColor];
+    WeiBoMessageManager *manager = [WeiBoMessageManager getInstance];
+    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
+    NSLog([manager isNeedToRefreshTheToken] == YES ? @"need to login":@"did login");
+    if (authToken == nil || [manager isNeedToRefreshTheToken])
+    {
+        [self showFirstRunViewWithAnimate:NO];
+    }
+    else
+    {
+        [self prepareToMainViewControllerWithAnimate:NO];
+    }
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -63,27 +59,10 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-     
-    // ios6中文输入后锁屏之后就会crash，加上之后不会
-    UIDevice * device = [UIDevice currentDevice];
-    BOOL backgroundSupported = NO;
-    if ([device respondsToSelector:@selector(isMultitaskingSupported)]) {
-        backgroundSupported = device.multitaskingSupported;
-    }
-    
-    __block UIBackgroundTaskIdentifier backgroundTask;
-    
-    if (backgroundSupported) {
-        backgroundTask = [application beginBackgroundTaskWithExpirationHandler:^{
-            [application endBackgroundTask:backgroundTask];
-            backgroundTask = UIBackgroundTaskInvalid;
-        }];
-    }
-    */
+     */
 }
-
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
@@ -108,4 +87,67 @@
      */
 }
 
+- (void) prepareToMainViewControllerWithAnimate:(BOOL)animate
+{
+    //reload nib
+    HomeViewController *vc1      = [[[HomeViewController alloc] init] autorelease];
+    HotViewController *vc2       = [[[HotViewController alloc] init] autorelease];
+    TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
+    MessageViewController *vc4   = [[[MessageViewController alloc] init] autorelease];
+    ProfileViewController *vc5   = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
+    vc5.title = @"我的";
+    UINavigationController * nav1 = [[[UINavigationController alloc] initWithRootViewController:vc1] autorelease];
+    UINavigationController * nav2 = [[[UINavigationController alloc] initWithRootViewController:vc2] autorelease];
+    UINavigationController * nav3 = [[[UINavigationController alloc] initWithRootViewController:vc3] autorelease];
+    UINavigationController * nav4 = [[[UINavigationController alloc] initWithRootViewController:vc4] autorelease];
+    UINavigationController * nav5 = [[[UINavigationController alloc] initWithRootViewController:vc5] autorelease];
+    
+    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+    self.tabBarController.viewControllers = @[nav1, nav2,nav3,nav4,nav5];
+    //添加button到tabbar上
+    NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
+    RaisedCenterButton *button = [RaisedCenterButton buttonWithImage:[UIImage imageNamed:fullpath] forTabBarController:self.tabBarController];
+    [self.tabBarController.tabBar addSubview:button];
+    [[window subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [window addSubview:tabBarController.view];
+    
+    self.window.rootViewController = self.tabBarController;
+    
+    if (animate) {
+        [UIView commitAnimations];
+    }
+}
+
+
+- (void) showFirstRunViewWithAnimate:(BOOL)animated
+{
+    if (oauthWebView != nil) {
+        [oauthWebView release];
+    }
+    oauthWebView = [[OAuthWebView alloc]initWithNibName:@"OAuthWebView" bundle:nil];
+    oauthWebView.view.frame = [UIScreen mainScreen].applicationFrame;
+    if(animated) {
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:window cache:YES];
+		[UIView setAnimationDuration:0.4];
+	}
+	[[window subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+	[window addSubview:oauthWebView.view];
+	if(animated)
+		[UIView commitAnimations];
+}
+
+-(void)logout
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_ACCESS_TOKEN];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_USER_ID];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_EXPIRATION_DATE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    WeiBoMessageManager *manager = [WeiBoMessageManager getInstance];
+    manager.httpManager.userId =nil;
+    manager.httpManager.authToken = nil;
+    [self showFirstRunViewWithAnimate:YES];
+    
+    
+}
 @end
