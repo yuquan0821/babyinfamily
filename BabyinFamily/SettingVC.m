@@ -143,18 +143,7 @@ enum {
 
 -(void)logout
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:USER_STORE_USER_ID];
-    [defaults removeObjectForKey:USER_STORE_USER_NAME];
-    [defaults removeObjectForKey:USER_STORE_ACCESS_TOKEN];
-    WeiBoMessageManager *manager = [WeiBoMessageManager getInstance];
-    manager.httpManager.userId =nil;
-    manager.httpManager.authToken = nil;
-    
-    OAuthWebView *webV = [[OAuthWebView alloc]initWithNibName:@"OAuthWebView" bundle:nil];
-    webV.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:webV animated:YES];
-    [webV release];
+    [[UIApplication sharedApplication].delegate performSelector:@selector(logout)];
 }
 
 -(void)didGetUserInfo:(NSNotification*)sender
