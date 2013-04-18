@@ -1188,6 +1188,7 @@
 					armv7,
 				);
 				CODE_SIGN_IDENTITY = "iPhone Developer: fan chun (GMTD4D4BTA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fan chun (GMTD4D4BTA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BabyinFamily/BabyinFamily-Prefix.pch";
 				INFOPLIST_FILE = "BabyinFamily/BabyinFamily-Info.plist";
@@ -1202,7 +1203,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "家贝";
-				PROVISIONING_PROFILE = "65DA86A0-97A4-4116-89AE-4FC8EEACB4B3";
+				PROVISIONING_PROFILE = "DA89B847-5314-4E22-8034-2A82D9C77842";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DA89B847-5314-4E22-8034-2A82D9C77842";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
