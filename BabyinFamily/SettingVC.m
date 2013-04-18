@@ -134,7 +134,7 @@ enum {
         }
         
         else if (row == kAboutMe) {
-            cell.textLabel.text = @"关于";
+            cell.textLabel.text = @"关于家贝";
         }
     }
     

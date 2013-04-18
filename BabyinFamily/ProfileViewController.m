@@ -10,7 +10,6 @@
 #import "ProfileViewController.h"
 #import "HHNetDataCacheManager.h"
 #import "FollowerVC.h"
-//#import "ProfileVC.h"
 #import "WeiBoMessageManager.h"
 #import "BabyHelper.h"
 
