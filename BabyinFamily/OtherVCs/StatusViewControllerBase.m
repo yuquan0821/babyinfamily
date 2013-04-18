@@ -342,6 +342,7 @@
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    return 385.0f;
     
     NSInteger  row = indexPath.row;
     
