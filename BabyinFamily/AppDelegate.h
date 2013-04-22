@@ -7,20 +7,34 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OAuthWebView.h"
+#import "LoadingViewController.h"
+#import "SinaWeibo.h"
+
+
+@class LoadingViewController;
+@class SinaWeibo;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate>
+{
+    UIWindow *_window;
+    SinaWeibo *sinaWeibo;
+    LoadingViewController *_loadingViewController;
+}
 
 @property (retain, nonatomic) UIWindow *window;
 
 @property (retain, nonatomic) UITabBarController *tabBarController;
 
-@property (retain, nonatomic) OAuthWebView  *oauthWebView;
+@property (retain, nonatomic) LoadingViewController *loadingViewController;
+
+@property (retain, nonatomic) SinaWeibo *sinaWeibo;
+
+@property (nonatomic, retain) NSTimer *timer;
 
 
 
 - (void) logout;
-- (void) showFirstRunViewWithAnimate:(BOOL)animated;
+- (void) showFirstRunViewWithAnimate;
 - (void) prepareToMainViewControllerWithAnimate:(BOOL)animate;
 
 @end

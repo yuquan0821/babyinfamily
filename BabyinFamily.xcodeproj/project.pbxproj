@@ -109,6 +109,8 @@
 		28EA94B3165F7FC1009F69E5 /* TakePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */; };
 		28EA94CB165F961F009F69E5 /* TakePhoto.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94CA165F961F009F69E5 /* TakePhoto.bundle */; };
 		28ECD28516B8C1AA00CAA0DA /* RaisedCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */; };
+		28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FFC52B1722B88800430C01 /* LoadingViewController.m */; };
+		28FFC52E1722B88800430C01 /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FFC52C1722B88800430C01 /* LoadingViewController.xib */; };
 		B40B1F5C1650E9D6000BC5DA /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B1F471650E9D6000BC5DA /* ASIAuthenticationDialog.m */; };
 		B40B1F5D1650E9D6000BC5DA /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B1F4A1650E9D6000BC5DA /* ASIDataCompressor.m */; };
 		B40B1F5E1650E9D6000BC5DA /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B1F4C1650E9D6000BC5DA /* ASIDataDecompressor.m */; };
@@ -333,6 +335,9 @@
 		28EA94CA165F961F009F69E5 /* TakePhoto.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TakePhoto.bundle; path = Images/TakePhoto/TakePhoto.bundle; sourceTree = "<group>"; };
 		28ECD28316B8C1AA00CAA0DA /* RaisedCenterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RaisedCenterButton.h; path = OtherVCs/RaisedCenterButton.h; sourceTree = "<group>"; };
 		28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RaisedCenterButton.m; path = OtherVCs/RaisedCenterButton.m; sourceTree = "<group>"; };
+		28FFC52A1722B88800430C01 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadingViewController.h; path = OtherVCs/LoadingViewController.h; sourceTree = "<group>"; };
+		28FFC52B1722B88800430C01 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadingViewController.m; path = OtherVCs/LoadingViewController.m; sourceTree = "<group>"; };
+		28FFC52C1722B88800430C01 /* LoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingViewController.xib; path = OtherVCs/LoadingViewController.xib; sourceTree = "<group>"; };
 		B40B1F461650E9D6000BC5DA /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "lib/asi-httprequest/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		B40B1F471650E9D6000BC5DA /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "lib/asi-httprequest/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		B40B1F481650E9D6000BC5DA /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "lib/asi-httprequest/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
@@ -512,6 +517,9 @@
 				2884955216631CD30042C4CD /* FollowerVC.h */,
 				2884955316631CD30042C4CD /* FollowerVC.m */,
 				2884955416631CD30042C4CD /* FollowerVC.xib */,
+				28FFC52A1722B88800430C01 /* LoadingViewController.h */,
+				28FFC52B1722B88800430C01 /* LoadingViewController.m */,
+				28FFC52C1722B88800430C01 /* LoadingViewController.xib */,
 				28ECD28316B8C1AA00CAA0DA /* RaisedCenterButton.h */,
 				28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */,
 				28D14F5A169CF53600B39793 /* SendAndSaveViewController.h */,
@@ -1004,6 +1012,7 @@
 				2871907F16F7011B00A3527B /* AddComment.xib in Resources */,
 				284393471706C30C00675BD5 /* Icon.png in Resources */,
 				284393491706C31A00675BD5 /* Icon@2x.png in Resources */,
+				28FFC52E1722B88800430C01 /* LoadingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1091,6 +1100,7 @@
 				2889609B1719037600819399 /* ImageViewCell.m in Sources */,
 				2889609C1719037600819399 /* WaterFlowViewCell.m in Sources */,
 				2889609D1719037600819399 /* WaterFlowView.m in Sources */,
+				28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,6 @@
 //
 
 #import "SettingVC.h"
-#import "OAuthWebView.h"
 #import "WeiBoMessageManager.h"
 #import "User.h"
 #import "AboutViewController.h"
@@ -122,11 +121,11 @@ enum {
     if (section == kAccountSection) {
         if (row == kCurrentUser) {
             NSString *name = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_NAME];
-            cell.textLabel.text = [NSString stringWithFormat:@"当前登陆账号：%@",name];
+            cell.textLabel.text = [NSString stringWithFormat:@"当前登录账号：%@",name];
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
         else if (row == kChangeAccount) {
-            cell.textLabel.text = @"更换账号";
+            cell.textLabel.text = @"注销登录";
         }
         
         else if (row == kCleanCache) {

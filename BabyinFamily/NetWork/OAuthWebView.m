@@ -13,6 +13,7 @@
 
 @implementation OAuthWebView
 @synthesize webV;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -77,8 +78,9 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
         [self.navigationController popViewControllerAnimated:YES];
+        [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewControllerWithAnimate:) withObject:[NSNumber numberWithBool:NO]];
     }
-    [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewControllerWithAnimate:) withObject:[NSNumber numberWithBool:NO]];
+
 
 }
 
@@ -87,9 +89,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = @"登陆";
-    self.navigationItem.hidesBackButton = YES;
+    self.title = @"新浪微博登录";
+    self.navigationItem.hidesBackButton  = YES;
+
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelWeibo)];
+    self.navigationItem.rightBarButtonItem = cancelButton;
+    [cancelButton release];
+
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_ACCESS_TOKEN];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_USER_ID];
@@ -157,6 +163,11 @@
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     NSLog(@"webview error=%@",error);
+}
+- (void) cancelWeibo {
+    if ([delegate respondsToSelector:@selector(oauthControllerDidCancel:)]) {
+        [delegate oauthControllerDidCancel:self];
+    }
 }
 
 @end

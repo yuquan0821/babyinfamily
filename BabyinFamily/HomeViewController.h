@@ -9,7 +9,6 @@
 
 #import <UIKit/UIKit.h>
 #import "StatusViewControllerBase.h"
-#import "OAuthWebView.h"
 
 @interface HomeViewController : StatusViewControllerBase
 {
@@ -20,6 +19,6 @@
 }
 
 @property (nonatomic, copy)     NSString *userID;
-@property (nonatomic, retain) NSTimer *timer;
+//@property (nonatomic, retain) NSTimer *timer;
 
 @end

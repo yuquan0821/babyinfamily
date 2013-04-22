@@ -128,7 +128,7 @@
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 								   SINA_APP_KEY,                    @"client_id",       //申请的appkey
 								   @"token",                        @"response_type",   //access_token
-								   @"http://www.weibo.com/ievataobaocom",   @"redirect_uri",    //申请时的重定向地址
+								   SINA_APP_REDIRECT_URI,           @"redirect_uri",    //申请时的重定向地址
 								   @"mobile",                       @"display",         //web页面的显示方式
                                    nil];
 	

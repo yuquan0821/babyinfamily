@@ -14,20 +14,19 @@
 #import "CoreDataManager.h"
 
 @interface HomeViewController()
-- (void)timerOnActive;
 - (void)getDataFromCD;
 @end
 
 @implementation HomeViewController
 @synthesize userID;
-@synthesize timer;
+//@synthesize timer;
 
 -(void)dealloc
 {
     self.userID = nil;
     
-    [timer invalidate];
-    self.timer = nil;
+    //[timer invalidate];
+    //self.timer = nil;
     
     [super dealloc];
 }
@@ -82,7 +81,7 @@
     [defaultNotifCenter addObserver:self selector:@selector(didGetHomeLine:)    name:MMSinaGotHomeLine          object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(didGetUserInfo:)    name:MMSinaGotUserInfo          object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(relogin)            name:NeedToReLogin              object:nil];
-    [defaultNotifCenter addObserver:self selector:@selector(didGetUnreadCount:) name:MMSinaGotUnreadCount       object:nil];
+   // [defaultNotifCenter addObserver:self selector:@selector(didGetUnreadCount:) name:MMSinaGotUnreadCount       object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(appWillResign:)     name:UIApplicationWillResignActiveNotification             object:nil];
 }
 
@@ -92,7 +91,7 @@
     [defaultNotifCenter removeObserver:self name:MMSinaGotHomeLine          object:nil];
     [defaultNotifCenter removeObserver:self name:MMSinaGotUserInfo          object:nil];
     [defaultNotifCenter removeObserver:self name:NeedToReLogin              object:nil];
-    [defaultNotifCenter removeObserver:self name:MMSinaGotUnreadCount       object:nil];
+    //[defaultNotifCenter removeObserver:self name:MMSinaGotUnreadCount       object:nil];
     
     [super viewDidUnload];
 }
@@ -127,10 +126,7 @@
     if (authToken == nil || [manager isNeedToRefreshTheToken])
     {
         shouldLoad = YES;
-        OAuthWebView *webV = [[OAuthWebView alloc]initWithNibName:@"OAuthWebView" bundle:nil];
-        webV.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:webV animated:NO];
-        [webV release];
+        [[UIApplication sharedApplication].delegate performSelector:@selector(showFirstRunViewWithAnimate)];
     }
     else
     {
@@ -162,18 +158,11 @@
     }
 }
 
--(void)timerOnActive
-{
-      [manager getUnreadCount:userID];
-}
 
 -(void)relogin
 {
     shouldLoad = YES;
-    OAuthWebView *webV = [[OAuthWebView alloc]initWithNibName:@"OAuthWebView" bundle:nil];
-    webV.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:webV animated:NO];
-    [webV release];
+   [[UIApplication sharedApplication].delegate performSelector:@selector(showFirstRunViewWithAnimate)];
 }
 
 -(void)didGetUserID:(NSNotification*)sender
@@ -203,10 +192,7 @@
             {
                 [[SHKActivityIndicator currentIndicator] hide];
                 shouldLoad = YES;
-                OAuthWebView *webV = [[OAuthWebView alloc]initWithNibName:@"OAuthWebView" bundle:nil];
-                webV.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:webV animated:NO];
-                [webV release];
+                [[UIApplication sharedApplication].delegate performSelector:@selector(showFirstRunViewWithAnimate:)];
             }
             return;
         }
@@ -231,9 +217,7 @@
     [self.tableView reloadData];
     [[SHKActivityIndicator currentIndicator] hide];
     [self refreshVisibleCellsImages];
-    if (timer == nil) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(timerOnActive) userInfo:nil repeats:YES];
-    }
+    
 }
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
@@ -242,18 +226,6 @@
     _shouldAppendTheDataArr = NO;
 }
 
--(void)didGetUnreadCount:(NSNotification*)sender
-{
-    NSDictionary *dic = sender.object;
-    NSNumber *num = [dic objectForKey:@"cmt"];
-    
-    NSLog(@"num = %@",num);
-    if ([num intValue] == 0) {
-        return;
-    }
-    
-    [[BabyAlertWindow getInstance] showWithString:[NSString stringWithFormat:@"有%@条评论",num]];
-    [[BabyAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:10];
-}
+
 
 @end

@@ -17,35 +17,41 @@
 @implementation AppDelegate
 @synthesize window;
 @synthesize tabBarController;
-@synthesize oauthWebView;
-//@synthesize manager;
+@synthesize timer;
+@synthesize loadingViewController;
+@synthesize sinaWeibo;
+
 
 - (void)dealloc
 {
     [window release];
     [tabBarController release];
-    [oauthWebView release];
-    // [manager release];
+    [timer invalidate];
+    self.timer = nil;
+    [sinaWeibo release];
     [super dealloc];
+    
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
-    WeiBoMessageManager *manager = [WeiBoMessageManager getInstance];
-    NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
-    NSLog([manager isNeedToRefreshTheToken] == YES ? @"need to login":@"did login");
-    if (authToken == nil || [manager isNeedToRefreshTheToken])
+    
+    BOOL authValid = sinaWeibo.isAuthValid;
+    
+    if (!authValid)
     {
-        [self showFirstRunViewWithAnimate:NO];
+        [self showFirstRunViewWithAnimate];
     }
     else
     {
         [self prepareToMainViewControllerWithAnimate:NO];
+        
     }
+    
     [self.window makeKeyAndVisible];
     return YES;
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -73,18 +79,22 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
+    [self.sinaWeibo applicationDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [self.sinaWeibo handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [self.sinaWeibo handleOpenURL:url];
 }
 
 - (void) prepareToMainViewControllerWithAnimate:(BOOL)animate
@@ -112,29 +122,34 @@
     [window addSubview:tabBarController.view];
     
     self.window.rootViewController = self.tabBarController;
-    
+    [self schedueMessageTimer];
+
     if (animate) {
         [UIView commitAnimations];
     }
 }
 
 
-- (void) showFirstRunViewWithAnimate:(BOOL)animated
+- (void) showFirstRunViewWithAnimate
 {
-    if (oauthWebView != nil) {
-        [oauthWebView release];
+    self.loadingViewController = [[[LoadingViewController alloc] initWithNibName:@"LoadingViewController" bundle:nil] autorelease];
+    self.window.rootViewController = self.loadingViewController;
+    [self.window makeKeyAndVisible];
+    
+    sinaWeibo = [[SinaWeibo alloc] initWithAppKey:SINA_APP_KEY appSecret:SINA_APP_SECRET appRedirectURI:SINA_APP_REDIRECT_URI andDelegate:self.loadingViewController];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSDictionary *sinaWeiboInfo = [defaults objectForKey:@"SinaWeiboAutoData"];
+    
+    if ([sinaWeiboInfo objectForKey:@"AccessTokenKey"] && [sinaWeiboInfo objectForKey:@"ExpirationDateKey"] && [sinaWeiboInfo objectForKey:@"UserIDKey"])
+    {
+        sinaWeibo.accessToken = [sinaWeiboInfo objectForKey:@"AccessTokenKey"];
+        
+        sinaWeibo.expirationDate = [sinaWeiboInfo objectForKey:@"ExpirationDateKey"];
+        
+        sinaWeibo.userID = [sinaWeiboInfo objectForKey:@"UserIDKey"];
     }
-    oauthWebView = [[OAuthWebView alloc]initWithNibName:@"OAuthWebView" bundle:nil];
-    oauthWebView.view.frame = [UIScreen mainScreen].applicationFrame;
-    if(animated) {
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:window cache:YES];
-		[UIView setAnimationDuration:0.4];
-	}
-	[[window subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-	[window addSubview:oauthWebView.view];
-	if(animated)
-		[UIView commitAnimations];
 }
 
 -(void)logout
@@ -142,12 +157,43 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_ACCESS_TOKEN];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_USER_ID];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_EXPIRATION_DATE];
+
     [[NSUserDefaults standardUserDefaults] synchronize];
-    WeiBoMessageManager *manager = [WeiBoMessageManager getInstance];
-    manager.httpManager.userId =nil;
-    manager.httpManager.authToken = nil;
-    [self showFirstRunViewWithAnimate:YES];
+    [timer invalidate];
+    self.timer = nil;
+    SinaWeibo *sinaweibo = [self sinaWeibo];
     
+    [sinaweibo logOut];
+    
+    [self showFirstRunViewWithAnimate];
     
 }
+- (void)schedueMessageTimer
+{
+    if (timer == nil) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(timerOnActive) userInfo:nil repeats:YES];
+    }
+    [timer fire];
+}
+
+-(void)timerOnActive
+{
+    WeiBoMessageManager *manager = [WeiBoMessageManager getInstance];
+
+    [manager getUnreadCount:[[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID]];
+}
+
+-(void)didGetUnreadCount:(NSNotification*)sender
+{
+    NSDictionary *dic = sender.object;
+    NSNumber *num = [dic objectForKey:@"cmt"];
+    
+    NSLog(@"num = %@",num);
+    if ([num intValue] == 0) {
+        return;
+    }
+    
+    [self.tabBarController.tabBar.items objectAtIndex:3];
+}
+
 @end

@@ -17,9 +17,6 @@
 #define SINA_API_AUTHORIZE          @"https://api.weibo.com/oauth2/authorize"
 #define SINA_API_ACCESS_TOKEN       @"https://api.weibo.com/oauth2/access_token"
 
-#define SINA_APP_KEY                @"3651188584"
-#define SINA_APP_SECRET             @"f6a4278fd2a4e8ca141caefa828339e9"
-
 #define USER_INFO_KEY_TYPE          @"requestType"
 
 #define USER_STORE_ACCESS_TOKEN     @"SinaAccessToken"
