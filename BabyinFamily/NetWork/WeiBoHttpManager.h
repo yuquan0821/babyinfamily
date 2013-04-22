@@ -19,10 +19,11 @@
 
 #define USER_INFO_KEY_TYPE          @"requestType"
 
-#define USER_STORE_ACCESS_TOKEN     @"SinaAccessToken"
-#define USER_STORE_EXPIRATION_DATE  @"SinaExpirationDate"
-#define USER_STORE_USER_ID          @"SinaUserID"
+#define USER_STORE_ACCESS_TOKEN     @"AccessTokenKey"
+#define USER_STORE_EXPIRATION_DATE  @"ExpirationDateKey"
+#define USER_STORE_USER_ID          @"UserIDKey"
 #define USER_STORE_USER_NAME        @"SinaUserName"
+#define USER_STORE_REFRESH_TOKEN    @"refresh_token"
 #define USER_OBJECT                 @"USER_OBJECT"
 #define NeedToReLogin               @"NeedToReLogin"
 

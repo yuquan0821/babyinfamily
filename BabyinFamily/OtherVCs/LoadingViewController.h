@@ -27,7 +27,6 @@
 
 - (void) share:(UIButton*) sender;
 
-- (void) exitShare:(UIButton*) sender;
 
 
 
