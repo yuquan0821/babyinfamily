@@ -24,6 +24,7 @@
 
 @synthesize loadButton = _loadButton;
 @synthesize indicator = _indicator;
+@synthesize userGuideView;
 
 - (SinaWeibo*)sinaWeibo
 {
@@ -42,6 +43,7 @@
     _indicator.center = self.view.center;
     [self.view addSubview:_indicator];
     [self addButton];
+    [self addGuideView];
 }
 
 - (void) addButton
@@ -56,9 +58,20 @@
     
     [self.loadButton setTitle:@"使用新浪微博账号登录" forState:UIControlStateNormal];
     
-    [self.loadButton addTarget:self action:@selector(login::) forControlEvents:UIControlEventTouchUpInside];
+    [self.loadButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.loadButton];
+}
+
+- (void) addGuideView
+{
+      userGuideView = [[[UINib nibWithNibName:@"UserGuideVIew" bundle:nil] instantiateWithOwner:self options:nil] objectAtIndex:0];
+    float height = DEVICE_IS_IPHONE5 ? 568 : 480;
+    [userGuideView setFrame:CGRectMake(0, 0, 320, height)];
+    
+    [userGuideView setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:userGuideView];
+
 }
 
 
@@ -113,6 +126,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    userGuideView = nil;
     // Release any retained subviews of the main view.
 }
 

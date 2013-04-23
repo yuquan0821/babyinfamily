@@ -12,6 +12,9 @@
 
 #import "SinaWeiboRequest.h"
 
+#import "UserGuideVIew.h"
+
+
 @interface LoadingViewController : UIViewController<SinaWeiboDelegate,SinaWeiboRequestDelegate>
 {
     UIButton *_loadButton;
@@ -22,6 +25,8 @@
 @property (strong, nonatomic) UIButton *loadButton;
 
 @property (strong, nonatomic) UIActivityIndicatorView *indicator;
+
+@property (retain, nonatomic) UserGuideVIew *userGuideView;
 
 - (void) addButton;
 

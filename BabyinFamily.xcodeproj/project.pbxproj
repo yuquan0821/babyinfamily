@@ -114,6 +114,8 @@
 		28FE404A1726BE73009BEEDC /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40451726BE73009BEEDC /* 2.jpg */; };
 		28FE404B1726BE73009BEEDC /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40461726BE73009BEEDC /* 3.jpg */; };
 		28FE404C1726BE73009BEEDC /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40471726BE73009BEEDC /* 4.jpg */; };
+		28FE40521726D34D009BEEDC /* UserGuideVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FE40501726D34D009BEEDC /* UserGuideVIew.m */; };
+		28FE40531726D34D009BEEDC /* UserGuideVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40511726D34D009BEEDC /* UserGuideVIew.xib */; };
 		28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FFC52B1722B88800430C01 /* LoadingViewController.m */; };
 		28FFC52E1722B88800430C01 /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FFC52C1722B88800430C01 /* LoadingViewController.xib */; };
 		B40B1F5C1650E9D6000BC5DA /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B1F471650E9D6000BC5DA /* ASIAuthenticationDialog.m */; };
@@ -345,6 +347,9 @@
 		28FE40451726BE73009BEEDC /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		28FE40461726BE73009BEEDC /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
 		28FE40471726BE73009BEEDC /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
+		28FE404F1726D34C009BEEDC /* UserGuideVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserGuideVIew.h; path = OtherVCs/UserGuideVIew.h; sourceTree = "<group>"; };
+		28FE40501726D34D009BEEDC /* UserGuideVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserGuideVIew.m; path = OtherVCs/UserGuideVIew.m; sourceTree = "<group>"; };
+		28FE40511726D34D009BEEDC /* UserGuideVIew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserGuideVIew.xib; path = OtherVCs/UserGuideVIew.xib; sourceTree = "<group>"; };
 		28FFC52A1722B88800430C01 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadingViewController.h; path = OtherVCs/LoadingViewController.h; sourceTree = "<group>"; };
 		28FFC52B1722B88800430C01 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadingViewController.m; path = OtherVCs/LoadingViewController.m; sourceTree = "<group>"; };
 		28FFC52C1722B88800430C01 /* LoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingViewController.xib; path = OtherVCs/LoadingViewController.xib; sourceTree = "<group>"; };
@@ -543,6 +548,9 @@
 				28DD3F4816DC601D005396AB /* StatusViewControllerBase.xib */,
 				28BAE94516C0DA3D00FA0F47 /* UIDeviceHardware.h */,
 				28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */,
+				28FE404F1726D34C009BEEDC /* UserGuideVIew.h */,
+				28FE40501726D34D009BEEDC /* UserGuideVIew.m */,
+				28FE40511726D34D009BEEDC /* UserGuideVIew.xib */,
 			);
 			name = OthersVCs;
 			sourceTree = "<group>";
@@ -1033,6 +1041,7 @@
 				28FE404A1726BE73009BEEDC /* 2.jpg in Resources */,
 				28FE404B1726BE73009BEEDC /* 3.jpg in Resources */,
 				28FE404C1726BE73009BEEDC /* 4.jpg in Resources */,
+				28FE40531726D34D009BEEDC /* UserGuideVIew.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1121,6 +1130,7 @@
 				2889609C1719037600819399 /* WaterFlowViewCell.m in Sources */,
 				2889609D1719037600819399 /* WaterFlowView.m in Sources */,
 				28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */,
+				28FE40521726D34D009BEEDC /* UserGuideVIew.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
