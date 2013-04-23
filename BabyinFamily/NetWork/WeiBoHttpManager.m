@@ -1,10 +1,3 @@
-//
-//  WeiBoHttpManager.m
-//  test
-//
-//  Created by jianting zhu on 11-12-31.
-//  Copyright (c) 2011年 Dunbar Science & Technology. All rights reserved.
-//
 
 //
 //  WeiBoHttpManager.m

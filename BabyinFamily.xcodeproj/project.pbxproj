@@ -109,6 +109,11 @@
 		28EA94B3165F7FC1009F69E5 /* TakePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */; };
 		28EA94CB165F961F009F69E5 /* TakePhoto.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94CA165F961F009F69E5 /* TakePhoto.bundle */; };
 		28ECD28516B8C1AA00CAA0DA /* RaisedCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */; };
+		28FE40481726BE73009BEEDC /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40431726BE73009BEEDC /* 0.jpg */; };
+		28FE40491726BE73009BEEDC /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40441726BE73009BEEDC /* 1.jpg */; };
+		28FE404A1726BE73009BEEDC /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40451726BE73009BEEDC /* 2.jpg */; };
+		28FE404B1726BE73009BEEDC /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40461726BE73009BEEDC /* 3.jpg */; };
+		28FE404C1726BE73009BEEDC /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40471726BE73009BEEDC /* 4.jpg */; };
 		28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FFC52B1722B88800430C01 /* LoadingViewController.m */; };
 		28FFC52E1722B88800430C01 /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FFC52C1722B88800430C01 /* LoadingViewController.xib */; };
 		B40B1F5C1650E9D6000BC5DA /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B1F471650E9D6000BC5DA /* ASIAuthenticationDialog.m */; };
@@ -335,6 +340,11 @@
 		28EA94CA165F961F009F69E5 /* TakePhoto.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TakePhoto.bundle; path = Images/TakePhoto/TakePhoto.bundle; sourceTree = "<group>"; };
 		28ECD28316B8C1AA00CAA0DA /* RaisedCenterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RaisedCenterButton.h; path = OtherVCs/RaisedCenterButton.h; sourceTree = "<group>"; };
 		28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RaisedCenterButton.m; path = OtherVCs/RaisedCenterButton.m; sourceTree = "<group>"; };
+		28FE40431726BE73009BEEDC /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
+		28FE40441726BE73009BEEDC /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		28FE40451726BE73009BEEDC /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		28FE40461726BE73009BEEDC /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
+		28FE40471726BE73009BEEDC /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
 		28FFC52A1722B88800430C01 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadingViewController.h; path = OtherVCs/LoadingViewController.h; sourceTree = "<group>"; };
 		28FFC52B1722B88800430C01 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadingViewController.m; path = OtherVCs/LoadingViewController.m; sourceTree = "<group>"; };
 		28FFC52C1722B88800430C01 /* LoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingViewController.xib; path = OtherVCs/LoadingViewController.xib; sourceTree = "<group>"; };
@@ -668,6 +678,11 @@
 		28EA949D165F5962009F69E5 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				28FE40431726BE73009BEEDC /* 0.jpg */,
+				28FE40441726BE73009BEEDC /* 1.jpg */,
+				28FE40451726BE73009BEEDC /* 2.jpg */,
+				28FE40461726BE73009BEEDC /* 3.jpg */,
+				28FE40471726BE73009BEEDC /* 4.jpg */,
 				284393461706C30C00675BD5 /* Icon.png */,
 				284393481706C31A00675BD5 /* Icon@2x.png */,
 				B4C94EEE164C057100722F37 /* sourcekit.bundle */,
@@ -1013,6 +1028,11 @@
 				284393471706C30C00675BD5 /* Icon.png in Resources */,
 				284393491706C31A00675BD5 /* Icon@2x.png in Resources */,
 				28FFC52E1722B88800430C01 /* LoadingViewController.xib in Resources */,
+				28FE40481726BE73009BEEDC /* 0.jpg in Resources */,
+				28FE40491726BE73009BEEDC /* 1.jpg in Resources */,
+				28FE404A1726BE73009BEEDC /* 2.jpg in Resources */,
+				28FE404B1726BE73009BEEDC /* 3.jpg in Resources */,
+				28FE404C1726BE73009BEEDC /* 4.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

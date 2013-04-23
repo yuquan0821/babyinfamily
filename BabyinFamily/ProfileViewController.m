@@ -91,8 +91,8 @@ enum {
         self.navigationItem.leftBarButtonItem = SettingBtn;
         [SettingBtn release];
     }
-    userID = [[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID];
-    NSLog(@"user id is %@", userID);
+    self.userID = [[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID];
+
     if (user.userId == userID.longLongValue ) {
         followButton.hidden = YES;
     }

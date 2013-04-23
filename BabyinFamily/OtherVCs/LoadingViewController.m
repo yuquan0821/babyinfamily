@@ -22,7 +22,7 @@
 
 @implementation LoadingViewController
 
-@synthesize shareButton = _shareButton;
+@synthesize loadButton = _loadButton;
 @synthesize indicator = _indicator;
 
 - (SinaWeibo*)sinaWeibo
@@ -46,35 +46,27 @@
 
 - (void) addButton
 {
-    _shareButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _loadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    [self.shareButton setFrame:CGRectMake(10, MainHeight - 65, 300, 50)];
+    [self.loadButton setFrame:CGRectMake(80, MainHeight - 30, 160, 27)];
     
-    [self.shareButton setTitle:@"使用微博账号登陆" forState:UIControlStateNormal];
+    [self.loadButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
     
-    [self.shareButton addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
+    [self.loadButton.titleLabel  setTextColor:[UIColor blackColor]];
     
-    [self.view addSubview:self.shareButton];
+    [self.loadButton setTitle:@"使用新浪微博账号登录" forState:UIControlStateNormal];
+    
+    [self.loadButton addTarget:self action:@selector(login::) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:self.loadButton];
 }
 
 
 //分享按钮响应方法
-- (void) share:(UIButton*) sender
+- (void) login:(UIButton*) sender
 {
     SinaWeibo *sinaWeibo = [self sinaWeibo];
-    
-    BOOL authValid = sinaWeibo.isAuthValid;
-    
-    if (!authValid)
-    {
-        [sinaWeibo logIn];
-    }
-    else
-    {
-        [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewControllerWithAnimate:) withObject:[NSNumber numberWithBool:NO]];
-
-    }
-    
+    [sinaWeibo logIn];
 }
 
 - (void)removeAuthData
