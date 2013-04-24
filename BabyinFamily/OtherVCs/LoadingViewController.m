@@ -50,7 +50,7 @@
 {
     _loadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    [self.loadButton setFrame:CGRectMake(80, MainHeight - 40, 160, 27)];
+    [self.loadButton setFrame:CGRectMake(80, MainHeight - 35, 160, 27)];
     
     [self.loadButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
     
