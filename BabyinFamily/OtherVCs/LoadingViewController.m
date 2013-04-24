@@ -50,7 +50,7 @@
 {
     _loadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    [self.loadButton setFrame:CGRectMake(80, MainHeight - 30, 160, 27)];
+    [self.loadButton setFrame:CGRectMake(80, MainHeight - 40, 160, 27)];
     
     [self.loadButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
     
@@ -60,7 +60,6 @@
     
     [self.loadButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:self.loadButton];
 }
 
 - (void) addGuideView
@@ -68,7 +67,8 @@
       userGuideView = [[[UINib nibWithNibName:@"UserGuideVIew" bundle:nil] instantiateWithOwner:self options:nil] objectAtIndex:0];
     float height = DEVICE_IS_IPHONE5 ? 568 : 480;
     [userGuideView setFrame:CGRectMake(0, 0, 320, height)];
-    
+    [userGuideView addSubview:self.loadButton];
+
     [userGuideView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:userGuideView];
 

@@ -8,6 +8,12 @@
 
 #import "UserGuideVIew.h"
 
+#define ScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define ScreenWidth [[UIScreen mainScreen] bounds].size.width
+#define StateBarHeight 20
+#define MainHeight (ScreenHeight - StateBarHeight)
+#define MainWidth ScreenWidth
+
 @interface UserGuideVIew ()
 
 @end
@@ -46,8 +52,11 @@
     scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * 5, scrollView.frame.size.height);
     
     [self.scrollView setDelegate:self];
+    pageControl.numberOfPages = 5;
+    pageControl.currentPage = 0;
     float y = DEVICE_IS_IPHONE5 ? 475 : 400;
     [self.pageControl setFrame:CGRectMake(110, y, 100, 35)];
+
 }
 
 #pragma mark -
@@ -57,4 +66,12 @@
     int page = floor((sv.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     pageControl.currentPage = page;
 }
+
+- (void) dealloc
+{
+    [scrollView release];
+    [pageControl release];
+    [super dealloc];
+}
+
 @end
