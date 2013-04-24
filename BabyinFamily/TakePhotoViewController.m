@@ -46,8 +46,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   // CGRect mainScreenFrame = [[UIScreen mainScreen] bounds];
-	//[[GPUImageView alloc] initWithFrame:mainScreenFrame];
+    CGRect mainScreenFrame = [[UIScreen mainScreen] bounds];
+	[[GPUImageView alloc] initWithFrame:mainScreenFrame];
     self.wantsFullScreenLayout = YES;
     //set background color
     self.view.backgroundColor = [UIColor colorWithPatternImage:
@@ -73,7 +73,7 @@
     //[self loadFilters];
     
     //we need a crop filter for the live video
-    cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.0f, 0.0f, 1.0f, 0.75f)];
+    cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
     filter = [[GPUImageRGBFilter alloc] init];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
