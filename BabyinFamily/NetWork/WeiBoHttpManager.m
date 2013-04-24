@@ -13,6 +13,7 @@
 #import "Status.h"
 #import "JSON.h"
 #import "Comment.h"
+#import "ASIDownloadCache.h"
 
 @implementation WeiBoHttpManager
 @synthesize requestQueue;
@@ -184,7 +185,12 @@
     NSString                *baseUrl =[NSString  stringWithFormat:@"%@/users/show.json",SINA_V2_DOMAIN];
     NSURL                   *url = [self generateURL:baseUrl params:params];
     
+    [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
+    
     ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:url];
+    
+    [request setDownloadCache:[ASIDownloadCache sharedCache]];
+
     NSLog(@"url=%@",url);
     [self setGetUserInfo:request withRequestType:SinaGetUserInfo];
     [requestQueue addOperation:request];
@@ -249,8 +255,12 @@
     [params setObject:[NSString stringWithFormat:@"%d",page] forKey:@"page"];
     NSString                *baseUrl =[NSString  stringWithFormat:@"%@/comments/to_me.json",SINA_V2_DOMAIN];
     NSURL                   *url = [self generateURL:baseUrl params:params];
-    
+    [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
+
     ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:url];
+    
+    [request setDownloadCache:[ASIDownloadCache sharedCache]];
+
     NSLog(@"url=%@",url);
     [self setGetUserInfo:request withRequestType:SinaGetCommentToMe];
     [requestQueue addOperation:request];
@@ -679,7 +689,11 @@
     NSString                *baseUrl =[NSString  stringWithFormat:@"%@/statuses/user_timeline.json",SINA_V2_DOMAIN];
     NSURL                   *url = [self generateURL:baseUrl params:params];
     
+    [ASIHTTPRequest setDefaultCache:[ASIDownloadCache sharedCache]];
+
     ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:url];
+    [request setDownloadCache:[ASIDownloadCache sharedCache]];
+
     NSLog(@"url=%@",url);
     [self setGetUserInfo:request withRequestType:SinaGetUserStatus];
     [requestQueue addOperation:request];
