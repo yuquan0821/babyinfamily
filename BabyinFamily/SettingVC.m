@@ -169,7 +169,7 @@ enum {
         }
         
         else if (row == kChangeAccount) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定要更换账号吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"更换", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定要注销账号吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"更换", nil];
             alert.tag = 0;
             [alert show];
             [alert release];
