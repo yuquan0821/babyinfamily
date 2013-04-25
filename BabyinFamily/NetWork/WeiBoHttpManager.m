@@ -964,9 +964,18 @@
 //失败
 - (void)requestFailed:(ASIHTTPRequest *)request{
     NSLog(@"requestFailed:%@,%@,",request.responseString,[request.error localizedDescription]);
-    if ([self.delegate respondsToSelector:@selector(didRequestField:)]) {
-        [self.delegate didRequestField:request.error];
+
+    NSDictionary *userInformation = [request userInfo];
+    RequestType requestType = [[userInformation objectForKey:USER_INFO_KEY_TYPE] intValue];
+    
+    //对特定的请求 处理网络异常
+    if (requestType == SinaGetHomeLine ||
+        requestType == SinaGetPublicTimeline) {
+        if ([self.delegate respondsToSelector:@selector(didRequestField:)]) {
+            [self.delegate didRequestField:request.error];
+        }
     }
+
 }
 
 //成功
