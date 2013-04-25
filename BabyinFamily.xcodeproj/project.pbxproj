@@ -109,8 +109,6 @@
 		28EA94B3165F7FC1009F69E5 /* TakePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */; };
 		28EA94CB165F961F009F69E5 /* TakePhoto.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94CA165F961F009F69E5 /* TakePhoto.bundle */; };
 		28ECD28516B8C1AA00CAA0DA /* RaisedCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */; };
-		28FB1A22172756BE00496131 /* GuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FB1A20172756BD00496131 /* GuideView.m */; };
-		28FB1A23172756BE00496131 /* GuideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FB1A21172756BD00496131 /* GuideView.xib */; };
 		28FE40481726BE73009BEEDC /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40431726BE73009BEEDC /* 0.jpg */; };
 		28FE40491726BE73009BEEDC /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40441726BE73009BEEDC /* 1.jpg */; };
 		28FE404A1726BE73009BEEDC /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40451726BE73009BEEDC /* 2.jpg */; };
@@ -344,9 +342,6 @@
 		28EA94CA165F961F009F69E5 /* TakePhoto.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TakePhoto.bundle; path = Images/TakePhoto/TakePhoto.bundle; sourceTree = "<group>"; };
 		28ECD28316B8C1AA00CAA0DA /* RaisedCenterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RaisedCenterButton.h; path = OtherVCs/RaisedCenterButton.h; sourceTree = "<group>"; };
 		28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RaisedCenterButton.m; path = OtherVCs/RaisedCenterButton.m; sourceTree = "<group>"; };
-		28FB1A1F172756BD00496131 /* GuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideView.h; sourceTree = "<group>"; };
-		28FB1A20172756BD00496131 /* GuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideView.m; sourceTree = "<group>"; };
-		28FB1A21172756BD00496131 /* GuideView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideView.xib; sourceTree = "<group>"; };
 		28FE40431726BE73009BEEDC /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
 		28FE40441726BE73009BEEDC /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		28FE40451726BE73009BEEDC /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
@@ -518,9 +513,6 @@
 			isa = PBXGroup;
 			children = (
 				2896C4811661E79E004705A4 /* AboutViewController.h */,
-				28FB1A1F172756BD00496131 /* GuideView.h */,
-				28FB1A20172756BD00496131 /* GuideView.m */,
-				28FB1A21172756BD00496131 /* GuideView.xib */,
 				2896C4821661E79E004705A4 /* AboutViewController.m */,
 				2896C4831661E79E004705A4 /* AboutViewController.xib */,
 				28D3387716E33FA70027B7F9 /* AddComment.h */,
@@ -711,7 +703,6 @@
 		28EA949E165F59CD009F69E5 /* UIDisplay */ = {
 			isa = PBXGroup;
 			children = (
-				28487DFF16DF3A5A00BFB194 /* WaterFllow */,
 				2896C4041661C150004705A4 /* TablesCells */,
 				28EA94A0165F6031009F69E5 /* VCS */,
 			);
@@ -736,6 +727,7 @@
 		28EA94A0165F6031009F69E5 /* VCS */ = {
 			isa = PBXGroup;
 			children = (
+				28487DFF16DF3A5A00BFB194 /* WaterFllow */,
 				2896C4021661C0E2004705A4 /* OthersVCs */,
 				2896C4031661C0FE004705A4 /* ImageBrowers */,
 				28EA94A1165F6058009F69E5 /* TabViewControllers */,
@@ -1050,7 +1042,6 @@
 				28FE404B1726BE73009BEEDC /* 3.jpg in Resources */,
 				28FE404C1726BE73009BEEDC /* 4.jpg in Resources */,
 				28FE40531726D34D009BEEDC /* UserGuideVIew.xib in Resources */,
-				28FB1A23172756BE00496131 /* GuideView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1140,7 +1131,6 @@
 				2889609D1719037600819399 /* WaterFlowView.m in Sources */,
 				28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */,
 				28FE40521726D34D009BEEDC /* UserGuideVIew.m in Sources */,
-				28FB1A22172756BE00496131 /* GuideView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
