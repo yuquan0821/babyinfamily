@@ -957,9 +957,9 @@
 //失败
 - (void)requestFailed:(ASIHTTPRequest *)request{
     NSLog(@"requestFailed:%@,%@,",request.responseString,[request.error localizedDescription]);
-    
-    NSNotification *notification = [NSNotification notificationWithName:MMSinaRequestFailed object:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    if ([self.delegate respondsToSelector:@selector(didRequestField:)]) {
+        [self.delegate didRequestField:request.error];
+    }
 }
 
 //成功
@@ -967,12 +967,13 @@
     NSDictionary *userInformation = [request userInfo];
     RequestType requestType = [[userInformation objectForKey:USER_INFO_KEY_TYPE] intValue];
     NSString * responseString = [request responseString];
-    NSLog(@"responseString = %@",responseString);
+
     
     //认证失败
     //{"error":"auth faild!","error_code":21301,"request":"/2/statuses/home_timeline.json"}
     SBJsonParser    *parser     = [[SBJsonParser alloc] init];
     id  returnObject = [parser objectWithString:responseString];
+    NSLog(@"responseString = %@",returnObject);
     [parser release];
     if ([returnObject isKindOfClass:[NSDictionary class]]) {
         NSString *errorString = [returnObject  objectForKey:@"error"];

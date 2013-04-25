@@ -268,6 +268,43 @@ static WeiBoMessageManager * instance=nil;
 }
 
 #pragma mark - WeiBoHttpDelegate
+- (BOOL)isNetError:(NSError *)error
+{
+    //kCFURLErrorCannotConnectToHost 飞行模式
+    //kCFURLErrorNotConnectedToInternet
+    if ([error code] == kCFURLErrorCannotConnectToHost ||
+        [error code] == kCFURLErrorNotConnectedToInternet) {
+        return YES;
+    }
+    return NO;
+}
+- (BOOL)isTimeOut:(NSError*)error
+{
+    //kCFURLErrorTimedOut 超时
+    if ([error code] == kCFURLErrorTimedOut ) {
+        return YES;
+    }
+    return NO;
+}
+- (BOOL)isNetCancel:(NSError *)error{
+    if ([error code] == kCFURLErrorCancelled) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)didRequestField:(id)error
+{    
+    NSNotification *notification = [NSNotification notificationWithName:MMSinaRequestFailed object:error];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+#warning 这里暂时统一处理错误，可能有问题,待定
+    NSError * err = (NSError *)error;
+    if ([self isNetError:err] || [self isTimeOut:err]) {
+        //提示网络出错
+        
+    }
+    
+}
 //获取最新的公共微博
 -(void)didGetPublicTimelineWithStatues:(NSArray *)statusArr
 {

@@ -78,6 +78,9 @@ typedef enum {
 @protocol WeiBoHttpDelegate <NSObject>
 
 @optional
+//网络请求失败
+-(void)didRequestField:(id)error;
+
 //获取最新的公共微博
 -(void)didGetPublicTimelineWithStatues:(NSArray*)statusArr;
 
