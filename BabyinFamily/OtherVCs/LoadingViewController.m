@@ -22,8 +22,9 @@
 
 @implementation LoadingViewController
 
-@synthesize shareButton = _shareButton;
+@synthesize loadButton = _loadButton;
 @synthesize indicator = _indicator;
+@synthesize userGuideView;
 
 - (SinaWeibo*)sinaWeibo
 {
@@ -42,52 +43,67 @@
     _indicator.center = self.view.center;
     [self.view addSubview:_indicator];
     [self addButton];
+    [self addGuideView];
 }
 
 - (void) addButton
 {
-    _shareButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _loadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    [self.shareButton setFrame:CGRectMake(10, MainHeight - 65, 300, 50)];
+    [self.loadButton setFrame:CGRectMake(80, MainHeight - 35, 160, 27)];
     
-    [self.shareButton setTitle:@"使用微博账号登陆" forState:UIControlStateNormal];
+    [self.loadButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
     
-    [self.shareButton addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
+    [self.loadButton.titleLabel  setTextColor:[UIColor blackColor]];
     
-    [self.view addSubview:self.shareButton];
+    [self.loadButton setTitle:@"使用新浪微博账号登录" forState:UIControlStateNormal];
+    
+    [self.loadButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (void) addGuideView
+{
+      userGuideView = [[[UINib nibWithNibName:@"UserGuideVIew" bundle:nil] instantiateWithOwner:self options:nil] objectAtIndex:0];
+    float height = DEVICE_IS_IPHONE5 ? 568 : 480;
+    [userGuideView setFrame:CGRectMake(0, 0, 320, height)];
+    [userGuideView addSubview:self.loadButton];
+
+    [userGuideView setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:userGuideView];
+
 }
 
 
 //分享按钮响应方法
-- (void) share:(UIButton*) sender
+- (void) login:(UIButton*) sender
 {
     SinaWeibo *sinaWeibo = [self sinaWeibo];
-    
-    BOOL authValid = sinaWeibo.isAuthValid;
-    
-    if (!authValid)
-    {
-        [sinaWeibo logIn];
-    }
-    else
-    {
-        [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewControllerWithAnimate:) withObject:[NSNumber numberWithBool:NO]];
+    [sinaWeibo logIn];
+}
 
-    }
-    
+- (void)removeAuthData
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_ACCESS_TOKEN];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_USER_ID];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_EXPIRATION_DATE];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_REFRESH_TOKEN];
 }
 - (void)storeAuthData
 {
     SinaWeibo *sinaWeibo = [self sinaWeibo];
+    
     NSString *accessToken = sinaWeibo.accessToken;
     NSString *userId = sinaWeibo.userID;
     NSDate   *expirationDate = sinaWeibo.expirationDate;
-    //NSString *refreshToken = sinaWeibo.refreshToken;
+    NSString *refreshToken = sinaWeibo.refreshToken;
     [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:USER_STORE_ACCESS_TOKEN];
     [[NSUserDefaults standardUserDefaults] setObject:userId forKey:USER_STORE_USER_ID];
-    [[NSUserDefaults standardUserDefaults]setObject:expirationDate forKey:USER_STORE_EXPIRATION_DATE];
-    
+    [[NSUserDefaults standardUserDefaults] setObject:expirationDate forKey:USER_STORE_EXPIRATION_DATE];
+    [[NSUserDefaults standardUserDefaults] setObject:refreshToken forKey:USER_STORE_REFRESH_TOKEN];
+
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 //登陆成功后回调方法
@@ -95,23 +111,22 @@
 {
     [self storeAuthData];
     [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewControllerWithAnimate:) withObject:[NSNumber numberWithBool:NO]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
-
-//退出登陆回调方法
-- (void) exitShare:(UIButton*) sender
+//注销登录后回调方法
+- (void)sinaweiboDidLogOut:(SinaWeibo *)sinaweibo
 {
-    SinaWeibo *sinaWeibo = [self sinaWeibo];
-    
-    [sinaWeibo logOut];
-        
-    NSLog(@"退出登陆");
+    NSLog(@"sinaweiboDidLogOut");
+    [self removeAuthData];
 }
 
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    userGuideView = nil;
     // Release any retained subviews of the main view.
 }
 

@@ -12,22 +12,26 @@
 
 #import "SinaWeiboRequest.h"
 
+#import "UserGuideVIew.h"
+
+
 @interface LoadingViewController : UIViewController<SinaWeiboDelegate,SinaWeiboRequestDelegate>
 {
-    UIButton *_shareButton;
+    UIButton *_loadButton;
     
     UIActivityIndicatorView *_indicator;
 }
 
-@property (strong, nonatomic) UIButton *shareButton;
+@property (strong, nonatomic) UIButton *loadButton;
 
 @property (strong, nonatomic) UIActivityIndicatorView *indicator;
 
+@property (retain, nonatomic) UserGuideVIew *userGuideView;
+
 - (void) addButton;
 
-- (void) share:(UIButton*) sender;
+- (void) login:(UIButton*) sender;
 
-- (void) exitShare:(UIButton*) sender;
 
 
 

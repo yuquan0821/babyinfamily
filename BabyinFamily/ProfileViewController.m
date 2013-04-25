@@ -92,6 +92,7 @@ enum {
         [SettingBtn release];
     }
     self.userID = [[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID];
+
     if (user.userId == userID.longLongValue ) {
         followButton.hidden = YES;
     }

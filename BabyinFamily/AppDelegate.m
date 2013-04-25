@@ -100,6 +100,8 @@
 - (void) prepareToMainViewControllerWithAnimate:(BOOL)animate
 {
     //reload nib
+   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUnreadCount:) name:MMSinaGotUnreadCount       object:nil];
+
     HomeViewController *vc1      = [[[HomeViewController alloc] init] autorelease];
     HotViewController *vc2       = [[[HotViewController alloc] init] autorelease];
     TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
@@ -152,19 +154,12 @@
     }
 }
 
+//退出登陆回调方法
 -(void)logout
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_ACCESS_TOKEN];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_USER_ID];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_EXPIRATION_DATE];
-
-    [[NSUserDefaults standardUserDefaults] synchronize];
     [timer invalidate];
-    self.timer = nil;
     SinaWeibo *sinaweibo = [self sinaWeibo];
-    
     [sinaweibo logOut];
-    
     [self showFirstRunViewWithAnimate];
     
 }
@@ -193,7 +188,7 @@
         return;
     }
     
-    [self.tabBarController.tabBar.items objectAtIndex:3];
+   // [self.tabBarController.tabBar.items objectAtIndex:3];
 }
 
 @end
