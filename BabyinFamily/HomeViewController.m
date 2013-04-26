@@ -101,10 +101,11 @@
     [super viewWillAppear:animated];
     if(![Utility connectedToNetwork])
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alert show];
         [alert release];
         [self stopLoading];
+        [self doneLoadingTableViewData];
         [[SHKActivityIndicator currentIndicator] hide];
     }else{
         if (shouldLoad)
@@ -115,9 +116,6 @@
             [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
         }
     }
-
-    
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -159,10 +157,11 @@
 {
     if(![Utility connectedToNetwork])
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alert show];
         [alert release];
         [self stopLoading];
+        [self doneLoadingTableViewData];
         [[SHKActivityIndicator currentIndicator] hide];
     }else{
         [manager getHomeLine:-1 maxID:_maxID count:-1 page:_page baseApp:1 feature:2];
@@ -244,10 +243,11 @@
    
     if(![Utility connectedToNetwork])
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alert show];
         [alert release];
         [self stopLoading];
+        [self doneLoadingTableViewData];
         [[SHKActivityIndicator currentIndicator] hide];
     }else{
         _reloading = YES;

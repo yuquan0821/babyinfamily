@@ -44,6 +44,7 @@
 
 -(void)setup
 {
+   
     self.title = @"主页";
     NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_home"];
     self.tabBarItem.image = [UIImage imageNamed:fullpath];
@@ -331,7 +332,6 @@
     //开始绘制第一个cell时，隐藏indecator.
     if (isFirstCell) {
         [[SHKActivityIndicator currentIndicator] hide];
-        //        [[ZJTStatusBarAlertWindow getInstance] hide];
         isFirstCell = NO;
     }
     return cell;
@@ -497,9 +497,20 @@
 #pragma mark EGORefreshTableHeaderDelegate Methods
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
-    _reloading = YES;
-	[manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
-        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
+    
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        [self stopLoading];
+        [self doneLoadingTableViewData];
+        [[SHKActivityIndicator currentIndicator] hide];
+    }else{
+        _reloading = YES;
+        [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];        
+    }
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{

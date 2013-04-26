@@ -50,13 +50,17 @@
 {
     _loadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    [self.loadButton setFrame:CGRectMake(80, MainHeight - 35, 160, 27)];
+    [self.loadButton setFrame:CGRectMake(30, MainHeight - 40, 260, 35)];
     
-    [self.loadButton.titleLabel setFont:[UIFont systemFontOfSize:13.0f]];
-    
-    [self.loadButton.titleLabel  setTextColor:[UIColor blackColor]];
-    
+    [self.loadButton.titleLabel setFont:[UIFont systemFontOfSize:16.0f]];
+
+    [self.loadButton setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
+
     [self.loadButton setTitle:@"使用新浪微博账号登录" forState:UIControlStateNormal];
+    
+    [self.loadButton setImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/Icon-Small"] forState:UIControlStateNormal];
+    
+    [self.loadButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -10, 0.0, 0.0)];
     
     [self.loadButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -80,7 +84,7 @@
 {
     if(![Utility connectedToNetwork])
     {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alert show];
         [alert release];
     }else{

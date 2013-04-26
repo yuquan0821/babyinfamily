@@ -54,7 +54,7 @@
     [self.scrollView setDelegate:self];
     pageControl.numberOfPages = 5;
     pageControl.currentPage = 0;
-    float y = DEVICE_IS_IPHONE5 ? 475 : 400;
+    float y = DEVICE_IS_IPHONE5 ? 475 : 380;
     [self.pageControl setFrame:CGRectMake(110, y, 100, 35)];
 
 }
