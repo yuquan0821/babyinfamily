@@ -94,6 +94,12 @@
 
 - (IBAction)sendPicture:(id)sender
 {
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }else{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             NSString *content =@"#家贝#记录宝贝的每一个瞬间！"  ;
             switch (arc4random() % 5) {
@@ -122,12 +128,14 @@
                 [manager postWithText:content image:image];
                 
             }
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"sendPicture" object:self];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"sendPicture" object:self];
+            });
         });
-    });
 
+    }
+   
 
 }
 -(void)didPost:(NSNotification*)sender

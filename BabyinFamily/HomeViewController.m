@@ -99,13 +99,24 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (shouldLoad)
+    if(![Utility connectedToNetwork])
     {
-        shouldLoad = NO;
-        [manager getUserID];
-        [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
-        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        [self stopLoading];
+        [[SHKActivityIndicator currentIndicator] hide];
+    }else{
+        if (shouldLoad)
+        {
+            shouldLoad = NO;
+            [manager getUserID];
+            [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+            [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
+        }
     }
+
+    
     
 }
 
@@ -146,8 +157,17 @@
 //上拉
 -(void)refresh
 {
-    [manager getHomeLine:-1 maxID:_maxID count:-1 page:_page baseApp:1 feature:2];
-    _shouldAppendTheDataArr = YES;
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        [self stopLoading];
+        [[SHKActivityIndicator currentIndicator] hide];
+    }else{
+        [manager getHomeLine:-1 maxID:_maxID count:-1 page:_page baseApp:1 feature:2];
+        _shouldAppendTheDataArr = YES;
+    }
 }
 
 -(void)appWillResign:(id)sender
@@ -221,10 +241,21 @@
 }
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
-    _reloading = YES;
-	[manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
-    _shouldAppendTheDataArr = NO;
-}
+   
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        [self stopLoading];
+        [[SHKActivityIndicator currentIndicator] hide];
+    }else{
+        _reloading = YES;
+        [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+        _shouldAppendTheDataArr = NO;
+
+    }
+ }
 
 
 

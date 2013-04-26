@@ -179,13 +179,32 @@ enum  {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didComment:) name:MMSinaCommentAStatus object:nil];
 
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }else{
+        if (self.commentArr == nil) {
+            [manager getCommentListWithID:status.statusId maxID:nil page:1];
+        }
+
+    }
     if (self.commentArr == nil) {
         [manager getCommentListWithID:status.statusId maxID:nil page:1];
     }
 }
 
 - (void)refresh {
-    [manager getCommentListWithID:status.statusId maxID:_maxID page:_page];
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }else{
+            
+        [manager getCommentListWithID:status.statusId maxID:_maxID page:_page];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -313,13 +332,22 @@ enum  {
 
 - (void)sendButtonAction
 {
-    NSString *content = textField.text;
-    NSString *weiboID = [NSString stringWithFormat:@"%lld",status.statusId];
-    if ( content != Nil && content.length !=0) {
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }else{
         
-        [manager commentAStatus:weiboID content:content];
+        NSString *content = textField.text;
+        NSString *weiboID = [NSString stringWithFormat:@"%lld",status.statusId];
+        if ( content != Nil && content.length !=0) {
+            
+            [manager commentAStatus:weiboID content:content];
+        }
+        self.textField.text = @"";
     }
-    self.textField.text = @"";
+    
 }
 
 //得到图片

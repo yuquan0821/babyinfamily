@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		280CF2851664CA250031262F /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CF2831664CA240031262F /* SettingVC.m */; };
 		280CF2861664CA250031262F /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280CF2841664CA250031262F /* SettingVC.xib */; };
+		280E9EA6172A14FD003D87AB /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9EA5172A14FD003D87AB /* Utility.m */; };
 		280FBA4A169BD90E0072741B /* AviarySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 280FBA49169BD90E0072741B /* AviarySDKResources.bundle */; };
 		280FBA4C169BD91F0072741B /* libAviarySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 280FBA4B169BD91F0072741B /* libAviarySDK.a */; };
 		280FBA4E169BDCD80072741B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280FBA4D169BDCD80072741B /* CoreImage.framework */; };
@@ -143,7 +144,6 @@
 		B44954B215A978F200FAA116 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B44954B015A978F200FAA116 /* InfoPlist.strings */; };
 		B44954B415A978F200FAA116 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B44954B315A978F200FAA116 /* main.m */; };
 		B44954B815A978F200FAA116 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B44954B715A978F200FAA116 /* AppDelegate.m */; };
-		B4C94ED9164C00F500722F37 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94ED8164C00F500722F37 /* BaseViewController.m */; };
 		B4C94EDD164C015100722F37 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EDC164C015100722F37 /* HomeViewController.m */; };
 		B4C94EE0164C017800722F37 /* HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EDF164C017800722F37 /* HotViewController.m */; };
 		B4C94EE6164C02E900722F37 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EE5164C02E900722F37 /* MessageViewController.m */; };
@@ -178,6 +178,8 @@
 		280CF2821664CA240031262F /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		280CF2831664CA240031262F /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		280CF2841664CA250031262F /* SettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingVC.xib; sourceTree = "<group>"; };
+		280E9EA4172A14FD003D87AB /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility.h; path = NetWork/Utility.h; sourceTree = "<group>"; };
+		280E9EA5172A14FD003D87AB /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utility.m; path = NetWork/Utility.m; sourceTree = "<group>"; };
 		280FBA44169BD8DD0072741B /* AFPhotoEditorContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorContext.h; path = AviarySDK/Headers/AFPhotoEditorContext.h; sourceTree = "<group>"; };
 		280FBA45169BD8DD0072741B /* AFPhotoEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorController.h; path = AviarySDK/Headers/AFPhotoEditorController.h; sourceTree = "<group>"; };
 		280FBA46169BD8DD0072741B /* AFPhotoEditorControllerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPhotoEditorControllerOptions.h; path = AviarySDK/Headers/AFPhotoEditorControllerOptions.h; sourceTree = "<group>"; };
@@ -401,8 +403,6 @@
 		B44954B515A978F200FAA116 /* BabyinFamily-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BabyinFamily-Prefix.pch"; sourceTree = "<group>"; };
 		B44954B615A978F200FAA116 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B44954B715A978F200FAA116 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B4C94ED7164C00F500722F37 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		B4C94ED8164C00F500722F37 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		B4C94EDB164C015100722F37 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		B4C94EDC164C015100722F37 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		B4C94EDE164C017800722F37 /* HotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotViewController.h; sourceTree = "<group>"; };
@@ -679,6 +679,8 @@
 				2896C45B1661E282004705A4 /* WeiBoMessageManager.m */,
 				28CBA96516990FED00D704AC /* AsyncImageDownloader.h */,
 				28CBA96616990FED00D704AC /* AsyncImageDownloader.m */,
+				280E9EA4172A14FD003D87AB /* Utility.h */,
+				280E9EA5172A14FD003D87AB /* Utility.m */,
 			);
 			name = netWork;
 			sourceTree = "<group>";
@@ -738,8 +740,6 @@
 		28EA94A1165F6058009F69E5 /* TabViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				B4C94ED7164C00F500722F37 /* BaseViewController.h */,
-				B4C94ED8164C00F500722F37 /* BaseViewController.m */,
 				B4C94EDB164C015100722F37 /* HomeViewController.h */,
 				B4C94EDC164C015100722F37 /* HomeViewController.m */,
 				B4C94EDE164C017800722F37 /* HotViewController.h */,
@@ -1054,7 +1054,6 @@
 			files = (
 				B44954B415A978F200FAA116 /* main.m in Sources */,
 				B44954B815A978F200FAA116 /* AppDelegate.m in Sources */,
-				B4C94ED9164C00F500722F37 /* BaseViewController.m in Sources */,
 				B4C94EDD164C015100722F37 /* HomeViewController.m in Sources */,
 				B4C94EE0164C017800722F37 /* HotViewController.m in Sources */,
 				B4C94EE6164C02E900722F37 /* MessageViewController.m in Sources */,
@@ -1131,6 +1130,7 @@
 				2889609D1719037600819399 /* WaterFlowView.m in Sources */,
 				28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */,
 				28FE40521726D34D009BEEDC /* UserGuideVIew.m in Sources */,
+				280E9EA6172A14FD003D87AB /* Utility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

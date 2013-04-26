@@ -51,9 +51,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [defaultNotifCenter addObserver:self selector:@selector(didGetHotLine:)    name:MMSinaGotUserStatus          object:nil];
+    [defaultNotifCenter addObserver:self selector:@selector(didGetHotLine:)     name:MMSinaGotUserStatus          object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
-    
+    [defaultNotifCenter addObserver:self selector:@selector(mmRequestFailed:)   name:MMSinaRequestFailed object:nil];
+
 	// Do any additional setup after loading the view, typically from a nib.
     waterFlow = [[WaterFlowView alloc] initWithFrame:CGRectMake(0, 0, MainWidth, MainHeight-82)];
     waterFlow.waterFlowViewDelegate = self;
@@ -80,6 +81,8 @@
     [super viewDidUnload];
     [defaultNotifCenter removeObserver:self name:MMSinaGotUserStatus        object:nil];
     [defaultNotifCenter removeObserver:self name:HHNetDataCacheNotification object:nil];
+    [defaultNotifCenter removeObserver:self name:MMSinaRequestFailed        object:nil];
+
     // Release any retained subviews of the main view.
 }
 
@@ -90,8 +93,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [manager getUserStatusUserID:@"1659171315" sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
-    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        [[SHKActivityIndicator currentIndicator] hide];
+    }else{
+        [manager getUserStatusUserID:@"1659171315" sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -155,6 +166,10 @@
     //reload table
     [waterFlow reloadData];
     
+}
+-(void)mmRequestFailed:(id)sender
+{
+    [[SHKActivityIndicator currentIndicator] hide];
 }
 -(void)didGetHotLine:(NSNotification*)sender
 {

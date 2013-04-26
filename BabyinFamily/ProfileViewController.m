@@ -185,11 +185,20 @@ enum {
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:) name:HHNetDataCacheNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfo:)    name:MMSinaGotUserInfo          object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFollowByUserIDWithResult:) name:MMSinaFollowedByUserIDWithResult object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUnfollowByUserIDWithResult:) name:MMSinaUnfollowedByUserIDWithResult object:nil];
-}
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        
+    }else{
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:) name:HHNetDataCacheNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfo:)    name:MMSinaGotUserInfo          object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFollowByUserIDWithResult:) name:MMSinaFollowedByUserIDWithResult object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUnfollowByUserIDWithResult:) name:MMSinaUnfollowedByUserIDWithResult object:nil];
+
+    }
+  }
 
 -(void)viewWillDisappear:(BOOL)animated
 {

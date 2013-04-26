@@ -78,8 +78,16 @@
 //分享按钮响应方法
 - (void) login:(UIButton*) sender
 {
-    SinaWeibo *sinaWeibo = [self sinaWeibo];
-    [sinaWeibo logIn];
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }else{
+        SinaWeibo *sinaWeibo = [self sinaWeibo];
+        [sinaWeibo logIn];
+    }
+
 }
 
 - (void)removeAuthData

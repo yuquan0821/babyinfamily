@@ -113,17 +113,35 @@
     [center addObserver:self selector:@selector(mmRequestFailed:) name:MMSinaRequestFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     
-    if (self.commentArr == nil) {
-        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
-
-        [manager getCommetListToMe:nil page:1];
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }else{
+        if (self.commentArr == nil) {
+            [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
+            
+            [manager getCommetListToMe:nil page:1];
+        }
     }
+    
 }
 
 - (void)refresh {
-   [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        [self stopLoading];
+        [[SHKActivityIndicator currentIndicator] hide];
+    }else{
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
+        
+        [manager getCommetListToMe:_maxID page:_page];
+    }
 
-    [manager getCommetListToMe:_maxID page:_page];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

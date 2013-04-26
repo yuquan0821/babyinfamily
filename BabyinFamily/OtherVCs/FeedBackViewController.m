@@ -165,17 +165,22 @@
 
 - (void)send:(id)sender
 {
-    
     NSString *content = theTextView.text;
-    
     UIImage *image = theImageView.image;
-    if (content != nil && [content length] != 0)
+    if(![Utility connectedToNetwork])
     {
-        if (!_shouldPostImage) {
-            [manager postWithText:content];
-        }
-        else {
-            [manager postWithText:content image:image];
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }else{
+        if (content != nil && [content length] != 0)
+        {
+            if (!_shouldPostImage) {
+                [manager postWithText:content];
+            }
+            else {
+                [manager postWithText:content image:image];
+            }
         }
     }
 }
