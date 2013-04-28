@@ -52,7 +52,7 @@
     
     [self.loadButton setFrame:CGRectMake(30, MainHeight - 40, 260, 35)];
     
-    [self.loadButton.titleLabel setFont:[UIFont systemFontOfSize:16.0f]];
+    [self.loadButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
 
     [self.loadButton setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
 

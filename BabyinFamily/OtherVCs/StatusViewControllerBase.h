@@ -1,6 +1,6 @@
 //
 //  StatusViewControllerBase.h
-//  zjtSinaWeiboClient
+//  
 //
 //  Created by 范艳春 on 12-11-27.
 //

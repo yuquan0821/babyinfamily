@@ -15,6 +15,12 @@
 		280FBA4E169BDCD80072741B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280FBA4D169BDCD80072741B /* CoreImage.framework */; };
 		280FBA50169BDCF60072741B /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 280FBA4F169BDCF50072741B /* libz.1.1.3.dylib */; };
 		280FBA52169BDD3C0072741B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280FBA51169BDD3B0072741B /* StoreKit.framework */; };
+		2813F289172BC8D800F88BB9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2813F288172BC8D800F88BB9 /* AudioToolbox.framework */; };
+		2813F29A172BCC5E00F88BB9 /* coinImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2813F291172BCC5E00F88BB9 /* coinImageView.m */; };
+		2813F29B172BCC5E00F88BB9 /* coinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2813F293172BCC5E00F88BB9 /* coinView.m */; };
+		2813F29C172BCC5E00F88BB9 /* OpenGLTexture3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 2813F297172BCC5E00F88BB9 /* OpenGLTexture3D.m */; };
+		2813F29D172BCC5E00F88BB9 /* ParticleEmitter3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 2813F299172BCC5E00F88BB9 /* ParticleEmitter3D.m */; };
+		2813F2A7172C0BA300F88BB9 /* SoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 2813F2A6172C0BA300F88BB9 /* SoundEffect.m */; };
 		2828531816E72D530062EC83 /* DetailStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2828531616E72D520062EC83 /* DetailStatusViewController.m */; };
 		2828531916E72D530062EC83 /* DetailStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2828531716E72D520062EC83 /* DetailStatusViewController.xib */; };
 		283654A416BFACDE00203578 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 283654A216BFACD900203578 /* FeedBackViewController.m */; };
@@ -91,6 +97,9 @@
 		2896C4921661E79E004705A4 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C4831661E79E004705A4 /* AboutViewController.xib */; };
 		2896C4931661E79E004705A4 /* AddCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C4851661E79E004705A4 /* AddCommentVC.m */; };
 		2896C4941661E79E004705A4 /* AddCommentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C4861661E79E004705A4 /* AddCommentVC.xib */; };
+		28AE00CF172CB14500640280 /* coins.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28AE00CE172CB14500640280 /* coins.mp3 */; };
+		28AE00D2172CB2A200640280 /* coin.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AE00D0172CB2A200640280 /* coin.png */; };
+		28AE00D3172CB2A200640280 /* stars2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AE00D1172CB2A200640280 /* stars2.png */; };
 		28BAE94716C0DA3E00FA0F47 /* UIDeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */; };
 		28CA6685167F0A660087F45D /* BabyAlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CA6684167F0A660087F45D /* BabyAlertWindow.m */; };
 		28CBA96716990FED00D704AC /* AsyncImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBA96616990FED00D704AC /* AsyncImageDownloader.m */; };
@@ -188,6 +197,20 @@
 		280FBA4D169BDCD80072741B /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		280FBA4F169BDCF50072741B /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		280FBA51169BDD3B0072741B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		2813F278172BBFD000F88BB9 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		2813F288172BC8D800F88BB9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		2813F290172BCC5E00F88BB9 /* coinImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = coinImageView.h; path = coin/coinImageView.h; sourceTree = "<group>"; };
+		2813F291172BCC5E00F88BB9 /* coinImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = coinImageView.m; path = coin/coinImageView.m; sourceTree = "<group>"; };
+		2813F292172BCC5E00F88BB9 /* coinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = coinView.h; path = coin/coinView.h; sourceTree = "<group>"; };
+		2813F293172BCC5E00F88BB9 /* coinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = coinView.m; path = coin/coinView.m; sourceTree = "<group>"; };
+		2813F294172BCC5E00F88BB9 /* ConstantsAndMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConstantsAndMacros.h; path = coin/ConstantsAndMacros.h; sourceTree = "<group>"; };
+		2813F295172BCC5E00F88BB9 /* OpenGLCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLCommon.h; path = coin/OpenGLCommon.h; sourceTree = "<group>"; };
+		2813F296172BCC5E00F88BB9 /* OpenGLTexture3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTexture3D.h; path = coin/OpenGLTexture3D.h; sourceTree = "<group>"; };
+		2813F297172BCC5E00F88BB9 /* OpenGLTexture3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTexture3D.m; path = coin/OpenGLTexture3D.m; sourceTree = "<group>"; };
+		2813F298172BCC5E00F88BB9 /* ParticleEmitter3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleEmitter3D.h; path = coin/ParticleEmitter3D.h; sourceTree = "<group>"; };
+		2813F299172BCC5E00F88BB9 /* ParticleEmitter3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParticleEmitter3D.m; path = coin/ParticleEmitter3D.m; sourceTree = "<group>"; };
+		2813F2A5172C0BA300F88BB9 /* SoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundEffect.h; path = coin/SoundEffect.h; sourceTree = "<group>"; };
+		2813F2A6172C0BA300F88BB9 /* SoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundEffect.m; path = coin/SoundEffect.m; sourceTree = "<group>"; };
 		2828531516E72D520062EC83 /* DetailStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailStatusViewController.h; path = OtherVCs/DetailStatusViewController.h; sourceTree = "<group>"; };
 		2828531616E72D520062EC83 /* DetailStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailStatusViewController.m; path = OtherVCs/DetailStatusViewController.m; sourceTree = "<group>"; };
 		2828531716E72D520062EC83 /* DetailStatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailStatusViewController.xib; path = OtherVCs/DetailStatusViewController.xib; sourceTree = "<group>"; };
@@ -317,6 +340,9 @@
 		2896C4841661E79E004705A4 /* AddCommentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCommentVC.h; path = OtherVCs/AddCommentVC.h; sourceTree = "<group>"; };
 		2896C4851661E79E004705A4 /* AddCommentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddCommentVC.m; path = OtherVCs/AddCommentVC.m; sourceTree = "<group>"; };
 		2896C4861661E79E004705A4 /* AddCommentVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddCommentVC.xib; path = OtherVCs/AddCommentVC.xib; sourceTree = "<group>"; };
+		28AE00CE172CB14500640280 /* coins.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = coins.mp3; path = coin/coinSource/coins.mp3; sourceTree = "<group>"; };
+		28AE00D0172CB2A200640280 /* coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = coin.png; path = coin/coinSource/coin.png; sourceTree = "<group>"; };
+		28AE00D1172CB2A200640280 /* stars2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stars2.png; path = coin/coinSource/stars2.png; sourceTree = "<group>"; };
 		28BAE94516C0DA3D00FA0F47 /* UIDeviceHardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIDeviceHardware.h; path = OtherVCs/UIDeviceHardware.h; sourceTree = "<group>"; };
 		28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIDeviceHardware.m; path = OtherVCs/UIDeviceHardware.m; sourceTree = "<group>"; };
 		28CA6683167F0A660087F45D /* BabyAlertWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyAlertWindow.h; path = BabyTools/BabyAlertWindow.h; sourceTree = "<group>"; };
@@ -417,6 +443,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2813F289172BC8D800F88BB9 /* AudioToolbox.framework in Frameworks */,
+				28EA9366165F12F5009F69E5 /* OpenGLES.framework in Frameworks */,
 				286883C4171840F000A92BE7 /* MessageUI.framework in Frameworks */,
 				286883C21718409A00A92BE7 /* AdSupport.framework in Frameworks */,
 				28368F17170FB2FE008C4CC1 /* libz.1.2.5.dylib in Frameworks */,
@@ -433,7 +461,6 @@
 				2896C47A1661E5FC004705A4 /* ImageIO.framework in Frameworks */,
 				28EA9378165F13BA009F69E5 /* libGPUImage.a in Frameworks */,
 				28EA9368165F1305009F69E5 /* QuartzCore.framework in Frameworks */,
-				28EA9366165F12F5009F69E5 /* OpenGLES.framework in Frameworks */,
 				28EA9364165F12DE009F69E5 /* CoreVideo.framework in Frameworks */,
 				28EA9362165F12D6009F69E5 /* CoreMedia.framework in Frameworks */,
 				B44954AC15A978F200FAA116 /* CoreGraphics.framework in Frameworks */,
@@ -481,6 +508,35 @@
 				280FBA49169BD90E0072741B /* AviarySDKResources.bundle */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		2813F260172BBC6700F88BB9 /* Coin */ = {
+			isa = PBXGroup;
+			children = (
+				2813F290172BCC5E00F88BB9 /* coinImageView.h */,
+				2813F291172BCC5E00F88BB9 /* coinImageView.m */,
+				2813F292172BCC5E00F88BB9 /* coinView.h */,
+				2813F293172BCC5E00F88BB9 /* coinView.m */,
+				2813F294172BCC5E00F88BB9 /* ConstantsAndMacros.h */,
+				2813F295172BCC5E00F88BB9 /* OpenGLCommon.h */,
+				2813F296172BCC5E00F88BB9 /* OpenGLTexture3D.h */,
+				2813F297172BCC5E00F88BB9 /* OpenGLTexture3D.m */,
+				2813F298172BCC5E00F88BB9 /* ParticleEmitter3D.h */,
+				2813F299172BCC5E00F88BB9 /* ParticleEmitter3D.m */,
+				2813F2A5172C0BA300F88BB9 /* SoundEffect.h */,
+				2813F2A6172C0BA300F88BB9 /* SoundEffect.m */,
+			);
+			name = Coin;
+			sourceTree = "<group>";
+		};
+		2813F271172BBCB300F88BB9 /* CoinSource */ = {
+			isa = PBXGroup;
+			children = (
+				28AE00D0172CB2A200640280 /* coin.png */,
+				28AE00D1172CB2A200640280 /* stars2.png */,
+				28AE00CE172CB14500640280 /* coins.mp3 */,
+			);
+			name = CoinSource;
 			sourceTree = "<group>";
 		};
 		28487DFF16DF3A5A00BFB194 /* WaterFllow */ = {
@@ -688,6 +744,7 @@
 		28EA949D165F5962009F69E5 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				2813F271172BBCB300F88BB9 /* CoinSource */,
 				28FE40431726BE73009BEEDC /* 0.jpg */,
 				28FE40441726BE73009BEEDC /* 1.jpg */,
 				28FE40451726BE73009BEEDC /* 2.jpg */,
@@ -729,6 +786,7 @@
 		28EA94A0165F6031009F69E5 /* VCS */ = {
 			isa = PBXGroup;
 			children = (
+				2813F260172BBC6700F88BB9 /* Coin */,
 				28487DFF16DF3A5A00BFB194 /* WaterFllow */,
 				2896C4021661C0E2004705A4 /* OthersVCs */,
 				2896C4031661C0FE004705A4 /* ImageBrowers */,
@@ -872,10 +930,11 @@
 		B44954A615A978F200FAA116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				286883C3171840F000A92BE7 /* MessageUI.framework */,
-				286883C11718409A00A92BE7 /* AdSupport.framework */,
+				2813F288172BC8D800F88BB9 /* AudioToolbox.framework */,
 				28368F0E170FB2C8008C4CC1 /* Accelerate.framework */,
+				286883C11718409A00A92BE7 /* AdSupport.framework */,
 				28EA935D165F129A009F69E5 /* AssetsLibrary.framework */,
+				2813F278172BBFD000F88BB9 /* AudioUnit.framework */,
 				28EA935F165F12A0009F69E5 /* AVFoundation.framework */,
 				B40B1F681650EA5B000BC5DA /* CFNetwork.framework */,
 				28885408167EB767000ED11A /* CoreData.framework */,
@@ -894,6 +953,7 @@
 				280FBA4F169BDCF50072741B /* libz.1.1.3.dylib */,
 				28368F16170FB2FE008C4CC1 /* libz.1.2.5.dylib */,
 				B40B1F6E1650ECCA000BC5DA /* libz.dylib */,
+				286883C3171840F000A92BE7 /* MessageUI.framework */,
 				B40B1F6C1650EB6B000BC5DA /* MobileCoreServices.framework */,
 				28EA9365165F12F5009F69E5 /* OpenGLES.framework */,
 				28EA9367165F1305009F69E5 /* QuartzCore.framework */,
@@ -1042,6 +1102,9 @@
 				28FE404B1726BE73009BEEDC /* 3.jpg in Resources */,
 				28FE404C1726BE73009BEEDC /* 4.jpg in Resources */,
 				28FE40531726D34D009BEEDC /* UserGuideVIew.xib in Resources */,
+				28AE00CF172CB14500640280 /* coins.mp3 in Resources */,
+				28AE00D2172CB2A200640280 /* coin.png in Resources */,
+				28AE00D3172CB2A200640280 /* stars2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1131,6 +1194,11 @@
 				28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */,
 				28FE40521726D34D009BEEDC /* UserGuideVIew.m in Sources */,
 				280E9EA6172A14FD003D87AB /* Utility.m in Sources */,
+				2813F29A172BCC5E00F88BB9 /* coinImageView.m in Sources */,
+				2813F29B172BCC5E00F88BB9 /* coinView.m in Sources */,
+				2813F29C172BCC5E00F88BB9 /* OpenGLTexture3D.m in Sources */,
+				2813F29D172BCC5E00F88BB9 /* ParticleEmitter3D.m in Sources */,
+				2813F2A7172C0BA300F88BB9 /* SoundEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1231,6 +1299,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fan chun (GMTD4D4BTA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BabyinFamily/BabyinFamily-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				INFOPLIST_FILE = "BabyinFamily/BabyinFamily-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -1259,6 +1328,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: fan chun";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BabyinFamily/BabyinFamily-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				INFOPLIST_FILE = "BabyinFamily/BabyinFamily-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (

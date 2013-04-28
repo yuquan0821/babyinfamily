@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "coinView.h"
 
-@interface AboutViewController : UIViewController
+@interface AboutViewController : UIViewController<coinViewDelegate>
+@property (nonatomic, assign)  int counter;
+@property (retain, nonatomic) coinView *coinview;
+@property (retain, nonatomic) NSTimer *timer;
+
+- (IBAction)buttonPressed:(id)sender;
 
 @end
