@@ -142,12 +142,6 @@ enum  {
     self.view.keyboardTriggerOffset = toolBar.bounds.size.height;
     
     [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
-        /*
-         Try not to call "self" inside this block (retain cycle).
-         But if you do, make sure to remove DAKeyboardControl
-         when you are done with the view controller by calling:
-         [self.view removeKeyboardControl];
-         */
         
         CGRect toolBarFrame = toolBar.frame;
         toolBarFrame.origin.y = keyboardFrameInView.origin.y - toolBarFrame.size.height;
@@ -190,9 +184,7 @@ enum  {
         }
 
     }
-    if (self.commentArr == nil) {
-        [manager getCommentListWithID:status.statusId maxID:nil page:1];
-    }
+    
 }
 
 - (void)refresh {
