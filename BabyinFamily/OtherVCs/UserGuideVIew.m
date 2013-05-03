@@ -61,7 +61,7 @@
             descriptionTextView.text = @"她记录了\n        你与孩子的美丽瞬间";            
         }
         if (i == 2) {
-            descriptionTextView.text = @"他记录了\n        生活中孩子的喜怒哀乐";            
+            descriptionTextView.text = @"他记录了\n        孩子生活中的点滴";            
         }
         if (i == 3) {
             descriptionTextView.text = @"在纷繁的世界中\n        孩子是您永远的牵挂";            
