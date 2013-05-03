@@ -297,12 +297,6 @@ static WeiBoMessageManager * instance=nil;
 {    
     NSNotification *notification = [NSNotification notificationWithName:MMSinaRequestFailed object:error];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
-#warning 这里暂时统一处理错误，可能有问题,待定
-    NSError * err = (NSError *)error;
-    if ([self isNetError:err] || [self isTimeOut:err]) {
-        //提示网络出错
-        
-    }
     
 }
 //获取最新的公共微博
