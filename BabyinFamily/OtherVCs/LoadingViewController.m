@@ -14,6 +14,8 @@
 #define StateBarHeight 20
 #define MainHeight (ScreenHeight - StateBarHeight)
 #define MainWidth ScreenWidth
+#define TITLE_FONT [UIFont fontWithName:@"HelveticaNeue-Bold" size:58.0]
+#define TITLE_TEXT_COLOR [UIColor whiteColor]
 
 
 @interface LoadingViewController ()
@@ -25,6 +27,7 @@
 @synthesize loadButton = _loadButton;
 @synthesize indicator = _indicator;
 @synthesize userGuideView;
+@synthesize titleLabel;
 
 - (SinaWeibo*)sinaWeibo
 {
@@ -44,6 +47,7 @@
     [self.view addSubview:_indicator];
     [self addButton];
     [self addGuideView];
+    [self addHeaderView];
 }
 
 - (void) addButton
@@ -64,6 +68,22 @@
     
     [self.loadButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     
+}
+
+- (void) addHeaderView
+
+{
+    CGRect panelTitleLabelFrame;
+        panelTitleLabelFrame = CGRectMake(10, 45, MainWidth - 20, 60);
+        titleLabel = [[UILabel alloc] initWithFrame:panelTitleLabelFrame];
+        titleLabel.text = @"家贝";
+        titleLabel.font = TITLE_FONT;
+        titleLabel.textColor = TITLE_TEXT_COLOR;
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    [self.view addSubview:titleLabel];
+        
 }
 
 - (void) addGuideView

@@ -28,6 +28,8 @@
 
 @property (retain, nonatomic) UserGuideVIew *userGuideView;
 
+@property (retain, nonatomic) UILabel       *titleLabel;
+
 - (void) addButton;
 
 - (void) login:(UIButton*) sender;

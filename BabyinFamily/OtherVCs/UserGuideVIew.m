@@ -28,25 +28,52 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        
     }
     return self;
 }
-
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
+
     for (int i=0; i<5; i++) {
-        CGRect frame = CGRectMake(scrollView.frame.size.width * i,
+        CGRect imageframe = CGRectMake(scrollView.frame.size.width * i,
                                   0,
                                   scrollView.frame.size.width,scrollView.frame.size.height);
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageframe];
         
         [imageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.jpg", i ]]];
+        float x = DEVICE_IS_IPHONE5 ? 420 : 330;
+
+        UITextView *descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(scrollView.frame.size.width * i + 40, x + 5, self.scrollView.frame.size.width - 80, 60)];
+        descriptionTextView.scrollEnabled = NO;
+        descriptionTextView.backgroundColor = [UIColor clearColor];
+        descriptionTextView.textAlignment = NSTextAlignmentLeft;
+        descriptionTextView.textColor = [UIColor whiteColor];
+        descriptionTextView.font = [UIFont boldSystemFontOfSize:16.0f];
+        if (i == 0) {
+            descriptionTextView.text = @"如你所知\n        家贝不止是一款拍照工具";
+        }
+        if (i == 1) {
+            descriptionTextView.text = @"她记录了\n        你与孩子的美丽瞬间";            
+        }
+        if (i == 2) {
+            descriptionTextView.text = @"他记录了\n        生活中孩子的喜怒哀乐";            
+        }
+        if (i == 3) {
+            descriptionTextView.text = @"在纷繁的世界中\n        孩子是您永远的牵挂";            
+        }
+        if (i == 4) {
+            descriptionTextView.text = @"如你所见\n        家贝是你一个温馨的家";            
+        }
+        descriptionTextView.editable = NO;
+        descriptionTextView.userInteractionEnabled = NO;
         
         [scrollView addSubview:imageView];
+        [scrollView addSubview:descriptionTextView];
     }
     
     scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * 5, scrollView.frame.size.height);

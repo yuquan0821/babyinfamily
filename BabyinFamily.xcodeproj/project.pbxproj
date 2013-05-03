@@ -31,6 +31,14 @@
 		28368F17170FB2FE008C4CC1 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28368F16170FB2FE008C4CC1 /* libz.1.2.5.dylib */; };
 		28368F1F171054F9008C4CC1 /* BlurOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28368F1E171054F9008C4CC1 /* BlurOverlayView.m */; };
 		283A8D0316F5A9E300E72753 /* HotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283A8D0216F5A9E300E72753 /* HotViewController.xib */; };
+		283CC8F0172FB19000273249 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 283CC8EB172FB19000273249 /* 3.jpg */; };
+		283CC8F1172FB19000273249 /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 283CC8EC172FB19000273249 /* 0.jpg */; };
+		283CC8F2172FB19000273249 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 283CC8ED172FB19000273249 /* 1.jpg */; };
+		283CC8F3172FB19000273249 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 283CC8EE172FB19000273249 /* 2.jpg */; };
+		283CC8F4172FB19000273249 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 283CC8EF172FB19000273249 /* 4.jpg */; };
+		283CC900172FBB5D00273249 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283CC8FF172FBB5D00273249 /* Default-568h@2x.png */; };
+		283CC904172FC0B700273249 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283CC903172FC0B700273249 /* Default@2x.png */; };
+		283CC906172FC0BE00273249 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 283CC905172FC0BE00273249 /* Default.png */; };
 		284393471706C30C00675BD5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 284393461706C30C00675BD5 /* Icon.png */; };
 		284393491706C31A00675BD5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 284393481706C31A00675BD5 /* Icon@2x.png */; };
 		284C910316DC5569000F2A48 /* StatusViewControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 284C910216DC5569000F2A48 /* StatusViewControllerBase.m */; };
@@ -119,11 +127,6 @@
 		28EA94B3165F7FC1009F69E5 /* TakePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */; };
 		28EA94CB165F961F009F69E5 /* TakePhoto.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94CA165F961F009F69E5 /* TakePhoto.bundle */; };
 		28ECD28516B8C1AA00CAA0DA /* RaisedCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */; };
-		28FE40481726BE73009BEEDC /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40431726BE73009BEEDC /* 0.jpg */; };
-		28FE40491726BE73009BEEDC /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40441726BE73009BEEDC /* 1.jpg */; };
-		28FE404A1726BE73009BEEDC /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40451726BE73009BEEDC /* 2.jpg */; };
-		28FE404B1726BE73009BEEDC /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40461726BE73009BEEDC /* 3.jpg */; };
-		28FE404C1726BE73009BEEDC /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40471726BE73009BEEDC /* 4.jpg */; };
 		28FE40521726D34D009BEEDC /* UserGuideVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FE40501726D34D009BEEDC /* UserGuideVIew.m */; };
 		28FE40531726D34D009BEEDC /* UserGuideVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40511726D34D009BEEDC /* UserGuideVIew.xib */; };
 		28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FFC52B1722B88800430C01 /* LoadingViewController.m */; };
@@ -142,7 +145,6 @@
 		B40B1F6B1650EAB6000BC5DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40B1F6A1650EAB6000BC5DA /* SystemConfiguration.framework */; };
 		B40B1F6D1650EB6B000BC5DA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B40B1F6C1650EB6B000BC5DA /* MobileCoreServices.framework */; };
 		B40B1F6F1650ECCA000BC5DA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B40B1F6E1650ECCA000BC5DA /* libz.dylib */; };
-		B40B1F711650ECD7000BC5DA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B40B1F701650ECD7000BC5DA /* Default-568h@2x.png */; };
 		B40B1F7C1650EE53000BC5DA /* SinaWeibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B40B1F741650EE53000BC5DA /* SinaWeibo.bundle */; };
 		B40B1F7D1650EE53000BC5DA /* SinaWeibo.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B1F761650EE53000BC5DA /* SinaWeibo.m */; };
 		B40B1F7E1650EE53000BC5DA /* SinaWeiboAuthorizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B1F781650EE53000BC5DA /* SinaWeiboAuthorizeView.m */; };
@@ -224,6 +226,14 @@
 		28368F1D171054F9008C4CC1 /* BlurOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurOverlayView.h; sourceTree = "<group>"; };
 		28368F1E171054F9008C4CC1 /* BlurOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurOverlayView.m; sourceTree = "<group>"; };
 		283A8D0216F5A9E300E72753 /* HotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotViewController.xib; sourceTree = "<group>"; };
+		283CC8EB172FB19000273249 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
+		283CC8EC172FB19000273249 /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
+		283CC8ED172FB19000273249 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		283CC8EE172FB19000273249 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
+		283CC8EF172FB19000273249 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
+		283CC8FF172FBB5D00273249 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		283CC903172FC0B700273249 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		283CC905172FC0BE00273249 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		284393461706C30C00675BD5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		284393481706C31A00675BD5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		284C910116DC5569000F2A48 /* StatusViewControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusViewControllerBase.h; path = OtherVCs/StatusViewControllerBase.h; sourceTree = "<group>"; };
@@ -370,11 +380,6 @@
 		28EA94CA165F961F009F69E5 /* TakePhoto.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TakePhoto.bundle; path = Images/TakePhoto/TakePhoto.bundle; sourceTree = "<group>"; };
 		28ECD28316B8C1AA00CAA0DA /* RaisedCenterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RaisedCenterButton.h; path = OtherVCs/RaisedCenterButton.h; sourceTree = "<group>"; };
 		28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RaisedCenterButton.m; path = OtherVCs/RaisedCenterButton.m; sourceTree = "<group>"; };
-		28FE40431726BE73009BEEDC /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
-		28FE40441726BE73009BEEDC /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
-		28FE40451726BE73009BEEDC /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
-		28FE40461726BE73009BEEDC /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
-		28FE40471726BE73009BEEDC /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
 		28FE404F1726D34C009BEEDC /* UserGuideVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserGuideVIew.h; path = OtherVCs/UserGuideVIew.h; sourceTree = "<group>"; };
 		28FE40501726D34D009BEEDC /* UserGuideVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserGuideVIew.m; path = OtherVCs/UserGuideVIew.m; sourceTree = "<group>"; };
 		28FE40511726D34D009BEEDC /* UserGuideVIew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserGuideVIew.xib; path = OtherVCs/UserGuideVIew.xib; sourceTree = "<group>"; };
@@ -409,7 +414,6 @@
 		B40B1F6A1650EAB6000BC5DA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B40B1F6C1650EB6B000BC5DA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B40B1F6E1650ECCA000BC5DA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		B40B1F701650ECD7000BC5DA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		B40B1F741650EE53000BC5DA /* SinaWeibo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = SinaWeibo.bundle; path = lib/SinaWeibo/SinaWeibo.bundle; sourceTree = SOURCE_ROOT; };
 		B40B1F751650EE53000BC5DA /* SinaWeibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SinaWeibo.h; path = lib/SinaWeibo/SinaWeibo.h; sourceTree = SOURCE_ROOT; };
 		B40B1F761650EE53000BC5DA /* SinaWeibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinaWeibo.m; path = lib/SinaWeibo/SinaWeibo.m; sourceTree = SOURCE_ROOT; };
@@ -744,12 +748,12 @@
 		28EA949D165F5962009F69E5 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				283CC8EC172FB19000273249 /* 0.jpg */,
+				283CC8ED172FB19000273249 /* 1.jpg */,
+				283CC8EE172FB19000273249 /* 2.jpg */,
+				283CC8EB172FB19000273249 /* 3.jpg */,
+				283CC8EF172FB19000273249 /* 4.jpg */,
 				2813F271172BBCB300F88BB9 /* CoinSource */,
-				28FE40431726BE73009BEEDC /* 0.jpg */,
-				28FE40441726BE73009BEEDC /* 1.jpg */,
-				28FE40451726BE73009BEEDC /* 2.jpg */,
-				28FE40461726BE73009BEEDC /* 3.jpg */,
-				28FE40471726BE73009BEEDC /* 4.jpg */,
 				284393461706C30C00675BD5 /* Icon.png */,
 				284393481706C31A00675BD5 /* Icon@2x.png */,
 				B4C94EEE164C057100722F37 /* sourcekit.bundle */,
@@ -984,11 +988,13 @@
 			children = (
 				B44954B615A978F200FAA116 /* AppDelegate.h */,
 				B44954B715A978F200FAA116 /* AppDelegate.m */,
-				2854E28316D46F2A008B6E4B /* ImageCache.xcdatamodeld */,
 				B44954AF15A978F200FAA116 /* BabyinFamily-Info.plist */,
 				B44954B515A978F200FAA116 /* BabyinFamily-Prefix.pch */,
-				B40B1F701650ECD7000BC5DA /* Default-568h@2x.png */,
+				283CC8FF172FBB5D00273249 /* Default-568h@2x.png */,
+				283CC905172FC0BE00273249 /* Default.png */,
+				283CC903172FC0B700273249 /* Default@2x.png */,
 				B40B1F8B1650F001000BC5DA /* GlobalConfig.h */,
+				2854E28316D46F2A008B6E4B /* ImageCache.xcdatamodeld */,
 				B44954B015A978F200FAA116 /* InfoPlist.strings */,
 				B44954B315A978F200FAA116 /* main.m */,
 			);
@@ -1069,9 +1075,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				283CC900172FBB5D00273249 /* Default-568h@2x.png in Resources */,
 				B44954B215A978F200FAA116 /* InfoPlist.strings in Resources */,
 				B4C94EEF164C057100722F37 /* sourcekit.bundle in Resources */,
-				B40B1F711650ECD7000BC5DA /* Default-568h@2x.png in Resources */,
 				B40B1F7C1650EE53000BC5DA /* SinaWeibo.bundle in Resources */,
 				28EA94B3165F7FC1009F69E5 /* TakePhotoViewController.xib in Resources */,
 				28EA94CB165F961F009F69E5 /* TakePhoto.bundle in Resources */,
@@ -1096,15 +1102,17 @@
 				284393471706C30C00675BD5 /* Icon.png in Resources */,
 				284393491706C31A00675BD5 /* Icon@2x.png in Resources */,
 				28FFC52E1722B88800430C01 /* LoadingViewController.xib in Resources */,
-				28FE40481726BE73009BEEDC /* 0.jpg in Resources */,
-				28FE40491726BE73009BEEDC /* 1.jpg in Resources */,
-				28FE404A1726BE73009BEEDC /* 2.jpg in Resources */,
-				28FE404B1726BE73009BEEDC /* 3.jpg in Resources */,
-				28FE404C1726BE73009BEEDC /* 4.jpg in Resources */,
 				28FE40531726D34D009BEEDC /* UserGuideVIew.xib in Resources */,
 				28AE00CF172CB14500640280 /* coins.mp3 in Resources */,
 				28AE00D2172CB2A200640280 /* coin.png in Resources */,
 				28AE00D3172CB2A200640280 /* stars2.png in Resources */,
+				283CC8F0172FB19000273249 /* 3.jpg in Resources */,
+				283CC8F1172FB19000273249 /* 0.jpg in Resources */,
+				283CC8F2172FB19000273249 /* 1.jpg in Resources */,
+				283CC8F3172FB19000273249 /* 2.jpg in Resources */,
+				283CC8F4172FB19000273249 /* 4.jpg in Resources */,
+				283CC904172FC0B700273249 /* Default@2x.png in Resources */,
+				283CC906172FC0BE00273249 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
