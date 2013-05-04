@@ -100,6 +100,7 @@
         [alert show];
         [alert release];
     }else{
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"发送中，请稍后..." inView:self.view];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             NSString *content =@"#家贝#记录宝贝的每一个瞬间！"  ;
             switch (arc4random() % 5) {
@@ -124,7 +125,8 @@
             
             UIImage *image = self.mainImageView.image;
             if (image != nil && content != Nil && content.length !=0) {
-                [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
+//                [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
+                
                 [manager postWithText:content image:image];
                 
             }
@@ -142,8 +144,9 @@
 {
     Status *sts = sender.object;
     if (sts.text != nil && [sts.text length] != 0) {
-        [[BabyAlertWindow getInstance] hide];
-        [self.navigationController dismissModalViewControllerAnimated:NO];
+//        [[BabyAlertWindow getInstance] hide];
+        [[SHKActivityIndicator currentIndicator] hide];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         self.tabBarController.tabBar.hidden = NO;
         self.tabBarController.selectedIndex = 0;
     }
@@ -151,8 +154,9 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         [alert release];
-        [[BabyAlertWindow getInstance] hide];
-        [self.navigationController dismissModalViewControllerAnimated:NO];
+//        [[BabyAlertWindow getInstance] hide];
+        [[SHKActivityIndicator currentIndicator] hide];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         self.tabBarController.tabBar.hidden = NO;
         self.tabBarController.selectedIndex = 0;
     }
