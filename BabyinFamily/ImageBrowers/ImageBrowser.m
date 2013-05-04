@@ -41,7 +41,7 @@
     self = [super initWithFrame:frame];
     if (self) 
     {
-        aScrollView = [[CustomScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        aScrollView = [[CustomScrollView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
         aScrollView.userInteractionEnabled = YES;
         
@@ -80,7 +80,7 @@
         return;
     }
     UIImageWriteToSavedPhotosAlbum(imageView.image, nil, nil, nil);
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"ImageSaveSucced" delegate:self cancelButtonTitle:@"Sure" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"保存成功！" delegate:self cancelButtonTitle:@"是" otherButtonTitles:nil];
     [alert show];
     [alert release];
 }

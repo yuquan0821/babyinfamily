@@ -12,6 +12,8 @@
 
 #define kTextViewPadding            16.0
 #define kLineBreakMode              UILineBreakModeWordWrap
+#define ScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define ScreenWidth [[UIScreen mainScreen] bounds].size.width
 
 
 @interface StatusViewControllerBase()
@@ -421,7 +423,7 @@
     BOOL isRetwitter = sts.retweetedStatus && sts.retweetedStatus.originalPic != nil;
     UIApplication *app = [UIApplication sharedApplication];
     
-    CGRect frame = CGRectMake(0, 0, 320, 480);
+    CGRect frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
     if (browserView == nil) {
         self.browserView = [[[ImageBrowser alloc]initWithFrame:frame] autorelease];
         [browserView setUp];
