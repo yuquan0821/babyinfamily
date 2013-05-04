@@ -9,6 +9,7 @@
 #import "StatusViewControllerBase.h"
 #import "UIImageView+Resize.h"
 #import "ProfileViewController.h"
+#import "SVStatusHUD.h"
 
 #define kTextViewPadding            16.0
 #define kLineBreakMode              UILineBreakModeWordWrap
@@ -257,6 +258,7 @@
     [self stopLoading];
     [self doneLoadingTableViewData];
     [[SHKActivityIndicator currentIndicator] hide];
+    
 }
 
 //计算text field 的高度。

@@ -963,7 +963,7 @@
 #pragma mark - ASINetworkQueueDelegate
 //失败
 - (void)requestFailed:(ASIHTTPRequest *)request{
-    NSLog(@"requestFailed:%@,%@,",request.responseString,[request.error localizedDescription]);
+    NSLog(@"requestFailed:%@,code=%d,%@,",request.responseString,[request.error code],[request.error localizedDescription]);
 
     NSDictionary *userInformation = [request userInfo];
     RequestType requestType = [[userInformation objectForKey:USER_INFO_KEY_TYPE] intValue];

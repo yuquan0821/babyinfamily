@@ -76,6 +76,7 @@ static BabyAlertWindow *instance = nil;
 }
 
 +(BabyAlertWindow *) getInstance{
+    return nil;
     @synchronized(self) {
         if (instance == nil) {
             instance = [[BabyAlertWindow alloc] init];

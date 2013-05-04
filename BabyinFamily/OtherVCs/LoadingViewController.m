@@ -121,10 +121,9 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_EXPIRATION_DATE];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_STORE_REFRESH_TOKEN];
 }
-- (void)storeAuthData
+- (void)storeAuthData:(SinaWeibo *)sinaWeibo;
 {
-    SinaWeibo *sinaWeibo = [self sinaWeibo];
-    
+    //保存到本地plist
     NSString *accessToken = sinaWeibo.accessToken;
     NSString *userId = sinaWeibo.userID;
     NSDate   *expirationDate = sinaWeibo.expirationDate;
@@ -135,13 +134,18 @@
     [[NSUserDefaults standardUserDefaults] setObject:refreshToken forKey:USER_STORE_REFRESH_TOKEN];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+ 
+    //更新model
+    [self sinaWeibo].accessToken = sinaWeibo.accessToken;
+    [self sinaWeibo].userID = sinaWeibo.userID;
+    [self sinaWeibo].expirationDate = sinaWeibo.expirationDate;
+    [self sinaWeibo].refreshToken = sinaWeibo.refreshToken;
 }
 
 //登陆成功后回调方法
 - (void) sinaweiboDidLogIn:(SinaWeibo *)sinaweibo
 {
-    [self storeAuthData];
+    [self storeAuthData:sinaweibo];
     [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewControllerWithAnimate:) withObject:[NSNumber numberWithBool:NO]];
     [[NSNotificationCenter defaultCenter] postNotificationName:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
     [self.navigationController popViewControllerAnimated:YES];
