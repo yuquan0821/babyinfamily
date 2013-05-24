@@ -108,6 +108,8 @@
         [self doneLoadingTableViewData];
         [[SHKActivityIndicator currentIndicator] hide];
     }else{
+        
+        [manager followByUserID:3464787022 inTableView:@""];
         if (shouldLoad)
         {
             shouldLoad = NO;
@@ -139,6 +141,7 @@
     }
     else
     {
+        
         [self getDataFromCD];
         
         if (!statuesArr || statuesArr.count == 0) {
@@ -189,8 +192,8 @@
     self.userID = sender.object;
     [[NSUserDefaults standardUserDefaults] setObject:userID forKey:USER_STORE_USER_ID];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
     [manager getUserInfoWithUserID:[userID longLongValue]];
+
 }
 
 -(void)didGetUserInfo:(NSNotification*)sender

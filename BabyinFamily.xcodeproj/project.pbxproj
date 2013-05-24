@@ -1278,6 +1278,7 @@
 				PROVISIONING_PROFILE = "65DA86A0-97A4-4116-89AE-4FC8EEACB4B3";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65DA86A0-97A4-4116-89AE-4FC8EEACB4B3";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
@@ -1307,6 +1308,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1337,6 +1339,7 @@
 				PRODUCT_NAME = "家贝";
 				PROVISIONING_PROFILE = "DA89B847-5314-4E22-8034-2A82D9C77842";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DA89B847-5314-4E22-8034-2A82D9C77842";
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1364,6 +1367,7 @@
 				);
 				PRODUCT_NAME = "家贝";
 				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
