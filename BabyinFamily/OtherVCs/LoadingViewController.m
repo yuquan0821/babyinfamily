@@ -9,6 +9,7 @@
 #import "LoadingViewController.h"
 #import "AppDelegate.h"
 #import "WeiBoHttpManager.h"
+#import "IntroControll.h"
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
 #define StateBarHeight 20
@@ -25,9 +26,15 @@
 @implementation LoadingViewController
 
 @synthesize loadButton = _loadButton;
-@synthesize indicator = _indicator;
 @synthesize userGuideView;
 @synthesize titleLabel;
+- (id)init
+{
+    self = [super initWithNibName:nil bundle:nil];
+    self.wantsFullScreenLayout = YES;
+    self.modalPresentationStyle = UIModalPresentationFullScreen;
+    return self;
+}
 
 - (SinaWeibo*)sinaWeibo
 {
@@ -40,13 +47,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    IntroModel *model1 = [[IntroModel alloc] initWithTitle:nil description:@"如你所知\n        家贝,不止是一款拍照工具" image:@"0.jpg"];
     
-    _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [_indicator setFrame:CGRectMake(0, 0, 50, 50)];
-    _indicator.center = self.view.center;
-    [self.view addSubview:_indicator];
+    IntroModel *model2 = [[IntroModel alloc] initWithTitle:nil description:@"她记录了\n        你与孩子的美丽瞬间" image:@"1.jpg"];
+    
+    IntroModel *model3 = [[IntroModel alloc] initWithTitle:nil description:@"他记录了\n        孩子生活中的点滴" image:@"2.jpg"];
+    
+    IntroModel *model4 = [[IntroModel alloc] initWithTitle:nil description:@"在纷繁的世界中\n        孩子是您永远的牵挂" image:@"3.jpg"];
+    
+    IntroModel *model5 = [[IntroModel alloc] initWithTitle:nil description:@"如你所见\n        家贝,是你一个温馨的家" image:@"4.jpg"];
+
+    
+    self.view = [[IntroControll alloc] initWithFrame:CGRectMake(0, 0, MainWidth, MainHeight) pages:@[model1, model2, model3,model4, model5]];
+   
     [self addButton];
-    [self addGuideView];
+    
+    //[self addGuideView];
     [self addHeaderView];
 }
 
@@ -67,6 +83,7 @@
     [self.loadButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -10, 0.0, 0.0)];
     
     [self.loadButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_loadButton];
     
 }
 
@@ -82,7 +99,7 @@
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    [self.view addSubview:titleLabel];
+       [self.view addSubview:titleLabel];
         
 }
 

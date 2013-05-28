@@ -50,6 +50,10 @@
 		286883C21718409A00A92BE7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286883C11718409A00A92BE7 /* AdSupport.framework */; };
 		286883C4171840F000A92BE7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286883C3171840F000A92BE7 /* MessageUI.framework */; };
 		2871907F16F7011B00A3527B /* AddComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2871907E16F7011B00A3527B /* AddComment.xib */; };
+		28833F73174F4A5C00039B56 /* IntroControll.m in Sources */ = {isa = PBXBuildFile; fileRef = 28833F6E174F4A5C00039B56 /* IntroControll.m */; };
+		28833F74174F4A5C00039B56 /* IntroModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28833F70174F4A5C00039B56 /* IntroModel.m */; };
+		28833F75174F4A5C00039B56 /* IntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28833F72174F4A5C00039B56 /* IntroView.m */; };
+		28833F77174F4AA200039B56 /* shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28833F76174F4AA200039B56 /* shadow@2x.png */; };
 		2884955516631CD30042C4CD /* FollowerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884955316631CD30042C4CD /* FollowerVC.m */; };
 		2884955616631CD30042C4CD /* FollowerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2884955416631CD30042C4CD /* FollowerVC.xib */; };
 		28849558166321800042C4CD /* weibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28849557166321800042C4CD /* weibo.bundle */; };
@@ -251,6 +255,13 @@
 		286883C11718409A00A92BE7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		286883C3171840F000A92BE7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2871907E16F7011B00A3527B /* AddComment.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddComment.xib; path = OtherVCs/AddComment.xib; sourceTree = "<group>"; };
+		28833F6D174F4A5C00039B56 /* IntroControll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroControll.h; path = introduction/IntroControll.h; sourceTree = "<group>"; };
+		28833F6E174F4A5C00039B56 /* IntroControll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroControll.m; path = introduction/IntroControll.m; sourceTree = "<group>"; };
+		28833F6F174F4A5C00039B56 /* IntroModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroModel.h; path = introduction/IntroModel.h; sourceTree = "<group>"; };
+		28833F70174F4A5C00039B56 /* IntroModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroModel.m; path = introduction/IntroModel.m; sourceTree = "<group>"; };
+		28833F71174F4A5C00039B56 /* IntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroView.h; path = introduction/IntroView.h; sourceTree = "<group>"; };
+		28833F72174F4A5C00039B56 /* IntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroView.m; path = introduction/IntroView.m; sourceTree = "<group>"; };
+		28833F76174F4AA200039B56 /* shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shadow@2x.png"; sourceTree = "<group>"; };
 		2884955216631CD30042C4CD /* FollowerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FollowerVC.h; path = OtherVCs/FollowerVC.h; sourceTree = "<group>"; };
 		2884955316631CD30042C4CD /* FollowerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FollowerVC.m; path = OtherVCs/FollowerVC.m; sourceTree = "<group>"; };
 		2884955416631CD30042C4CD /* FollowerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowerVC.xib; path = OtherVCs/FollowerVC.xib; sourceTree = "<group>"; };
@@ -572,6 +583,19 @@
 			name = CoreDataModels;
 			sourceTree = "<group>";
 		};
+		28833F6A174F49F200039B56 /* introduction */ = {
+			isa = PBXGroup;
+			children = (
+				28833F6D174F4A5C00039B56 /* IntroControll.h */,
+				28833F6E174F4A5C00039B56 /* IntroControll.m */,
+				28833F6F174F4A5C00039B56 /* IntroModel.h */,
+				28833F70174F4A5C00039B56 /* IntroModel.m */,
+				28833F71174F4A5C00039B56 /* IntroView.h */,
+				28833F72174F4A5C00039B56 /* IntroView.m */,
+			);
+			name = introduction;
+			sourceTree = "<group>";
+		};
 		2896C4021661C0E2004705A4 /* OthersVCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -794,6 +818,7 @@
 		28EA94A0165F6031009F69E5 /* VCS */ = {
 			isa = PBXGroup;
 			children = (
+				28833F6A174F49F200039B56 /* introduction */,
 				2813F260172BBC6700F88BB9 /* Coin */,
 				28487DFF16DF3A5A00BFB194 /* WaterFllow */,
 				2896C4021661C0E2004705A4 /* OthersVCs */,
@@ -997,6 +1022,7 @@
 				283CC8FF172FBB5D00273249 /* Default-568h@2x.png */,
 				283CC905172FC0BE00273249 /* Default.png */,
 				283CC903172FC0B700273249 /* Default@2x.png */,
+				28833F76174F4AA200039B56 /* shadow@2x.png */,
 				B40B1F8B1650F001000BC5DA /* GlobalConfig.h */,
 				2854E28316D46F2A008B6E4B /* ImageCache.xcdatamodeld */,
 				B44954B015A978F200FAA116 /* InfoPlist.strings */,
@@ -1127,6 +1153,7 @@
 				283CC8F4172FB19000273249 /* 4.jpg in Resources */,
 				283CC904172FC0B700273249 /* Default@2x.png in Resources */,
 				283CC906172FC0BE00273249 /* Default.png in Resources */,
+				28833F77174F4AA200039B56 /* shadow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1222,6 +1249,9 @@
 				2813F29D172BCC5E00F88BB9 /* ParticleEmitter3D.m in Sources */,
 				2813F2A7172C0BA300F88BB9 /* SoundEffect.m in Sources */,
 				B4CB588C1734FACC006870F9 /* SVStatusHUD.m in Sources */,
+				28833F73174F4A5C00039B56 /* IntroControll.m in Sources */,
+				28833F74174F4A5C00039B56 /* IntroModel.m in Sources */,
+				28833F75174F4A5C00039B56 /* IntroView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

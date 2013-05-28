@@ -19,12 +19,9 @@
 {
     UIButton *_loadButton;
     
-    UIActivityIndicatorView *_indicator;
 }
 
-@property (strong, nonatomic) UIButton *loadButton;
-
-@property (strong, nonatomic) UIActivityIndicatorView *indicator;
+@property (retain, nonatomic) UIButton *loadButton;
 
 @property (retain, nonatomic) UserGuideVIew *userGuideView;
 
