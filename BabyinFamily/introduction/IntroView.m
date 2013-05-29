@@ -16,7 +16,7 @@
         [titleLabel sizeToFit];
         [titleLabel setCenter:CGPointMake(frame.size.width/2, frame.size.height-145)];
         [self addSubview:titleLabel];
-        
+        [titleLabel release];
        
         float x = DEVICE_IS_IPHONE5 ? 420 : 330;
         UITextView *descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(40, x + 5, 240, 60)];
@@ -30,6 +30,7 @@
         descriptionTextView.editable = NO;
         descriptionTextView.userInteractionEnabled = NO;
         [self addSubview:descriptionTextView];
+        [descriptionTextView release];
      
     }
     return self;

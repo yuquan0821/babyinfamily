@@ -1,14 +1,34 @@
 #import "IntroControll.h"
+
+@interface IntroControll ()
+@property(nonatomic, retain)UIImageView *backgroundImage1;
+@property(nonatomic, retain)UIImageView *backgroundImage2;
+@property(nonatomic, retain)UIScrollView *scrollView;
+@property(nonatomic, retain)UIPageControl *pageControl;
+@property(nonatomic, retain)NSArray *pages;
+@property(nonatomic, retain)NSTimer *timer;
+@end
+
 @implementation IntroControll
 //fan 修改
 
-/*@synthesize backgroundImage1;
+@synthesize backgroundImage1;
 @synthesize backgroundImage2;
 @synthesize scrollView;
 @synthesize pageControl;
 @synthesize pages;
-@synthesize timer;*/
-
+@synthesize timer;
+- (void)dealloc{
+    [backgroundImage1 release];
+    [backgroundImage2 release];
+    [scrollView release];
+    [pageControl release];
+    [pages release];
+    [timer invalidate];
+    [timer release];
+    [super dealloc];
+    
+}
 - (id)initWithFrame:(CGRect)frame pages:(NSArray*)pagesArray
 {
     self = [super initWithFrame:frame];
@@ -18,12 +38,12 @@
         
         self.backgroundColor = [UIColor blackColor];
         
-        backgroundImage1 = [[[UIImageView alloc] initWithFrame:frame] autorelease];
+        backgroundImage1 = [[UIImageView alloc] initWithFrame:frame];
         [backgroundImage1 setContentMode:UIViewContentModeScaleAspectFill];
         [backgroundImage1 setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
         [self addSubview:backgroundImage1];
 
-        backgroundImage2 = [[[UIImageView alloc] initWithFrame:frame] autorelease];
+        backgroundImage2 = [[UIImageView alloc] initWithFrame:frame];
         [backgroundImage2 setContentMode:UIViewContentModeScaleAspectFill];
         [backgroundImage2 setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
         [self addSubview:backgroundImage2];
@@ -51,11 +71,7 @@
         [self addSubview:pageControl];
         
         //Create pages
-        pages = pagesArray;
-        
-        //fan 修改
-
-        [pages retain];
+        self.pages = pagesArray;
         
         scrollView.contentSize = CGSizeMake(pages.count * frame.size.width, frame.size.height);
         
@@ -66,6 +82,7 @@
             IntroView *view = [[IntroView alloc] initWithFrame:frame model:[pages objectAtIndex:i]];
             view.frame = CGRectOffset(view.frame, i*frame.size.width, 0);
             [scrollView addSubview:view];
+            [view release];
         }
             
         //start timer
