@@ -243,11 +243,10 @@
 
         [self refreshVisibleCellsImages];
     }else{
-        [SVStatusHUD showWithImage:nil status:@"没有更多了"];
+        refreshFooterView.hidden = YES;
     }
     
     [[SHKActivityIndicator currentIndicator] hide];
-    refreshFooterView.hidden = NO;
 }
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
