@@ -423,9 +423,9 @@ static WeiBoMessageManager * instance=nil;
 //获取当前登录用户及其所关注用户的最新微博
 -(void)didGetHomeLine:(NSArray *)statusArr
 {
-    if (statusArr == nil || [statusArr count] == 0) {
-        return;
-    }
+//    if (statusArr == nil || [statusArr count] == 0) {
+//        return;
+//    }
     NSNotification *notification = [NSNotification notificationWithName:MMSinaGotHomeLine object:statusArr];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }

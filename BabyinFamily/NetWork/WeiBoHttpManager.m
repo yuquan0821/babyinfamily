@@ -1275,8 +1275,10 @@
         }
         NSString *isRefresh = [userInformation objectForKey:@"isRefresh"];
         if ([isRefresh isEqualToString:@"YES"]) {
-            Status* s = [statuesArr objectAtIndex:0];
-            s.isRefresh = @"YES";
+            if (statuesArr.count>0) {
+                Status* s = [statuesArr objectAtIndex:0];
+                s.isRefresh = @"YES";
+            }
         }
         if ([delegate respondsToSelector:@selector(didGetHomeLine:)]) {
             [delegate didGetHomeLine:statuesArr];

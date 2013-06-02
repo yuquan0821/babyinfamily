@@ -12,6 +12,7 @@
 #import "BabyHelper.h"
 #import "BabyAlertWindow.h"
 #import "CoreDataManager.h"
+#import "SVStatusHUD.h"
 
 @interface HomeViewController()
 - (void)getDataFromCD;
@@ -220,6 +221,7 @@
         }
     }
     
+    NSArray * newStatus = (NSArray *)sender.object;
     [self stopLoading];
     [self doneLoadingTableViewData];
     
@@ -232,14 +234,20 @@
         _page = 1;
     }
     else {
-        [statuesArr addObjectsFromArray:sender.object];
+        [statuesArr addObjectsFromArray:newStatus];
     }
-    _page++;
-    refreshFooterView.hidden = NO;
-    [self.tableView reloadData];
-    [[SHKActivityIndicator currentIndicator] hide];
-    [self refreshVisibleCellsImages];
+    //newStatus的count大于0的时候，认为是有下一页的
+    if (newStatus.count > 0) {
+        _page++;
+        [self.tableView reloadData];
+
+        [self refreshVisibleCellsImages];
+    }else{
+        [SVStatusHUD showWithImage:nil status:@"没有更多了"];
+    }
     
+    [[SHKActivityIndicator currentIndicator] hide];
+    refreshFooterView.hidden = NO;
 }
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
