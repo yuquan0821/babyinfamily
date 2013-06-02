@@ -1081,7 +1081,7 @@
         NSMutableArray  *commentArr = [[NSMutableArray alloc]initWithCapacity:0];
         for (id item in arr) {
             Comment *comm = [Comment commentWithJsonDictionary:item];
-            if ([comm.status.source isEqualToString:@"未通过审核应用"]||[comm.status.source isEqualToString:@"家贝"]) {
+            if ([comm.status.source isEqualToString:@"家贝"]) {
                 [commentArr addObject:comm];
             }
         }
