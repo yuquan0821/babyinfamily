@@ -42,6 +42,8 @@
     if (self) {
         _isFollowingViewController = NO;
         _manager = [WeiBoMessageManager getInstance];
+        _fansCursor = 0;
+        _followCursor = 0;
     }
     return self;
 }
@@ -136,17 +138,33 @@
     }
 }
 
+
 -(void)gotFollowUserList:(NSNotification*)sender
 {
     NSDictionary *dic = sender.object;
     NSArray *arr = [dic objectForKey:@"userArr"];
+    NSNumber *cursor = [dic objectForKey:@"cursor"];
     User *tempUser = [arr lastObject];
     User *lastUser = [_userArr lastObject];
+    
     if (![tempUser.screenName isEqualToString:lastUser.screenName]) {
-        self.userArr = arr;
+        if (_userArr == nil || _userArr.count == 0 || _followCursor == 0) {
+            self.userArr = [NSMutableArray arrayWithArray:arr];
+        }
+        else {
+            [_userArr addObjectsFromArray:arr];
+        }
+        if (_isFollowingViewController) {
+            
+            _fansCursor   = cursor.intValue;
+        }
+        else {
+            _followCursor = cursor.intValue;
+        }
         [self.table reloadData];
     }
     else {
+        self.refreshFooterView.hidden = YES;
         
     }
     [self stopLoading];
@@ -155,6 +173,7 @@
     [self refreshVisibleCellsImages];
     
 }
+
 
 -(void)gotFollowResult:(NSNotification*)sender
 {
@@ -237,7 +256,6 @@
 {
     [self stopLoading];
     [[SHKActivityIndicator currentIndicator] hide];
-    //    [[ZJTStatusBarAlertWindow getInstance] hide];
 }
 
 - (void)refresh
@@ -255,10 +273,10 @@
         userID = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID];
     }
     if (_isFollowingViewController) {
-        [_manager getFollowingUserList:[userID longLongValue] count:50 cursor:0];
+        [_manager getFollowingUserList:[userID longLongValue] count:50 cursor:_fansCursor];
     }
     else {
-        [_manager getFollowedUserList:[userID longLongValue] count:50 cursor:0];
+        [_manager getFollowedUserList:[userID longLongValue] count:50 cursor:_followCursor];
     }
     if (self.userArr == nil) {
         [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];

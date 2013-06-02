@@ -19,6 +19,8 @@
     BOOL _isFollowingViewController;
     WeiBoMessageManager *_manager;
     UINib *_followerCellNib;
+    int _fansCursor;
+    int _followCursor;
     User *_user;
 }
 
