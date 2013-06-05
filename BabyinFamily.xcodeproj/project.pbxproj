@@ -133,6 +133,7 @@
 		28ECD28516B8C1AA00CAA0DA /* RaisedCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECD28416B8C1AA00CAA0DA /* RaisedCenterButton.m */; };
 		28FE40521726D34D009BEEDC /* UserGuideVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FE40501726D34D009BEEDC /* UserGuideVIew.m */; };
 		28FE40531726D34D009BEEDC /* UserGuideVIew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FE40511726D34D009BEEDC /* UserGuideVIew.xib */; };
+		28FEB45D175BABE000437D53 /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FEB45C175BABE000437D53 /* Toast+UIView.m */; };
 		28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FFC52B1722B88800430C01 /* LoadingViewController.m */; };
 		28FFC52E1722B88800430C01 /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FFC52C1722B88800430C01 /* LoadingViewController.xib */; };
 		B40B1F5C1650E9D6000BC5DA /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B40B1F471650E9D6000BC5DA /* ASIAuthenticationDialog.m */; };
@@ -395,6 +396,8 @@
 		28FE404F1726D34C009BEEDC /* UserGuideVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserGuideVIew.h; path = OtherVCs/UserGuideVIew.h; sourceTree = "<group>"; };
 		28FE40501726D34D009BEEDC /* UserGuideVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserGuideVIew.m; path = OtherVCs/UserGuideVIew.m; sourceTree = "<group>"; };
 		28FE40511726D34D009BEEDC /* UserGuideVIew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserGuideVIew.xib; path = OtherVCs/UserGuideVIew.xib; sourceTree = "<group>"; };
+		28FEB45B175BABE000437D53 /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Toast+UIView.h"; path = "BabyTools/Toast+UIView.h"; sourceTree = "<group>"; };
+		28FEB45C175BABE000437D53 /* Toast+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Toast+UIView.m"; path = "BabyTools/Toast+UIView.m"; sourceTree = "<group>"; };
 		28FFC52A1722B88800430C01 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadingViewController.h; path = OtherVCs/LoadingViewController.h; sourceTree = "<group>"; };
 		28FFC52B1722B88800430C01 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadingViewController.m; path = OtherVCs/LoadingViewController.m; sourceTree = "<group>"; };
 		28FFC52C1722B88800430C01 /* LoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingViewController.xib; path = OtherVCs/LoadingViewController.xib; sourceTree = "<group>"; };
@@ -807,6 +810,8 @@
 				2854E28116D462DD008B6E4B /* CoreDataManager.m */,
 				288853F9167EAD67000ED11A /* BabyHelper.h */,
 				288853FA167EAD67000ED11A /* BabyHelper.m */,
+				28FEB45B175BABE000437D53 /* Toast+UIView.h */,
+				28FEB45C175BABE000437D53 /* Toast+UIView.m */,
 				28CA6683167F0A660087F45D /* BabyAlertWindow.h */,
 				28CA6684167F0A660087F45D /* BabyAlertWindow.m */,
 				2889B7791696919B00D8FF16 /* UIImageView+Resize.h */,
@@ -1252,6 +1257,7 @@
 				28833F73174F4A5C00039B56 /* IntroControll.m in Sources */,
 				28833F74174F4A5C00039B56 /* IntroModel.m in Sources */,
 				28833F75174F4A5C00039B56 /* IntroView.m in Sources */,
+				28FEB45D175BABE000437D53 /* Toast+UIView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

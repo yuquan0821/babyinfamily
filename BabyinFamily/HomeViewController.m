@@ -83,7 +83,7 @@
     [defaultNotifCenter addObserver:self selector:@selector(didGetUserInfo:)    name:MMSinaGotUserInfo          object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(relogin)            name:NeedToReLogin              object:nil];
    // [defaultNotifCenter addObserver:self selector:@selector(didGetUnreadCount:) name:MMSinaGotUnreadCount       object:nil];
-    [defaultNotifCenter addObserver:self selector:@selector(appWillResign:)     name:UIApplicationWillResignActiveNotification             object:nil];
+   // [defaultNotifCenter addObserver:self selector:@selector(appWillResign:)     name:UIApplicationWillResignActiveNotification             object:nil];
 }
 
 -(void)viewDidUnload

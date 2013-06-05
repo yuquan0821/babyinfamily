@@ -53,6 +53,7 @@
         shadowImageView.contentMode = UIViewContentModeScaleToFill;
         shadowImageView.frame = CGRectMake(0, frame.size.height-200, frame.size.width, 200);
         [self addSubview:shadowImageView];
+        [shadowImageView release];
         
         //Initial ScrollView
         scrollView = [[UIScrollView alloc] initWithFrame:self.frame];

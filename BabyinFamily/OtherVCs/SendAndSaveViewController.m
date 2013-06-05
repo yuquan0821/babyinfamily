@@ -35,7 +35,6 @@
         backGroundImageView.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/detail_image_background.png"];
         self.mainImage = image;
     }
-    manager = [WeiBoMessageManager getInstance];
     self.title = @"save and send";
     return self;
 }
@@ -126,7 +125,8 @@
             UIImage *image = self.mainImageView.image;
             if (image != nil && content != Nil && content.length !=0) {
 //                [[BabyAlertWindow getInstance] showWithString:@"发送中，请稍后..."];
-                
+                manager = [WeiBoMessageManager getInstance];
+
                 [manager postWithText:content image:image];
                 
             }

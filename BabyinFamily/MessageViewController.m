@@ -123,6 +123,7 @@
             [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
             
             [manager getCommetListToMe:nil page:1];
+            
         }
     }
     
@@ -212,6 +213,13 @@
         [[SHKActivityIndicator currentIndicator]hide];
         [table reloadData];
         [self stopLoading];
+        if (commentArr == nil || [commentArr isEqual:[NSNull null]]) {
+            [self.view makeToast:@"啊哦，你还没有收到任何好友的评论，邀请他们一起用家贝互动吧！"
+                        duration:3.0
+                        position:@"center"
+                           image:[UIImage imageNamed:@"toast.png"]];
+            self.refreshFooterView.hidden = YES;
+        }
         [self performSelector:@selector(refreshVisibleCellsImages) withObject:nil afterDelay:0.5];
     }
 }
@@ -276,9 +284,7 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (commentArr == nil || [commentArr isEqual:[NSNull null]]) {
-        return 0;
-    }
+
     return [commentArr count];
 }
 

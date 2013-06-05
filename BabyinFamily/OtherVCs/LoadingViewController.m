@@ -59,7 +59,12 @@
 
     
     self.view = [[IntroControll alloc] initWithFrame:CGRectMake(0, 0, MainWidth, MainHeight) pages:@[model1, model2, model3,model4, model5]];
-   
+    [model1 release];
+    [model2 release];
+    [model3 release];
+    [model4 release];
+    [model5 release];
+
     [self addButton];
     
     //[self addGuideView];
@@ -83,6 +88,7 @@
     [self.loadButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, -10, 0.0, 0.0)];
     
     [self.loadButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view addSubview:_loadButton];
     
 }
@@ -187,7 +193,12 @@
 {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
-
+- (void)dealloc
+{
+    [_loadButton release];
+    [titleLabel release];
+    [super dealloc];
+}
 
 @end
 
