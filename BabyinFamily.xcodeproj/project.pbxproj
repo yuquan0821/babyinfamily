@@ -47,7 +47,6 @@
 		2854E27F16D45FE1008B6E4B /* UserCoreDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E27C16D45FE1008B6E4B /* UserCoreDataItem.m */; };
 		2854E28216D462DD008B6E4B /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E28116D462DD008B6E4B /* CoreDataManager.m */; };
 		2854E28516D46F2A008B6E4B /* ImageCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2854E28316D46F2A008B6E4B /* ImageCache.xcdatamodeld */; };
-		286883C21718409A00A92BE7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286883C11718409A00A92BE7 /* AdSupport.framework */; };
 		286883C4171840F000A92BE7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286883C3171840F000A92BE7 /* MessageUI.framework */; };
 		2871907F16F7011B00A3527B /* AddComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2871907E16F7011B00A3527B /* AddComment.xib */; };
 		28833F73174F4A5C00039B56 /* IntroControll.m in Sources */ = {isa = PBXBuildFile; fileRef = 28833F6E174F4A5C00039B56 /* IntroControll.m */; };
@@ -253,7 +252,6 @@
 		2854E28016D462DD008B6E4B /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = BabyTools/CoreDataManager.h; sourceTree = "<group>"; };
 		2854E28116D462DD008B6E4B /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = BabyTools/CoreDataManager.m; sourceTree = "<group>"; };
 		2854E28416D46F2A008B6E4B /* ImageCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImageCache.xcdatamodel; sourceTree = "<group>"; };
-		286883C11718409A00A92BE7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		286883C3171840F000A92BE7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2871907E16F7011B00A3527B /* AddComment.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddComment.xib; path = OtherVCs/AddComment.xib; sourceTree = "<group>"; };
 		28833F6D174F4A5C00039B56 /* IntroControll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroControll.h; path = introduction/IntroControll.h; sourceTree = "<group>"; };
@@ -467,7 +465,6 @@
 				2813F289172BC8D800F88BB9 /* AudioToolbox.framework in Frameworks */,
 				28EA9366165F12F5009F69E5 /* OpenGLES.framework in Frameworks */,
 				286883C4171840F000A92BE7 /* MessageUI.framework in Frameworks */,
-				286883C21718409A00A92BE7 /* AdSupport.framework in Frameworks */,
 				28368F17170FB2FE008C4CC1 /* libz.1.2.5.dylib in Frameworks */,
 				28368F15170FB2F0008C4CC1 /* libsqlite3.0.dylib in Frameworks */,
 				28368F13170FB2D3008C4CC1 /* CoreText.framework in Frameworks */,
@@ -970,7 +967,6 @@
 			children = (
 				2813F288172BC8D800F88BB9 /* AudioToolbox.framework */,
 				28368F0E170FB2C8008C4CC1 /* Accelerate.framework */,
-				286883C11718409A00A92BE7 /* AdSupport.framework */,
 				28EA935D165F129A009F69E5 /* AssetsLibrary.framework */,
 				2813F278172BBFD000F88BB9 /* AudioUnit.framework */,
 				28EA935F165F12A0009F69E5 /* AVFoundation.framework */,
