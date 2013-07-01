@@ -49,6 +49,7 @@
 {
    
     self.title = @"主页";
+    self.navigationItem.title = @"家贝";
     NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_home"];
     self.tabBarItem.image = [UIImage imageNamed:fullpath];
     
