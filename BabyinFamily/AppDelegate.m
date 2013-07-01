@@ -173,20 +173,6 @@
     self.window.rootViewController = self.loadingViewController;
     [self.window makeKeyAndVisible];
     
-//    sinaWeibo = [[SinaWeibo alloc] initWithAppKey:SINA_APP_KEY appSecret:SINA_APP_SECRET appRedirectURI:SINA_APP_REDIRECT_URI andDelegate:self.loadingViewController];
-//    
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    
-//    NSDictionary *sinaWeiboInfo = [defaults objectForKey:@"SinaWeiboAutoData"];
-//    
-//    if ([sinaWeiboInfo objectForKey:@"AccessTokenKey"] && [sinaWeiboInfo objectForKey:@"ExpirationDateKey"] && [sinaWeiboInfo objectForKey:@"UserIDKey"])
-//    {
-//        sinaWeibo.accessToken = [sinaWeiboInfo objectForKey:@"AccessTokenKey"];
-//        
-//        sinaWeibo.expirationDate = [sinaWeiboInfo objectForKey:@"ExpirationDateKey"];
-//        
-//        sinaWeibo.userID = [sinaWeiboInfo objectForKey:@"UserIDKey"];
-//    }
 }
 
 //退出登陆回调方法
