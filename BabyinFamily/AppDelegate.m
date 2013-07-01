@@ -47,6 +47,30 @@
         
         sinaWeibo.userID = [defaults objectForKey:USER_STORE_USER_ID];
     }
+    UIImage *navBackgroundImage = [UIImage imageNamed:@"header_bg"];
+    [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
+    
+    // Change UINavigationBar appearance by setting the font, color, shadow and offset.
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          
+                                                          [UIColor colorWithRed:245.0 / 255.0 green:245.0 / 255.0 blue:245.0 / 255.0 alpha:1.0], UITextAttributeTextColor,
+                                                          
+                                                          [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8], UITextAttributeTextShadowColor,
+                                                          
+                                                          [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
+                                                          
+                                                          [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], UITextAttributeFont,
+                                                          
+                                                          nil]];
+    
+    // Change the UIBarButtonItem apperance by setting a resizable background image for the back button.
+    UIImage *backButtonImage = [[UIImage imageNamed:@"navigationBarBackButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    // Change the UIBarButtonItem apperance by setting a resizable background image for the edit button.
+    UIEdgeInsets insets = {0, 6, 0, 6};// Same as doing this: UIEdgeInsetsMake (top, left, bottom, right)
+    UIImage *barButtonImage = [[UIImage imageNamed:@"button_normal"] resizableImageWithCapInsets:insets];
+    [[UIBarButtonItem appearance] setBackgroundImage:barButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     BOOL authValid = sinaWeibo.isAuthValid;
     
