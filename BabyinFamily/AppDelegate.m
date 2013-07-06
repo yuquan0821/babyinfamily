@@ -37,20 +37,12 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
-    sinaWeibo = [[SinaWeibo alloc] initWithAppKey:SINA_APP_KEY appSecret:SINA_APP_SECRET appRedirectURI:SINA_APP_REDIRECT_URI andDelegate:self.loadingViewController];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if([defaults objectForKey:USER_STORE_USER_ID]){
-        sinaWeibo.accessToken = [defaults objectForKey:USER_STORE_ACCESS_TOKEN];
-        
-        sinaWeibo.expirationDate = [defaults objectForKey:USER_STORE_EXPIRATION_DATE];
-        
-        sinaWeibo.userID = [defaults objectForKey:USER_STORE_USER_ID];
-    }
+
+    //添加navigationbar 的默认图片
     UIImage *navBackgroundImage = [UIImage imageNamed:@"header_bg"];
     [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
     
-    // Change UINavigationBar appearance by setting the font, color, shadow and offset.
+    // 修改 UINavigationBar 字体，起始位置，阴影.
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           
                                                           [UIColor colorWithRed:245.0 / 255.0 green:245.0 / 255.0 blue:245.0 / 255.0 alpha:1.0], UITextAttributeTextColor,
@@ -63,17 +55,28 @@
                                                           
                                                           nil]];
     
-    // Change the UIBarButtonItem apperance by setting a resizable background image for the back button.
+    // 根据需要修改UIBarButtonItem返回按钮的背景图及其大小 .
     UIImage *backButtonImage = [[UIImage imageNamed:@"navigationBarBackButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
-    // Change the UIBarButtonItem apperance by setting a resizable background image for the edit button.
+    // 根据需要修改UIBarButtonItem编辑按钮的背景图及其大小 
     UIEdgeInsets insets = {0, 6, 0, 6};// Same as doing this: UIEdgeInsetsMake (top, left, bottom, right)
     UIImage *barButtonImage = [[UIImage imageNamed:@"button_normal"] resizableImageWithCapInsets:insets];
     [[UIBarButtonItem appearance] setBackgroundImage:barButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
-    BOOL authValid = sinaWeibo.isAuthValid;
+   // 微博登陆SDK的使用 
+    sinaWeibo = [[SinaWeibo alloc] initWithAppKey:SINA_APP_KEY appSecret:SINA_APP_SECRET appRedirectURI:SINA_APP_REDIRECT_URI andDelegate:self.loadingViewController];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([defaults objectForKey:USER_STORE_USER_ID]){
+        sinaWeibo.accessToken = [defaults objectForKey:USER_STORE_ACCESS_TOKEN];
+        
+        sinaWeibo.expirationDate = [defaults objectForKey:USER_STORE_EXPIRATION_DATE];
+        
+        sinaWeibo.userID = [defaults objectForKey:USER_STORE_USER_ID];
+    }
+    BOOL authValid = sinaWeibo.isAuthValid;
+    // 根据是否登陆成功进入不同的流程。 
     if (!authValid)
     {
         [self showFirstRunViewWithAnimate];
