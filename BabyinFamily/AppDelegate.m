@@ -14,7 +14,7 @@
 #import "ProfileViewController.h"
 #import "RaisedCenterButton.h"
 #import "BabyNavigationController.h"
-
+#import "UIImage+Addition.h"
 @implementation AppDelegate
 @synthesize window;
 @synthesize tabBarController;
@@ -150,13 +150,40 @@
     BabyNavigationController * nav4 = [[[BabyNavigationController alloc] initWithRootViewController:vc4] autorelease];
     BabyNavigationController * nav5 = [[[BabyNavigationController alloc] initWithRootViewController:vc5] autorelease];
     
-    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.tabBarController.viewControllers = @[nav1, nav2,nav3,nav4,nav5];
-    //添加button到tabbar上
-    NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
-    RaisedCenterButton *button = [RaisedCenterButton buttonWithImage:[UIImage imageNamed:fullpath] forTabBarController:self.tabBarController];
-    [self.tabBarController.tabBar addSubview:button];
-    [[window subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    NSArray *ctrlArr = @[nav1,nav2,nav3,nav4,nav5];
+    
+    NSMutableDictionary *imgDic = [NSMutableDictionary dictionaryWithCapacity:3];
+	[imgDic setObject:[UIImage imageWithSourceKit:@"TabBar_Image/home@2x.png"] forKey:@"Default"];
+	[imgDic setObject:[UIImage imageWithSourceKit:@"TabBar_Image/home@2x.png"] forKey:@"Highlighted"];
+	[imgDic setObject:[UIImage imageWithSourceKit:@"TabBar_Image/home-on@2x.png"] forKey:@"Seleted"];
+	NSMutableDictionary *imgDic2 = [NSMutableDictionary dictionaryWithCapacity:3];
+	[imgDic2 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/topic@2x.png"] forKey:@"Default"];
+	[imgDic2 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/topic@2x.png"] forKey:@"Highlighted"];
+	[imgDic2 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/topic-on@2x.png"] forKey:@"Seleted"];
+	NSMutableDictionary *imgDic3 = [NSMutableDictionary dictionaryWithCapacity:3];
+	[imgDic3 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/search@2x.png"] forKey:@"Default"];
+	[imgDic3 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/search@2x.png"] forKey:@"Highlighted"];
+	[imgDic3 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/search@2x.png"] forKey:@"Seleted"];
+	NSMutableDictionary *imgDic4 = [NSMutableDictionary dictionaryWithCapacity:3];
+	[imgDic4 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/shoppping@2x.png"] forKey:@"Default"];
+	[imgDic4 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/shoppping@2x.png"] forKey:@"Highlighted"];
+	[imgDic4 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/shoppping-on@2x.png"] forKey:@"Seleted"];
+	NSMutableDictionary *imgDic5 = [NSMutableDictionary dictionaryWithCapacity:3];
+	[imgDic5 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/my@2x.png"] forKey:@"Default"];
+	[imgDic5 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/my@2x.png"] forKey:@"Highlighted"];
+	[imgDic5 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/my-on@2x.png"] forKey:@"Seleted"];
+	NSArray *imgArr = [NSArray arrayWithObjects:imgDic,imgDic2,imgDic3,imgDic4,imgDic5,nil];
+    
+    self.tabBarController = [[GTTabBarController alloc] initWithViewControllers:ctrlArr imageArray:imgArr];
+	[self.tabBarController setTabBarTransparent:YES];
+    self.tabBarController.delegate = self;
+    self.tabBarController.animateDriect = 0;
+    
+//    //添加button到tabbar上
+//    NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
+//    RaisedCenterButton *button = [RaisedCenterButton buttonWithImage:[UIImage imageNamed:fullpath] forTabBarController:self.tabBarController];
+//    [self.tabBarController.tabBar addSubview:button];
+//    [[window subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [window addSubview:tabBarController.view];
     
     self.window.rootViewController = self.tabBarController;
@@ -212,5 +239,22 @@
     
    // [self.tabBarController.tabBar.items objectAtIndex:3];
 }
+#pragma mark -
+#pragma mark GTTabBarControllerDelegate
+- (BOOL)tabBarController:(GTTabBarController *)atabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    if ([tabBarController.viewControllers objectAtIndex:2] == viewController) {
+        TakePhotoViewController *picker = [[[TakePhotoViewController alloc] init] autorelease];
+        UINavigationController * nav = [[[UINavigationController alloc] initWithRootViewController:picker] autorelease];
+        [picker.navigationController setNavigationBarHidden:YES];
+        [self.tabBarController presentModalViewController:nav animated:NO];
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+        return NO;
+    }
+    return YES;
+}
 
+- (void)tabBarController:(GTTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+    
+}
 @end

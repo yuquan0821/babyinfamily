@@ -17,3 +17,5 @@
 #ifdef __OPTIMIZE__
 #define NSLog(...)
 #endif
+
+#import "UIImage+Addition.h"

@@ -163,6 +163,9 @@
 		B44954B415A978F200FAA116 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B44954B315A978F200FAA116 /* main.m */; };
 		B44954B815A978F200FAA116 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B44954B715A978F200FAA116 /* AppDelegate.m */; };
 		B455F5D01787C779000CEA3F /* BabyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B455F5CF1787C779000CEA3F /* BabyNavigationController.m */; };
+		B455F5D91787E392000CEA3F /* GTTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B455F5D61787E392000CEA3F /* GTTabBar.m */; };
+		B455F5DA1787E392000CEA3F /* GTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B455F5D81787E392000CEA3F /* GTTabBarController.m */; };
+		B455F5E51787EB48000CEA3F /* UIImage+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = B455F5E41787E7CA000CEA3F /* UIImage+Addition.m */; };
 		B4C94EDD164C015100722F37 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EDC164C015100722F37 /* HomeViewController.m */; };
 		B4C94EE0164C017800722F37 /* HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EDF164C017800722F37 /* HotViewController.m */; };
 		B4C94EE6164C02E900722F37 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EE5164C02E900722F37 /* MessageViewController.m */; };
@@ -455,6 +458,12 @@
 		B44954B715A978F200FAA116 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B455F5CE1787C779000CEA3F /* BabyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyNavigationController.h; sourceTree = "<group>"; };
 		B455F5CF1787C779000CEA3F /* BabyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyNavigationController.m; sourceTree = "<group>"; };
+		B455F5D51787E392000CEA3F /* GTTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTTabBar.h; sourceTree = "<group>"; };
+		B455F5D61787E392000CEA3F /* GTTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTTabBar.m; sourceTree = "<group>"; };
+		B455F5D71787E392000CEA3F /* GTTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTTabBarController.h; sourceTree = "<group>"; };
+		B455F5D81787E392000CEA3F /* GTTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTTabBarController.m; sourceTree = "<group>"; };
+		B455F5E31787E7CA000CEA3F /* UIImage+Addition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIImage+Addition.h"; path = "BabyTools/UIImage+Addition.h"; sourceTree = "<group>"; };
+		B455F5E41787E7CA000CEA3F /* UIImage+Addition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Addition.m"; path = "BabyTools/UIImage+Addition.m"; sourceTree = "<group>"; };
 		B4C94EDB164C015100722F37 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		B4C94EDC164C015100722F37 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		B4C94EDE164C017800722F37 /* HotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotViewController.h; sourceTree = "<group>"; };
@@ -812,6 +821,8 @@
 		28EA949F165F59E0009F69E5 /* babyTools */ = {
 			isa = PBXGroup;
 			children = (
+				B455F5E31787E7CA000CEA3F /* UIImage+Addition.h */,
+				B455F5E41787E7CA000CEA3F /* UIImage+Addition.m */,
 				2854E28016D462DD008B6E4B /* CoreDataManager.h */,
 				2854E28116D462DD008B6E4B /* CoreDataManager.m */,
 				288853F9167EAD67000ED11A /* BabyHelper.h */,
@@ -829,6 +840,7 @@
 		28EA94A0165F6031009F69E5 /* VCS */ = {
 			isa = PBXGroup;
 			children = (
+				B455F5D41787E392000CEA3F /* GTTabBar */,
 				28833F6A174F49F200039B56 /* introduction */,
 				2813F260172BBC6700F88BB9 /* Coin */,
 				28487DFF16DF3A5A00BFB194 /* WaterFllow */,
@@ -1046,6 +1058,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B455F5D41787E392000CEA3F /* GTTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				B455F5D51787E392000CEA3F /* GTTabBar.h */,
+				B455F5D61787E392000CEA3F /* GTTabBar.m */,
+				B455F5D71787E392000CEA3F /* GTTabBarController.h */,
+				B455F5D81787E392000CEA3F /* GTTabBarController.m */,
+			);
+			path = GTTabBar;
+			sourceTree = "<group>";
+		};
 		B4CB58891734FACC006870F9 /* SVStatusHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1182,6 +1205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B455F5E51787EB48000CEA3F /* UIImage+Addition.m in Sources */,
 				B44954B415A978F200FAA116 /* main.m in Sources */,
 				B44954B815A978F200FAA116 /* AppDelegate.m in Sources */,
 				B4C94EDD164C015100722F37 /* HomeViewController.m in Sources */,
@@ -1272,6 +1296,8 @@
 				28833F75174F4A5C00039B56 /* IntroView.m in Sources */,
 				28FEB45D175BABE000437D53 /* Toast+UIView.m in Sources */,
 				B455F5D01787C779000CEA3F /* BabyNavigationController.m in Sources */,
+				B455F5D91787E392000CEA3F /* GTTabBar.m in Sources */,
+				B455F5DA1787E392000CEA3F /* GTTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
