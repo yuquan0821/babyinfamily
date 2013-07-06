@@ -162,6 +162,7 @@
 		B44954B215A978F200FAA116 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B44954B015A978F200FAA116 /* InfoPlist.strings */; };
 		B44954B415A978F200FAA116 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B44954B315A978F200FAA116 /* main.m */; };
 		B44954B815A978F200FAA116 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B44954B715A978F200FAA116 /* AppDelegate.m */; };
+		B455F5D01787C779000CEA3F /* BabyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B455F5CF1787C779000CEA3F /* BabyNavigationController.m */; };
 		B4C94EDD164C015100722F37 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EDC164C015100722F37 /* HomeViewController.m */; };
 		B4C94EE0164C017800722F37 /* HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EDF164C017800722F37 /* HotViewController.m */; };
 		B4C94EE6164C02E900722F37 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EE5164C02E900722F37 /* MessageViewController.m */; };
@@ -452,6 +453,8 @@
 		B44954B515A978F200FAA116 /* BabyinFamily-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BabyinFamily-Prefix.pch"; sourceTree = "<group>"; };
 		B44954B615A978F200FAA116 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B44954B715A978F200FAA116 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B455F5CE1787C779000CEA3F /* BabyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyNavigationController.h; sourceTree = "<group>"; };
+		B455F5CF1787C779000CEA3F /* BabyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyNavigationController.m; sourceTree = "<group>"; };
 		B4C94EDB164C015100722F37 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		B4C94EDC164C015100722F37 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		B4C94EDE164C017800722F37 /* HotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotViewController.h; sourceTree = "<group>"; };
@@ -852,6 +855,8 @@
 				28EA94AF165F7FC1009F69E5 /* TakePhotoViewController.h */,
 				28EA94B0165F7FC1009F69E5 /* TakePhotoViewController.m */,
 				28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */,
+				B455F5CE1787C779000CEA3F /* BabyNavigationController.h */,
+				B455F5CF1787C779000CEA3F /* BabyNavigationController.m */,
 			);
 			name = TabViewControllers;
 			sourceTree = "<group>";
@@ -1266,6 +1271,7 @@
 				28833F74174F4A5C00039B56 /* IntroModel.m in Sources */,
 				28833F75174F4A5C00039B56 /* IntroView.m in Sources */,
 				28FEB45D175BABE000437D53 /* Toast+UIView.m in Sources */,
+				B455F5D01787C779000CEA3F /* BabyNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

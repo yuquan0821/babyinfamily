@@ -13,6 +13,7 @@
 #import "MessageViewController.h"
 #import "ProfileViewController.h"
 #import "RaisedCenterButton.h"
+#import "BabyNavigationController.h"
 
 @implementation AppDelegate
 @synthesize window;
@@ -146,8 +147,8 @@
     UINavigationController * nav1 = [[[UINavigationController alloc] initWithRootViewController:vc1] autorelease];
     UINavigationController * nav2 = [[[UINavigationController alloc] initWithRootViewController:vc2] autorelease];
     UINavigationController * nav3 = [[[UINavigationController alloc] initWithRootViewController:vc3] autorelease];
-    UINavigationController * nav4 = [[[UINavigationController alloc] initWithRootViewController:vc4] autorelease];
-    UINavigationController * nav5 = [[[UINavigationController alloc] initWithRootViewController:vc5] autorelease];
+    BabyNavigationController * nav4 = [[[BabyNavigationController alloc] initWithRootViewController:vc4] autorelease];
+    BabyNavigationController * nav5 = [[[BabyNavigationController alloc] initWithRootViewController:vc5] autorelease];
     
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = @[nav1, nav2,nav3,nav4,nav5];
