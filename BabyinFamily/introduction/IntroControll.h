@@ -14,13 +14,6 @@
     int currentPhotoNum;
 }
 
-//fan 修改
-/*@property(nonatomic, retain)UIImageView *backgroundImage1;
-@property(nonatomic, retain)UIImageView *backgroundImage2;
-@property(nonatomic, retain)UIScrollView *scrollView;
-@property(nonatomic, retain)UIPageControl *pageControl;
-@property(nonatomic, retain)NSArray *pages;
-@property(nonatomic, retain)NSTimer *timer;*/
 
 - (id)initWithFrame:(CGRect)frame pages:(NSArray*)pagesArray;
 

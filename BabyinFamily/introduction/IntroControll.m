@@ -10,8 +10,6 @@
 @end
 
 @implementation IntroControll
-//fan 修改
-
 @synthesize backgroundImage1;
 @synthesize backgroundImage2;
 @synthesize scrollView;
