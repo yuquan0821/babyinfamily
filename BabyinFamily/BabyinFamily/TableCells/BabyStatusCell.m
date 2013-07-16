@@ -5,81 +5,232 @@
 //  Created by 范艳春 on 13-7-8.
 //
 //
-
-#import "BabyStatusCell.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import "BabyStatusCell.h"
 @implementation BabyStatusCell
 @synthesize delegate;
-@synthesize headView;
-@synthesize avatarBackGround;
-@synthesize avatarImageView;
-@synthesize userNameLabel;
-@synthesize locatonImageview;
-@synthesize locationLabel;
-@synthesize timeLabel;
 
 @synthesize weiboView;
-@synthesize backGround;
-@synthesize weiboImage;
+@synthesize bgImage;
+@synthesize contentImage;
 @synthesize contentText;
 
 @synthesize repostBackGround;
-@synthesize repostView;
-@synthesize repostImage;
+@synthesize repostMainView;
+@synthesize repostContentImage;
 @synthesize repostText;
 
-@synthesize commentTable;
-@synthesize moreComments;
-@synthesize commentButton;
-
 @synthesize status;
+@synthesize cellHeight;
+@synthesize statusHeight;
+@synthesize more;
+@synthesize commentButton;
 
 typedef enum{
     WeiboImages,
     RepostImages
 }_viewTag;
 
-- (void)dealloc
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    [headView release];
-    [avatarBackGround release];
-    [avatarImageView release];
-    [userNameLabel release];
-    [locatonImageview release];
-    [locationLabel release];
-    [timeLabel release];
-    [weiboView release];
-    [backGround release];
-    [weiboImage release];
-    self.contentText = nil;
-    [repostBackGround release];
-    [repostView release];
-    [repostImage release];
-    self.repostText = nil;
-    [commentTable release];
-    [commentButton release];
-    [moreComments release];
-    [super dealloc];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        // Initialization code
+        [self customViews]; //自定义Cell
+        
+    }
+    return self;
 }
 
-//设计富文本的布局
--(JSTwitterCoreTextView*)GetJSTwitterCoreTextView
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
+    [super setSelected:selected animated:animated];
     
-    JSTwitterCoreTextView *coreTextView = [[JSTwitterCoreTextView alloc]initWithFrame:CGRectZero];
-    [coreTextView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [coreTextView setDelegate:self];
-    [coreTextView setFontName:FONT];
-    [coreTextView setFontSize:FONT_SIZE];
-    [coreTextView setPaddingTop:PADDING_TOP];
-    [coreTextView setPaddingLeft:PADDING_LEFT];
-    coreTextView.exclusiveTouch = YES;
-    coreTextView.userInteractionEnabled = NO;
-    coreTextView.backgroundColor = [UIColor whiteColor];
-    coreTextView.textColor = [UIColor colorWithRed:160/255.0 green:160/255.0 blue:160/255.0 alpha:1];
-    coreTextView.linkColor = [UIColor colorWithRed:96/255.0 green:138/255.0 blue:176/255.0 alpha:1];
-    return [coreTextView autorelease];
+    // Configure the view for the selected state
+}
+
+
+
+
+-(void)customViews
+{
+    //背景图
+    //    self.repostBg = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"repost-bg.png"]stretchableImageWithLeftCapWidth:28 topCapHeight:28]];
+    //微博视图
+    self.weiboView = [[UIView alloc]initWithFrame:CGRectZero];
+    //转发视图
+    self.repostMainView = [[UIView alloc]initWithFrame:CGRectZero];
+    self.weiboView.backgroundColor = [UIColor clearColor];
+    self.repostMainView.backgroundColor = [UIColor clearColor];
+    
+    //微博内容
+    self.contentText = [[UITextView alloc] initWithFrame:CGRectZero];
+    self.contentText.font = [UIFont systemFontOfSize:15];
+    self.contentText.editable = NO;
+    self.contentText.backgroundColor = [UIColor clearColor];
+    //转发内容
+    self.repostText = [[UITextView alloc] initWithFrame:CGRectZero];
+    self.repostText.font = [UIFont systemFontOfSize:15];
+    self.repostText.editable = NO;
+    self.repostText.backgroundColor = [UIColor clearColor];
+    
+    UITapGestureRecognizer *weiboImgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClicked:)];
+    
+    UITapGestureRecognizer *repostImgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(repostImageClicked:)];
+    
+    //微博图片
+    self.contentImage = [[UIImageView alloc]initWithFrame:CGRectZero];
+    [self.contentImage.layer setMasksToBounds:YES];
+    [self.contentImage.layer setCornerRadius:4];
+    self.contentImage.contentMode = UIViewContentModeScaleAspectFit;
+    self.contentImage.tag = WeiboImages;
+    //转发图片
+    self.repostContentImage = [[UIImageView alloc]initWithFrame:CGRectZero];
+    [self.repostContentImage.layer setMasksToBounds:YES];
+    [self.repostContentImage.layer setCornerRadius:4];
+    self.repostContentImage.tag = RepostImages;
+    
+    //评论按钮
+    self.commentButton = [[UIButton alloc]initWithFrame:CGRectZero];
+    //更多操作按钮
+    self.more = [[UIButton alloc]initWithFrame:CGRectZero];
+    
+    self.repostContentImage.userInteractionEnabled = YES;
+    self.repostContentImage.contentMode = UIViewContentModeScaleAspectFit;
+    [self.repostContentImage addGestureRecognizer:repostImgTap];
+    [repostImgTap release];
+    repostImgTap = nil;
+    
+    self.contentImage.userInteractionEnabled = YES;
+    [self.contentImage addGestureRecognizer:weiboImgTap];
+    [weiboImgTap release];
+    weiboImgTap = nil;
+    
+    [self setFrame:CGRectMake(0, 0, 300, 0)];
+    [self.layer setCornerRadius:4];
+    
+    [self addSubview:weiboView];
+    [self addSubview:repostMainView];
+    [self addSubview:commentButton];
+    [self addSubview:more];
+    
+    [self.weiboView setUserInteractionEnabled:YES];
+    [self.weiboView addSubview:contentImage];
+    [self.weiboView addSubview:contentText];
+    [self.repostMainView addSubview:repostBackGround];
+    [self.repostMainView addSubview:repostContentImage];
+    [self.repostMainView addSubview:repostText];
+}
+//获取文本框高度
++ (CGFloat)getStstusContentHeight:(NSString*)text contentViewWith:(CGFloat)with
+{
+    CGFloat height = 1;
+    UIFont * font=[UIFont  systemFontOfSize:16];
+    CGSize size=[text sizeWithFont:font constrainedToSize:CGSizeMake(with, 300.0f) lineBreakMode:UILineBreakModeWordWrap];
+    height = size.height + 7;
+    return height;
+}
+
+//设置Cell
+-(void)setContent:(Status *)weibo
+{
+    [contentText layoutIfNeeded];
+    [repostText layoutIfNeeded];
+    contentText.text = weibo.text;
+    Status  *repostWeibo = weibo.retweetedStatus;
+    CGFloat height = 0;
+    height = [[self class] getStstusContentHeight:contentText.text contentViewWith:CONTENT_WIDTH];
+    CGRect frame;
+    frame =  weiboView.frame;
+    frame.origin.y = 4;
+    frame.origin.x = 8;
+  
+    //有weibo图
+    if (self.contentImage.hidden == NO) {
+        self.contentImage.frame  = CGRectMake(8,2, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
+        self.contentText.frame  = CGRectMake(8, contentImage.frame.origin.y + contentImage.frame.size.height+2, contentImage.frame.size.width, height+2);
+       }else{
+        //无微博图
+        self.contentText.frame  = CGRectMake(8, 2, CONTENT_WIDTH, height+2);
+        }
+    self.weiboView.frame  = CGRectMake(12, 2, CELL_WIDTH, contentText.frame.origin.y + contentText.frame.size.height + 2);
+    
+    //有转发
+    if (self.repostMainView.hidden == NO) {
+        frame =  repostMainView.frame;
+        frame.origin.y = weiboView.frame.origin.y + weiboView.frame.size.height-8;
+        frame.origin.x = 8;
+        frame.size.width = CELL_WIDTH;
+        self.repostMainView.frame = frame;
+        self.repostText.text = [NSString stringWithFormat:@"@%@:%@",repostWeibo.user.name,repostWeibo.text];
+        height = [[self class]getStstusContentHeight:repostText.text contentViewWith:CONTENT_WIDTH];
+        //有转发图
+        if (self.repostContentImage.hidden ==NO) {
+            self.repostContentImage.frame = CGRectMake(12,  2, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
+            self.repostText.frame  = CGRectMake(8, repostContentImage.frame.origin.y + repostContentImage.frame.size.height, CONTENT_WIDTH, height+2);
+            
+            }else{
+            //无转发图
+            self.repostText.frame = CGRectMake(8, 2, CONTENT_WIDTH, height+2);
+            }
+        
+        frame.size.height  = repostText.frame.origin.y + repostText.frame.size.height;
+        self.repostMainView.frame = frame;
+        //        self.repostBg.frame = CGRectMake(2, 0, 300, repostView.frame.size.height);
+        self.statusHeight = repostMainView.frame.size.height + repostMainView.frame.origin.y;
+    }else{
+        //无转发
+        self.statusHeight = weiboView.frame.size.height + weiboView.frame.origin.y;
+    }
+ 
+      self.commentButton.frame = CGRectMake(10, self.statusHeight +2, 140, 28);
+      self.commentButton.titleLabel.text = @"评论";
+      self.more.frame = CGRectMake(160, self.statusHeight + 2, 140, 28);
+      self.more.titleLabel.text = @"...";
+
+      self.cellHeight = commentButton.frame.origin.y + commentButton.frame.size.height + 2;
+    
+    self.frame = CGRectMake(0, 0, 320, cellHeight);
+}
+
+
+//更新Cell
+-(void)updateCellWith:(Status *)weibo
+{
+    self.status = weibo;
+    Status  *repostWeibo = weibo.retweetedStatus;
+    
+    NSString *url = weibo.bmiddlePic;
+    NSLog(@"weibo.thumbnailImageUrl:%@",url);
+    //有图
+    if (url!=nil) {
+        self.contentImage.hidden = NO;
+    }else{
+        self.contentImage.hidden = YES;
+    }
+    
+    //有转发
+    if (repostWeibo && ![repostWeibo isEqual:[NSNull null]])
+    {
+        self.repostMainView.hidden = NO;
+        //        repostContent.text = [NSString stringWithFormat:@"@%@:%@",repostWeibo.user.name,repostWeibo.text];
+        
+        NSString *url = repostWeibo.bmiddlePic;
+        NSLog(@"有转发:weibo.thumbnailImageUrl:%@",url);
+        //有图
+        if (url!=nil) {
+            self.repostContentImage.hidden = NO;
+        }else{
+            self.repostContentImage.hidden = YES;
+        }
+    }
+    //无转发
+    else
+    {
+        self.repostMainView.hidden = YES;
+    }
+   
+    [self setContent:weibo];
 }
 
 //点击微博图片
@@ -90,8 +241,8 @@ typedef enum{
             [delegate statusImageClicked:self.status];
         }
     }
-    
     NSLog(@"------------------------ img clicked:%@", sender);
+
 }
 
 //点击转发微博图片
@@ -104,137 +255,26 @@ typedef enum{
         }
     }
     NSLog(@"图片被点击");
+
 }
 
-//获取富文本框高度
-+(CGFloat)getJSHeight:(NSString*)text jsViewWith:(CGFloat)with
+- (void)dealloc
 {
-    CGFloat height = [JSCoreTextView measureFrameHeightForText:text
-                                                      fontName:FONT
-                                                      fontSize:FONT_SIZE
-                                            constrainedToWidth:with - (PADDING_LEFT * 2)
-                                                    paddingTop:PADDING_TOP
-                                                   paddingLeft:PADDING_LEFT];
-    return height;
-}
-
--(void)customViews
-{
-    //背景图
-    //    self.repostBg = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"repost-bg.png"]stretchableImageWithLeftCapWidth:28 topCapHeight:28]];
-    //头像
-    self.headView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.avatarBackGround = [[UIImageView alloc]initWithFrame:CGRectZero];
-    self.avatarImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
-    self.avatarImageView.backgroundColor = [UIColor clearColor];
-    //用户名
-    self.userNameLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-    self.userNameLabel.textColor = [UIColor brownColor];
-    self.userNameLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-    self.userNameLabel.backgroundColor = [UIColor clearColor];
-    //用户地点
-    self.locatonImageview = [[UIImageView alloc] initWithFrame:CGRectZero];
-    self.locationLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-    self.locationLabel.textColor= [UIColor blackColor];
-    self.locationLabel.font = [UIFont systemFontOfSize:12.0f];
-    self.locationLabel.backgroundColor = [UIColor clearColor];
-    //发布时间
-    self.timeLabel= [[UILabel alloc]initWithFrame:CGRectZero];
-    self.timeLabel.textColor = [UIColor brownColor];
-    self.timeLabel.font = [UIFont systemFontOfSize:12.0f];
-    self.timeLabel.textAlignment =UITextAlignmentRight;
-    self.timeLabel.backgroundColor = [UIColor clearColor];
-    
-    //微博视图
-    self.weiboView = [[UIView alloc]initWithFrame:CGRectZero];
-    //转发视图
-    self.repostView = [[UIView alloc]initWithFrame:CGRectZero];
-    self.weiboView.backgroundColor = [UIColor clearColor];
-    self.repostView.backgroundColor = [UIColor clearColor];
-    
-    //微博内容
-    // weiboContent = [[JSTwitterCoreTextView alloc]initWithFrame:CGRectZero];
-    self.contentText = [self GetJSTwitterCoreTextView];
-    self.contentText.backgroundColor = [UIColor clearColor];
-    //转发内容
-    //repostContent = [[JSTwitterCoreTextView alloc]initWithFrame:CGRectZero];
-    self.repostText = [self GetJSTwitterCoreTextView] ;
-    self.repostText.backgroundColor = [UIColor clearColor];
-    
-    UITapGestureRecognizer *weiboImgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClicked:)];
-    
-    UITapGestureRecognizer *repostImgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(repostImageClicked:)];
-    
-    //微博图片
-    self.weiboImage = [[UIImageView alloc]initWithFrame:CGRectZero];
-    [self.weiboImage.layer setMasksToBounds:YES];
-    [self.weiboImage.layer setCornerRadius:4];
-    self.weiboImage.contentMode = UIViewContentModeScaleAspectFit;
-    self.weiboImage.tag = WeiboImages;
-    //转发图片
-    self.repostImage = [[UIImageView alloc]initWithFrame:CGRectZero];
-    [self.repostImage.layer setMasksToBounds:YES];
-    [self.repostImage.layer setCornerRadius:4];
-    self.repostImage.tag = RepostImages;
-    
-    //评论列表
-    self.commentTable = [[UITableView alloc]initWithFrame:CGRectZero];
-    //更多评论按钮
-    self.moreComments = [[UIButton alloc]initWithFrame:CGRectZero];
-    //评论按钮
-    self.commentButton = [[UIButton alloc]initWithFrame:CGRectZero];
-    
-    self.repostImage.userInteractionEnabled = YES;
-    self.repostImage.contentMode = UIViewContentModeScaleAspectFit;
-    [self.repostImage addGestureRecognizer:repostImgTap];
-    [repostImgTap release];
-    repostImgTap = nil;
-    
-    self.weiboImage.userInteractionEnabled = YES;
-    [self.weiboImage addGestureRecognizer:weiboImgTap];
-    [weiboImgTap release];
-    weiboImgTap = nil;
-    
-    [self setFrame:CGRectMake(0, 0, 300, 0)];
-    [self.layer setCornerRadius:4];
-    
-    [self addSubview:headView];
-    [self addSubview:weiboView];
-    [self addSubview:repostView];
-    [self addSubview:commentTable];
-    [self addSubview:moreComments];
-    [self addSubview:commentButton];
-    
-    [self.headView addSubview:avatarBackGround];
-    [self.headView addSubview:avatarImageView];
-    [self.headView addSubview:userNameLabel];
-    [self.headView addSubview:locatonImageview];
-    [self.headView addSubview:locationLabel];
-    [self.headView addSubview:timeLabel];
-    [self.weiboView setUserInteractionEnabled:YES];
-    [self.weiboView addSubview:weiboImage];
-    [self.weiboView addSubview:contentText];
-    [self.repostView addSubview:repostBackGround];
-    [self.repostView addSubview:repostImage];
-    [self.repostView addSubview:repostText];
+    [self.weiboView release];
+    [self.bgImage release];
+    [self.contentImage release];
+    self.contentText = nil;
+    [self.repostBackGround release];
+    [self.repostMainView release];
+    [self.repostContentImage release];
+    self.repostText = nil;
+    [self.commentButton release];
+    [self.more release];
+    self.status = nil;
+    [super dealloc];
 }
 
 
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 @end

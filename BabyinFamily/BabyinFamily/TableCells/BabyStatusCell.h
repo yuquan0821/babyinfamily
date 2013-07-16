@@ -10,47 +10,47 @@
 #import "User.h"
 #import "Status.h"
 #import "Comment.h"
-#import "JSTwitterCoreTextView.h"
+#import "ProfileViewController.h"
 #define IMAGE_VIEW_HEIGHT 300.0f
 #define CELL_WIDTH 300.0f
 #define CONTENT_WIDTH 280.0f
-#define PADDING_TOP 5.0
-#define PADDING_LEFT 5.0
+#define PADDING_TOP 4.0
+#define PADDING_LEFT 4.0
 #define FONT_SIZE 13.0
 #define FONT @"Arial"
 #define TEXT_VIEW_SIZE CGSizeMake(240, 1000)
 
 @class  BabyStatusCell;
-@protocol BabyStatusCellDelegate;
+@protocol BabyStatusCellDelegate<NSObject>
 
-@interface BabyStatusCell : UITableViewCell <UITextViewDelegate, JSCoreTextViewDelegate,UIGestureRecognizerDelegate>
+-(void)statusImageClicked:(Status *)theStatus;
+
+@end
+
+@interface BabyStatusCell : UITableViewCell <UITextViewDelegate, UIGestureRecognizerDelegate>
 {
     id<BabyStatusCellDelegate>  delegate;
 }
-@property (nonatomic, assign) id<BabyStatusCellDelegate> delegate;
-@property (nonatomic, retain) UIView      *headView;
-@property (nonatomic, retain) UIImageView *avatarBackGround;
-@property (nonatomic, retain) UIImageView *avatarImageView;
-@property (nonatomic, retain) UILabel     *userNameLabel;
-@property (nonatomic, retain) UIImageView *locatonImageview;
-@property (nonatomic, retain) UILabel     *locationLabel;
-@property (nonatomic, retain) UILabel     *timeLabel;
-
-@property (nonatomic, retain) UIImageView *backGround;
+@property (nonatomic, retain) id<BabyStatusCellDelegate> delegate;
+//原文
+@property (nonatomic, retain) UIImageView *bgImage;
 @property (nonatomic, retain) UIView      *weiboView;
-@property (nonatomic, retain) UIImageView *weiboImage;
-@property (nonatomic, retain) JSTwitterCoreTextView *contentText;
-
+@property (nonatomic, retain) UIImageView *contentImage;
+@property (nonatomic, retain) UITextView  *contentText;
+//转发
 @property (nonatomic, retain) UIImageView *repostBackGround;
-@property (nonatomic, retain) UIView      *repostView;
-@property (nonatomic, retain) UIImageView *repostImage;
-@property (nonatomic, retain) JSTwitterCoreTextView *repostText;
-
-@property (nonatomic, retain) UITableView *commentTable;
-@property (nonatomic, retain) UIButton    *moreComments;
-@property (nonatomic, retain) UIButton    *commentButton;
+@property (nonatomic, retain) UIView      *repostMainView;
+@property (nonatomic, retain) UIImageView *repostContentImage;
+@property (nonatomic, retain) UITextView  *repostText;
 
 @property (nonatomic, retain) Status      *status;
+@property (nonatomic, assign) CGFloat     statusHeight;
+@property (nonatomic, assign) CGFloat     cellHeight;
+@property (nonatomic, retain) UIButton    *more;
+@property (nonatomic, retain) UIButton    *commentButton;
+
+//用户设置cell组成
+-(void)customViews;
 
 //动态更新界面布局
 -(void)updateCellWith:(Status *)weibo;
@@ -58,14 +58,8 @@
 //返回Cell高度
 -(CGFloat)contentHeight:(CGFloat )cellHeight;
 
+
+
 @end
 
-@protocol BabyStatusCellDelegate <NSObject>
-
--(void)statusImageClicked:(Status *)theStatus;
-//-(void)cellImageDidTaped:(StatusCell *)theCell image:(UIImage*)image;
-//-(void)cellLinkDidTaped:(StatusCell *)theCell link:(NSString*)link;
-//-(void)cellTextDidTaped:(StatusCell *)theCell;
--(void)customViews;
-@end
 
