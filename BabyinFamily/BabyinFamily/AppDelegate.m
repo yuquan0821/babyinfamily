@@ -38,34 +38,7 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
-
-    //添加navigationbar 的默认图片
-    UIImage *navBackgroundImage = [UIImage imageNamed:@"header_bg"];
-    [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
-    
-    // 修改 UINavigationBar 字体，起始位置，阴影.
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          
-                                                          [UIColor colorWithRed:245.0 / 255.0 green:245.0 / 255.0 blue:245.0 / 255.0 alpha:1.0], UITextAttributeTextColor,
-                                                          
-                                                          [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8], UITextAttributeTextShadowColor,
-                                                          
-                                                          [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
-                                                          
-                                                          [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], UITextAttributeFont,
-                                                          
-                                                          nil]];
-    
-    // 根据需要修改UIBarButtonItem返回按钮的背景图及其大小 .
-    UIImage *backButtonImage = [[UIImage imageNamed:@"navigationBarBackButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    
-    // 根据需要修改UIBarButtonItem编辑按钮的背景图及其大小 
-    UIEdgeInsets insets = {0, 6, 0, 6};// Same as doing this: UIEdgeInsetsMake (top, left, bottom, right)
-    UIImage *barButtonImage = [[UIImage imageNamed:@"button_normal"] resizableImageWithCapInsets:insets];
-    [[UIBarButtonItem appearance] setBackgroundImage:barButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    
-   // 微博登陆SDK的使用 
+    // 微博登陆SDK的使用
     sinaWeibo = [[SinaWeibo alloc] initWithAppKey:SINA_APP_KEY appSecret:SINA_APP_SECRET appRedirectURI:SINA_APP_REDIRECT_URI andDelegate:self.loadingViewController];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -77,20 +50,51 @@
         sinaWeibo.userID = [defaults objectForKey:USER_STORE_USER_ID];
     }
     BOOL authValid = sinaWeibo.isAuthValid;
-    // 根据是否登陆成功进入不同的流程。 
+    // 根据是否登陆成功进入不同的流程。
     if (!authValid)
     {
         [self showFirstRunViewWithAnimate];
     }
     else
     {
+        
         [self prepareToMainViewControllerWithAnimate:NO];
+        UIImage *storyMenuItemImage = [UIImage imageNamed:@"bg-menuitem.png"];
+        UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"bg-menuitem-highlighted.png"];
+        
+        UIImage *starImage = [UIImage imageNamed:@"icon-star.png"];
+        
+        QuadCurveMenuItem *starMenuItem1 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                                   highlightedImage:storyMenuItemImagePressed
+                                                                       ContentImage:starImage
+                                                            highlightedContentImage:nil];
+        QuadCurveMenuItem *starMenuItem2 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                                   highlightedImage:storyMenuItemImagePressed
+                                                                       ContentImage:starImage
+                                                            highlightedContentImage:nil];
+        QuadCurveMenuItem *starMenuItem3 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                                   highlightedImage:storyMenuItemImagePressed
+                                                                       ContentImage:starImage
+                                                            highlightedContentImage:nil];
+        
+        NSArray *menus = [NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, nil];
+        [starMenuItem1 release];
+        [starMenuItem2 release];
+        [starMenuItem3 release];
+        
+        
+        
+        QuadCurveMenu *menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(160, 430, 0, 0) menus:menus];
+        menu.delegate = self;
+        [self.tabBarController.view addSubview:menu];
+        
+        [menu release];
         
     }
     
     [self.window makeKeyAndVisible];
     return YES;
-
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -139,32 +143,42 @@
 - (void) prepareToMainViewControllerWithAnimate:(BOOL)animate
 {
     //reload nib
-   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUnreadCount:) name:MMSinaGotUnreadCount       object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUnreadCount:) name:MMSinaGotUnreadCount       object:nil];
+    
     HomeViewController *vc1      = [[[HomeViewController alloc] init] autorelease];
     HotViewController *vc2       = [[[HotViewController alloc] init] autorelease];
     TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
     MessageViewController *vc4   = [[[MessageViewController alloc] init] autorelease];
     ProfileViewController *vc5   = [[[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil] autorelease];
     vc5.title = @"我的";
-    BabyNavigationController * nav1 = [[[BabyNavigationController alloc] initWithRootViewController:vc1] autorelease];
-    UINavigationController * nav2 = [[[UINavigationController alloc] initWithRootViewController:vc2] autorelease];
-    UINavigationController * nav3 = [[[UINavigationController alloc] initWithRootViewController:vc3] autorelease];
-    BabyNavigationController * nav4 = [[[BabyNavigationController alloc] initWithRootViewController:vc4] autorelease];
-    BabyNavigationController * nav5 = [[[BabyNavigationController alloc] initWithRootViewController:vc5] autorelease];
+    CustomNavViewController * nav1 = [[[CustomNavViewController alloc] initWithRootViewController:vc1] autorelease];
+    CustomNavViewController * nav2 = [[[CustomNavViewController alloc] initWithRootViewController:vc2] autorelease];
+    CustomNavViewController * nav3 = [[[CustomNavViewController alloc] initWithRootViewController:vc3] autorelease];
+    CustomNavViewController * nav4 = [[[CustomNavViewController alloc] initWithRootViewController:vc4] autorelease];
+    CustomNavViewController * nav5 = [[[CustomNavViewController alloc] initWithRootViewController:vc5] autorelease];
     
-    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    self.tabBarController.viewControllers = @[nav1, nav2,nav3,nav4,nav5];
+    //self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+    //self.tabBarController.viewControllers = @[nav1, nav2,nav3,nav4,nav5];
     //添加button到tabbar上
-    NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
-    RaisedCenterButton *button = [RaisedCenterButton buttonWithImage:[UIImage imageNamed:fullpath] forTabBarController:self.tabBarController];
-    [self.tabBarController.tabBar addSubview:button];
+    self.tabBarController = [[[CustomTabbarViewController alloc] initWithNibName:@"CustomTabbarViewController" bundle:nil] autorelease];
+    nav1.tabbarViewController = self.tabBarController;
+    nav2.tabbarViewController = self.tabBarController;
+    nav3.tabbarViewController = self.tabBarController;
+    nav4.tabbarViewController = self.tabBarController;
+    nav5.tabbarViewController = self.tabBarController;
+    
+    
+    self.tabBarController.arrayViewcontrollers = [NSArray arrayWithObjects:nav1 ,nav2,nav3,nav4,nav5, nil];
+    //NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
+    //RaisedCenterButton *button = [RaisedCenterButton buttonWithImage:[UIImage imageNamed:fullpath] forTabBarController:self.tabBarController];
+    //[self.tabBarController.b addSubview:button];
     [[window subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [window addSubview:tabBarController.view];
+    [window  addSubview:tabBarController.view];
     
     self.window.rootViewController = self.tabBarController;
     [self schedueMessageTimer];
-
+    [self.tabBarController touchBtnAtIndex:0];
+    
     if (animate) {
         [UIView commitAnimations];
     }
@@ -199,7 +213,7 @@
 -(void)timerOnActive
 {
     WeiBoMessageManager *manager = [WeiBoMessageManager getInstance];
-
+    
     [manager getUnreadCount:[[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID]];
 }
 
@@ -213,7 +227,32 @@
         return;
     }
     
-   // [self.tabBarController.tabBar.items objectAtIndex:3];
+    // [self.tabBarController.tabBar.items objectAtIndex:3];
+}
+- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx
+{
+    switch (idx) {
+        case 0:
+        {
+            NSLog(@"Select the index : %d",idx);
+            
+            break;
+        }
+        case 1:
+        {
+            NSLog(@"Select the index : %d",idx);
+            break;
+        }
+        case 2:
+        {
+            NSLog(@"Select the index : %d",idx);
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
 }
 
 @end
