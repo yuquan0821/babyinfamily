@@ -21,6 +21,8 @@
 #ifndef SINA_APP_REDIRECT_URI
 #error
 #endif
+#define DEVICE_IS_IPHONE5 ([[UIScreen mainScreen] bounds].size.height == 568)
+
 
 
 

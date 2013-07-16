@@ -83,8 +83,9 @@
         [starMenuItem3 release];
         
         
-        
-        QuadCurveMenu *menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(160, 430, 0, 0) menus:menus];
+        float height = DEVICE_IS_IPHONE5 ? 518 : 430;
+
+        QuadCurveMenu *menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(160, height, 0, 0) menus:menus];
         menu.delegate = self;
         [self.tabBarController.view addSubview:menu];
         
