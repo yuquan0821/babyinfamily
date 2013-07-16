@@ -20,11 +20,14 @@
 #import "SHKActivityIndicator.h"
 #import "UIImageView+Resize.h"
 #import "AddComment.h"
+#import "BabyStatusCellHeadView.h"
+#import "UIImageView+WebCache.h"
+#import "BabyStatusCell.h"
 
 
 @class WeiBoMessageManager;
 
-@interface StatusViewControllerBase : PullRefreshTableViewController<EGORefreshTableHeaderDelegate,StatusCellDelegate,ImageBrowserDelegate,UIActionSheetDelegate>{
+@interface StatusViewControllerBase : PullRefreshTableViewController<EGORefreshTableHeaderDelegate,StatusCellDelegate,ImageBrowserDelegate,UIActionSheetDelegate,BabyStatusCellHeadClickDelegate,SDWebImageManagerDelegate,BabyStatusCellDelegate>{
     
     WeiBoMessageManager *manager;
     NSNotificationCenter *defaultNotifCenter;

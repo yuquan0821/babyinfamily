@@ -10,6 +10,7 @@
 #import "UIImageView+Resize.h"
 #import "ProfileViewController.h"
 #import "SVStatusHUD.h"
+#import "BabyStatusDetailViewController.h"
 
 #define kTextViewPadding            16.0
 #define kLineBreakMode              UILineBreakModeWordWrap
@@ -47,7 +48,7 @@
 
 -(void)setup
 {
-   
+    
     self.title = @"主页";
     self.navigationItem.title = @"家贝";
     NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_home"];
@@ -131,17 +132,18 @@
     NSLog(@" sts base table = %@,delegate = %@",self.tableView,self.tableView.delegate);
     NSLog(@"navigation is height %f",self.navigationController.navigationBar.frame.size.height);
     self.table = self.tableView;
-    [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
+    //[defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(mmRequestFailed:)   name:MMSinaRequestFailed object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)       name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(receiveDeletePicNotification:) name:@"DeletedPic" object:nil];
-
-
+    
+    [self loadVisuableImage:self.table];
+    
 }
 
 -(void)viewDidUnload
 {
-    [defaultNotifCenter removeObserver:self name:HHNetDataCacheNotification object:nil];
+    //[defaultNotifCenter removeObserver:self name:HHNetDataCacheNotification object:nil];
     [defaultNotifCenter removeObserver:self name:MMSinaRequestFailed        object:nil];
     [defaultNotifCenter removeObserver:self name:DID_GET_TOKEN_IN_WEB_VIEW  object:nil];
     
@@ -151,8 +153,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self loadVisuableImage:self.table];
+    
     [self.table reloadData];
-
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -177,12 +181,12 @@
     NSArray *cellArr = [self.table visibleCells];
     for (StatusCell *cell in cellArr) {
         NSIndexPath *inPath = [self.table indexPathForCell:cell];
-        Status *status = [statuesArr objectAtIndex:inPath.row];
+        Status *status = [statuesArr objectAtIndex:inPath.section];
         User *user = status.user;
         
         if (user.avatarImage == nil)
         {
-            [[HHNetDataCacheManager getInstance] getDataWithURL:user.profileImageUrl withIndex:inPath.row];
+            [[HHNetDataCacheManager getInstance] getDataWithURL:user.profileImageUrl withIndex:inPath.section];
         }
         else {
             cell.avatarImage.image = user.avatarImage;
@@ -190,15 +194,121 @@
         
         if (status.statusImage == nil)
         {
-            [[HHNetDataCacheManager getInstance] getDataWithURL:status.bmiddlePic withIndex:inPath.row];
+            [[HHNetDataCacheManager getInstance] getDataWithURL:status.bmiddlePic withIndex:inPath.section];
         }
         else {
             cell.contentImage.image = status.statusImage;
         }
-
+        
     }
-
+    
 }
+//如果保证平滑
+//为是么用异步， 就是为了肥皂滑 ui流畅
+//1.图片数据异步从网络上下载
+//2.tableview中图片是需要的时候（滚动停下来 可见的cell）才加载
+//3.下载完的图片 缓存起来
+//加载可见图片
+-(void)loadVisuableImage:(UITableView *)scrollView
+{
+    NSArray *array  = [scrollView visibleCells];
+    
+    for ( BabyStatusCell *cell  in array) {
+        NSIndexPath *path =  [scrollView indexPathForCell:cell];
+        
+        Status *weibo  = [statuesArr objectAtIndex:path.section];
+        //        StatusHead *head =(StatusHead *) [self tableView:_weiboTable viewForHeaderInSection:path.section];
+        //        NSLog(@"head section %d", path.section);
+        //        NSLog(@"head %@", head);
+        //        NSLog(@"status user name%@", weibo.user.name);
+        //使用SDWebImageManager类：可以进行一些异步加载的工作。
+        SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
+        
+        //        //下载头像
+        //        head.userName.text = [weibo.user name];
+        //        [head.userImg setImageWithURL:[NSURL URLWithString:weibo.user.profileImageUrl]];
+        //        [head.userImg.layer setMasksToBounds:YES];
+        //        [head.userImg.layer setCornerRadius:5];
+        //
+        //        NSLog(@"head - user - name :%@", head.userName.text);
+        //        [head setNeedsDisplay];
+        //下载微博图片
+        if (cell.contentImage.image == [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"] ||
+            cell.repostContentImage.image == [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"])
+        {
+            if (cell.contentImage.hidden == NO) {
+                //判断是否有本地缓存
+                NSURL *imgURL = [NSURL URLWithString:weibo.bmiddlePic];
+                UIImage *cachedImage = [sdManager imageWithURL:imgURL];
+                if (cachedImage) {
+                    //如果cache命中，则直接利用缓存的图片进行有关操作
+                    // CGSize size = CGSizeMake(300, 300);
+                    //cachedImage = [UIImageView imageWithImage:cachedImage scaledToSizeWithSameAspectRatio:size];
+                    [UIView animateWithDuration:0.3 animations:^{
+                        cell.contentImage.alpha = 0.0f;
+                    } completion:^(BOOL finished) {
+                        cell.contentImage.alpha = 1.0f;
+                        [cell.contentImage setImage:cachedImage];
+                    }];
+                }else{
+                    //如果没有命中，则去指定url下载图片
+                    //增加进度条
+                    UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                    [cell.contentImage addSubview:loading];
+                    loading.center = cell.contentImage.center;
+                    [loading startAnimating];
+                    [UIView animateWithDuration:0.3 animations:^{
+                        cell.contentImage.alpha = 0.0f;
+                    } completion:^(BOOL finished) {
+                        [UIView animateWithDuration:0.3 animations:^{
+                            cell.contentImage.alpha = 1.0f;
+                            [cell.contentImage setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@"loadingIMG.jpg"]];
+                            
+                            [loading stopAnimating];
+                            [loading removeFromSuperview];
+                            [loading release];
+                        } ];
+                    }];
+                }
+            }
+            if (cell.repostContentImage.hidden == NO) {
+                NSURL *imgURL = [NSURL URLWithString:weibo.retweetedStatus.bmiddlePic];
+                UIImage *cachedImage = [sdManager imageWithURL:imgURL];
+                if (cachedImage) {
+                    CGSize size = CGSizeMake(300, 300);
+                    cachedImage = [UIImageView imageWithImage:cachedImage scaledToSizeWithSameAspectRatio:size];
+                    [UIView animateWithDuration:0.3 animations:^{
+                        cell.contentImage.alpha = 0.0f;
+                    } completion:^(BOOL finished) {
+                        cell.contentImage.alpha = 1.0f;
+                        [cell.repostContentImage setImage:cachedImage];
+                    }];
+                }
+                else{
+                    cell.repostContentImage.image =  [ UIImage imageNamed:@"loadingIMG.png"];
+                    UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                    [cell.contentImage addSubview:loading];
+                    loading.center = cell.contentImage.center;
+                    [loading startAnimating];
+                    [UIView animateWithDuration:0.3 animations:^{
+                        cell.repostContentImage.alpha = 0.0f;
+                    } completion:^(BOOL finished) {
+                        [UIView animateWithDuration:0.3 animations:^{
+                            cell.repostContentImage.alpha = 1.0f;
+                            [cell.repostContentImage setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@"loadingIMG.jpg"]];
+                            [loading stopAnimating];
+                            [loading removeFromSuperview];
+                            [loading release];
+                        }];
+                    }];
+                }
+            }
+        }
+        [cell setNeedsDisplay];
+    }
+}
+
+
 
 //得到图片
 -(void)getAvatar:(NSNotification*)sender
@@ -249,6 +359,8 @@
     {
         if ([url isEqualToString:sts.retweetedStatus.thumbnailPic])
         {
+            CGSize size = CGSizeMake(300, 300);
+            image = [UIImageView imageWithImage:[UIImage imageWithData:data] scaledToSizeWithSameAspectRatio:size];
             sts.statusImage = image;
         }
     }
@@ -262,14 +374,6 @@
     
 }
 
-//计算text field 的高度。
--(CGFloat)cellHeight:(NSString*)contentText with:(CGFloat)with
-{
-    UIFont * font=[UIFont  systemFontOfSize:14];
-    CGSize size=[contentText sizeWithFont:font constrainedToSize:CGSizeMake(with - kTextViewPadding, 300000.0f) lineBreakMode:kLineBreakMode];
-    CGFloat height = size.height;
-    return height ;//= 200.0f;
-}
 
 - (id)cellForTableView:(UITableView *)tableView fromNib:(UINib *)nib {
     static NSString *cellID = @"StatusCell";
@@ -291,87 +395,126 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [statuesArr count];
+    
 }
 
+-(CGFloat )tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 52;
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [statuesArr count];
+    return 1;
 }
+//页眉
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+
+{
+    BabyStatusCellHeadView *head = [[BabyStatusCellHeadView alloc]initWithFrame:CGRectMake(0, 0, 320, 52)];
+    Status *status = [statuesArr objectAtIndex:section];
+    NSLog(@"status user name%@", status.user.name);
+    head.userNameLabel.text = [status.user name];
+    [head.avatarImage setImageWithURL:[NSURL URLWithString:status.user.profileImageUrl]];
+    [head.timeLabel setText:status.timestamp];
+    head.locationLabel.text = status.user.location;
+    head.user = status.user;
+    head.delegate = self;
+    return head;
+}
+
 
 //add statusCell to sectionrows
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger  row = indexPath.row;
-    StatusCell *cell = [self cellForTableView:tableView fromNib:self.statusCellNib];
-    [cell.moreButton addTarget:self action:@selector(moreButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    /* NSInteger  row = indexPath.section;
+     StatusCell *cell = [self cellForTableView:tableView fromNib:self.statusCellNib];
+     [cell.moreButton addTarget:self action:@selector(moreButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+     [cell.commentButton addTarget:self action:@selector(addComment:) forControlEvents:UIControlEventTouchUpInside];
+     [cell.userNameButton addTarget:self action:@selector(goToProfile:) forControlEvents:UIControlEventTouchUpInside];
+     
+     
+     if (row >= [statuesArr count]) {
+     return cell;
+     }
+     
+     Status *status = [statuesArr objectAtIndex:row];
+     status.cellIndexPath = indexPath;
+     cell.delegate = self;
+     cell.cellIndexPath = indexPath;
+     [cell setupCell:status ];
+     if (self.table.dragging == NO && self.table.decelerating == NO)
+     {
+     if (status.user.avatarImage == nil)
+     {
+     [[HHNetDataCacheManager getInstance] getDataWithURL:status.user.profileImageUrl withIndex:row];
+     }
+     
+     if (status.statusImage == nil)
+     {
+     [[HHNetDataCacheManager getInstance] getDataWithURL:status.thumbnailPic withIndex:row];
+     [[HHNetDataCacheManager getInstance] getDataWithURL:status.retweetedStatus.thumbnailPic withIndex:row];
+     }
+     }    cell.avatarImage.image = status.user.avatarImage;
+     cell.contentImage.image = status.statusImage;
+     
+     //开始绘制第一个cell时，隐藏indecator.
+     if (isFirstCell) {
+     [[SHKActivityIndicator currentIndicator] hide];
+     isFirstCell = NO;
+     }*/
+    
+    static NSString *cellIdentifier = @"babyStatusCell";
+    
+    BabyStatusCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    Status *weibo  = [statuesArr objectAtIndex:indexPath.section];
+    NSLog(@"---------- 微博:%@", weibo.text);
+    NSLog(@"---------- 转发:%@", weibo.retweetedStatus.text);
+    if (cell == nil) {
+        cell = [[BabyStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        [cell updateCellWith:weibo];
+    }
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    cell.contentImage.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
+    cell.repostContentImage.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
+    
+    // [cell.userNameButton addTarget:self action:@selector(goToProfile:) forControlEvents:UIControlEventTouchUpInside];
+    //不能在这个地方来下载图片
+    //如果这个函数cellForRowAtIndexPath
+    //如果从0行翻到999行，这个函数就会至少调用1000次
+    //NSLog(@"section %d ",indexPath.section);
+    // [cell updateCellWith:[listData objectAtIndex:row]];
+    
+    [cell updateCellWith:weibo];
+    [cell.more addTarget:self action:@selector(moreButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.commentButton addTarget:self action:@selector(addComment:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.userNameButton addTarget:self action:@selector(goToProfile:) forControlEvents:UIControlEventTouchUpInside];
-
-
-    if (row >= [statuesArr count]) {
-        return cell;
-    }
-    
-    Status *status = [statuesArr objectAtIndex:row];
-    status.cellIndexPath = indexPath;
-    cell.delegate = self;
-    cell.cellIndexPath = indexPath;
-    [cell setupCell:status ];
-    if (self.table.dragging == NO && self.table.decelerating == NO) //只有scrollview没有滑动时才加载（节省流量）
-
-    {
-        if (status.user.avatarImage == nil)
-        {
-            [[HHNetDataCacheManager getInstance] getDataWithURL:status.user.profileImageUrl withIndex:row];
-        }
-        
-        if (status.statusImage == nil)
-        {
-            [[HHNetDataCacheManager getInstance] getDataWithURL:status.bmiddlePic withIndex:row];
-        }
-    }
-    cell.avatarImage.image = status.user.avatarImage;
-    cell.contentImage.image = status.statusImage;
-    
-    //开始绘制第一个cell时，隐藏indecator.
-    if (isFirstCell) {
-        [[SHKActivityIndicator currentIndicator] hide];
-        isFirstCell = NO;
-    }
+    cell.delegate =self;
     return cell;
-
+    
 }
 
 
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 385.0f;
     
-    NSInteger  row = indexPath.row;
-    
-    if (row >= [statuesArr count])
-    {
-        NSLog(@"heightForRowAtIndexPath error ,index = %d,count = %d",row,[statuesArr count]);
-        return 1;
-    }
-    
-    Status *status          = [statuesArr objectAtIndex:row];
-    NSString *url = status.bmiddlePic;
-    StatusCell *cell = [self cellForTableView:tableView fromNib:self.statusCellNib];
-    [cell setupCell:status];
-    NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:[indexPath row]]];
-    CGFloat height = 0.0f;
-    
-    //
-    if (url && [url length] != 0)
-    {
-        height = [cell setCellHeight: status contentImageData:imageData];
-        NSLog(@"hight is %f",height);
-    }
-    return height;
+    NSInteger  row = indexPath.section;
+    static NSString *cellIdentifier = @"babyStatusCell";
+    Status *status = [statuesArr objectAtIndex:row];
+    BabyStatusCell *cell = [[[BabyStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier]autorelease];
+    [cell updateCellWith:status];
+    return cell.cellHeight;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    BabyStatusDetailViewController* Detail = [[BabyStatusDetailViewController alloc] init];
+    Detail.weibo = [statuesArr objectAtIndex:indexPath.section];
+    [self.navigationController pushViewController:Detail animated:YES];
+    // [Detail release];
+}
+
 
 #pragma mark - StatusCellDelegate
 
@@ -412,6 +555,70 @@
         }
     }
 }
+
+#pragma mark - imageClick
+-(void)statusImageClicked:(Status *)theStatus
+{
+    
+    shouldShowIndicator = YES;
+    NSLog(@"click is running");
+    
+    if ([theStatus.cellIndexPath row] > [statuesArr count]) {
+        return ;
+    }
+    
+    Status *sts = [statuesArr objectAtIndex:[theStatus.cellIndexPath row]];
+    BOOL isRetwitter = sts.retweetedStatus && sts.retweetedStatus.originalPic != nil;
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    CGRect frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+    if (browserView == nil) {
+        self.browserView = [[[ImageBrowser alloc]initWithFrame:frame] autorelease];
+        [browserView setUp];
+    }
+    
+    // browserView.image = image;
+    browserView.theDelegate = self;
+    browserView.bigImageURL = isRetwitter ? sts.retweetedStatus.originalPic : sts.originalPic;
+    [browserView loadImage];
+    [app.keyWindow addSubview:browserView];
+    app.statusBarHidden = YES;
+    if (shouldShowIndicator == YES && browserView) {
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:browserView];
+    }
+    else shouldShowIndicator = YES;
+    /*ImagesViewer *viewer = [[ImagesViewer alloc]initWithFrame:self.view.bounds];
+     viewer.delegate = self;
+     
+     UIActivityIndicatorView *loadingView  = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+     [loadingView startAnimating];
+     [viewer addSubview:loadingView];
+     [loadingView release];
+     loadingView = nil;
+     viewer.frame  = CGRectMake(0, -460, 320, 460);
+     [self.view.superview addSubview:viewer];
+     viewer.imges.alpha = 0;
+     [UIView animateWithDuration:0.5
+     animations:^{
+     viewer.frame  = CGRectMake(0, -20, 320, 460);
+     viewer.imges.alpha = 1.0f;
+     
+     [viewer.imges setImageWithURL:[NSURL URLWithString:theStatus.middleImageUrl]];
+     //                        viewer.imageUrl = theStatus.middleImageUrl;
+     NSLog(@"URLWithString:theStatus.middleImageUrl:%@",theStatus.middleImageUrl);
+     } completion:^(BOOL finished) {
+     [loadingView stopAnimating];
+     [loadingView removeFromSuperview];
+     }];
+     
+     //    ImageViewConreoller * imageView = [[ImageViewConreoller alloc] init];
+     //    imageView.imageUrl = theStatus.middleImageUrl;
+     //
+     //    [self presentModalViewController:imageView animated:YES];*/
+    
+}
+
+
 
 -(void)cellImageDidTaped:(StatusCell *)theCell image:(UIImage *)image
 {
@@ -474,19 +681,24 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [self refreshVisibleCellsImages];
+    // [self refreshVisibleCellsImages];
+    [self loadVisuableImage:(UITableView *)scrollView];
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
-    [self refreshVisibleCellsImages];
+    // [self refreshVisibleCellsImages];
+    // [self loadVisuableImage:(UITableView *)scrollView];
+    
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
     if (!decelerate)
 	{
-        [self refreshVisibleCellsImages];
+        // [self refreshVisibleCellsImages];
+        [self loadVisuableImage:(UITableView *)scrollView];
+        
     }
     
     if (scrollView.contentOffset.y < 200)
@@ -514,7 +726,7 @@
     }else{
         _reloading = YES;
         [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
-        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];        
+        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
     }
 }
 
@@ -537,7 +749,7 @@
     UIButton *button = (UIButton *)sender;
     StatusCell *cell = (StatusCell *)button.superview.superview;
     NSIndexPath *path = [self.table indexPathForCell:cell];
-    Status *status = [self.statuesArr objectAtIndex:path.row];
+    Status *status = [self.statuesArr objectAtIndex:path.section];
     self.clickedStatus = status;
     UIActionSheet *sheet;
     NSString *userId = [[NSUserDefaults standardUserDefaults] stringForKey:USER_STORE_USER_ID];
@@ -560,26 +772,26 @@
     StatusCell *cell = (StatusCell *)[self.table cellForRowAtIndexPath:clickedIndexPath];
     if (clickedStatus.statusImage == nil)
     {
-        [[HHNetDataCacheManager getInstance] getDataWithURL:clickedStatus.bmiddlePic withIndex:clickedIndexPath.row];
+        [[HHNetDataCacheManager getInstance] getDataWithURL:clickedStatus.bmiddlePic withIndex:clickedIndexPath.section];
     }
     
     cell.contentImage.image = clickedStatus.statusImage;
-    UIImageWriteToSavedPhotosAlbum(cell.contentImage.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);        
+    UIImageWriteToSavedPhotosAlbum(cell.contentImage.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 //destroy status
 
 - (void)deletePicture
 {
-     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-         NSString *weiboID =[NSString stringWithFormat:@"%lld",clickedStatus.statusId];
-         [manager destroyAstatus:weiboID];
-         dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSString *weiboID =[NSString stringWithFormat:@"%lld",clickedStatus.statusId];
+        [manager destroyAstatus:weiboID];
+        dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:weiboID,@"weiboID", nil];
-           [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
-          [userInfo release];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
+            [userInfo release];
         });
-     });
+    });
 }
 
 
@@ -587,7 +799,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"%d",buttonIndex);
-        NSString *userId = [[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID];
+    NSString *userId = [[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID];
     if (clickedStatus.user.userId == userId.longLongValue) {
         //0：删除 1：保存 2：取消
         switch (buttonIndex) {
@@ -623,7 +835,7 @@
     UIButton *button = (UIButton *)sender;
     StatusCell *cell = (StatusCell *)button.superview.superview;
     NSIndexPath *path = [self.table indexPathForCell:cell];
-    Status *status = [self.statuesArr objectAtIndex:path.row];
+    Status *status = [self.statuesArr objectAtIndex:path.section];
     AddComment *add = [[AddComment alloc]initWithNibName:@"AddComment" bundle:nil];
     add.status = status;
     add.hidesBottomBarWhenPushed = YES;
@@ -638,7 +850,7 @@
     UIButton *button = (UIButton *)sender;
     StatusCell *cell = (StatusCell *)button.superview.superview;
     NSIndexPath *path = [self.table indexPathForCell:cell];
-    Status *status = [self.statuesArr objectAtIndex:path.row];
+    Status *status = [self.statuesArr objectAtIndex:path.section];
     ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
     profile.user = status.user;
     profile.hidesBottomBarWhenPushed = YES;
