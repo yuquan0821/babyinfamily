@@ -8,17 +8,51 @@
 
 
 #import <UIKit/UIKit.h>
-#import "StatusViewControllerBase.h"
+#import "StatusCell.h"
+#import "PullRefreshTableViewController.h"
+#import "EGORefreshTableHeaderView.h"
+#import "ImageBrowser.h"
+#import "WeiBoMessageManager.h"
+#import "Status.h"
+#import "User.h"
+#import "ASIHTTPRequest.h"
+#import "HHNetDataCacheManager.h"
+#import "GifView.h"
+#import "SHKActivityIndicator.h"
+#import "UIImageView+Resize.h"
+#import "AddComment.h"
+#import "BabyStatusCellHeadView.h"
+#import "UIImageView+WebCache.h"
+#import "BabyStatusCell.h"
 
-@interface HomeViewController : StatusViewControllerBase
+
+@interface HomeViewController : PullRefreshTableViewController<EGORefreshTableHeaderDelegate,StatusCellDelegate,ImageBrowserDelegate,UIActionSheetDelegate,BabyStatusCellHeadClickDelegate,SDWebImageManagerDelegate,BabyStatusCellDelegate>
 {
-    NSString *userID;
-    int _page;
-    long long _maxID;
-    BOOL _shouldAppendTheDataArr;
+    UITableView                 *table;
+    NSMutableArray              *statuesArr;
+    BOOL                        isFirstCell;
+    WeiBoMessageManager         *manager;
+	EGORefreshTableHeaderView   *_refreshHeaderView;
+    NSString                    *userID;
+    int                         _page;
+    long long                   _maxID;
+    BOOL                        _shouldAppendTheDataArr;
+    NSNotificationCenter        *defaultNotifCenter;
+    ImageBrowser                *browserView;
+    BOOL                        shouldShowIndicator;
+    BOOL                        shouldLoad;
+	BOOL                        _reloading;
 }
+@property (retain,nonatomic)    UITableView             *table;
+@property (nonatomic, copy)     NSString                *userID;
+@property (nonatomic, retain)   NSMutableArray          *statuesArr;
+@property (nonatomic, retain)   ImageBrowser            *browserView;
+@property (nonatomic, retain)   Status                  *clickedStatus;
 
-@property (nonatomic, copy)     NSString *userID;
-//@property (nonatomic, retain) NSTimer *timer;
+
+- (void)doneLoadingTableViewData;
+- (void)moreButtonOnClick:(id)sender;
+- (void)loadVisuableImage:(UITableView *)scrollView;
+
 
 @end
