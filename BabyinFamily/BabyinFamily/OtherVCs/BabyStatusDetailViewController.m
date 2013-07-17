@@ -22,6 +22,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"详情";
+
     }
     return self;
 }
@@ -212,10 +214,8 @@
         NSLog(@"status user name%@", status.user.name);
         head.userNameLabel.text = [status.user name];
         [head.avatarImage setImageWithURL:[NSURL URLWithString:status.user.profileImageUrl]];
-       // [head.avatarImage.layer setMasksToBounds:YES];
-        //[head.avatarImage.layer setCornerRadius:5];
+        head.locationLabel.text = status.user.location;
         [head.timeLabel   setText:status.timestamp];
-        //         head.UserId = [NSString stringWithFormat:@"%lld",status.user.userId];
         head.user = status.user;
         head.delegate = self;
         return head;

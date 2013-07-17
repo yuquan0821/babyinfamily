@@ -20,7 +20,6 @@
 {
     UITableView * detailTableView;
     Status * _weibo;
-    // NSMutableArray * _commentListArray;
     NSMutableArray * listCommentsArray;
     NSNumber * commentsCount;
     BOOL  flagHeader;
