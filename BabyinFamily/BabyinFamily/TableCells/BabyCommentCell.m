@@ -38,21 +38,21 @@
     [_headImageView.layer  setMasksToBounds:YES];
     [_headImageView.layer setCornerRadius:10];
     
-    _commentPersonNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 5, 200, 20)];
+    _commentPersonNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_headImageView.frame.origin.x + _headImageView.frame.size.width + 4, _headImageView.frame.origin.y, 160, 21)];
     _commentPersonNameLabel.text = @"user";
     _commentPersonNameLabel.textAlignment = UITextAlignmentLeft;
-    _commentPersonNameLabel.font = [UIFont systemFontOfSize:18.0f];
+    _commentPersonNameLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     _commentPersonNameLabel.lineBreakMode = UILineBreakModeHeadTruncation;
     
-    _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(230, 5, 80, 35)];
+    _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(_commentPersonNameLabel.frame.origin.x + _commentPersonNameLabel.frame.size.width , _commentPersonNameLabel.frame.origin.y + 3 , 90, 16)];
     _timeLabel.text = @"10分钟";
-    _timeLabel.textAlignment = UITextAlignmentCenter;
-    _timeLabel.font = [UIFont systemFontOfSize:18.0f];
+    _timeLabel.textAlignment = UITextAlignmentRight;
+    _timeLabel.font = [UIFont systemFontOfSize:12.0f];
     _timeLabel.lineBreakMode = UILineBreakModeHeadTruncation;
     
-    _commentContent  = [[UILabel alloc]initWithFrame:CGRectMake(60, 30, 160, 0)];
+    _commentContent  = [[UILabel alloc]initWithFrame:CGRectMake(_headImageView.frame.origin.x + _headImageView.frame.size.width + 4, _commentPersonNameLabel.frame.origin.y + _commentPersonNameLabel.frame.size.height + 4, 228, 0)];
     _commentContent.textAlignment = UITextAlignmentLeft;
-    _commentContent.font = [UIFont systemFontOfSize:12.0f];
+    _commentContent.font = [UIFont systemFontOfSize:14.0f];
     _commentContent.lineBreakMode = UILineBreakModeCharacterWrap;
     _commentContent.numberOfLines = 0;
     
@@ -62,6 +62,7 @@
     [bgView addSubview:_commentContent];
     
     return bgView;
+
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated
