@@ -92,7 +92,7 @@ static AsyncImageDownloader *instance = NULL;
             NSValue *nsScaleSize = [info objectForKey:@"scaleSize"];
             CGSize scaleSize = [nsScaleSize CGSizeValue];
             //scale image
-            UIImage *scaledImage = [UIImageView imageWithImage:image scaledToSizeWithSameAspectRatio:scaleSize];
+            UIImage *scaledImage = [UIImage imageWithImage:image scaledToSizeWithSameAspectRatio:scaleSize];
             //add to thumbnailCache
             NSDictionary *thumbnailInfo = [[NSDictionary alloc]initWithObjectsAndKeys:scaledImage,@"image",[NSValue valueWithCGSize:scaleSize],@"scaleSize", nil];
             [_thumbnailCache setObject:thumbnailInfo forKey:request.url];

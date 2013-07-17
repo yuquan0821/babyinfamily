@@ -276,7 +276,7 @@
                 UIImage *cachedImage = [sdManager imageWithURL:imgURL];
                 if (cachedImage) {
                     CGSize size = CGSizeMake(300, 300);
-                    cachedImage = [UIImageView imageWithImage:cachedImage scaledToSizeWithSameAspectRatio:size];
+                    cachedImage = [UIImage imageWithImage:cachedImage scaledToSizeWithSameAspectRatio:size];
                     [UIView animateWithDuration:0.3 animations:^{
                         cell.contentImage.alpha = 0.0f;
                     } completion:^(BOOL finished) {
@@ -349,7 +349,7 @@
     if([url isEqualToString:sts.bmiddlePic])
     {
         CGSize size = CGSizeMake(300, 300);
-        image = [UIImageView imageWithImage:[UIImage imageWithData:data] scaledToSizeWithSameAspectRatio:size];
+        image = [UIImage imageWithImage:[UIImage imageWithData:data] scaledToSizeWithSameAspectRatio:size];
         sts.statusImage =image;
         cell.contentImage.image = sts.statusImage;
     }
@@ -360,7 +360,7 @@
         if ([url isEqualToString:sts.retweetedStatus.thumbnailPic])
         {
             CGSize size = CGSizeMake(300, 300);
-            image = [UIImageView imageWithImage:[UIImage imageWithData:data] scaledToSizeWithSameAspectRatio:size];
+            image = [UIImage imageWithImage:[UIImage imageWithData:data] scaledToSizeWithSameAspectRatio:size];
             sts.statusImage = image;
         }
     }

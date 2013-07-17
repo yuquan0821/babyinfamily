@@ -8,7 +8,7 @@
 #import "UIImageView+Resize.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation UIImageView (Resize)
+@implementation UIImage (Resize)
 
 static bool isRetina()
 {

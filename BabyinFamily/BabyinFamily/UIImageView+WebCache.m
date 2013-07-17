@@ -7,8 +7,26 @@
  */
 
 #import "UIImageView+WebCache.h"
+#import "UIImageView+Resize.h"
+#import <objc/runtime.h>
 
+static char SCALSESIZE_IDENTIFER;
 @implementation UIImageView (WebCache)
+@dynamic scaleSize;
+
+- (void)setScaleSize:(CGSize)scaleSize
+{
+    objc_setAssociatedObject(self, &SCALSESIZE_IDENTIFER, NSStringFromCGSize(scaleSize), OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (CGSize)scaleSize
+{
+    NSString * string = objc_getAssociatedObject(self, &SCALSESIZE_IDENTIFER);
+    if (string) {
+        return CGSizeFromString(string);
+    }
+    return CGSizeZero;
+}
 
 - (void)setImageWithURL:(NSURL *)url
 {
@@ -22,7 +40,8 @@
 
 - (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder scaleSize:(CGSize)size
 {
-    
+    self.scaleSize = size;
+    [self setImageWithURL:url placeholderImage:placeholder options:0];
 }
 
 - (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options
@@ -47,7 +66,11 @@
 
 - (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image
 {
-    self.image = image;
+    if (self.scaleSize.width > 0) {
+        self.image = [UIImage imageWithImage:image scaledToSizeWithSameAspectRatio:self.scaleSize];
+    }else{
+        self.image = image;
+    }
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImageView (Resize)
+@interface UIImage (Resize)
 
 /**
  等比例缩放到固定大小，多余部分裁去
