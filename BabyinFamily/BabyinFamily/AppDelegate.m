@@ -57,40 +57,7 @@
     }
     else
     {
-        
         [self prepareToMainViewControllerWithAnimate:NO];
-        UIImage *storyMenuItemImage = [UIImage imageNamed:@"bg-menuitem.png"];
-        UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"bg-menuitem-highlighted.png"];
-        
-        UIImage *starImage = [UIImage imageNamed:@"icon-star.png"];
-        
-        QuadCurveMenuItem *starMenuItem1 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                                   highlightedImage:storyMenuItemImagePressed
-                                                                       ContentImage:starImage
-                                                            highlightedContentImage:nil];
-        QuadCurveMenuItem *starMenuItem2 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                                   highlightedImage:storyMenuItemImagePressed
-                                                                       ContentImage:starImage
-                                                            highlightedContentImage:nil];
-        QuadCurveMenuItem *starMenuItem3 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                                   highlightedImage:storyMenuItemImagePressed
-                                                                       ContentImage:starImage
-                                                            highlightedContentImage:nil];
-        
-        NSArray *menus = [NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, nil];
-        [starMenuItem1 release];
-        [starMenuItem2 release];
-        [starMenuItem3 release];
-        
-        
-        float height = DEVICE_IS_IPHONE5 ? 518 : 430;
-
-        QuadCurveMenu *menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(160, height, 0, 0) menus:menus];
-        menu.delegate = self;
-        [self.tabBarController.view addSubview:menu];
-        
-        [menu release];
-        
     }
     
     [self.window makeKeyAndVisible];
@@ -143,7 +110,6 @@
 
 - (void) prepareToMainViewControllerWithAnimate:(BOOL)animate
 {
-    //reload nib
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUnreadCount:) name:MMSinaGotUnreadCount       object:nil];
     
     HomeViewController *vc1      = [[[HomeViewController alloc] init] autorelease];
@@ -157,10 +123,6 @@
     CustomNavViewController * nav3 = [[[CustomNavViewController alloc] initWithRootViewController:vc3] autorelease];
     CustomNavViewController * nav4 = [[[CustomNavViewController alloc] initWithRootViewController:vc4] autorelease];
     CustomNavViewController * nav5 = [[[CustomNavViewController alloc] initWithRootViewController:vc5] autorelease];
-    
-    //self.tabBarController = [[[UITabBarController alloc] init] autorelease];
-    //self.tabBarController.viewControllers = @[nav1, nav2,nav3,nav4,nav5];
-    //添加button到tabbar上
     self.tabBarController = [[[CustomTabbarViewController alloc] initWithNibName:@"CustomTabbarViewController" bundle:nil] autorelease];
     nav1.tabbarViewController = self.tabBarController;
     nav2.tabbarViewController = self.tabBarController;
@@ -168,12 +130,41 @@
     nav4.tabbarViewController = self.tabBarController;
     nav5.tabbarViewController = self.tabBarController;
     
-    
     self.tabBarController.arrayViewcontrollers = [NSArray arrayWithObjects:nav1 ,nav2,nav3,nav4,nav5, nil];
-    //NSString *fullpath = [NSString stringWithFormat:@"sourcekit.bundle/image/%@", @"tabbar_camera"];
-    //RaisedCenterButton *button = [RaisedCenterButton buttonWithImage:[UIImage imageNamed:fullpath] forTabBarController:self.tabBarController];
-    //[self.tabBarController.b addSubview:button];
+    
     [[window subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    UIImage *storyMenuItemImage = [UIImage imageNamed:@"bg-menuitem.png"];
+    UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"bg-menuitem-highlighted.png"];
+    
+    UIImage *starImage = [UIImage imageNamed:@"icon-star.png"];
+    
+    QuadCurveMenuItem *starMenuItem1 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                               highlightedImage:storyMenuItemImagePressed
+                                                                   ContentImage:starImage
+                                                        highlightedContentImage:nil];
+    QuadCurveMenuItem *starMenuItem2 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                               highlightedImage:storyMenuItemImagePressed
+                                                                   ContentImage:starImage
+                                                        highlightedContentImage:nil];
+    QuadCurveMenuItem *starMenuItem3 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                               highlightedImage:storyMenuItemImagePressed
+                                                                   ContentImage:starImage
+                                                        highlightedContentImage:nil];
+    
+    NSArray *menus = [NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, nil];
+    [starMenuItem1 release];
+    [starMenuItem2 release];
+    [starMenuItem3 release];
+    
+    
+    float height = DEVICE_IS_IPHONE5 ? 518 : 430;
+    
+    QuadCurveMenu *menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(160, height, 0, 0) menus:menus];
+    menu.delegate = self;
+    [self.tabBarController.view addSubview:menu];
+    
+    [menu release];
+    
     [window  addSubview:tabBarController.view];
     
     self.window.rootViewController = self.tabBarController;
