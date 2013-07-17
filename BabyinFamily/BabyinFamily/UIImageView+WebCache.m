@@ -20,6 +20,11 @@
     [self setImageWithURL:url placeholderImage:placeholder options:0];
 }
 
+- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder scaleSize:(CGSize)size
+{
+    
+}
+
 - (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options
 {
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
