@@ -128,7 +128,7 @@
     [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)                  name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(receiveDeletePicNotification:) name:@"DeletedPic" object:nil];
     
-    [self loadVisuableImage:self.table];
+  //  [self loadVisuableImage:self.table];
     
     
 }
@@ -266,12 +266,13 @@
     //newStatus的count大于0的时候，认为是有下一页的
     if (newStatus.count > 0) {
         _page++;
+        
         [self.tableView reloadData];
+        [self loadVisuableImage:self.tableView];
         
     }else{
         refreshFooterView.hidden = YES;
     }
-    [self loadVisuableImage:self.tableView];
     
     [[SHKActivityIndicator currentIndicator] hide];
 }
@@ -321,6 +322,9 @@
                 //判断是否有本地缓存
                 NSURL *imgURL = [NSURL URLWithString:weibo.bmiddlePic];
                 UIImage *cachedImage = [sdManager imageWithURL:imgURL];
+                //CGSize size = CGSizeMake(300, 300);
+                //cachedImage = [UIImage imageWithImage:cachedImage scaledToSizeWithSameAspectRatio:size];
+
                 if (cachedImage) {
                     //如果cache命中，则直接利用缓存的图片进行有关操作
                     // CGSize size = CGSizeMake(300, 300);
@@ -342,8 +346,9 @@
                         cell.contentImage.alpha = 0.0f;
                     } completion:^(BOOL finished) {
                         [UIView animateWithDuration:0.3 animations:^{
+                            CGSize size = CGSizeMake(300, 300);
                             cell.contentImage.alpha = 1.0f;
-                            [cell.contentImage setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]];
+                            [cell.contentImage setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]scaleSize:size ];
                             
                             [loading stopAnimating];
                             [loading removeFromSuperview];
@@ -579,7 +584,6 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    // [self refreshVisibleCellsImages];
     [self loadVisuableImage:(UITableView *)scrollView];
 }
 
@@ -594,8 +598,7 @@
     
     if (!decelerate)
 	{
-        // [self refreshVisibleCellsImages];
-        [self loadVisuableImage:(UITableView *)scrollView];
+     [self loadVisuableImage:(UITableView *)scrollView];
         
     }
     
