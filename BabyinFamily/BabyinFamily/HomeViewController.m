@@ -420,7 +420,7 @@
     Status *status = [statuesArr objectAtIndex:section];
     NSLog(@"status user name%@", status.user.name);
     head.userNameLabel.text = [status.user name];
-    [head.avatarImage setImageWithURL:[NSURL URLWithString:status.user.profileImageUrl]];
+    [head.avatarImage setImageWithURL:[NSURL URLWithString:status.user.profileLargeImageUrl]];
     [head.timeLabel setText:status.timestamp];
     head.locationLabel.text = status.user.location;
     head.user = status.user;

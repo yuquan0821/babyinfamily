@@ -78,7 +78,7 @@
         [_weiboDetailCommentInfo release];
         _weiboDetailCommentInfo = [comment retain];
     
-        [_headImageView setImageWithURL:[NSURL URLWithString:comment.user.profileImageUrl]];
+        [_headImageView setImageWithURL:[NSURL URLWithString:comment.user.profileLargeImageUrl]];
         
         _commentPersonNameLabel.text = comment.user.name;
         _commentContent.text = comment.text;
