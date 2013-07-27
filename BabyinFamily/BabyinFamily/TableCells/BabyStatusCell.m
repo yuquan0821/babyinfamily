@@ -92,8 +92,14 @@ typedef enum{
     
     //评论按钮
     self.commentButton = [[UIButton alloc]initWithFrame:CGRectZero];
+    self.commentButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+
+
+
     //更多操作按钮
     self.more = [[UIButton alloc]initWithFrame:CGRectZero];
+    self.more = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+
     
     self.repostContentImage.userInteractionEnabled = YES;
     self.repostContentImage.contentMode = UIViewContentModeScaleAspectFit;
@@ -184,11 +190,12 @@ typedef enum{
     }
  
       self.commentButton.frame = CGRectMake(10, self.statusHeight +2, 140, 28);
-      self.commentButton.titleLabel.text = @"评论";
+      self.commentButton.titleLabel.textColor = [UIColor blackColor];
+      [self.commentButton setTitle: @"评论" forState:UIControlStateNormal];
       self.more.frame = CGRectMake(160, self.statusHeight + 2, 140, 28);
-      self.more.titleLabel.text = @"...";
-
-      self.cellHeight = commentButton.frame.origin.y + commentButton.frame.size.height + 2;
+      self.more.titleLabel.textColor = [UIColor blackColor];
+      [self.more setTitle: @"..." forState:UIControlStateNormal];
+      self.cellHeight = commentButton.frame.origin.y + commentButton.frame.size.height + 6;
     
     self.frame = CGRectMake(0, 0, 320, cellHeight);
 }
