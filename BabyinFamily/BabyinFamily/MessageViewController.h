@@ -13,6 +13,7 @@
 #import "ImageBrowser.h"
 #import "StatusCell.h"
 #import "Toast+UIView.h"
+#import "BabyCommentCell.h"
 
 @class WeiBoMessageManager;
 @class Comment;

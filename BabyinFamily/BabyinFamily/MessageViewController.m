@@ -7,7 +7,6 @@
 //
 
 #import "MessageViewController.h"
-#import "ZJTCommentCell.h"
 #import "BabyHelper.h"
 #import "WeiBoMessageManager.h"
 #import "Comment.h"
@@ -60,23 +59,6 @@
     [super didReceiveMemoryWarning];
 }
 
--(void)refreshVisibleCellsImages
-{
-    NSArray *cellArr = [self.table visibleCells];
-    for (ZJTCommentCell *cell in cellArr) {
-        NSIndexPath *inPath = [self.table indexPathForCell:cell];
-        Comment *comment = [commentArr objectAtIndex:inPath.row];
-        User *theUser = comment.user;
-        
-        if (theUser.avatarImage == nil)
-        {
-            [[HHNetDataCacheManager getInstance] getDataWithURL:theUser.profileImageUrl withIndex:inPath.row];
-        }
-        else {
-            cell.avatarImage.image = theUser.avatarImage;
-        }
-    }
-}
 
 
 - (void)viewDidLoad
@@ -92,7 +74,7 @@
     table.dataSource = self;
     table.delegate = self;
     table = self.tableView;
-
+    
     
 }
 
@@ -142,7 +124,7 @@
         
         [manager getCommetListToMe:_maxID page:_page];
     }
-
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -150,14 +132,6 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter]removeObserver:self];
     
-}
-
--(UINib*)commentCellNib
-{
-    if (commentCellNib == nil) {
-        self.commentCellNib = [ZJTCommentCell nib];
-    }
-    return commentCellNib;
 }
 
 - (void)dealloc {
@@ -220,7 +194,7 @@
                            image:[UIImage imageNamed:@"toast.png"]];
             self.refreshFooterView.hidden = YES;
         }
-        [self performSelector:@selector(refreshVisibleCellsImages) withObject:nil afterDelay:0.5];
+        //[self performSelector:@selector(refreshVisibleCellsImages) withObject:nil afterDelay:0.5];
     }
 }
 
@@ -238,42 +212,6 @@
 }
 
 
-//得到图片
--(void)getAvatar:(NSNotification*)sender
-{
-    NSDictionary * dic = sender.object;
-    NSString * url          = [dic objectForKey:HHNetDataCacheURLKey];
-    NSNumber *indexNumber   = [dic objectForKey:HHNetDataCacheIndex];
-    NSInteger index         = [indexNumber intValue];
-    NSData *data            = [dic objectForKey:HHNetDataCacheData];
-    UIImage * image     = [UIImage imageWithData:data];
-    
-    if (data == nil) {
-        NSLog(@"data == nil");
-    }
-    //当下载大图过程中，后退，又返回，如果此时收到大图的返回数据，会引起crash，在此做预防。
-    if (indexNumber == nil || index == -1) {
-        NSLog(@"indexNumber = nil");
-        return;
-    }
-    
-    if (index >= [commentArr count]) {
-        //        NSLog(@"statues arr error ,index = %d,count = %d",index,[statuesArr count]);
-        return;
-    }
-    
-    Comment  *comment = [commentArr objectAtIndex:index];
-    User *theUser = comment.user;
-    
-    ZJTCommentCell *cell = (ZJTCommentCell *)[self.table cellForRowAtIndexPath:comment.cellIndexPath];
-    
-    //得到的是头像图片
-    if ([url isEqualToString:theUser.profileImageUrl])
-    {
-        theUser.avatarImage = image;
-        cell.avatarImage.image = theUser.avatarImage;
-    }
-}
 
 -(void)mmRequestFailed:(id)sender
 {
@@ -284,60 +222,46 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
+    
     return [commentArr count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger  row = indexPath.row;
-    ZJTCommentCell *cell = [ZJTCommentCell cellForTableView:table fromNib:self.commentCellNib];
-    
-    if (commentArr == nil || [commentArr isEqual:[NSNull null]]) {
-        return cell;
+    static NSString *cellIdentifier = @"commentCell";
+    BabyCommentCell  * cell = [[[BabyCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+    //填充所有内容
+    if ([commentArr count] == 0) {
+        NSLog(@"评论没有");
+    }else{
+        Comment * comment = [commentArr objectAtIndex:indexPath.row];
+        cell.weiboDetailCommentInfo = comment;
+        CGRect frame = cell.commentContent.frame;
+        frame.size.height = [self cellHeight:comment.text with:228.0];
+        cell.commentContent.frame = frame;
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
     }
-    else if (row >= [commentArr count] || [commentArr count] == 0)
-    {
-        //        NSLog(@"cellForRowAtIndexPath error ,index = %d,count = %d",row,[commentArr count]);
-        return cell;
-    }
     
-    Comment *comment = [commentArr objectAtIndex:row];
     
-    cell.nameLB.text = comment.user.screenName;
-    cell.contentLB.text = comment.text;
-    comment.cellIndexPath = indexPath;
+    cell.backgroundColor = [UIColor whiteColor];
     
-    if (self.table.dragging == NO && self.table.decelerating == NO)
-    {
-        if (comment.user.avatarImage == nil)
-        {
-            [[HHNetDataCacheManager getInstance] getDataWithURL:status.user.profileImageUrl withIndex:row];
-        }
-    }
-    cell.avatarImage.image = comment.user.avatarImage;
-    
-    CGRect frame = cell.contentLB.frame;
-    frame.size.height = [self cellHeight:comment.text with:228.];
-    cell.contentLB.frame = frame;
-    
-    cell.timeLB.text = comment.timestamp;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger  row = indexPath.row;
-    Comment *comment = [commentArr objectAtIndex:row];
-    CGFloat height = 0.0f;
-    height = [self cellHeight:comment.text with:228.0f] + 42.;
-    if (height < 66.) {
-        height = 66.;
-    }
+    
+    NSInteger row = indexPath.row;
+    Comment * commentInfo = [commentArr objectAtIndex:row];
+    CGFloat  height = 0.0f;
+    height  = [self cellHeight:commentInfo.text with:228.0f]+42;
+    NSLog(@"height:%f",height);
     return height;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     int row = indexPath.row;
     self.clickedComment = [commentArr objectAtIndex:row];
     User *theUser = clickedComment.user;
@@ -349,11 +273,9 @@
 }
 
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    [self refreshVisibleCellsImages];
-}
+
 
 @end
+
 
 
