@@ -27,6 +27,19 @@ static BabyHelper *instance = nil;
     return instance;
 }
 
++ (NSString *) regularStringFromSearchString:(NSString *)string
+{
+	NSMutableString * stringRet = [[NSMutableString alloc] initWithCapacity:0];
+	for( int i = 0; i < [string length]; i++ )
+	{
+		[stringRet appendFormat:@".*(%@)", [string substringWithRange:NSMakeRange(i, 1)]];
+	}
+	
+	[stringRet appendString:@".*"];
+	
+	return [stringRet autorelease];
+}
+
 + (CAAnimation *)animationWithScaleFrom:(CGFloat) from To:(CGFloat) to Duration:(CGFloat) duration BeginTime:(CGFloat)beginTime //大小变化动画
 {
     CABasicAnimation *theAnimation;
