@@ -26,7 +26,6 @@
 @implementation LoadingViewController
 
 @synthesize loadButton = _loadButton;
-@synthesize userGuideView;
 @synthesize titleLabel;
 - (id)init
 {
@@ -109,18 +108,6 @@
         
 }
 
-- (void) addGuideView
-{
-      userGuideView = [[[UINib nibWithNibName:@"UserGuideVIew" bundle:nil] instantiateWithOwner:self options:nil] objectAtIndex:0];
-    float height = DEVICE_IS_IPHONE5 ? 568 : 480;
-    [userGuideView setFrame:CGRectMake(0, 0, 320, height)];
-    [userGuideView addSubview:self.loadButton];
-
-    [userGuideView setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:userGuideView];
-
-}
-
 
 //分享按钮响应方法
 - (void) login:(UIButton*) sender
@@ -185,7 +172,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    userGuideView = nil;
     // Release any retained subviews of the main view.
 }
 

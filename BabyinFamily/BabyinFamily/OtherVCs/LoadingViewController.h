@@ -12,7 +12,6 @@
 
 #import "SinaWeiboRequest.h"
 
-#import "UserGuideVIew.h"
 
 
 @interface LoadingViewController : UIViewController<SinaWeiboDelegate,SinaWeiboRequestDelegate>
@@ -23,7 +22,6 @@
 
 @property (retain, nonatomic) UIButton *loadButton;
 
-@property (retain, nonatomic) UserGuideVIew *userGuideView;
 
 @property (retain, nonatomic) UILabel       *titleLabel;
 
