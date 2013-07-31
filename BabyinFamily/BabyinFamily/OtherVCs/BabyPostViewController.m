@@ -98,7 +98,7 @@
     textView.scrollEnabled = YES;
     textView.backgroundColor = [UIColor clearColor];
     [self.textView setPlaceholderText:@"记录宝宝的美丽瞬间，从这里开始！"];
-    
+    self.textView.delegate= self;
     self.textView.font = [UIFont systemFontOfSize:13.0f];
     [self.textView becomeFirstResponder];
     //  [self.textView setReturnKeyType:UIReturnKeySend];
@@ -265,7 +265,9 @@
 
 - (void)actionBtnBack
 {
-    [self dismissModalViewControllerAnimated:NO];
+    [self dismissModalViewControllerAnimated:YES ];
+    [self retain];
+    [self release];
 }
 
 
@@ -366,8 +368,6 @@
 #pragma mark 监听键盘的显示与隐藏
 -(void)inputKeyboardWillShow:(NSNotification *)notification{
     
-
-    
     // Get KeyBoard CGRect.
     NSDictionary *info = [notification userInfo];
     NSValue *keyValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
@@ -375,13 +375,10 @@
     
     // New toolBar position.
     NSInteger toolBarY = self.view.frame.size.height - keyboardSize.height - toolBar.frame.size.height;
-    
-    
     NSLog(@"toolBarY: %d", toolBarY);
     
     // Set new position to textView.
     textView.frame = CGRectMake(0, 0, textView.frame.size.width, toolBarY - 30);
-    
     btnDatePicker.frame = CGRectMake(10, toolBarY - 25, 100, 20);
     
     // Set new position to toolBar.
@@ -391,8 +388,15 @@
     [pageControl setHidden:YES];
 }
 -(void)inputKeyboardWillHide:(NSNotification *)notification{
-    [btnFirstTime setBackgroundImage:[UIImage imageNamed:@"Text"] forState:UIControlStateNormal];
-    keyboardIsShow=NO;
+    NSDictionary* userInfo = [notification userInfo];
+    
+    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    
+    NSTimeInterval animationDuration;
+    
+    [animationDurationValue getValue:&animationDuration];
+    keyboardIsShow=YES;
+
 }
 
 //跳转到At页面
@@ -421,4 +425,33 @@
 {
     textView.text = [textView.text stringByAppendingFormat:@"我在这里：#%@#",poi.title];
 }
+#pragma mark - UITextViewDelegate
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textV
+{
+    if (textV.text.length == 0) {
+        btnSend.enabled = NO;
+    }
+    else {
+        btnSend.enabled = YES;
+    }
+    return YES;
+}
+- (void)textViewDidChange:(UITextView *)textV
+{
+    NSString *temp = textV.text;
+    if (temp.length != 0) {
+        btnSend.enabled = YES;
+    }
+    else {
+        btnSend.enabled = NO;
+    }
+    
+    if (temp.length > 140) {
+        textView.text = [temp substringToIndex:140];
+    }
+  //  countLabel.text = [NSString stringWithFormat:@"%d",140 - textView.text.length];
+}
+
+
 @end

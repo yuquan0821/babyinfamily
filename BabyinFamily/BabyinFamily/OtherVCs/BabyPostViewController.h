@@ -19,7 +19,7 @@
 #import "BabyPositionViewController.h"
 #import "TakePhotoViewController.h"
 
-@interface BabyPostViewController : UIViewController<UIScrollViewDelegate,BabyAtTableViewControllerDelegate,BabyPositionViewControllerDelegate,UIGestureRecognizerDelegate,UINavigationBarDelegate,AFPhotoEditorControllerDelegate>
+@interface BabyPostViewController : UIViewController<UIScrollViewDelegate,BabyAtTableViewControllerDelegate,BabyPositionViewControllerDelegate,UIGestureRecognizerDelegate,UINavigationBarDelegate,AFPhotoEditorControllerDelegate,UITextViewDelegate>
 {
     BabyPlaceHolderTextView *textView;
     UIToolbar *toolBar;//工具栏
@@ -43,5 +43,8 @@
 -(void)keyboardChanged:(NSNotification*)notification;
 -(id)initWithImage:(UIImage*)image;
 
+@end
+@protocol BabyPostViewControllerDelegate <NSObject>
 
+-(void)closePostView:(id)sender;
 @end
