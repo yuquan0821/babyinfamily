@@ -654,7 +654,7 @@
     UIButton *button = (UIButton *)sender;
     BabyStatusCell *cell = (BabyStatusCell *)button.superview.superview;
     NSIndexPath *path = [self.table indexPathForCell:cell];
-    Status *status = [self.statuesArr objectAtIndex:path.section];
+    Status *status = [self.statuesArr objectAtIndex:path.row];
     self.clickedStatus = status;
     UIActionSheet *sheet;
     NSString *userId = [[NSUserDefaults standardUserDefaults] stringForKey:USER_STORE_USER_ID];

@@ -5,32 +5,35 @@
 //  Created by 范艳春 on 13-2-4.
 //
 //
-
+#define KEYBOARDHEIGHT 216
+#define TOOLBARHEIGHT 44
+#define BUTTONWH 34
 #import <UIKit/UIKit.h>
 
 @class WeiBoMessageManager;
 
 
-@interface FeedBackViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate>
+@interface FeedBackViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,UIActionSheetDelegate,UIGestureRecognizerDelegate>
 {
     WeiBoMessageManager *manager;
     BOOL _shouldPostImage;
+    UIButton *btnPicture;
+    UIButton *btnSend;
+    UIImageView *postImages;
+    UIImageView * iconMark;
+
 
 }
-@property (retain, nonatomic) IBOutlet UIScrollView *theScrollView;
-@property (retain, nonatomic) IBOutlet UIImageView *theImageView;
-@property (retain, nonatomic) IBOutlet UIImageView *TVBackView;
+@property (retain, nonatomic) UILabel *countLabel;
+@property (retain, nonatomic) UITextView *theTextView;
 
-@property (retain, nonatomic) IBOutlet UILabel *countLabel;
-@property (retain, nonatomic) IBOutlet UITextView *theTextView;
-@property (retain, nonatomic) IBOutlet UIView *mainView;
-@property (retain, nonatomic) IBOutlet UIButton *photoButton;
 
 @property (nonatomic,retain) NSString *weiboID;
-@property (nonatomic,retain) NSString *commentID;
 @property (nonatomic,retain) NSString *ios;
 @property (nonatomic,retain) NSString *iosVision;
 @property (nonatomic,retain) NSString *platform;
 @property (nonatomic,retain) NSString *APPVision;
+@property (nonatomic,retain) UIToolbar*toolBar;
+
 
 @end

@@ -53,7 +53,7 @@
     
     self.timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.userNameLabel.frame.origin.x + self.userNameLabel.frame.size.width - 10, 16, 100, 21)];
     self.timeLabel.textColor = [UIColor brownColor];
-    self.timeLabel.font = [UIFont systemFontOfSize:12];
+    self.timeLabel.font = [UIFont systemFontOfSize:10];
     self.timeLabel.textAlignment = UITextAlignmentRight;
     self.timeLabel.backgroundColor = [UIColor clearColor];
     

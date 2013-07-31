@@ -61,10 +61,10 @@
     
     if (hidden) {
         [_tabbar setFrame:CGRectMake(_tabbar.frame.origin.x, iPhone5?568:480, _tabbar.frame.size.width, _tabbar.frame.size.height)];
-        //[_tabbar setFrame:CGRectMake(0-320, _tabbar.frame.origin.y, _tabbar.frame.size.width, _tabbar.frame.size.height)];
+    [_tabbar setFrame:CGRectMake(0-320, _tabbar.frame.origin.y, _tabbar.frame.size.width, _tabbar.frame.size.height)];
     } else {
         [_tabbar setFrame:CGRectMake(_tabbar.frame.origin.x, iPhone5?568-80:480-80, _tabbar.frame.size.width, _tabbar.frame.size.height)];
-        // [_tabbar setFrame:CGRectMake(0, _tabbar.frame.origin.y, _tabbar.frame.size.width, _tabbar.frame.size.height)];
+        [_tabbar setFrame:CGRectMake(0, _tabbar.frame.origin.y, _tabbar.frame.size.width, _tabbar.frame.size.height)];
     }
     
     [UIView commitAnimations];
@@ -100,7 +100,7 @@
         
         viewController.view.tag = SELECTED_VIEW_CONTROLLER_TAG;
         viewController.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
-        
+    
         [self.view insertSubview:viewController.view belowSubview:_tabbar];
     }
     

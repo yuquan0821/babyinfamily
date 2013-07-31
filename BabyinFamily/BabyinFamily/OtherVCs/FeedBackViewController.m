@@ -10,24 +10,21 @@
 #import "WeiBoMessageManager.h"
 #import "Status.h"
 #import "UIDeviceHardware.h"
+#import <QuartzCore/QuartzCore.h>
+
 @interface FeedBackViewController ()
 
 @end
 
 @implementation FeedBackViewController
-@synthesize theScrollView;
-@synthesize theImageView;
-@synthesize TVBackView;
 @synthesize countLabel;
 @synthesize theTextView;
-@synthesize mainView;
-@synthesize photoButton;
 @synthesize weiboID;
-@synthesize commentID;
 @synthesize ios;
 @synthesize iosVision;
 @synthesize platform;
 @synthesize APPVision;
+@synthesize toolBar;
 
 
 #pragma mark - Lifecycle
@@ -45,43 +42,128 @@
 
 
 - (void)dealloc {
-    [commentID release];
     [weiboID release];
-    [theScrollView release];
-    [theImageView release];
     [theTextView release];
-    [TVBackView release];
-    [mainView release];
     [countLabel release];
-    [photoButton release];
     [ios release];
     [iosVision release];
     [platform release];
     [APPVision release];
+    [toolBar release];
     [super dealloc];
+}
+
+-(void)postImagesAnimation
+{
+    CGRect frame = theTextView.frame;
+    frame.size.width = 196;
+    [UIView animateWithDuration:0.5 animations:^{
+        postImages.hidden = NO;
+        postImages.frame = CGRectMake(212, 32, 100, 80);
+        postImages.alpha = 1.0;
+        theTextView.frame = frame;
+    }  completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.25 animations:^{
+            iconMark.hidden = NO;
+            iconMark.frame = CGRectMake(72, -8, 26, 20);
+            postImages.transform = CGAffineTransformRotate(CGAffineTransformMakeRotation(0), -M_PI/30.0);
+            iconMark.transform = CGAffineTransformMakeRotation(M_PI/20);
+        }];
+    }];
+}
+-(void)postImagesRemoveAnimation{
+    CGRect frame = theTextView.frame;
+    frame.size.width = 300;
+    [UIView animateWithDuration:0.25 animations:^{
+        iconMark.transform = CGAffineTransformMakeRotation(0);
+        iconMark.frame = CGRectMake(50, -60, 26, 20);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.6 animations:^{
+            iconMark.hidden = YES;
+            postImages.transform = CGAffineTransformMakeRotation(0);
+            postImages.frame = CGRectMake(400, 300, 0, 0);
+            theTextView.frame = frame;
+        }completion:^(BOOL finished){
+            postImages.hidden = YES;
+        }];
+    }];
+}
+
+-(void)removeImages:(id)sender
+{
+    [self postImagesRemoveAnimation];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIBarButtonItem *retwitterBtn = [[UIBarButtonItem alloc]initWithTitle:@"发送"
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:self
-                                                                   action:@selector(send:)];
-    self.navigationItem.rightBarButtonItem = retwitterBtn;
-    [retwitterBtn release];
-    
-    theScrollView.contentSize = CGSizeMake(320, 410);
+    theTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 6, 320, 115)];
+    theTextView.scrollEnabled = YES;
+    theTextView.backgroundColor = [UIColor clearColor];
+    theTextView.font = [UIFont systemFontOfSize:13.0f];
     theTextView.delegate = self;
+    //发送图片
+    iconMark  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainFaceIconMark"]];
+    iconMark.frame = CGRectMake(50, -12, 26, 20);
+    iconMark.hidden = YES;
+    iconMark.userInteractionEnabled = YES;
+    
+    postImages = [[UIImageView alloc]initWithFrame:CGRectMake(400, 300, 0, 0)];
+    postImages.hidden = YES;
+    postImages.backgroundColor = [UIColor blackColor];
+    [postImages.layer setBorderColor:[UIColor clearColor].CGColor];
+    [postImages.layer setBorderWidth:2.0];
+    [postImages.layer setShadowColor:[UIColor blackColor].CGColor];
+    [postImages.layer setShadowOffset:CGSizeMake(1, 2)];
+    [postImages.layer setShadowOpacity:0.8];
+    [postImages.layer setShadowRadius:2.0];
+    postImages.layer.shouldRasterize = YES;
+    
+    [postImages addSubview:iconMark];
+    postImages.image = [UIImage imageNamed:@"testimg.jpg"];
+    //删除图片
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeImages:)];
+    tapRecognizer.delegate = self;
+    postImages.userInteractionEnabled = YES;
+    [iconMark addGestureRecognizer:tapRecognizer];
+    [tapRecognizer release];
+
     self.ios = [[UIDevice currentDevice] systemName];
     self.iosVision = [[[UIDevice currentDevice] systemVersion] stringByAppendingString:@" "];
     self.platform = [[[[[UIDeviceHardware alloc] init] platform] stringByAppendingString:@" " ] stringByAppendingString:[[self.ios stringByAppendingString:@" "] stringByAppendingString:self.iosVision]];
     self.APPVision = [@" 版本:" stringByAppendingString: [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
     self.theTextView.text = [[[@"#家贝反馈# @家贝2013 " stringByAppendingString: self.APPVision ] stringByAppendingString:@" " ]stringByAppendingString:self.platform];
     countLabel.text = [NSString stringWithFormat:@"%d",140 - theTextView.text.length];
-    TVBackView.image = [[UIImage imageNamed:@"weibo.bundle/WeiboImages/input_window.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:15];
+    //添加toolBar
+    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f,self.view.bounds.size.height - TOOLBARHEIGHT - KEYBOARDHEIGHT,self.view.bounds.size.width,TOOLBARHEIGHT)];
+    toolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    UIEdgeInsets insets = UIEdgeInsetsMake(40, 0, 40, 0);
+    [toolBar setBackgroundImage:[[UIImage imageNamed:@"keyBoardBack"] resizableImageWithCapInsets:insets] forToolbarPosition:0 barMetrics:0];
+    [toolBar setBarStyle:UIBarStyleBlack];
     
+    //照片
+    btnPicture = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnPicture.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;
+    [btnPicture setBackgroundImage:[UIImage imageNamed:@"Voice"] forState:UIControlStateNormal];
+    [btnPicture addTarget:self action:@selector(btnClicked) forControlEvents:UIControlEventTouchUpInside];
+    btnPicture.frame = CGRectMake(5,toolBar.bounds.size.height-38.0f,BUTTONWH + 50,BUTTONWH);
+    btnPicture.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    [btnPicture setTitle:@"图片" forState:UIControlStateNormal];
+    [toolBar addSubview:btnPicture];
+    
+    //发送按钮
+    btnSend = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btnSend.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;
+    btnSend.enabled=YES;
+    [btnSend addTarget:self action:@selector(send:) forControlEvents:UIControlEventTouchUpInside];
+    btnSend.frame = CGRectMake(270,toolBar.bounds.size.height-38.0f,BUTTONWH + 5,BUTTONWH);
+    btnSend.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    [btnSend setTitle:@"发送" forState:UIControlStateNormal];
+    [toolBar addSubview:btnSend];
+    [self.view addSubview:postImages];
+    [self.view bringSubviewToFront:postImages];
+    [self.view addSubview:toolBar];
+    [self.view addSubview:theTextView];
     
 }
 
@@ -93,14 +175,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPost:) name:MMSinaGotPostResult object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPost:) name:MMSinaGotRepost object:nil];
-    
-    // 键盘高度变化通知，ios5.0新增的
-#ifdef __IPHONE_5_0
-    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
-    if (version >= 5.0) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    }
-#endif
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -111,62 +185,17 @@
 
 - (void)viewDidUnload
 {
-    [self setTheScrollView:nil];
-    [self setTheImageView:nil];
     [self setTheTextView:nil];
-    [self setTVBackView:nil];
-    [self setMainView:nil];
     [self setCountLabel:nil];
-    [self setPhotoButton:nil];
     [super viewDidUnload];
 }
 
 #pragma mark - Tool Methods
-- (void)addPhoto
-{
-    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
-    imagePickerController.navigationBar.tintColor = [UIColor colorWithRed:72.0/255.0 green:106.0/255.0 blue:154.0/255.0 alpha:1.0];
-	imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	imagePickerController.delegate = self;
-	imagePickerController.allowsEditing = NO;
-	[self presentModalViewController:imagePickerController animated:NO];
-	[imagePickerController release];
-}
-
-- (void)takePhoto
-{
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"该设备不支持拍照功能"
-                                                       delegate:nil
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"好", nil];
-        [alert show];
-        [alert release];
-    }
-    else
-    {
-        UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePickerController.delegate = self;
-        imagePickerController.allowsEditing = NO;
-        [self presentModalViewController:imagePickerController animated:NO];
-        [imagePickerController release];
-    }
-}
-
--(IBAction)addImageAlert
-{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"插入图片" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"系统相册",@"拍摄", nil];
-    [alert show];
-    [alert release];
-}
 
 - (void)send:(id)sender
 {
     NSString *content = theTextView.text;
-    UIImage *image = theImageView.image;
+    UIImage *image = postImages.image;
     if(![Utility connectedToNetwork])
     {
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
@@ -191,34 +220,23 @@
 #pragma mark Responding to keyboard events
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    NSDictionary *userInfo = [notification userInfo];
-    NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardRect = [aValue CGRectValue];
+    // Get KeyBoard CGRect.
+    NSDictionary *info = [notification userInfo];
+    NSValue *keyValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGSize keyboardSize = [keyValue CGRectValue].size;
     
+    // New toolBar position.
+    NSInteger toolBarY = self.view.frame.size.height - keyboardSize.height - toolBar.frame.size.height;
     
-    NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    NSTimeInterval animationDuration;
-    [animationDurationValue getValue:&animationDuration];
+    NSLog(@"toolBarY: %d", toolBarY);
     
-    // Animate the resize of the text view's frame in sync with the keyboard's appearance.
-    //    [self moveInputBarWithKeyboardHeight:keyboardRect.size.height withDuration:animationDuration];
+    // Set new position to textView.
+    theTextView.frame = CGRectMake(0, 0, theTextView.frame.size.width, toolBarY );
     
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    if (keyboardRect.size.height == 252)
-    {
-        CGRect frame = mainView.frame;
-        frame.size.height = 165;
-        mainView.frame = frame;
-    }
-    else if(keyboardRect.size.height == 216)
-    {
-        CGRect frame = mainView.frame;
-        frame.size.height = 165 + 36;
-        mainView.frame = frame;
-    }
-    [UIView commitAnimations];
+    countLabel.frame = CGRectMake(200, toolBarY - 25, 100, 20);
+    
+    // Set new position to toolBar.
+    toolBar.frame = CGRectMake(0, toolBarY, toolBar.frame.size.width, toolBar.frame.size.height);
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
@@ -246,42 +264,116 @@
 }
 
 #pragma mark - UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
-    [picker dismissModalViewControllerAnimated:YES];
-    UIImage * image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    self.theImageView.image = image;
-    _shouldPostImage = YES;
+    postImages.image = image;
+    [picker dismissModalViewControllerAnimated:NO];
+    [self postImagesAnimation];
 }
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    //取消按钮
+    if (buttonIndex == 2) {
+        if (postImages.hidden == NO) {
+            [self postImagesAnimation];
+        }
+    }
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //调用
+    UIImagePickerController *imagesPicker =  [[UIImagePickerController alloc]init];
+    imagesPicker.delegate = self;
+    imagesPicker.allowsEditing = NO;
+    
+    switch (buttonIndex) {
+        case 0:
+        {
+            //调用系统相册
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+                imagesPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                NSLog(@"UIImagePickerControllerSourceTypePhotoLibrary Clicked");
+                [self presentModalViewController:imagesPicker animated:NO];
+                [imagesPicker release];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:@"访问图片库错误"
+                                      message:@""
+                                      delegate:nil
+                                      cancelButtonTitle:@"OK!"
+                                      otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+            }
+        }
+            
+            break;
+        case 1:
+        {
+            //调用系统相机
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+                imagesPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                NSLog(@"UIImagePickerControllerSourceTypeCamera Clicked");
+                [self presentModalViewController:imagesPicker animated:NO];
+                [imagesPicker release];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:@"访问相机错误"
+                                      message:@""
+                                      delegate:nil
+                                      cancelButtonTitle:@"OK!"
+                                      otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+            }
+            
+        }
+            break;
+        default:
+            break;
+    }
+    
+    
+}
+-(void)btnClicked
+{
+    CGRect frame = theTextView.frame;
+    frame.size.width = 300;
+    [UIView animateWithDuration:0.25 animations:^{
+        iconMark.transform = CGAffineTransformMakeRotation(0);
+        iconMark.frame = CGRectMake(50, -60, 26, 20);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.6 animations:^{
+            iconMark.hidden = YES;
+            postImages.transform = CGAffineTransformMakeRotation(0);
+            postImages.frame = CGRectMake(400, 300, 0, 0);
+            theTextView.frame = frame;
+        }];
+    }];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"请选择图片来源" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"系统相册" otherButtonTitles:@"相机", nil];
+    actionSheet.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+    [actionSheet showInView:self.view];
+}
+
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissModalViewControllerAnimated:NO];
 }
 
-#pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSLog(@"index = %d",buttonIndex);
-    if (buttonIndex == 1)
-    {
-        [self addPhoto];
-    }
-    else if(buttonIndex == 2)
-    {
-        [self takePhoto];
-    }
-}
 
 #pragma mark - UITextViewDelegate
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     if (textView.text.length == 0) {
-        self.navigationItem.rightBarButtonItem.enabled = NO;
+        btnSend.enabled = NO;
     }
     else {
-        self.navigationItem.rightBarButtonItem.enabled = YES;
+        btnSend.enabled = YES;
     }
     return YES;
 }
@@ -289,10 +381,10 @@
 {
     NSString *temp = textView.text;
     if (temp.length != 0) {
-        self.navigationItem.rightBarButtonItem.enabled = YES;
+        btnSend.enabled = YES;
     }
     else {
-        self.navigationItem.rightBarButtonItem.enabled = NO;
+        btnSend.enabled = NO;
     }
     
     if (temp.length > 140) {
@@ -301,10 +393,5 @@
     countLabel.text = [NSString stringWithFormat:@"%d",140 - theTextView.text.length];
 }
 
-
--(void)atTableViewControllerCellDidClickedWithScreenName:(NSString*)name
-{
-    theTextView.text = [theTextView.text stringByAppendingFormat:@"@%@",name];
-}
 
 @end

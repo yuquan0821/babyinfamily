@@ -191,9 +191,9 @@
     if (indexPath.section == 0) {
         static NSString *cellIdentifier = @"tempCell";
         BabyStatusCell *cell = [[[BabyStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+        [cell updateCellWith:self.weibo];
         cell.more.hidden = YES;
         cell.commentButton.hidden = YES;
-        [cell updateCellWith:self.weibo];
         return cell.cellHeight - 28;
     }else{
         NSInteger row = indexPath.row;
