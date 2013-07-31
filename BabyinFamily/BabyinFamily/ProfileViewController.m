@@ -61,7 +61,7 @@ enum {
 
 - (void)feedBack
 {
-    FeedBackViewController *fb = [[FeedBackViewController alloc]initWithNibName:@"FeedBackViewController" bundle:nil];
+    BabyFeedBackViewController *fb = [[BabyFeedBackViewController alloc]init];
     [self.navigationController pushViewController:fb animated:YES];
     [fb release];
 }
