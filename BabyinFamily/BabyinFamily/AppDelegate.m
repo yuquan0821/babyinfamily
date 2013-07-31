@@ -227,12 +227,11 @@
         case 0:
         {
             BabyPostViewController *postView = [[[BabyPostViewController alloc] init] autorelease];
-            CustomNavViewController * nav = [[[CustomNavViewController alloc] initWithRootViewController:postView] autorelease];
+            CustomNavViewController * nav = [[CustomNavViewController alloc] initWithRootViewController:postView];
             [postView.navigationController setNavigationBarHidden:NO];
             [self.tabBarController presentModalViewController:nav animated:NO];
             [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
-            NSLog(@"Select the index : %d",idx);
-            
+    
             break;
         }
         case 1:
@@ -242,7 +241,6 @@
             [picker.navigationController setNavigationBarHidden:YES];
             [self.tabBarController presentModalViewController:nav animated:NO];
             [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-            NSLog(@"Select the index : %d",idx);
             break;
         }
         case 2:

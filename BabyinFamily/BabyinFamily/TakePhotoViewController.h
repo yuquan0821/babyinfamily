@@ -38,15 +38,12 @@
 @property (retain, nonatomic) id <TakePhotoViewControllerDelegate> delegate;
 @property (retain, nonatomic) IBOutlet UIButton *photoCaptureButton;
 @property (retain, nonatomic) IBOutlet UIButton *cancelButton;
-
 @property (retain, nonatomic) IBOutlet UIButton *cameraToggleButton;
 @property (retain, nonatomic) IBOutlet UIButton *libraryToggleButton;
 @property (retain, nonatomic) IBOutlet UIButton *flashToggleButton;
 @property (retain, nonatomic) IBOutlet UIButton *retakeButton;
-
 @property (retain, nonatomic) IBOutlet UIView *photoBar;
 @property (retain, nonatomic) IBOutlet UIView *topBar;
-
 @property (nonatomic, strong) BlurOverlayView *blurOverlayView;
 @property (nonatomic, assign) CGFloat outputJPEGQuality;
 

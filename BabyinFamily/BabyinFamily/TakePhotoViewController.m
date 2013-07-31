@@ -309,7 +309,6 @@
     [self.photoCaptureButton setImage:[UIImage imageNamed:@"TakePhoto.bundle/UI/camera-icon"] forState:UIControlStateNormal];
     [self.photoCaptureButton setTitle:nil forState:UIControlStateNormal];
     
-    [self setFilter:selectedFilter];
     [self prepareFilter];
 }
 
