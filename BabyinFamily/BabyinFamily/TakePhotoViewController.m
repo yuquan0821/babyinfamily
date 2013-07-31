@@ -8,7 +8,6 @@
 
 #import "TakePhotoViewController.h"
 #import "SendAndSaveViewController.h"
-#import "RaisedCenterButton.h"
 
 @implementation TakePhotoViewController {
     BOOL isStatic;
@@ -20,7 +19,6 @@
 @synthesize imageView;
 @synthesize cameraToggleButton;
 @synthesize photoCaptureButton;
-@synthesize blurToggleButton;
 @synthesize flashToggleButton;
 @synthesize cancelButton;
 @synthesize retakeButton;
@@ -58,20 +56,8 @@
     
     self.topBar.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"TakePhoto.bundle/UI/photo_bar"]];
     //button states
-    [self.blurToggleButton setSelected:NO];
     
     staticPictureOriginalOrientation = UIImageOrientationUp;
-    
-    self.blurOverlayView = [[BlurOverlayView alloc] initWithFrame:CGRectMake(0, 0,
-                                                                             self.imageView.frame.size.width,
-                                                                             self.imageView.frame.size.height)];
-    self.blurOverlayView.alpha = 0;
-    [self.imageView addSubview:self.blurOverlayView];
-    
-    hasBlur = NO;
-    
-    //[self loadFilters];
-    
     //we need a crop filter for the live video
     cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f)];
     filter = [[GPUImageRGBFilter alloc] init];
@@ -116,41 +102,6 @@
 }
 
 
--(void) setFilter:(int) index {
-    switch (index) {
-        case 1:{
-            filter = [[GPUImageContrastFilter alloc] init];
-            [(GPUImageContrastFilter *) filter setContrast:1.75];
-        } break;
-        case 2: {
-            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"TakePhoto.bundle/Filters/crossprocess"];
-        } break;
-        case 3: {
-            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"TakePhoto.bundle/Filters/02"];
-        } break;
-            /*case 4: {
-             filter = [[GrayscaleContrastFilter alloc] init];
-             } break;*/
-        case 5: {
-            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"TakePhoto.bundle/Filters/17"];
-        } break;
-        case 6: {
-            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"TakePhoto.bundle/Filters/aqua"];
-        } break;
-        case 7: {
-            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"TakePhoto.bundle/Filters/yellow-red"];
-        } break;
-        case 8: {
-            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"TakePhoto.bundle/Filters/06"];
-        } break;
-        case 9: {
-            filter = [[GPUImageToneCurveFilter alloc] initWithACV:@"TakePhoto.bundle/Filters/purple-green"];
-        } break;
-        default:
-            filter = [[GPUImageRGBFilter alloc] init];
-            break;
-    }
-}
 
 -(void) prepareFilter {
     if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
@@ -255,32 +206,6 @@
     [button setSelected:!button.selected];
 }
 
--(IBAction) toggleBlur:(UIButton*)blurButton {
-    
-    [self.blurToggleButton setEnabled:NO];
-    [self removeAllTargets];
-    
-    if (hasBlur) {
-        hasBlur = NO;
-        [self showBlurOverlay:NO];
-        [self.blurToggleButton setSelected:NO];
-    } else {
-        if (!blurFilter) {
-            blurFilter = [[GPUImageGaussianSelectiveBlurFilter alloc] init];
-            [(GPUImageGaussianSelectiveBlurFilter*)blurFilter setExcludeCircleRadius:80.0/320.0];
-            [(GPUImageGaussianSelectiveBlurFilter*)blurFilter setExcludeCirclePoint:CGPointMake(0.5f, 0.5f)];
-            [(GPUImageGaussianSelectiveBlurFilter*)blurFilter setBlurSize:2.0f];
-            [(GPUImageGaussianSelectiveBlurFilter*)blurFilter setAspectRatio:1.0f];
-        }
-        hasBlur = YES;
-        [self.blurToggleButton setSelected:YES];
-        [self flashBlurOverlay];
-
-    }
-    
-    [self prepareFilter];
-    [self.blurToggleButton setEnabled:YES];
-}
 
 -(IBAction) switchCamera {
     [self.cameraToggleButton setEnabled:NO];
@@ -393,8 +318,6 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
 
     self.tabBarController.tabBar.hidden = NO;
-    self.tabBarController.tabBar.selectedItem = 0;
-   // [self.tabBarController.selectedViewController.reloadData ];
     [self dismissModalViewControllerAnimated:NO];
 }
 

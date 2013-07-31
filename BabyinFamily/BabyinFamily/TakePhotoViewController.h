@@ -40,7 +40,6 @@
 @property (retain, nonatomic) IBOutlet UIButton *cancelButton;
 
 @property (retain, nonatomic) IBOutlet UIButton *cameraToggleButton;
-@property (retain, nonatomic) IBOutlet UIButton *blurToggleButton;
 @property (retain, nonatomic) IBOutlet UIButton *libraryToggleButton;
 @property (retain, nonatomic) IBOutlet UIButton *flashToggleButton;
 @property (retain, nonatomic) IBOutlet UIButton *retakeButton;
