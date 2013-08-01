@@ -30,5 +30,6 @@
 @property (nonatomic, assign) id<BabyStatusCellHeadClickDelegate> delegate;
 @property (nonatomic, retain)User         *user;
 
+-(void)babyStatusCellHeadImageClicked:(id)sender;
 
 @end

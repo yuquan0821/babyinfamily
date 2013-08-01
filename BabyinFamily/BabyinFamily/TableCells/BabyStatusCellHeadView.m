@@ -39,6 +39,11 @@
    self.avatarImage.backgroundColor = [UIColor clearColor];
     //self.avatarImage.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
     
+    self.gotoProfileButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.gotoProfileButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;
+    self.gotoProfileButton.frame = CGRectMake(avatarImageBackGround.frame.origin.x +4, avatarImageBackGround.frame.origin.y +3, 42, 42);
+     [self.gotoProfileButton addTarget:self action:@selector(babyStatusCellHeadImageClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(avatarImageBackGround.frame.origin.x + avatarImageBackGround.frame.size.width + 4, 4, 160, 21)];
     self.userNameLabel.textColor = [UIColor brownColor];
     self.userNameLabel.font = [UIFont boldSystemFontOfSize:16];
@@ -59,6 +64,7 @@
     
     [self addSubview:avatarImageBackGround];
     [self addSubview:avatarImage];
+    [self addSubview:gotoProfileButton];
     [self addSubview:userNameLabel];
     [self addSubview:locationImage];
     [self addSubview:locationLabel];
@@ -66,6 +72,11 @@
     
 }
 
+- (void)babyStatusCellHeadImageClicked:(id)sender
+{
+    [_delegate babyStatusCellHeadImageClicked:self.user];
+
+}
 
 - (void)dealloc
 {
