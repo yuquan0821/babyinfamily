@@ -7,6 +7,8 @@
 //
 
 #import "BabyPostViewController.h"
+#import "Status.h"
+#import "SHKActivityIndicator.h"
 
 @interface BabyPostViewController ()
 
@@ -34,7 +36,7 @@
         self.title = @"记录";
         keyboardIsShow=YES;
         self.view.backgroundColor = [UIColor whiteColor];
-        
+        manager = [WeiBoMessageManager getInstance];        
     }
     return self;
 }
@@ -44,53 +46,13 @@
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
--(void)postImagesAnimation
-{
-    CGRect frame = textView.frame;
-    frame.size.width = 196;
-    [UIView animateWithDuration:0.5 animations:^{
-        postImages.hidden = NO;
-        postImages.frame = CGRectMake(212, 32, 100, 80);
-        postImages.alpha = 1.0;
-        textView.frame = frame;
-    }  completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.25 animations:^{
-            iconMark.hidden = NO;
-            iconMark.frame = CGRectMake(72, -8, 26, 20);
-            postImages.transform = CGAffineTransformRotate(CGAffineTransformMakeRotation(0), -M_PI/30.0);
-            iconMark.transform = CGAffineTransformMakeRotation(M_PI/20);
-        }];
-    }];
-}
--(void)postImagesRemoveAnimation{
-    CGRect frame = textView.frame;
-    frame.size.width = 300;
-    [UIView animateWithDuration:0.25 animations:^{
-        iconMark.transform = CGAffineTransformMakeRotation(0);
-        iconMark.frame = CGRectMake(50, -60, 26, 20);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.6 animations:^{
-            iconMark.hidden = YES;
-            postImages.transform = CGAffineTransformMakeRotation(0);
-            postImages.frame = CGRectMake(400, 300, 0, 0);
-            textView.frame = frame;
-        }completion:^(BOOL finished){
-            postImages.hidden = YES;
-        }];
-    }];
-}
--(void)removeImages:(id)sender
-{
-    [self postImagesRemoveAnimation];
-}
-
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(actionBtnBack)];
+    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(actionBtnBack)];
     self.navigationItem.leftBarButtonItem = btnBack;
     [btnBack release];
 
@@ -103,36 +65,6 @@
     [self.textView becomeFirstResponder];
     //  [self.textView setReturnKeyType:UIReturnKeySend];
     [self.view addSubview:textView];
-    
-    
-    //发送图片
-    iconMark  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainFaceIconMark"]];
-    iconMark.frame = CGRectMake(50, -12, 26, 20);
-    iconMark.hidden = NO;
-    iconMark.userInteractionEnabled = YES;
-    
-    postImages = [[UIImageView alloc]initWithFrame:CGRectMake(400, 300, 0, 0)];
-    postImages.hidden = NO;
-    postImages.backgroundColor = [UIColor blackColor];
-    [postImages.layer setBorderColor:[UIColor clearColor].CGColor];
-    [postImages.layer setBorderWidth:2.0];
-    [postImages.layer setShadowColor:[UIColor blackColor].CGColor];
-    [postImages.layer setShadowOffset:CGSizeMake(1, 2)];
-    [postImages.layer setShadowOpacity:0.8];
-    [postImages.layer setShadowRadius:2.0];
-    postImages.layer.shouldRasterize = YES;
-    
-    [postImages addSubview:iconMark];
-    postImages.image = [UIImage imageNamed:@"testimg.jpg"];
-    [self.view addSubview:postImages];
-    [self.view bringSubviewToFront:postImages];
-    //删除图片
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeImages:)];
-    tapRecognizer.delegate = self;
-    postImages.userInteractionEnabled = YES;
-    [iconMark addGestureRecognizer:tapRecognizer];
-    [tapRecognizer release];
-    
     
     btnDatePicker = [UIButton buttonWithType:UIButtonTypeCustom];
     btnDatePicker.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.1];
@@ -167,7 +99,7 @@
     [toolBar setBackgroundImage:[[UIImage imageNamed:@"keyBoardBack"] resizableImageWithCapInsets:insets] forToolbarPosition:0 barMetrics:0];
     [toolBar setBarStyle:UIBarStyleBlack];
     
-    //第一次按钮
+    //第一次按钮（备用），目前不显示
     btnFirstTime = [UIButton buttonWithType:UIButtonTypeCustom];
     btnFirstTime.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;
     [btnFirstTime setBackgroundImage:[UIImage imageNamed:@"Voice"] forState:UIControlStateNormal];
@@ -201,21 +133,13 @@
     btnSend = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     btnSend.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;
     btnSend.enabled=NO;
-    [btnSend addTarget:self action:@selector(sendAction) forControlEvents:UIControlEventTouchUpInside];
+    [btnSend addTarget:self action:@selector(send:) forControlEvents:UIControlEventTouchUpInside];
     btnSend.frame = CGRectMake(btnLocation.frame.origin.x + btnLocation.frame.size.width +30,toolBar.bounds.size.height-38.0f,BUTTONWH + 5,BUTTONWH);
     btnSend.titleLabel.font = [UIFont systemFontOfSize:14.0f];
     [btnSend setTitle:@"发送" forState:UIControlStateNormal];
     [toolBar addSubview:btnSend];
-    //给键盘注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(inputKeyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(inputKeyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    //创建表情键盘
+
+    //创建第一次键盘，（备用）
     if (scrollView==nil) {
         scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, KEYBOARDHEIGHT)];
         [scrollView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"facesBack"]]];
@@ -245,11 +169,7 @@
     [pageControl addTarget:self action:@selector(changePage:)forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:pageControl];
     [pageControl release];
-    
-   // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillShowNotification object:nil];
     [self.view addSubview:toolBar];
-    
-    
 }
 - (void)scrollViewDidScroll:(UIScrollView *)sender {
     int page = scrollView.contentOffset.x / 320;//通过滚动的偏移量来判断目前页面所对应的小白点
@@ -281,6 +201,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    //给键盘注册通知
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(inputKeyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPost:) name:MMSinaGotPostResult object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPost:) name:MMSinaGotRepost object:nil];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -291,6 +220,12 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
+    //给键盘注册通知
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(inputKeyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
     
     // Remove all observer.
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -313,6 +248,8 @@
     [btnDatePicker setTitle:selectDate forState:UIControlStateNormal];
 }
 
+
+//备用
 
 -(void)disFaceKeyboard{
     //如果直接点击表情，通过toolbar的位置来判断
@@ -452,6 +389,41 @@
     }
   //  countLabel.text = [NSString stringWithFormat:@"%d",140 - textView.text.length];
 }
+#pragma mark - Tool Methods
 
+- (void)send:(id)sender
+{
+    NSString *content = textView.text;
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }else{
+        if (content != nil && [content length] != 0)
+        {
+            [manager postWithText:content];
+            [[SHKActivityIndicator currentIndicator] displayActivity:@"发送中，请稍后..." inView:self.view];
+
+        }
+    }
+}
+
+-(void)didPost:(NSNotification*)sender
+{
+    Status *sts = sender.object;
+    if (sts.text != nil && [sts.text length] != 0) {
+        [[SHKActivityIndicator currentIndicator] hide];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        [[SHKActivityIndicator currentIndicator] hide];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
+    }
+}
 
 @end
