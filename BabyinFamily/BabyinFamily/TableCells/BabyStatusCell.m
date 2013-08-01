@@ -49,9 +49,6 @@ typedef enum{
     // Configure the view for the selected state
 }
 
-
-
-
 -(void)customViews
 {
     //背景图
@@ -89,17 +86,12 @@ typedef enum{
     [self.repostContentImage.layer setMasksToBounds:YES];
     [self.repostContentImage.layer setCornerRadius:4];
     self.repostContentImage.tag = RepostImages;
-    
     //评论按钮
     self.commentButton = [[UIButton alloc]initWithFrame:CGRectZero];
     self.commentButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-
-
-
     //更多操作按钮
     self.more = [[UIButton alloc]initWithFrame:CGRectZero];
     self.more = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-
     
     self.repostContentImage.userInteractionEnabled = YES;
     self.repostContentImage.contentMode = UIViewContentModeScaleAspectFit;
@@ -248,7 +240,6 @@ typedef enum{
             [delegate statusImageClicked:self.status];
         }
     }
-    NSLog(@"------------------------ img clicked:%@", sender);
 
 }
 
@@ -261,7 +252,6 @@ typedef enum{
             [delegate statusImageClicked:self.status.retweetedStatus];
         }
     }
-    NSLog(@"图片被点击");
 
 }
 

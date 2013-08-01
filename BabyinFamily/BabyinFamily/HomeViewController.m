@@ -749,19 +749,13 @@
 }
 
 //跳转到用户介绍页面
-
-- (void)goToProfile:(id)sender
+- (void)babyStatusCellHeadImageClicked:(User *)user
 {
-    UIButton *button = (UIButton *)sender;
-    StatusCell *cell = (StatusCell *)button.superview.superview;
-    NSIndexPath *path = [self.table indexPathForCell:cell];
-    Status *status = [self.statuesArr objectAtIndex:path.section];
     ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
-    profile.user = status.user;
+    profile.user = user;
     profile.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:profile animated:YES];
     [profile release];
-    
 }
 //监听保存结果
 

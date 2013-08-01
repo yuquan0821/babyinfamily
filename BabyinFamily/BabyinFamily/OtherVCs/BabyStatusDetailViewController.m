@@ -278,6 +278,17 @@
         return cell;
     }
 }
+//跳转到用户介绍页面
+- (void)babyStatusCellHeadImageClicked:(User *)user
+{
+    ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
+    profile.user = user;
+    profile.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:profile animated:YES];
+    [profile release];
+}
+
+
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
@@ -293,10 +304,6 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)babyStatusCellHeadImageClicked:(id)sender
-{
 }
 
 -(void)dealloc

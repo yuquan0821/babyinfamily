@@ -55,10 +55,6 @@
 //动态更新界面布局
 -(void)updateCellWith:(Status *)weibo;
 
-//返回Cell高度
--(CGFloat)contentHeight:(CGFloat )cellHeight;
-
-
 
 @end
 
