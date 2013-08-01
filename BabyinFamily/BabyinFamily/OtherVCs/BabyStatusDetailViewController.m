@@ -11,7 +11,6 @@
 #import "Status.h"
 #import "UIImageView+WebCache.h"
 #import "BabyCommentCell.h"
-//#import "weiboDetailCommentInfo.h"
 #import "WeiBoMessageManager.h"
 #import "Comment.h"
 #import "ProfileViewController.h"
@@ -37,14 +36,6 @@
 }
 
 #pragma mark - View lifecycle
-
-/*
- // Implement loadView to create a view hierarchy programmatically, without using a nib.
- - (void)loadView
- {
- }
- */
-
 
 -(CGFloat)cellHeight:(NSString*)contentText with:(CGFloat)with
 {
@@ -104,8 +95,6 @@
 {
     
     [super viewDidLoad];
-    //    flagHeader = (BOOL *)(malloc(10));
-    //    memset(flagHeader, NO, 10);
     
     listCommentsArray = [[NSMutableArray alloc]initWithCapacity:0];
     float height = DEVICE_IS_IPHONE5 ? 504 : 416;
@@ -129,15 +118,6 @@
 }
 
 # pragma  mark -headImageClick
-
--(void)statusHeadImageClicked:(User *)user
-{
-    ProfileViewController * mansInfo = [[ProfileViewController alloc] init];
-    
-    mansInfo.user = user;
-    [self.navigationController pushViewController:mansInfo animated:YES ];
-    [mansInfo release];
-}
 
 - (void)viewDidUnload
 {
@@ -182,7 +162,7 @@
     if (section == 0) {
         return 50;
     }else{
-        return 0;
+        return 44;
     }
 }
 
@@ -191,10 +171,11 @@
     if (indexPath.section == 0) {
         static NSString *cellIdentifier = @"tempCell";
         BabyStatusCell *cell = [[[BabyStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
-        [cell updateCellWith:self.weibo];
         cell.more.hidden = YES;
         cell.commentButton.hidden = YES;
-        return cell.cellHeight - 28;
+        [cell updateCellWith:self.weibo];
+
+        return cell.cellHeight;
     }else{
         NSInteger row = indexPath.row;
         Comment * commentInfo = [listCommentsArray objectAtIndex:row];
@@ -227,7 +208,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 44;
+        return 0;
     }else{
         return 0;
     }

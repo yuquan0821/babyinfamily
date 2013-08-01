@@ -23,8 +23,10 @@
 @synthesize status;
 @synthesize cellHeight;
 @synthesize statusHeight;
+//@synthesize commentTableView;
 @synthesize more;
 @synthesize commentButton;
+@synthesize shareButton;
 
 typedef enum{
     WeiboImages,
@@ -86,9 +88,16 @@ typedef enum{
     [self.repostContentImage.layer setMasksToBounds:YES];
     [self.repostContentImage.layer setCornerRadius:4];
     self.repostContentImage.tag = RepostImages;
+    //评论列表
+    //self.commentTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    //self.commentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     //评论按钮
     self.commentButton = [[UIButton alloc]initWithFrame:CGRectZero];
     self.commentButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    //分享按钮
+    self.shareButton = [[UIButton alloc]initWithFrame:CGRectZero];
+    self.shareButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     //更多操作按钮
     self.more = [[UIButton alloc]initWithFrame:CGRectZero];
     self.more = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -110,7 +119,9 @@ typedef enum{
     [self addSubview:weiboView];
     [self addSubview:repostMainView];
     [self addSubview:commentButton];
+    //[self addSubview:commentTableView];
     [self addSubview:more];
+    [self addSubview:shareButton];
     
     [self.weiboView setUserInteractionEnabled:YES];
     [self.weiboView addSubview:contentImage];
@@ -181,12 +192,20 @@ typedef enum{
         self.statusHeight = weiboView.frame.size.height + weiboView.frame.origin.y;
     }
  
-      self.commentButton.frame = CGRectMake(10, self.statusHeight +2, 140, 28);
+      self.commentButton.frame = CGRectMake(10, self.statusHeight +2, 100, 28);
       self.commentButton.titleLabel.textColor = [UIColor blackColor];
-      [self.commentButton setTitle: @"评论" forState:UIControlStateNormal];
-      self.more.frame = CGRectMake(160, self.statusHeight + 2, 140, 28);
+      [self.commentButton setTitle: [NSString stringWithFormat:@"评论:%d",weibo.commentsCount] forState:UIControlStateNormal];
+    [self.commentButton addTarget:self action:@selector(statusCommentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+
+      self.shareButton.frame = CGRectMake(110, self.statusHeight +2, 100, 28);
+      self.shareButton.titleLabel.textColor = [UIColor blackColor];
+      [self.shareButton setTitle: @"分享" forState:UIControlStateNormal];
+     [self.shareButton addTarget:self action:@selector(StatusShareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+
+      self.more.frame = CGRectMake(210, self.statusHeight + 2, 100, 28);
       self.more.titleLabel.textColor = [UIColor blackColor];
       [self.more setTitle: @"..." forState:UIControlStateNormal];
+      [self.more addTarget:self action:@selector(statusMoreButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
       self.cellHeight = commentButton.frame.origin.y + commentButton.frame.size.height + 6;
     
     self.frame = CGRectMake(0, 0, 320, cellHeight);
@@ -197,8 +216,7 @@ typedef enum{
 -(void)updateCellWith:(Status *)weibo
 {
     self.status = weibo;
-    Status  *repostWeibo = weibo.retweetedStatus;
-    
+    Status  *repostWeibo = weibo.retweetedStatus;    
     NSString *url = weibo.bmiddlePic;
     NSLog(@"weibo.thumbnailImageUrl:%@",url);
     //有图
@@ -212,7 +230,6 @@ typedef enum{
     if (repostWeibo && ![repostWeibo isEqual:[NSNull null]])
     {
         self.repostMainView.hidden = NO;
-        //        repostContent.text = [NSString stringWithFormat:@"@%@:%@",repostWeibo.user.name,repostWeibo.text];
         
         NSString *url = repostWeibo.bmiddlePic;
         NSLog(@"有转发:weibo.thumbnailImageUrl:%@",url);
@@ -228,7 +245,7 @@ typedef enum{
     {
         self.repostMainView.hidden = YES;
     }
-   
+    
     [self setContent:weibo];
 }
 
@@ -255,6 +272,23 @@ typedef enum{
 
 }
 
+- (void)statusCommentButtonClicked:(id)sender
+{
+    [delegate statusCommentButtonClicked:self.status];
+
+}
+
+- (void)statusMoreButtonClicked:(id)sender
+{
+    [delegate statusMoreButtonClicked:self.status];
+}
+
+- (void)StatusShareButtonClicked:(id)sender
+{
+    [delegate StatusShareButtonClicked:self.status];
+
+}
+
 - (void)dealloc
 {
     [self.weiboView release];
@@ -267,6 +301,7 @@ typedef enum{
     self.repostText = nil;
     [self.commentButton release];
     [self.more release];
+    [self.shareButton release];
     self.status = nil;
     [super dealloc];
 }

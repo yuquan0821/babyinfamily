@@ -455,8 +455,6 @@
     // [cell updateCellWith:[listData objectAtIndex:row]];
     
     [cell updateCellWith:weibo];
-    [cell.more addTarget:self action:@selector(moreButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.commentButton addTarget:self action:@selector(addComment:) forControlEvents:UIControlEventTouchUpInside];
     cell.delegate =self;
     return cell;
     
@@ -649,13 +647,8 @@
 #pragma mark - Action Methods
 //clicked morebutton
 
-- (void)moreButtonOnClick:(id)sender
+- (void)statusMoreButtonClicked:(Status*)status
 {
-    UIButton *button = (UIButton *)sender;
-    BabyStatusCell *cell = (BabyStatusCell *)button.superview.superview;
-    NSIndexPath *path = [self.table indexPathForCell:cell];
-    Status *status = [self.statuesArr objectAtIndex:path.row];
-    self.clickedStatus = status;
     UIActionSheet *sheet;
     NSString *userId = [[NSUserDefaults standardUserDefaults] stringForKey:USER_STORE_USER_ID];
     
@@ -668,7 +661,6 @@
     [sheet showInView:window];
     [sheet release];
 }
-
 //save picture
 
 - (void)savePicture
@@ -735,18 +727,16 @@
 
 //查看图片的评论和做出评理
 
-- (void)addComment:(id)sender
+- (void)statusCommentButtonClicked:(Status*)status
 {
-    UIButton *button = (UIButton *)sender;
-    BabyStatusCell *cell = (BabyStatusCell *)button.superview.superview;
-    NSIndexPath *path = [self.table indexPathForCell:cell];
-    Status *status = [self.statuesArr objectAtIndex:path.section];
     AddComment *add = [[AddComment alloc]initWithNibName:@"AddComment" bundle:nil];
     add.status = status;
     add.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:add animated:YES];
     [add release];
+    
 }
+
 
 //跳转到用户介绍页面
 - (void)babyStatusCellHeadImageClicked:(User *)user
@@ -756,6 +746,10 @@
     profile.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:profile animated:YES];
     [profile release];
+}
+
+- (void)StatusShareButtonClicked:(Status*)status
+{
 }
 //监听保存结果
 

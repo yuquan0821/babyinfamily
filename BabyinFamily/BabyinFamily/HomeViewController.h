@@ -52,7 +52,6 @@
 
 - (void)doneLoadingTableViewData;
 - (void)moreButtonOnClick:(id)sender;
-- (void)loadVisuableImage:(UITableView *)scrollView;
 
 
 @end

@@ -24,10 +24,13 @@
 @protocol BabyStatusCellDelegate<NSObject>
 
 -(void)statusImageClicked:(Status *)theStatus;
+-(void)statusMoreButtonClicked:(id)sender;
+-(void)StatusShareButtonClicked:(id)sender;
+-(void)statusCommentButtonClicked:(id)sender;
 
 @end
 
-@interface BabyStatusCell : UITableViewCell <UITextViewDelegate, UIGestureRecognizerDelegate>
+@interface BabyStatusCell : UITableViewCell <UITextViewDelegate, UIGestureRecognizerDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     id<BabyStatusCellDelegate>  delegate;
 }
@@ -46,7 +49,9 @@
 @property (nonatomic, retain) Status      *status;
 @property (nonatomic, assign) CGFloat     statusHeight;
 @property (nonatomic, assign) CGFloat     cellHeight;
+//@property (nonatomic, retain) UITableView *commentTableView;
 @property (nonatomic, retain) UIButton    *more;
+@property (nonatomic, retain) UIButton    *shareButton;
 @property (nonatomic, retain) UIButton    *commentButton;
 
 //用户设置cell组成
@@ -54,7 +59,9 @@
 
 //动态更新界面布局
 -(void)updateCellWith:(Status *)weibo;
-
+-(void)statusMoreButtonClicked:(id)sender;
+-(void)StatusShareButtonClicked:(id)sender;
+-(void)statusCommentButtonClicked:(id)sender;
 
 @end
 

@@ -1,14 +1,10 @@
 //
-//  BabyStatusDetailViewCont/Users/hanyanchun/Documents/babyfamily/babyinfamily/babyinfamily/BabyinFamily.xcodeprojroller.h
+//BabyinFamily.xcodeprojroller.h
 //  BabyinFamily
 //
 //  Created by 范艳春 on 13-7-10.
 //
 //
-
-
-
-///*
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "BabyStatusCell.h"

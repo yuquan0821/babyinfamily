@@ -780,6 +780,16 @@
 				2896C4841661E79E004705A4 /* AddCommentVC.h */,
 				2896C4851661E79E004705A4 /* AddCommentVC.m */,
 				2896C4861661E79E004705A4 /* AddCommentVC.xib */,
+				282E203617A7445200EAC441 /* BabyAtTableViewController.h */,
+				282E203717A7445200EAC441 /* BabyAtTableViewController.m */,
+				282E204117A79A5300EAC441 /* BabyFeedBackViewController.h */,
+				282E204217A79A5400EAC441 /* BabyFeedBackViewController.m */,
+				282E203917A745E300EAC441 /* BabyPositionViewController.h */,
+				282E203A17A745E300EAC441 /* BabyPositionViewController.m */,
+				28110F9217A9FE4A00B33054 /* BabyPostPhotoViewController.h */,
+				28110F9317A9FE4A00B33054 /* BabyPostPhotoViewController.m */,
+				282E203E17A748AA00EAC441 /* BabyPostViewController.h */,
+				282E203F17A748AA00EAC441 /* BabyPostViewController.m */,
 				286957231795471B00115C2D /* BabyStatusDetailViewController.h */,
 				286957241795471B00115C2D /* BabyStatusDetailViewController.m */,
 				28368F1D171054F9008C4CC1 /* BlurOverlayView.h */,
@@ -804,16 +814,6 @@
 				280CF2841664CA250031262F /* SettingVC.xib */,
 				28BAE94516C0DA3D00FA0F47 /* UIDeviceHardware.h */,
 				28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */,
-				282E203617A7445200EAC441 /* BabyAtTableViewController.h */,
-				282E203717A7445200EAC441 /* BabyAtTableViewController.m */,
-				282E203917A745E300EAC441 /* BabyPositionViewController.h */,
-				282E203A17A745E300EAC441 /* BabyPositionViewController.m */,
-				282E203E17A748AA00EAC441 /* BabyPostViewController.h */,
-				282E203F17A748AA00EAC441 /* BabyPostViewController.m */,
-				282E204117A79A5300EAC441 /* BabyFeedBackViewController.h */,
-				282E204217A79A5400EAC441 /* BabyFeedBackViewController.m */,
-				28110F9217A9FE4A00B33054 /* BabyPostPhotoViewController.h */,
-				28110F9317A9FE4A00B33054 /* BabyPostPhotoViewController.m */,
 			);
 			name = OthersVCs;
 			sourceTree = "<group>";
@@ -977,7 +977,7 @@
 			isa = PBXGroup;
 			children = (
 				2896C4041661C150004705A4 /* TablesCells */,
-				28EA94A0165F6031009F69E5 /* VCS */,
+				28EA94A0165F6031009F69E5 /* ViewControllers */,
 			);
 			name = UIDisplay;
 			sourceTree = "<group>";
@@ -1001,7 +1001,7 @@
 			name = babyTools;
 			sourceTree = "<group>";
 		};
-		28EA94A0165F6031009F69E5 /* VCS */ = {
+		28EA94A0165F6031009F69E5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				286956EA1795462500115C2D /* CustomTabbar */,
@@ -1013,7 +1013,7 @@
 				2896C4031661C0FE004705A4 /* ImageBrowers */,
 				28EA94A1165F6058009F69E5 /* TabViewControllers */,
 			);
-			name = VCS;
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		28EA94A1165F6058009F69E5 /* TabViewControllers */ = {
