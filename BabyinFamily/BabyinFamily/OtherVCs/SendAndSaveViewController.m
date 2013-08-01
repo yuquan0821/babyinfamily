@@ -42,6 +42,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(actionBtnBack)];
+    self.navigationItem.leftBarButtonItem = btnBack;
+    [btnBack release];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPost:) name:MMSinaGotPostResult object:nil];
 
     // Do any additional setup after loading the view from its nib.
@@ -140,6 +143,13 @@
    
 
 }
+- (void)actionBtnBack
+{
+    [self dismissModalViewControllerAnimated:YES ];
+    [self retain];
+    [self release];
+}
+
 -(void)didPost:(NSNotification*)sender
 {
     Status *sts = sender.object;

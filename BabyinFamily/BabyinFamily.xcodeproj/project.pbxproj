@@ -15,6 +15,7 @@
 		280FBA4E169BDCD80072741B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280FBA4D169BDCD80072741B /* CoreImage.framework */; };
 		280FBA50169BDCF60072741B /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 280FBA4F169BDCF50072741B /* libz.1.1.3.dylib */; };
 		280FBA52169BDD3C0072741B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280FBA51169BDD3B0072741B /* StoreKit.framework */; };
+		28110F9417A9FE4A00B33054 /* BabyPostPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28110F9317A9FE4A00B33054 /* BabyPostPhotoViewController.m */; };
 		2813F289172BC8D800F88BB9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2813F288172BC8D800F88BB9 /* AudioToolbox.framework */; };
 		2813F29A172BCC5E00F88BB9 /* coinImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2813F291172BCC5E00F88BB9 /* coinImageView.m */; };
 		2813F29B172BCC5E00F88BB9 /* coinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2813F293172BCC5E00F88BB9 /* coinView.m */; };
@@ -249,6 +250,8 @@
 		280FBA4D169BDCD80072741B /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		280FBA4F169BDCF50072741B /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		280FBA51169BDD3B0072741B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		28110F9217A9FE4A00B33054 /* BabyPostPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyPostPhotoViewController.h; path = OtherVCs/BabyPostPhotoViewController.h; sourceTree = "<group>"; };
+		28110F9317A9FE4A00B33054 /* BabyPostPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyPostPhotoViewController.m; path = OtherVCs/BabyPostPhotoViewController.m; sourceTree = "<group>"; };
 		2813F278172BBFD000F88BB9 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		2813F288172BC8D800F88BB9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2813F290172BCC5E00F88BB9 /* coinImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = coinImageView.h; path = coin/coinImageView.h; sourceTree = "<group>"; };
@@ -809,6 +812,8 @@
 				282E203F17A748AA00EAC441 /* BabyPostViewController.m */,
 				282E204117A79A5300EAC441 /* BabyFeedBackViewController.h */,
 				282E204217A79A5400EAC441 /* BabyFeedBackViewController.m */,
+				28110F9217A9FE4A00B33054 /* BabyPostPhotoViewController.h */,
+				28110F9317A9FE4A00B33054 /* BabyPostPhotoViewController.m */,
 			);
 			name = OthersVCs;
 			sourceTree = "<group>";
@@ -1506,6 +1511,7 @@
 				282E203B17A745E300EAC441 /* BabyPositionViewController.m in Sources */,
 				282E204017A748AB00EAC441 /* BabyPostViewController.m in Sources */,
 				282E204317A79A5700EAC441 /* BabyFeedBackViewController.m in Sources */,
+				28110F9417A9FE4A00B33054 /* BabyPostPhotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -161,7 +161,7 @@
     
     QuadCurveMenu *menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(160, height, 0, 0) menus:menus];
     menu.delegate = self;
-    [self.tabBarController.view addSubview:menu];
+    [tabBarController.view addSubview:menu];
     
     [menu release];
     
