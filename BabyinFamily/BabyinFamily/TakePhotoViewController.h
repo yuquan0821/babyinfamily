@@ -11,6 +11,7 @@
 #import "GPUImage.h"
 #import "AFPhotoEditorController.h"
 #import "BlurOverlayView.h"
+#import "BabyPostPhotoViewController.h"
 
 
 

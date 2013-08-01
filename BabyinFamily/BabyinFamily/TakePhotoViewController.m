@@ -68,9 +68,10 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
-   // [stillCamera stopCameraCapture];
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+    [self removeAllTargets];
+    [self retakePhoto:nil];
 
 }
 
@@ -317,7 +318,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
 
     self.tabBarController.tabBar.hidden = NO;
-    [self dismissModalViewControllerAnimated:NO];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(IBAction) handlePan:(UIGestureRecognizer *) sender
@@ -441,10 +442,10 @@
 {
     // Handle the result image here
     if (image != nil) {
-        SendAndSaveViewController* viewController = [[SendAndSaveViewController alloc] initWithImage:image];
+        BabyPostPhotoViewController* viewController = [[BabyPostPhotoViewController alloc] initWithImage:image];
        [self.navigationController pushViewController:viewController animated:NO];
         [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
-        [viewController release];
+       // [viewController release];
     }
     //关闭图像选择器
     [self dismissModalViewControllerAnimated:NO];
@@ -459,12 +460,9 @@
 
 #pragma mark - UIImagePickerDelegate
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
-   
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {    
 #if 0
     [self dismissModalViewControllerAnimated:NO];
-    //UIImage *image = [UIImage imageNamed:@"Default.png"];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self performSelector:@selector(displayEditorForImage:) withObject:image afterDelay:0.5];
 #else
