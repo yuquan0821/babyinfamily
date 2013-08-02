@@ -55,13 +55,6 @@
 		2854E28216D462DD008B6E4B /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2854E28116D462DD008B6E4B /* CoreDataManager.m */; };
 		2854E28516D46F2A008B6E4B /* ImageCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2854E28316D46F2A008B6E4B /* ImageCache.xcdatamodeld */; };
 		286883C4171840F000A92BE7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286883C3171840F000A92BE7 /* MessageUI.framework */; };
-		286956F61795463C00115C2D /* CustomBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 286956EE1795463C00115C2D /* CustomBarButton.m */; };
-		286956F71795463C00115C2D /* CustomNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286956F01795463C00115C2D /* CustomNavViewController.m */; };
-		286956F81795463C00115C2D /* CustomTabbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 286956F21795463C00115C2D /* CustomTabbarView.m */; };
-		286956F91795463C00115C2D /* CustomTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286956F41795463C00115C2D /* CustomTabbarViewController.m */; };
-		286956FA1795463C00115C2D /* CustomTabbarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 286956F51795463C00115C2D /* CustomTabbarViewController.xib */; };
-		2869570F1795469600115C2D /* 1_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 286956FB1795469600115C2D /* 1_bg.png */; };
-		286957101795469600115C2D /* bottom_4chick.png in Resources */ = {isa = PBXBuildFile; fileRef = 286956FC1795469600115C2D /* bottom_4chick.png */; };
 		286957111795469600115C2D /* bg-addbutton-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 286956FD1795469600115C2D /* bg-addbutton-highlighted.png */; };
 		286957121795469600115C2D /* bg-addbutton-highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286956FE1795469600115C2D /* bg-addbutton-highlighted@2x.png */; };
 		286957131795469600115C2D /* bg-addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 286956FF1795469600115C2D /* bg-addbutton.png */; };
@@ -76,10 +69,6 @@
 		2869571C1795469600115C2D /* icon-plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286957081795469600115C2D /* icon-plus@2x.png */; };
 		2869571D1795469600115C2D /* icon-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 286957091795469600115C2D /* icon-star.png */; };
 		2869571E1795469600115C2D /* icon-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2869570A1795469600115C2D /* icon-star@2x.png */; };
-		2869571F1795469600115C2D /* bottom_4nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 2869570B1795469600115C2D /* bottom_4nor.png */; };
-		286957201795469600115C2D /* bottom_m_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2869570C1795469600115C2D /* bottom_m_bg.png */; };
-		286957211795469600115C2D /* box_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 2869570D1795469600115C2D /* box_blue.png */; };
-		286957221795469600115C2D /* box_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 2869570E1795469600115C2D /* box_grey.png */; };
 		286957251795471B00115C2D /* BabyStatusDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286957241795471B00115C2D /* BabyStatusDetailViewController.m */; };
 		286CC3CD1795436200633FB7 /* BabyCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 286CC3CC1795436100633FB7 /* BabyCommentCell.m */; };
 		286CC3D21795437A00633FB7 /* BabyStatusCellHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 286CC3D11795437A00633FB7 /* BabyStatusCellHeadView.m */; };
@@ -175,8 +164,12 @@
 		28EA94B2165F7FC1009F69E5 /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EA94B0165F7FC1009F69E5 /* TakePhotoViewController.m */; };
 		28EA94B3165F7FC1009F69E5 /* TakePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */; };
 		28EA94CB165F961F009F69E5 /* TakePhoto.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94CA165F961F009F69E5 /* TakePhoto.bundle */; };
+		28FCB43F17ABE48800461E89 /* UIImage+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FCB43E17ABE48800461E89 /* UIImage+Addition.m */; };
 		28FE083417AB436E00621D2A /* BabyDetailStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FE083317AB436E00621D2A /* BabyDetailStatusCell.m */; };
 		28FE083917AB586000621D2A /* BabyDetailStatusCellHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FE083817AB586000621D2A /* BabyDetailStatusCellHeadView.m */; };
+		28FE083E17AB97A300621D2A /* BabyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FE083D17AB97A300621D2A /* BabyNavigationController.m */; };
+		28FE084317AB986F00621D2A /* GTTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FE084017AB986C00621D2A /* GTTabBar.m */; };
+		28FE084417AB986F00621D2A /* GTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FE084217AB986D00621D2A /* GTTabBarController.m */; };
 		28FEB45D175BABE000437D53 /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FEB45C175BABE000437D53 /* Toast+UIView.m */; };
 		28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FFC52B1722B88800430C01 /* LoadingViewController.m */; };
 		28FFC52E1722B88800430C01 /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FFC52C1722B88800430C01 /* LoadingViewController.xib */; };
@@ -204,7 +197,6 @@
 		B44954B215A978F200FAA116 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B44954B015A978F200FAA116 /* InfoPlist.strings */; };
 		B44954B415A978F200FAA116 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B44954B315A978F200FAA116 /* main.m */; };
 		B44954B815A978F200FAA116 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B44954B715A978F200FAA116 /* AppDelegate.m */; };
-		B455F5D01787C779000CEA3F /* BabyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B455F5CF1787C779000CEA3F /* BabyNavigationController.m */; };
 		B4C94EDD164C015100722F37 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EDC164C015100722F37 /* HomeViewController.m */; };
 		B4C94EE0164C017800722F37 /* HotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EDF164C017800722F37 /* HotViewController.m */; };
 		B4C94EE6164C02E900722F37 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C94EE5164C02E900722F37 /* MessageViewController.m */; };
@@ -310,17 +302,6 @@
 		2854E28116D462DD008B6E4B /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = BabyTools/CoreDataManager.m; sourceTree = "<group>"; };
 		2854E28416D46F2A008B6E4B /* ImageCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImageCache.xcdatamodel; sourceTree = "<group>"; };
 		286883C3171840F000A92BE7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		286956ED1795463C00115C2D /* CustomBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomBarButton.h; path = CustomTabbar/CustomBarButton.h; sourceTree = "<group>"; };
-		286956EE1795463C00115C2D /* CustomBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomBarButton.m; path = CustomTabbar/CustomBarButton.m; sourceTree = "<group>"; };
-		286956EF1795463C00115C2D /* CustomNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomNavViewController.h; path = CustomTabbar/CustomNavViewController.h; sourceTree = "<group>"; };
-		286956F01795463C00115C2D /* CustomNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomNavViewController.m; path = CustomTabbar/CustomNavViewController.m; sourceTree = "<group>"; };
-		286956F11795463C00115C2D /* CustomTabbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTabbarView.h; path = CustomTabbar/CustomTabbarView.h; sourceTree = "<group>"; };
-		286956F21795463C00115C2D /* CustomTabbarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomTabbarView.m; path = CustomTabbar/CustomTabbarView.m; sourceTree = "<group>"; };
-		286956F31795463C00115C2D /* CustomTabbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTabbarViewController.h; path = CustomTabbar/CustomTabbarViewController.h; sourceTree = "<group>"; };
-		286956F41795463C00115C2D /* CustomTabbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomTabbarViewController.m; path = CustomTabbar/CustomTabbarViewController.m; sourceTree = "<group>"; };
-		286956F51795463C00115C2D /* CustomTabbarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomTabbarViewController.xib; path = CustomTabbar/CustomTabbarViewController.xib; sourceTree = "<group>"; };
-		286956FB1795469600115C2D /* 1_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_bg.png; sourceTree = "<group>"; };
-		286956FC1795469600115C2D /* bottom_4chick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_4chick.png; sourceTree = "<group>"; };
 		286956FD1795469600115C2D /* bg-addbutton-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-addbutton-highlighted.png"; sourceTree = "<group>"; };
 		286956FE1795469600115C2D /* bg-addbutton-highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-addbutton-highlighted@2x.png"; sourceTree = "<group>"; };
 		286956FF1795469600115C2D /* bg-addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-addbutton.png"; sourceTree = "<group>"; };
@@ -335,10 +316,6 @@
 		286957081795469600115C2D /* icon-plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-plus@2x.png"; sourceTree = "<group>"; };
 		286957091795469600115C2D /* icon-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-star.png"; sourceTree = "<group>"; };
 		2869570A1795469600115C2D /* icon-star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-star@2x.png"; sourceTree = "<group>"; };
-		2869570B1795469600115C2D /* bottom_4nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_4nor.png; sourceTree = "<group>"; };
-		2869570C1795469600115C2D /* bottom_m_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_m_bg.png; sourceTree = "<group>"; };
-		2869570D1795469600115C2D /* box_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box_blue.png; sourceTree = "<group>"; };
-		2869570E1795469600115C2D /* box_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box_grey.png; sourceTree = "<group>"; };
 		286957231795471B00115C2D /* BabyStatusDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyStatusDetailViewController.h; path = OtherVCs/BabyStatusDetailViewController.h; sourceTree = "<group>"; };
 		286957241795471B00115C2D /* BabyStatusDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyStatusDetailViewController.m; path = OtherVCs/BabyStatusDetailViewController.m; sourceTree = "<group>"; };
 		286CC3CB1795436100633FB7 /* BabyCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyCommentCell.h; path = TableCells/BabyCommentCell.h; sourceTree = "<group>"; };
@@ -506,10 +483,18 @@
 		28EA94B0165F7FC1009F69E5 /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoViewController.m; sourceTree = "<group>"; };
 		28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TakePhotoViewController.xib; sourceTree = "<group>"; };
 		28EA94CA165F961F009F69E5 /* TakePhoto.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TakePhoto.bundle; path = Images/TakePhoto/TakePhoto.bundle; sourceTree = "<group>"; };
+		28FCB43D17ABE48800461E89 /* UIImage+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Addition.h"; path = "BabyTools/UIImage+Addition.h"; sourceTree = "<group>"; };
+		28FCB43E17ABE48800461E89 /* UIImage+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Addition.m"; path = "BabyTools/UIImage+Addition.m"; sourceTree = "<group>"; };
 		28FE083217AB436D00621D2A /* BabyDetailStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyDetailStatusCell.h; path = TableCells/BabyDetailStatusCell.h; sourceTree = "<group>"; };
 		28FE083317AB436E00621D2A /* BabyDetailStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyDetailStatusCell.m; path = TableCells/BabyDetailStatusCell.m; sourceTree = "<group>"; };
 		28FE083717AB585F00621D2A /* BabyDetailStatusCellHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyDetailStatusCellHeadView.h; path = TableCells/BabyDetailStatusCellHeadView.h; sourceTree = "<group>"; };
 		28FE083817AB586000621D2A /* BabyDetailStatusCellHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyDetailStatusCellHeadView.m; path = TableCells/BabyDetailStatusCellHeadView.m; sourceTree = "<group>"; };
+		28FE083C17AB97A300621D2A /* BabyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyNavigationController.h; path = CustomNavigationController/BabyNavigationController.h; sourceTree = "<group>"; };
+		28FE083D17AB97A300621D2A /* BabyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyNavigationController.m; path = CustomNavigationController/BabyNavigationController.m; sourceTree = "<group>"; };
+		28FE083F17AB986B00621D2A /* GTTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTTabBar.h; path = CustomTabbar/GTTabBar.h; sourceTree = "<group>"; };
+		28FE084017AB986C00621D2A /* GTTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTTabBar.m; path = CustomTabbar/GTTabBar.m; sourceTree = "<group>"; };
+		28FE084117AB986D00621D2A /* GTTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTTabBarController.h; path = CustomTabbar/GTTabBarController.h; sourceTree = "<group>"; };
+		28FE084217AB986D00621D2A /* GTTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTTabBarController.m; path = CustomTabbar/GTTabBarController.m; sourceTree = "<group>"; };
 		28FEB45B175BABE000437D53 /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Toast+UIView.h"; path = "BabyTools/Toast+UIView.h"; sourceTree = "<group>"; };
 		28FEB45C175BABE000437D53 /* Toast+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Toast+UIView.m"; path = "BabyTools/Toast+UIView.m"; sourceTree = "<group>"; };
 		28FFC52A1722B88800430C01 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadingViewController.h; path = OtherVCs/LoadingViewController.h; sourceTree = "<group>"; };
@@ -562,8 +547,6 @@
 		B44954B515A978F200FAA116 /* BabyinFamily-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BabyinFamily-Prefix.pch"; sourceTree = "<group>"; };
 		B44954B615A978F200FAA116 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B44954B715A978F200FAA116 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B455F5CE1787C779000CEA3F /* BabyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyNavigationController.h; sourceTree = "<group>"; };
-		B455F5CF1787C779000CEA3F /* BabyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyNavigationController.m; sourceTree = "<group>"; };
 		B4C94EDB164C015100722F37 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		B4C94EDC164C015100722F37 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		B4C94EDE164C017800722F37 /* HotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotViewController.h; sourceTree = "<group>"; };
@@ -705,15 +688,10 @@
 		286956EA1795462500115C2D /* CustomTabbar */ = {
 			isa = PBXGroup;
 			children = (
-				286956ED1795463C00115C2D /* CustomBarButton.h */,
-				286956EE1795463C00115C2D /* CustomBarButton.m */,
-				286956EF1795463C00115C2D /* CustomNavViewController.h */,
-				286956F01795463C00115C2D /* CustomNavViewController.m */,
-				286956F11795463C00115C2D /* CustomTabbarView.h */,
-				286956F21795463C00115C2D /* CustomTabbarView.m */,
-				286956F31795463C00115C2D /* CustomTabbarViewController.h */,
-				286956F41795463C00115C2D /* CustomTabbarViewController.m */,
-				286956F51795463C00115C2D /* CustomTabbarViewController.xib */,
+				28FE083F17AB986B00621D2A /* GTTabBar.h */,
+				28FE084017AB986C00621D2A /* GTTabBar.m */,
+				28FE084117AB986D00621D2A /* GTTabBarController.h */,
+				28FE084217AB986D00621D2A /* GTTabBarController.m */,
 			);
 			name = CustomTabbar;
 			sourceTree = "<group>";
@@ -987,18 +965,20 @@
 		28EA949F165F59E0009F69E5 /* babyTools */ = {
 			isa = PBXGroup;
 			children = (
-				2854E28016D462DD008B6E4B /* CoreDataManager.h */,
-				2854E28116D462DD008B6E4B /* CoreDataManager.m */,
-				288853F9167EAD67000ED11A /* BabyHelper.h */,
-				288853FA167EAD67000ED11A /* BabyHelper.m */,
-				28FEB45B175BABE000437D53 /* Toast+UIView.h */,
-				28FEB45C175BABE000437D53 /* Toast+UIView.m */,
+				28FCB43D17ABE48800461E89 /* UIImage+Addition.h */,
+				28FCB43E17ABE48800461E89 /* UIImage+Addition.m */,
 				28CA6683167F0A660087F45D /* BabyAlertWindow.h */,
 				28CA6684167F0A660087F45D /* BabyAlertWindow.m */,
-				2889B7791696919B00D8FF16 /* UIImageView+Resize.h */,
-				2889B77A1696919B00D8FF16 /* UIImageView+Resize.m */,
+				288853F9167EAD67000ED11A /* BabyHelper.h */,
+				288853FA167EAD67000ED11A /* BabyHelper.m */,
 				2843CB9F17A6B9B900E3C677 /* BabyPlaceHolderTextView.h */,
 				2843CBA017A6B9B900E3C677 /* BabyPlaceHolderTextView.m */,
+				2854E28016D462DD008B6E4B /* CoreDataManager.h */,
+				2854E28116D462DD008B6E4B /* CoreDataManager.m */,
+				28FEB45B175BABE000437D53 /* Toast+UIView.h */,
+				28FEB45C175BABE000437D53 /* Toast+UIView.m */,
+				2889B7791696919B00D8FF16 /* UIImageView+Resize.h */,
+				2889B77A1696919B00D8FF16 /* UIImageView+Resize.m */,
 			);
 			name = babyTools;
 			sourceTree = "<group>";
@@ -1006,6 +986,7 @@
 		28EA94A0165F6031009F69E5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				28FE083B17AB968800621D2A /* CustomNavigationController */,
 				286956EA1795462500115C2D /* CustomTabbar */,
 				286CC3F11795457000633FB7 /* QuadCurveMenu */,
 				28833F6A174F49F200039B56 /* introduction */,
@@ -1034,10 +1015,17 @@
 				28EA94AF165F7FC1009F69E5 /* TakePhotoViewController.h */,
 				28EA94B0165F7FC1009F69E5 /* TakePhotoViewController.m */,
 				28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */,
-				B455F5CE1787C779000CEA3F /* BabyNavigationController.h */,
-				B455F5CF1787C779000CEA3F /* BabyNavigationController.m */,
 			);
 			name = TabViewControllers;
+			sourceTree = "<group>";
+		};
+		28FE083B17AB968800621D2A /* CustomNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				28FE083C17AB97A300621D2A /* BabyNavigationController.h */,
+				28FE083D17AB97A300621D2A /* BabyNavigationController.m */,
+			);
+			name = CustomNavigationController;
 			sourceTree = "<group>";
 		};
 		B40B1F421650E99F000BC5DA /* ASIHttpRequest */ = {
@@ -1208,8 +1196,6 @@
 		B44954AE15A978F200FAA116 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				286956FB1795469600115C2D /* 1_bg.png */,
-				286956FC1795469600115C2D /* bottom_4chick.png */,
 				286956FD1795469600115C2D /* bg-addbutton-highlighted.png */,
 				286956FE1795469600115C2D /* bg-addbutton-highlighted@2x.png */,
 				286956FF1795469600115C2D /* bg-addbutton.png */,
@@ -1224,10 +1210,6 @@
 				286957081795469600115C2D /* icon-plus@2x.png */,
 				286957091795469600115C2D /* icon-star.png */,
 				2869570A1795469600115C2D /* icon-star@2x.png */,
-				2869570B1795469600115C2D /* bottom_4nor.png */,
-				2869570C1795469600115C2D /* bottom_m_bg.png */,
-				2869570D1795469600115C2D /* box_blue.png */,
-				2869570E1795469600115C2D /* box_grey.png */,
 				284872A4178184C700DD82E7 /* navigationBarBackButton.png */,
 				284872A6178187B400DD82E7 /* header_bg.png */,
 				284872A7178187B400DD82E7 /* header_bg@2x.png */,
@@ -1372,9 +1354,6 @@
 				284872A9178187B400DD82E7 /* header_bg@2x.png in Resources */,
 				286CC3E8179544BD00633FB7 /* LICENSE in Resources */,
 				286CC3E9179544BD00633FB7 /* README.md in Resources */,
-				286956FA1795463C00115C2D /* CustomTabbarViewController.xib in Resources */,
-				2869570F1795469600115C2D /* 1_bg.png in Resources */,
-				286957101795469600115C2D /* bottom_4chick.png in Resources */,
 				286957111795469600115C2D /* bg-addbutton-highlighted.png in Resources */,
 				286957121795469600115C2D /* bg-addbutton-highlighted@2x.png in Resources */,
 				286957131795469600115C2D /* bg-addbutton.png in Resources */,
@@ -1389,10 +1368,6 @@
 				2869571C1795469600115C2D /* icon-plus@2x.png in Resources */,
 				2869571D1795469600115C2D /* icon-star.png in Resources */,
 				2869571E1795469600115C2D /* icon-star@2x.png in Resources */,
-				2869571F1795469600115C2D /* bottom_4nor.png in Resources */,
-				286957201795469600115C2D /* bottom_m_bg.png in Resources */,
-				286957211795469600115C2D /* box_blue.png in Resources */,
-				286957221795469600115C2D /* box_grey.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1488,7 +1463,6 @@
 				28833F74174F4A5C00039B56 /* IntroModel.m in Sources */,
 				28833F75174F4A5C00039B56 /* IntroView.m in Sources */,
 				28FEB45D175BABE000437D53 /* Toast+UIView.m in Sources */,
-				B455F5D01787C779000CEA3F /* BabyNavigationController.m in Sources */,
 				2886A157178A828A00EB9E64 /* BabyStatusCell.m in Sources */,
 				286CC3CD1795436200633FB7 /* BabyCommentCell.m in Sources */,
 				286CC3D21795437A00633FB7 /* BabyStatusCellHeadView.m in Sources */,
@@ -1501,10 +1475,6 @@
 				286CC3F0179544BD00633FB7 /* UIImageView+WebCache.m in Sources */,
 				286CC3F61795459100633FB7 /* QuadCurveMenu.m in Sources */,
 				286CC3F71795459100633FB7 /* QuadCurveMenuItem.m in Sources */,
-				286956F61795463C00115C2D /* CustomBarButton.m in Sources */,
-				286956F71795463C00115C2D /* CustomNavViewController.m in Sources */,
-				286956F81795463C00115C2D /* CustomTabbarView.m in Sources */,
-				286956F91795463C00115C2D /* CustomTabbarViewController.m in Sources */,
 				286957251795471B00115C2D /* BabyStatusDetailViewController.m in Sources */,
 				2843CBA117A6B9B900E3C677 /* BabyPlaceHolderTextView.m in Sources */,
 				282E203817A7445200EAC441 /* BabyAtTableViewController.m in Sources */,
@@ -1514,6 +1484,10 @@
 				28110F9417A9FE4A00B33054 /* BabyPostPhotoViewController.m in Sources */,
 				28FE083417AB436E00621D2A /* BabyDetailStatusCell.m in Sources */,
 				28FE083917AB586000621D2A /* BabyDetailStatusCellHeadView.m in Sources */,
+				28FE083E17AB97A300621D2A /* BabyNavigationController.m in Sources */,
+				28FE084317AB986F00621D2A /* GTTabBar.m in Sources */,
+				28FE084417AB986F00621D2A /* GTTabBarController.m in Sources */,
+				28FCB43F17ABE48800461E89 /* UIImage+Addition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

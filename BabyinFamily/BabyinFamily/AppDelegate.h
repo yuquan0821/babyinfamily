@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "LoadingViewController.h"
 #import "SinaWeibo.h"
-#import "CustomNavViewController.h"
-#import "CustomTabbarViewController.h"
 #import "QuadCurveMenu.h"
+#import "GTTabBarController.h"
+#import "UIImage+Addition.h"
 
 @class LoadingViewController;
 @class SinaWeibo;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate,QuadCurveMenuDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate,QuadCurveMenuDelegate,GTTabBarControllerDelegate>
 {
     UIWindow *_window;
     SinaWeibo *sinaWeibo;
@@ -25,7 +25,7 @@
 
 @property (retain, nonatomic) UIWindow *window;
 
-@property (retain, nonatomic) CustomTabbarViewController *tabBarController;
+@property (retain, nonatomic) GTTabBarController *tabBarController;
 
 @property (retain, nonatomic) LoadingViewController *loadingViewController;
 

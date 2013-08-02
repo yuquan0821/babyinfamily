@@ -105,6 +105,7 @@
 
 - (void)viewDidLoad
 {
+    
     textView = [[BabyPlaceHolderTextView alloc]initWithFrame:CGRectMake(0, 6, 320, 115)];
     textView.scrollEnabled = YES;
     textView.backgroundColor = [UIColor clearColor];

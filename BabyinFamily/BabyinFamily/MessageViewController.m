@@ -93,7 +93,7 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(didGetComments:) name:MMSinaToMeCommentList object:nil];
     [center addObserver:self selector:@selector(mmRequestFailed:) name:MMSinaRequestFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
+  
     
     if(![Utility connectedToNetwork])
     {

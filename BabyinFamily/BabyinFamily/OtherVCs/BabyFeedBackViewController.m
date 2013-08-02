@@ -33,7 +33,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:@"FeedBackViewController" bundle:nibBundleOrNil];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         _shouldPostImage = NO;
@@ -101,7 +101,7 @@
     [super viewDidLoad];
     theTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 6, 320, 115)];
     theTextView.scrollEnabled = YES;
-    theTextView.backgroundColor = [UIColor clearColor];
+    //theTextView.backgroundColor = [UIColor clearColor];
     theTextView.font = [UIFont systemFontOfSize:13.0f];
     theTextView.delegate = self;
     //发送图片

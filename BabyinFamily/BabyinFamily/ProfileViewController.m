@@ -62,12 +62,16 @@ enum {
 - (void)feedBack
 {
     BabyFeedBackViewController *fb = [[BabyFeedBackViewController alloc]init];
+    fb.hidesBottomBarWhenPushed = YES;
+
     [self.navigationController pushViewController:fb animated:YES];
     [fb release];
 }
 - (void)setting
 {
     SettingVC  *sv = [[SettingVC alloc]initWithNibName:@"SettingVC" bundle:nil];
+    sv.hidesBottomBarWhenPushed = YES;
+
     [self.navigationController pushViewController:sv animated:YES];
     [sv release];
 }
