@@ -29,8 +29,6 @@
 		282E203D17A7461700EAC441 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282E203C17A7461700EAC441 /* CoreLocation.framework */; };
 		282E204017A748AB00EAC441 /* BabyPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282E203F17A748AA00EAC441 /* BabyPostViewController.m */; };
 		282E204317A79A5700EAC441 /* BabyFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282E204217A79A5400EAC441 /* BabyFeedBackViewController.m */; };
-		283654A416BFACDE00203578 /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 283654A216BFACD900203578 /* FeedBackViewController.m */; };
-		283654A516BFACDE00203578 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283654A316BFACDB00203578 /* FeedBackViewController.xib */; };
 		28368F0F170FB2C8008C4CC1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28368F0E170FB2C8008C4CC1 /* Accelerate.framework */; };
 		28368F13170FB2D3008C4CC1 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28368F12170FB2D3008C4CC1 /* CoreText.framework */; };
 		28368F15170FB2F0008C4CC1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28368F14170FB2F0008C4CC1 /* libsqlite3.0.dylib */; };
@@ -279,9 +277,6 @@
 		282E203F17A748AA00EAC441 /* BabyPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyPostViewController.m; path = OtherVCs/BabyPostViewController.m; sourceTree = "<group>"; };
 		282E204117A79A5300EAC441 /* BabyFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyFeedBackViewController.h; path = OtherVCs/BabyFeedBackViewController.h; sourceTree = "<group>"; };
 		282E204217A79A5400EAC441 /* BabyFeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyFeedBackViewController.m; path = OtherVCs/BabyFeedBackViewController.m; sourceTree = "<group>"; };
-		283654A116BFACD600203578 /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedBackViewController.h; path = OtherVCs/FeedBackViewController.h; sourceTree = "<group>"; };
-		283654A216BFACD900203578 /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedBackViewController.m; path = OtherVCs/FeedBackViewController.m; sourceTree = "<group>"; };
-		283654A316BFACDB00203578 /* FeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeedBackViewController.xib; path = OtherVCs/FeedBackViewController.xib; sourceTree = "<group>"; };
 		28368F0E170FB2C8008C4CC1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		28368F12170FB2D3008C4CC1 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		28368F14170FB2F0008C4CC1 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -800,9 +795,6 @@
 				2828531516E72D520062EC83 /* DetailStatusViewController.h */,
 				2828531616E72D520062EC83 /* DetailStatusViewController.m */,
 				2828531716E72D520062EC83 /* DetailStatusViewController.xib */,
-				283654A116BFACD600203578 /* FeedBackViewController.h */,
-				283654A216BFACD900203578 /* FeedBackViewController.m */,
-				283654A316BFACDB00203578 /* FeedBackViewController.xib */,
 				2884955216631CD30042C4CD /* FollowerVC.h */,
 				2884955316631CD30042C4CD /* FollowerVC.m */,
 				2884955416631CD30042C4CD /* FollowerVC.xib */,
@@ -1353,7 +1345,6 @@
 				288659AC167430C0000EADCC /* StatusCell.xib in Resources */,
 				280FBA4A169BD90E0072741B /* AviarySDKResources.bundle in Resources */,
 				28D14F5E169CF53600B39793 /* SendAndSaveViewController.xib in Resources */,
-				283654A516BFACDE00203578 /* FeedBackViewController.xib in Resources */,
 				2828531916E72D530062EC83 /* DetailStatusViewController.xib in Resources */,
 				283A8D0316F5A9E300E72753 /* HotViewController.xib in Resources */,
 				2871907F16F7011B00A3527B /* AddComment.xib in Resources */,
@@ -1467,7 +1458,6 @@
 				28CBA96716990FED00D704AC /* AsyncImageDownloader.m in Sources */,
 				2889E7FA169ACC7800885875 /* POI.m in Sources */,
 				28D14F5D169CF53600B39793 /* SendAndSaveViewController.m in Sources */,
-				283654A416BFACDE00203578 /* FeedBackViewController.m in Sources */,
 				28BAE94716C0DA3E00FA0F47 /* UIDeviceHardware.m in Sources */,
 				2854E27D16D45FE1008B6E4B /* Images.m in Sources */,
 				2854E27E16D45FE1008B6E4B /* StatusCoreDataItem.m in Sources */,

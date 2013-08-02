@@ -8,7 +8,6 @@
 
 
 #import <UIKit/UIKit.h>
-#import "StatusCell.h"
 #import "PullRefreshTableViewController.h"
 #import "EGORefreshTableHeaderView.h"
 #import "ImageBrowser.h"
