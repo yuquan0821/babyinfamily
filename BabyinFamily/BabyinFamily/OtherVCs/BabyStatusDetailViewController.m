@@ -170,9 +170,7 @@
 {
     if (indexPath.section == 0) {
         static NSString *cellIdentifier = @"tempCell";
-        BabyStatusCell *cell = [[[BabyStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
-        cell.more.hidden = YES;
-        cell.commentButton.hidden = YES;
+        BabyDetailStatusCell *cell = [[[BabyDetailStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
         [cell updateCellWith:self.weibo];
 
         return cell.cellHeight;
@@ -180,7 +178,7 @@
         NSInteger row = indexPath.row;
         Comment * commentInfo = [listCommentsArray objectAtIndex:row];
         CGFloat  height = 0.0f;
-        height  = [self cellHeight:commentInfo.text with:160.0f]+42;
+        height  = [self cellHeight:commentInfo.text with:228.0f]+42;
         NSLog(@"height:%f",height);
         return height;
     }
@@ -220,9 +218,9 @@
     if (indexPath.section == 0) {
         static NSString *cellIdentifier = @"weiboCell";
         
-        BabyStatusCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        BabyDetailStatusCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
-            cell = [[[BabyStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+            cell = [[[BabyDetailStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
         }
         cell.backgroundColor = [UIColor whiteColor];
         if (cell.contentImage.hidden == NO) {
@@ -247,7 +245,7 @@
             Comment * comment = [listCommentsArray objectAtIndex:indexPath.row];
             cell.weiboDetailCommentInfo = comment;
             CGRect frame = cell.commentContent.frame;
-            frame.size.height = [self cellHeight:comment.text with:160.0];
+            frame.size.height = [self cellHeight:comment.text with:228.0];
             cell.commentContent.frame = frame;
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 

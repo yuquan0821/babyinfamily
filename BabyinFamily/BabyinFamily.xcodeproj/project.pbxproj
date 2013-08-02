@@ -177,6 +177,7 @@
 		28EA94B2165F7FC1009F69E5 /* TakePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EA94B0165F7FC1009F69E5 /* TakePhotoViewController.m */; };
 		28EA94B3165F7FC1009F69E5 /* TakePhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */; };
 		28EA94CB165F961F009F69E5 /* TakePhoto.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28EA94CA165F961F009F69E5 /* TakePhoto.bundle */; };
+		28FE083417AB436E00621D2A /* BabyDetailStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FE083317AB436E00621D2A /* BabyDetailStatusCell.m */; };
 		28FEB45D175BABE000437D53 /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FEB45C175BABE000437D53 /* Toast+UIView.m */; };
 		28FFC52D1722B88800430C01 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FFC52B1722B88800430C01 /* LoadingViewController.m */; };
 		28FFC52E1722B88800430C01 /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FFC52C1722B88800430C01 /* LoadingViewController.xib */; };
@@ -509,6 +510,8 @@
 		28EA94B0165F7FC1009F69E5 /* TakePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoViewController.m; sourceTree = "<group>"; };
 		28EA94B1165F7FC1009F69E5 /* TakePhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TakePhotoViewController.xib; sourceTree = "<group>"; };
 		28EA94CA165F961F009F69E5 /* TakePhoto.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TakePhoto.bundle; path = Images/TakePhoto/TakePhoto.bundle; sourceTree = "<group>"; };
+		28FE083217AB436D00621D2A /* BabyDetailStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyDetailStatusCell.h; path = TableCells/BabyDetailStatusCell.h; sourceTree = "<group>"; };
+		28FE083317AB436E00621D2A /* BabyDetailStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyDetailStatusCell.m; path = TableCells/BabyDetailStatusCell.m; sourceTree = "<group>"; };
 		28FEB45B175BABE000437D53 /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Toast+UIView.h"; path = "BabyTools/Toast+UIView.h"; sourceTree = "<group>"; };
 		28FEB45C175BABE000437D53 /* Toast+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Toast+UIView.m"; path = "BabyTools/Toast+UIView.m"; sourceTree = "<group>"; };
 		28FFC52A1722B88800430C01 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadingViewController.h; path = OtherVCs/LoadingViewController.h; sourceTree = "<group>"; };
@@ -862,6 +865,8 @@
 				2896C4431661E0B2004705A4 /* ZJTCommentCell.h */,
 				2896C4441661E0B2004705A4 /* ZJTCommentCell.m */,
 				2896C4451661E0B2004705A4 /* ZJTCommentCell.xib */,
+				28FE083217AB436D00621D2A /* BabyDetailStatusCell.h */,
+				28FE083317AB436E00621D2A /* BabyDetailStatusCell.m */,
 			);
 			name = TablesCells;
 			sourceTree = "<group>";
@@ -1512,6 +1517,7 @@
 				282E204017A748AB00EAC441 /* BabyPostViewController.m in Sources */,
 				282E204317A79A5700EAC441 /* BabyFeedBackViewController.m in Sources */,
 				28110F9417A9FE4A00B33054 /* BabyPostPhotoViewController.m in Sources */,
+				28FE083417AB436E00621D2A /* BabyDetailStatusCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

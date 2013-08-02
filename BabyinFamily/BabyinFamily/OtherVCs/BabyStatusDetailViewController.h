@@ -7,9 +7,9 @@
 //
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "BabyStatusCell.h"
 #import "BabyStatusCellHeadView.h"
 #import "SDWebImageManager.h"
+#import "BabyDetailStatusCell.h"
 
 
 @interface BabyStatusDetailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,BabyStatusCellHeadClickDelegate,SDWebImageManagerDelegate>
