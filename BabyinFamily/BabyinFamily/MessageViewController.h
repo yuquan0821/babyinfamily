@@ -38,7 +38,7 @@
 @property (retain, nonatomic) UIImage               *contentImage;
 @property (retain, nonatomic) NSMutableArray        *commentArr;
 @property (assign, nonatomic) BOOL                  isFromProfileVC;
-@property (retain, nonatomic) Comment *clickedComment;
+@property (retain, nonatomic) Comment               *clickedComment;
 
 
 @end

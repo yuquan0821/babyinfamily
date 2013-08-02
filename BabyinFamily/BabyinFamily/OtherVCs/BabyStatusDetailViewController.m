@@ -198,6 +198,13 @@
         head.user = status.user;
         head.delegate = self;
         return head;
+    }else
+    {
+        BabyDetailStatusCellHeadView *head = [[BabyDetailStatusCellHeadView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+        Status *status = _weibo;
+        NSLog(@"status user name%@", status.user.name);
+        head.commentCount.text = [NSString stringWithFormat:@"评论:%d",status.commentsCount];
+        return head;
     }
     return nil;
 }

@@ -10,6 +10,7 @@
 #import "BabyStatusCellHeadView.h"
 #import "SDWebImageManager.h"
 #import "BabyDetailStatusCell.h"
+#import "BabyDetailStatusCellHeadView.h"
 
 
 @interface BabyStatusDetailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,BabyStatusCellHeadClickDelegate,SDWebImageManagerDelegate>
