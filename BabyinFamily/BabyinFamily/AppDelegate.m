@@ -265,7 +265,7 @@
         {
             TakePhotoViewController *picker = [[[TakePhotoViewController alloc] init] autorelease];
             BabyNavigationController * nav = [[[BabyNavigationController alloc] initWithRootViewController:picker] autorelease];
-            [picker.navigationController setNavigationBarHidden:NO];
+            [picker.navigationController setNavigationBarHidden:YES];
             [self.tabBarController presentModalViewController:nav animated:NO];
             [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
             break;
