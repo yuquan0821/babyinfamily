@@ -163,7 +163,7 @@
         {
             shouldLoad = NO;
             [manager getUserID];
-            [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+            [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:-1];
             [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
             [self.table reloadData];
             [self loadVisuableImage:self.table];
@@ -193,7 +193,7 @@
     else
     {
         if (!statuesArr || statuesArr.count == 0) {
-            [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+            [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:-1];
             [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
         }
         
@@ -322,13 +322,9 @@
                 //判断是否有本地缓存
                 NSURL *imgURL = [NSURL URLWithString:weibo.bmiddlePic];
                 UIImage *cachedImage = [sdManager imageWithURL:imgURL];
-                //CGSize size = CGSizeMake(300, 300);
-                //cachedImage = [UIImage imageWithImage:cachedImage scaledToSizeWithSameAspectRatio:size];
 
                 if (cachedImage) {
                     //如果cache命中，则直接利用缓存的图片进行有关操作
-                    // CGSize size = CGSizeMake(300, 300);
-                    //cachedImage = [UIImageView imageWithImage:cachedImage scaledToSizeWithSameAspectRatio:size];
                     [UIView animateWithDuration:0.3 animations:^{
                         cell.contentImage.alpha = 0.0f;
                     } completion:^(BOOL finished) {
@@ -361,8 +357,6 @@
                 NSURL *imgURL = [NSURL URLWithString:weibo.retweetedStatus.bmiddlePic];
                 UIImage *cachedImage = [sdManager imageWithURL:imgURL];
                 if (cachedImage) {
-                    CGSize size = CGSizeMake(300, 300);
-                    cachedImage = [UIImage imageWithImage:cachedImage scaledToSizeWithSameAspectRatio:size];
                     [UIView animateWithDuration:0.3 animations:^{
                         cell.contentImage.alpha = 0.0f;
                     } completion:^(BOOL finished) {
@@ -380,8 +374,9 @@
                         cell.repostContentImage.alpha = 0.0f;
                     } completion:^(BOOL finished) {
                         [UIView animateWithDuration:0.3 animations:^{
+                            CGSize size = CGSizeMake(300, 300);
                             cell.repostContentImage.alpha = 1.0f;
-                            [cell.repostContentImage setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]];
+                            [cell.repostContentImage setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]scaleSize:size];
                             [loading stopAnimating];
                             [loading removeFromSuperview];
                             [loading release];
@@ -393,9 +388,6 @@
         [cell setNeedsDisplay];
     }
 }
-
-
-
 
 #pragma mark - UITableViewDataSource
 
@@ -473,14 +465,15 @@
     return cell.cellHeight;
 }
 
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    
-//    BabyStatusDetailViewController* Detail = [[BabyStatusDetailViewController alloc] init];
-//    Detail.weibo = [statuesArr objectAtIndex:indexPath.section];
-//    [self.navigationController pushViewController:Detail animated:YES];
-//    [Detail release];
-//}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    BabyStatusDetailViewController* Detail = [[BabyStatusDetailViewController alloc] init];
+    Detail.weibo = [statuesArr objectAtIndex:indexPath.section];
+    Detail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:Detail animated:YES];
+    [Detail release];
+}
 
 
 #pragma mark - StatusCellDelegate
@@ -624,7 +617,7 @@
         [[SHKActivityIndicator currentIndicator] hide];
     }else{
         _reloading = YES;
-        [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+        [manager getHomeLine:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:-1];
         [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
         _shouldAppendTheDataArr = NO;
         
@@ -729,11 +722,11 @@
 
 - (void)statusCommentButtonClicked:(Status*)status
 {
-    BabyStatusDetailViewController* Detail = [[BabyStatusDetailViewController alloc] init];
-    Detail.weibo = status;
+    BabyAddCommentViewController* Detail = [[BabyAddCommentViewController alloc] init];
+    Detail.status = status;
     Detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:Detail animated:YES];
-    [Detail release];
+    //[Detail release];
 }
 
 
@@ -808,7 +801,7 @@
         [self doneLoadingTableViewData];
         [[SHKActivityIndicator currentIndicator] hide];
     }else{
-        [manager getHomeLine:-1 maxID:_maxID count:-1 page:_page baseApp:1 feature:2];
+        [manager getHomeLine:-1 maxID:_maxID count:-1 page:_page baseApp:1 feature:-1];
         _shouldAppendTheDataArr = YES;
     }
 }

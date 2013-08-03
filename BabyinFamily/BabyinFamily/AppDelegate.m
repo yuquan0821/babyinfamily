@@ -18,7 +18,6 @@
 @implementation AppDelegate
 @synthesize window;
 @synthesize tabBarController;
-@synthesize timer;
 @synthesize loadingViewController;
 @synthesize sinaWeibo;
 
@@ -27,8 +26,6 @@
 {
     [window release];
     [tabBarController release];
-    [timer invalidate];
-    self.timer = nil;
     [sinaWeibo release];
     [super dealloc];
     
@@ -110,8 +107,7 @@
 
 - (void) prepareToMainViewControllerWithAnimate:(BOOL)animate
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUnreadCount:) name:MMSinaGotUnreadCount       object:nil];
-    
+
     HomeViewController *vc1      = [[[HomeViewController alloc] init] autorelease];
     HotViewController *vc2       = [[[HotViewController alloc] init] autorelease];
     TakePhotoViewController *vc3 = [[[TakePhotoViewController alloc] init] autorelease];
@@ -196,7 +192,6 @@
     [window  addSubview:tabBarController.view];
     
     self.window.rootViewController = self.tabBarController;
-    [self schedueMessageTimer];
     
     if (animate) {
         [UIView commitAnimations];
@@ -215,39 +210,12 @@
 //退出登陆回调方法
 -(void)logout
 {
-    [timer invalidate];
     SinaWeibo *sinaweibo = [self sinaWeibo];
     [sinaweibo logOut];
     [self showFirstRunViewWithAnimate];
     
 }
-- (void)schedueMessageTimer
-{
-    if (timer == nil) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(timerOnActive) userInfo:nil repeats:YES];
-    }
-    [timer fire];
-}
 
--(void)timerOnActive
-{
-    WeiBoMessageManager *manager = [WeiBoMessageManager getInstance];
-    
-    [manager getUnreadCount:[[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID]];
-}
-
--(void)didGetUnreadCount:(NSNotification*)sender
-{
-    NSDictionary *dic = sender.object;
-    NSNumber *num = [dic objectForKey:@"cmt"];
-    
-    NSLog(@"num = %@",num);
-    if ([num intValue] == 0) {
-        return;
-    }
-    
-    // [self.tabBarController.tabBar.items objectAtIndex:3];
-}
 - (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx
 {
     switch (idx) {

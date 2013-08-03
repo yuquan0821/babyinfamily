@@ -23,9 +23,10 @@
 #import "BabyStatusCellHeadView.h"
 #import "UIImageView+WebCache.h"
 #import "BabyStatusCell.h"
+#import "BabyAddCommentViewController.h"
 
 
-@interface HomeViewController : PullRefreshTableViewController<EGORefreshTableHeaderDelegate,StatusCellDelegate,ImageBrowserDelegate,UIActionSheetDelegate,BabyStatusCellHeadClickDelegate,SDWebImageManagerDelegate,BabyStatusCellDelegate>
+@interface HomeViewController : PullRefreshTableViewController<EGORefreshTableHeaderDelegate,ImageBrowserDelegate,UIActionSheetDelegate,BabyStatusCellHeadClickDelegate,SDWebImageManagerDelegate,BabyStatusCellDelegate>
 {
     UITableView                 *table;
     NSMutableArray              *statuesArr;
@@ -50,7 +51,6 @@
 
 
 - (void)doneLoadingTableViewData;
-- (void)moreButtonOnClick:(id)sender;
 
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28007D3017AD00BC00CB2BD4 /* BabyAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28007D2F17AD00BA00CB2BD4 /* BabyAddCommentViewController.m */; };
 		280CF2851664CA250031262F /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CF2831664CA240031262F /* SettingVC.m */; };
 		280CF2861664CA250031262F /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280CF2841664CA250031262F /* SettingVC.xib */; };
 		280E9EA6172A14FD003D87AB /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9EA5172A14FD003D87AB /* Utility.m */; };
@@ -229,6 +230,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28007D2E17AD00B800CB2BD4 /* BabyAddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyAddCommentViewController.h; path = OtherVCs/BabyAddCommentViewController.h; sourceTree = "<group>"; };
+		28007D2F17AD00BA00CB2BD4 /* BabyAddCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyAddCommentViewController.m; path = OtherVCs/BabyAddCommentViewController.m; sourceTree = "<group>"; };
 		280CF2821664CA240031262F /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		280CF2831664CA240031262F /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		280CF2841664CA250031262F /* SettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingVC.xib; sourceTree = "<group>"; };
@@ -790,6 +793,8 @@
 				280CF2841664CA250031262F /* SettingVC.xib */,
 				28BAE94516C0DA3D00FA0F47 /* UIDeviceHardware.h */,
 				28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */,
+				28007D2E17AD00B800CB2BD4 /* BabyAddCommentViewController.h */,
+				28007D2F17AD00BA00CB2BD4 /* BabyAddCommentViewController.m */,
 			);
 			name = OthersVCs;
 			sourceTree = "<group>";
@@ -1488,6 +1493,7 @@
 				28FE084317AB986F00621D2A /* GTTabBar.m in Sources */,
 				28FE084417AB986F00621D2A /* GTTabBarController.m in Sources */,
 				28FCB43F17ABE48800461E89 /* UIImage+Addition.m in Sources */,
+				28007D3017AD00BC00CB2BD4 /* BabyAddCommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

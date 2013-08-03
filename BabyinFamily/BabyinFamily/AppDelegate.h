@@ -31,8 +31,6 @@
 
 @property (retain, nonatomic) SinaWeibo *sinaWeibo;
 
-@property (nonatomic, retain) NSTimer *timer;
-
 
 
 - (void) logout;
