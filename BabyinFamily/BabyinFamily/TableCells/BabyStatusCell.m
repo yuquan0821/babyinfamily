@@ -218,7 +218,7 @@ typedef enum{
     self.status = weibo;
     Status  *repostWeibo = weibo.retweetedStatus;    
     NSString *url = weibo.bmiddlePic;
-    NSLog(@"weibo.thumbnailImageUrl:%@",url);
+    //NSLog(@"weibo.thumbnailImageUrl:%@",url);
     //有图
     if (url!=nil) {
         self.contentImage.hidden = NO;

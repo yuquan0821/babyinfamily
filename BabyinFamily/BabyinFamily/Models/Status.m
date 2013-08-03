@@ -154,7 +154,7 @@
 		inReplyToUserId = [dic getIntValueForKey:@"in_reply_to_user_id" defaultValue:-1];
 		inReplyToScreenName = [[dic getStringValueForKey:@"in_reply_to_screen_name" defaultValue:@""] retain];
 		thumbnailPic = [[dic getStringValueForKey:@"thumbnail_pic" defaultValue:@""] retain];
-		bmiddlePic = [[dic getStringValueForKey:@"bmiddle_pic" defaultValue:@""] retain];
+		bmiddlePic = [[dic getStringValueForKey:@"bmiddle_pic" defaultValue:nil] retain];
 		originalPic = [[dic getStringValueForKey:@"original_pic" defaultValue:@""] retain];
 		
         commentsCount = [dic getIntValueForKey:@"comments_count" defaultValue:-1];
