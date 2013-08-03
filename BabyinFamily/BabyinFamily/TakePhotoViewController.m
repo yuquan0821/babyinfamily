@@ -69,6 +69,7 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
     [self removeAllTargets];
     [self retakePhoto:nil];
@@ -443,6 +444,7 @@
     // Handle the result image here
     if (image != nil) {
         BabyPostPhotoViewController* viewController = [[BabyPostPhotoViewController alloc] initWithImage:image];
+        self.navigationController.navigationBarHidden = NO;
        [self.navigationController pushViewController:viewController animated:NO];
         [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
        // [viewController release];

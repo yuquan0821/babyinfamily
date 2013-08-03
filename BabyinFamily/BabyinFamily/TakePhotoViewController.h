@@ -12,6 +12,7 @@
 #import "AFPhotoEditorController.h"
 #import "BlurOverlayView.h"
 #import "BabyPostPhotoViewController.h"
+#import "BabyNavigationController.h"
 
 
 

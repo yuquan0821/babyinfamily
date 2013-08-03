@@ -473,14 +473,14 @@
     return cell.cellHeight;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    BabyStatusDetailViewController* Detail = [[BabyStatusDetailViewController alloc] init];
-    Detail.weibo = [statuesArr objectAtIndex:indexPath.section];
-    [self.navigationController pushViewController:Detail animated:YES];
-    [Detail release];
-}
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//    BabyStatusDetailViewController* Detail = [[BabyStatusDetailViewController alloc] init];
+//    Detail.weibo = [statuesArr objectAtIndex:indexPath.section];
+//    [self.navigationController pushViewController:Detail animated:YES];
+//    [Detail release];
+//}
 
 
 #pragma mark - StatusCellDelegate
@@ -729,12 +729,11 @@
 
 - (void)statusCommentButtonClicked:(Status*)status
 {
-    AddComment *add = [[AddComment alloc]initWithNibName:@"AddComment" bundle:nil];
-    add.status = status;
-    add.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:add animated:YES];
-    [add release];
-    
+    BabyStatusDetailViewController* Detail = [[BabyStatusDetailViewController alloc] init];
+    Detail.weibo = status;
+    Detail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:Detail animated:YES];
+    [Detail release];
 }
 
 
