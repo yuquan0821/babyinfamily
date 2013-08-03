@@ -12,6 +12,7 @@
 
 @interface UIImageView (WebCache) <SDWebImageManagerDelegate>
 @property (nonatomic, assign) CGSize scaleSize;
+@property (nonatomic, retain) NSString * imageUrl;
 /**
  * Set the imageView `image` with an `url`.
  *

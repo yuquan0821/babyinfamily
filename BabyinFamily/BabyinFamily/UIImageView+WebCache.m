@@ -9,10 +9,25 @@
 #import "UIImageView+WebCache.h"
 #import "UIImageView+Resize.h"
 #import <objc/runtime.h>
+#import "SDImageCache.h"
 
 static char SCALSESIZE_IDENTIFER;
+static char IMAGEURL_IDENTIFER;
 @implementation UIImageView (WebCache)
 @dynamic scaleSize;
+@dynamic imageUrl;
+- (void)setImageUrl:(NSString *)imageUrl{
+    objc_setAssociatedObject(self, &IMAGEURL_IDENTIFER, imageUrl, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (NSString *)imageUrl
+{
+    NSString * string = objc_getAssociatedObject(self, &IMAGEURL_IDENTIFER);
+    if (string) {
+        return string;
+    }
+    return nil;
+}
 
 - (void)setScaleSize:(CGSize)scaleSize
 {
@@ -41,6 +56,7 @@ static char SCALSESIZE_IDENTIFER;
 - (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder scaleSize:(CGSize)size
 {
     self.scaleSize = size;
+    self.imageUrl = [url absoluteString];
     [self setImageWithURL:url placeholderImage:placeholder options:0];
 }
 
@@ -68,9 +84,20 @@ static char SCALSESIZE_IDENTIFER;
 {
     if (self.scaleSize.width > 0) {
         self.image = [UIImage imageWithImage:image scaledToSizeWithSameAspectRatio:self.scaleSize];
+        
+        [self performSelectorOnMainThread:@selector(restoreImage) withObject:nil waitUntilDone:NO];
     }else{
         self.image = image;
     }
+
 }
 
+- (void)restoreImage{
+    // reStore the image in the cache
+    NSData *imageData = UIImagePNGRepresentation(self.image);
+    [[SDImageCache sharedImageCache] storeImage:self.image
+                                      imageData:imageData
+                                         forKey:self.imageUrl
+                                         toDisk:!(0 & SDWebImageCacheMemoryOnly)];
+}
 @end
