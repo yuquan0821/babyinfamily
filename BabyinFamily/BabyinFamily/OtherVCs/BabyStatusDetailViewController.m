@@ -105,7 +105,7 @@
     
     listCommentsArray = [[NSMutableArray alloc]initWithCapacity:0];
     float height = DEVICE_IS_IPHONE5 ? 504 : 416;
-
+    height-=40;
     detailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, height) style:UITableViewStylePlain];
     detailTableView.delegate =self;
     detailTableView.dataSource = self;
