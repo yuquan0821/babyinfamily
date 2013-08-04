@@ -268,7 +268,7 @@
     ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
     profile.user = theUser;
     profile.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:profile animated:YES];
+    [self.navigationController pushViewController:profile animated:NO];
     [profile release];
 }
 

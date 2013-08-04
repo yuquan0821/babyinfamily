@@ -254,15 +254,15 @@
 {
     if (viewController.hidesBottomBarWhenPushed)
     {
-        [self.tabBarController hidesTabBar:YES animated:YES driect:1];
-        menu.hidden = YES;
         self.tabBarController.tabBarTransparent = YES;
+        [self.tabBarController hidesTabBar:YES animated:NO driect:1];
+        menu.hidden = YES;
     }
     else
     {
+        self.tabBarController.tabBarTransparent = NO;
         [self.tabBarController hidesTabBar:NO animated:NO driect:1];
         menu.hidden = NO;
-        self.tabBarController.tabBarTransparent = NO;
     }
 }
 

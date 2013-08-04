@@ -64,7 +64,7 @@ enum {
     BabyFeedBackViewController *fb = [[BabyFeedBackViewController alloc]init];
     fb.hidesBottomBarWhenPushed = YES;
 
-    [self.navigationController pushViewController:fb animated:YES];
+    [self.navigationController pushViewController:fb animated:NO];
     [fb release];
 }
 - (void)setting
@@ -72,7 +72,7 @@ enum {
     SettingVC  *sv = [[SettingVC alloc]initWithNibName:@"SettingVC" bundle:nil];
     sv.hidesBottomBarWhenPushed = YES;
 
-    [self.navigationController pushViewController:sv animated:YES];
+    [self.navigationController pushViewController:sv animated:NO];
     [sv release];
 }
 
@@ -324,7 +324,7 @@ enum {
     followerVC.user = user;
     followerVC.hidesBottomBarWhenPushed = YES;
     
-    [self.navigationController pushViewController:followerVC animated:YES];
+    [self.navigationController pushViewController:followerVC animated:NO];
     [followerVC release];
 }
 
@@ -338,7 +338,7 @@ enum {
     followingVC.user = user;
     followingVC.hidesBottomBarWhenPushed = YES;
     
-    [self.navigationController pushViewController:followingVC animated:YES];
+    [self.navigationController pushViewController:followingVC animated:NO];
     [followingVC release];
 }
 

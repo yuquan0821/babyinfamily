@@ -725,7 +725,7 @@
     BabyStatusDetailViewController* Detail = [[BabyStatusDetailViewController alloc] init];
     Detail.weibo = status;
     Detail.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:Detail animated:YES];
+    [self.navigationController pushViewController:Detail animated:NO];
     //[Detail release];
 }
 
@@ -735,7 +735,7 @@
     ProfileViewController *profile = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
     profile.user = user;
     profile.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:profile animated:YES];
+    [self.navigationController pushViewController:profile animated:NO];
     [profile release];
 }
 
