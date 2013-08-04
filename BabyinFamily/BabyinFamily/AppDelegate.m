@@ -20,6 +20,7 @@
 @synthesize tabBarController;
 @synthesize loadingViewController;
 @synthesize sinaWeibo;
+@synthesize menu;
 
 
 - (void)dealloc
@@ -27,6 +28,7 @@
     [window release];
     [tabBarController release];
     [sinaWeibo release];
+    [menu release];
     [super dealloc];
     
 }
@@ -183,12 +185,10 @@
     
     float height = DEVICE_IS_IPHONE5 ? 518 : 430;
     
-    QuadCurveMenu *menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(160, height, 0, 0) menus:menus];
+    menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(160, height, 0, 0) menus:menus];
     menu.delegate = self;
     [tabBarController.view addSubview:menu];
-    
-    [menu release];
-    
+        
     [window  addSubview:tabBarController.view];
     
     self.window.rootViewController = self.tabBarController;
@@ -255,10 +255,12 @@
     if (viewController.hidesBottomBarWhenPushed)
     {
         [self.tabBarController hidesTabBar:YES animated:YES];
+        menu.hidden = YES;
     }
     else
     {
         [self.tabBarController hidesTabBar:NO animated:YES];
+        menu.hidden = NO;
     }
 }
 
