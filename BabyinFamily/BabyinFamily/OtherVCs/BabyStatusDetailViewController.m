@@ -69,6 +69,9 @@
     NSArray * arr = [dic objectForKey:@"commentArrary"];
     commentsCount = [dic objectForKey:@"count"];
     count += [arr count];
+    if (pageCount == 1) {
+        [listCommentsArray removeAllObjects];
+    }
     [listCommentsArray addObjectsFromArray:arr];
     
     [detailTableView reloadData];
@@ -109,12 +112,15 @@
     
     NSLog(@"self.weibo text :%@",self.weibo.text);
     [self.view addSubview:detailTableView];
+
+    [self createToolBar];
+    [self requestCommentlist];
+}
+- (void)requestCommentlist{
     pageCount = 1;
     count = 0;
     [self getComments:pageCount];
-    [self createToolBar];
 }
-
 -(void)viewWillAppear:(BOOL)animated
 {
     NSNotificationCenter * notification = [NSNotificationCenter defaultCenter];
@@ -421,10 +427,14 @@
     NSLog(@"%d",success);
     if (success) {
         NSLog(@"评论成功");
-        
+        [self requestCommentlist];
     }else{
         NSLog(@"评论失败");
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"评论失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
     }
+    [textField resignFirstResponder];
 }
 
 
