@@ -1450,8 +1450,8 @@
     if (requestType == SinaCommentAStatus)
     {
         
-        NSDictionary *dic = [userInfo objectForKey:@"reply_comment"];
-        if (dic)
+        NSString * text = [userInfo objectForKey:@"text"];
+        if (text)
         {
             if ([delegate respondsToSelector:@selector(didCommentAStatus:)]) {
                 [delegate didCommentAStatus:YES];
