@@ -260,7 +260,7 @@
     }
     else
     {
-        [self.tabBarController hidesTabBar:NO animated:YES driect:1];
+        [self.tabBarController hidesTabBar:NO animated:NO driect:1];
         menu.hidden = NO;
         self.tabBarController.tabBarTransparent = NO;
     }
