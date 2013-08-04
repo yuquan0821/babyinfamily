@@ -83,7 +83,8 @@ static GTTabBarController *gtTabBarController;
 	}
 	else
 	{
-		transitionView.frame = CGRectMake(0, 0, 320.0f, containerView.frame.size.height - kTabBarHeight);
+		//transitionView.frame = CGRectMake(0, 0, 320.0f, containerView.frame.size.height - kTabBarHeight);
+        transitionView.frame = CGRectMake(0, 0, 320.0f, containerView.frame.size.height - 44);
 	}
 }
 

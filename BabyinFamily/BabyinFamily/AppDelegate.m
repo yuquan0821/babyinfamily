@@ -151,7 +151,7 @@
 	NSArray *imgArr = [NSArray arrayWithObjects:imgDic,imgDic2,imgDic3,imgDic4,imgDic5,nil];
     
     self.tabBarController = [[GTTabBarController alloc] initWithViewControllers:ctrlArr imageArray:imgArr];
-	[self.tabBarController setTabBarTransparent:YES];
+	[self.tabBarController setTabBarTransparent:NO];
     self.tabBarController.delegate = self;
     self.tabBarController.animateDriect = 0;
 
