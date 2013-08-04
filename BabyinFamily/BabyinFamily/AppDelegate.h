@@ -31,6 +31,8 @@
 
 @property (retain, nonatomic) SinaWeibo *sinaWeibo;
 
+@property (retain, nonatomic) QuadCurveMenu *menu;
+
 
 
 - (void) logout;
