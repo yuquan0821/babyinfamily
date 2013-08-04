@@ -166,10 +166,10 @@ typedef enum{
         frame.size.height  = repostText.frame.origin.y + repostText.frame.size.height;
         self.repostMainView.frame = frame;
         //        self.repostBg.frame = CGRectMake(2, 0, 300, repostView.frame.size.height);
-        self.cellHeight = repostMainView.frame.size.height + repostMainView.frame.origin.y;
+        self.cellHeight = repostMainView.frame.size.height + repostMainView.frame.origin.y + 6;
     }else{
         //无转发
-        self.cellHeight = weiboView.frame.size.height + weiboView.frame.origin.y;
+        self.cellHeight = weiboView.frame.size.height + weiboView.frame.origin.y + 6 ;
     }
     
     

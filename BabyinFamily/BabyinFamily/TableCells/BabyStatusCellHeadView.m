@@ -31,7 +31,8 @@
 - (void)customCellHead
 {
 
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor colorWithRed:253.0f/255.0f green:253.0f/255.0f blue:253.0f/255.0f alpha:0.5];
+
     self.avatarImageBackGround = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 50, 50)];
     self.avatarImageBackGround.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
     

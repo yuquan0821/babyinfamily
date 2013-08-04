@@ -11,11 +11,15 @@
 #import "Status.h"
 #import "UIImageView+WebCache.h"
 #import "BabyCommentCell.h"
-#import "WeiBoMessageManager.h"
 #import "Comment.h"
 #import "ProfileViewController.h"
+#import "DAKeyboardControl.h"
+
 @implementation BabyStatusDetailViewController
 @synthesize weibo = _weibo;
+@synthesize textField;
+@synthesize sendButton;
+@synthesize toolBar;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -48,8 +52,8 @@
 -(void)getComments:(int)page
 {
     [_active startAnimating];
-    WeiBoMessageManager * message = [WeiBoMessageManager getInstance];
-    [message getCommentListWithID:self.weibo.statusId maxID:0 page:page];
+    manager = [WeiBoMessageManager getInstance];
+    [manager getCommentListWithID:self.weibo.statusId maxID:0 page:page];
 }
 
 -(void)getMoreComments
@@ -108,6 +112,7 @@
     pageCount = 1;
     count = 0;
     [self getComments:pageCount];
+    [self createToolBar];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -115,7 +120,17 @@
     NSNotificationCenter * notification = [NSNotificationCenter defaultCenter];
     [notification addObserver:self selector:@selector(getCommentsFromNet:) name:MMSinaGotCommentList object:nil];
     //  [self loadVisuableImage:detailTableView];
+    [notification addObserver:self selector:@selector(commentResult:) name: MMSinaCommentAStatus object:nil];
+
+
 }
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+// Remove all observer.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 # pragma  mark -headImageClick
 
@@ -138,6 +153,7 @@
            man.followButton.hidden = YES;
 
         }
+        man.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:man animated:YES];
     }
 }
@@ -160,7 +176,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 50;
+        return 52;
     }else{
         return 44;
     }
@@ -274,7 +290,53 @@
     [profile release];
 }
 
+- (void)createToolBar
+{
+    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f,
+                                                                     self.view.bounds.size.height - 40.0f,
+                                                                     self.view.bounds.size.width,
+                                                                     40.0f)];
+    toolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:toolBar];
+    
+    textField = [[UITextField alloc] initWithFrame:CGRectMake(10.0f,
+                                                              6.0f,
+                                                              toolBar.bounds.size.width - 20.0f - 68.0f,
+                                                              30.0f)];
+    textField.borderStyle = UITextBorderStyleRoundedRect;
+    textField.font = [UIFont systemFontOfSize:13.0];
+    textField.textAlignment = UITextAlignmentLeft;
+    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    textField.placeholder = @"请输入评论";
+    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    textField.delegate = self;
+    [toolBar addSubview:textField];
+    
+    sendButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    sendButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+    [sendButton setTitle:@"发送" forState:UIControlStateNormal];
+    sendButton.enabled = NO;
+    sendButton.frame = CGRectMake(toolBar.bounds.size.width - 68.0f,
+                                  6.0f,
+                                  58.0f,
+                                  29.0f);
+    [sendButton addTarget:self action:@selector(sendButtonAction) forControlEvents:UIControlEventTouchUpInside];
 
+    [toolBar addSubview:sendButton];
+    self.view.keyboardTriggerOffset = toolBar.bounds.size.height;
+    
+    [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView) {
+        
+        CGRect toolBarFrame = toolBar.frame;
+        toolBarFrame.origin.y = keyboardFrameInView.origin.y - toolBarFrame.size.height;
+        toolBar.frame = toolBarFrame;
+        
+        CGRect tableViewFrame = detailTableView.frame;
+        tableViewFrame.size.height = toolBarFrame.origin.y;
+        detailTableView.frame = tableViewFrame;
+    }];
+
+}
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
@@ -291,11 +353,89 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+#pragma mark - UiTextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField1 shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSMutableString *newValue = [[textField1.text mutableCopy] autorelease];
+    [newValue replaceCharactersInRange:range withString:string];//string是当前输入的字符，newValue是当前输入框中的字符
+    if ([newValue length]== 0)
+    {
+        self.sendButton.enabled = NO;
+    }
+    else
+    {
+        self.sendButton.enabled  = YES;
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField1
+{
+    if (textField1.text.length == 0) {
+        self.sendButton.enabled = NO;
+    }
+    else {
+        self.sendButton.enabled = YES;
+    }
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField1
+{
+    NSString *temp = textField1.text;
+    if (temp.length != 0) {
+        self.sendButton.enabled = YES;
+    }
+    else {
+        self.sendButton.enabled = NO;
+    }
+    
+    if (temp.length > 140) {
+        textField1.text = [temp substringToIndex:140];
+    }
+}
+- (void)sendButtonAction
+{
+    if(![Utility connectedToNetwork])
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"网络连接失败,请查看网络是否连接正常！" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }else{
+        
+        NSString *content = textField.text;
+        NSString *weiboID = [NSString stringWithFormat:@"%lld",_weibo.statusId];
+        if ( content != Nil && content.length !=0) {
+            
+            [manager commentAStatus:weiboID content:content];
+        }
+        self.textField.text = @"";
+    }
+    
+}
+-(void)commentResult:(NSNotification *)notification
+{
+    NSNumber * boo = notification.object;
+    BOOL success = [boo boolValue];
+    NSLog(@"%d",success);
+    if (success) {
+        NSLog(@"评论成功");
+        
+    }else{
+        NSLog(@"评论失败");
+    }
+}
+
+
 
 -(void)dealloc
 {
     [self.weibo release];
     [_active release];
+    [textField release];
+    [sendButton release];
+    [toolBar release];
     [super release];
     [super dealloc];
 }

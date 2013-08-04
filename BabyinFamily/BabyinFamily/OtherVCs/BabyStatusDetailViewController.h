@@ -11,20 +11,27 @@
 #import "SDWebImageManager.h"
 #import "BabyDetailStatusCell.h"
 #import "BabyDetailStatusCellHeadView.h"
+#import "WeiBoMessageManager.h"
 
-
-@interface BabyStatusDetailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,BabyStatusCellHeadClickDelegate,SDWebImageManagerDelegate>
+@interface BabyStatusDetailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,BabyStatusCellHeadClickDelegate,SDWebImageManagerDelegate,UITextFieldDelegate>
 {
-    UITableView * detailTableView;
-    Status * _weibo;
-    NSMutableArray * listCommentsArray;
-    NSNumber * commentsCount;
-    BOOL  flagHeader;
-    UIButton * footerButton;
-    int pageCount;
-    int count;
+    WeiBoMessageManager    *manager;
+    UITableView            * detailTableView;
+    Status                 * _weibo;
+    NSMutableArray         * listCommentsArray;
+    NSNumber               * commentsCount;
+    BOOL                   flagHeader;
+    UIButton               * footerButton;
+    int                     pageCount;
+    int                     count;
     UIActivityIndicatorView * _active;
 }
-@property (nonatomic,retain) Status * weibo;
+@property (nonatomic,retain) Status       * weibo;
+@property (retain, nonatomic) UITextField *textField;
+@property (retain, nonatomic) UIButton    *sendButton;
+@property (nonatomic, retain) UIToolbar   *toolBar;
+
+
+
 
 @end

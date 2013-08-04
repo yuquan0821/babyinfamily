@@ -170,8 +170,10 @@ enum  {
     [center addObserver:self selector:@selector(didFollowByUserID:) name:MMSinaFollowedByUserIDWithResult object:nil];
     [center addObserver:self selector:@selector(didUnfollowByUserID:) name:MMSinaUnfollowedByUserIDWithResult object:nil];
     [center addObserver:self selector:@selector(mmRequestFailed:) name:MMSinaRequestFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didComment:) name:MMSinaCommentAStatus object:nil];
+    [center addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
+    [center addObserver:self selector:@selector(didComment:) name:MMSinaCommentAStatus object:nil];
+    [center addObserver:self selector:@selector(commentResult:) name: MMSinaCommentAStatus object:nil];
+
 
     if(![Utility connectedToNetwork])
     {
@@ -341,6 +343,21 @@ enum  {
     }
     
 }
+-(void)commentResult:(NSNotification *)noti
+{
+    NSNumber * boo = noti.object;
+    BOOL success = [boo boolValue];
+    NSString * str;
+    if (success) {
+        NSLog(@"评论成功");
+        str = @"评论成功";
+        
+    }else{
+        NSLog(@"评论失败");
+        str = @"评论失败";
+    }
+}
+
 
 //得到图片
 -(void)getAvatar:(NSNotification*)sender

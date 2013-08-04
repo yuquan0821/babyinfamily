@@ -24,7 +24,7 @@
 - (void)customView
 {
     self.frame = CGRectMake(0, 0, 320, 44);
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor colorWithRed:253.0f/255.0f green:253.0f/255.0f blue:253.0f/255.0f alpha:0.8];
     self.commentCount = [[UILabel alloc] initWithFrame:CGRectMake(20, 8, 160, 21)];
     self.commentCount.textColor = [UIColor brownColor];
     self.commentCount.font = [UIFont boldSystemFontOfSize:13.0f];

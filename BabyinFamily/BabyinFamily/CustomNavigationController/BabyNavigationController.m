@@ -9,7 +9,7 @@
 #import "BabyNavigationController.h"
 
 #define KEY_WINDOW  [[UIApplication sharedApplication]keyWindow]
-#define BackGesture_Mindistance  100
+#define BackGesture_Mindistance  80
 @interface BabyNavigationController ()
 {
     CGPoint startTouch;

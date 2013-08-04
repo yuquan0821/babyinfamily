@@ -192,17 +192,22 @@ typedef enum{
         self.statusHeight = weiboView.frame.size.height + weiboView.frame.origin.y;
     }
  
-      self.commentButton.frame = CGRectMake(10, self.statusHeight +2, 100, 28);
+      self.commentButton.frame = CGRectMake(10, self.statusHeight + 4, 100, 28);
       self.commentButton.titleLabel.textColor = [UIColor blackColor];
-      [self.commentButton setTitle: [NSString stringWithFormat:@"评论:%d",weibo.commentsCount] forState:UIControlStateNormal];
+    if (weibo.commentsCount ==0) {
+        [self.commentButton setTitle: @"评论" forState:UIControlStateNormal];
+
+    }else{
+        [self.commentButton setTitle: [NSString stringWithFormat:@"评论:%d",weibo.commentsCount] forState:UIControlStateNormal];
+    }
     [self.commentButton addTarget:self action:@selector(statusCommentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
-      self.shareButton.frame = CGRectMake(110, self.statusHeight +2, 100, 28);
+      self.shareButton.frame = CGRectMake(110, self.statusHeight +4, 100, 28);
       self.shareButton.titleLabel.textColor = [UIColor blackColor];
       [self.shareButton setTitle: @"分享" forState:UIControlStateNormal];
      [self.shareButton addTarget:self action:@selector(StatusShareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
-      self.more.frame = CGRectMake(210, self.statusHeight + 2, 100, 28);
+      self.more.frame = CGRectMake(210, self.statusHeight + 4, 100, 28);
       self.more.titleLabel.textColor = [UIColor blackColor];
       [self.more setTitle: @"..." forState:UIControlStateNormal];
       [self.more addTarget:self action:@selector(statusMoreButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -232,7 +237,7 @@ typedef enum{
         self.repostMainView.hidden = NO;
         
         NSString *url = repostWeibo.bmiddlePic;
-        NSLog(@"有转发:weibo.thumbnailImageUrl:%@",url);
+        //NSLog(@"有转发:weibo.thumbnailImageUrl:%@",url);
         //有图
         if (url!=nil) {
             self.repostContentImage.hidden = NO;
