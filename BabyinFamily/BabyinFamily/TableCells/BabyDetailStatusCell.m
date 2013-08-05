@@ -9,6 +9,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "BabyDetailStatusCell.h"
+#import "UIImageView+Resize.h"
+
 @implementation BabyDetailStatusCell
 @synthesize delegate;
 
@@ -136,7 +138,12 @@ typedef enum{
     
     //有weibo图
     if (self.contentImage.hidden == NO) {
-        self.contentImage.frame  = CGRectMake(8,2, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
+        if (weibo.originalImage) {
+            float height = [UIImage heightWithSpecificWidth:CONTENT_WIDTH ofAnImage:weibo.originalImage];
+            self.contentImage.frame  = CGRectMake(8,2, CONTENT_WIDTH, height);
+        }else{
+            self.contentImage.frame  = CGRectMake(8,2, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
+        }
         self.contentText.frame  = CGRectMake(8, contentImage.frame.origin.y + contentImage.frame.size.height+2, contentImage.frame.size.width, height+2);
     }else{
         //无微博图
@@ -155,7 +162,12 @@ typedef enum{
         height = [[self class]getStstusContentHeight:repostText.text contentViewWith:CONTENT_WIDTH];
         //有转发图
         if (self.repostContentImage.hidden ==NO) {
-            self.repostContentImage.frame = CGRectMake(12,  2, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
+            if (repostWeibo.originalImage) {
+                float height = [UIImage heightWithSpecificWidth:CONTENT_WIDTH ofAnImage:repostWeibo.originalImage];
+                self.repostContentImage.frame = CGRectMake(12,  2, CONTENT_WIDTH, height);
+            }else{
+                self.repostContentImage.frame = CGRectMake(12,  2, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
+            }
             self.repostText.frame  = CGRectMake(8, repostContentImage.frame.origin.y + repostContentImage.frame.size.height, CONTENT_WIDTH, height+2);
             
         }else{
@@ -182,7 +194,7 @@ typedef enum{
 {
     self.status = weibo;
     Status  *repostWeibo = weibo.retweetedStatus;
-    NSString *url = weibo.bmiddlePic;
+    NSString *url = weibo.originalPic;
     NSLog(@"weibo.thumbnailImageUrl:%@",url);
     //有图
     if (url!=nil) {
@@ -196,7 +208,7 @@ typedef enum{
     {
         self.repostMainView.hidden = NO;
         
-        NSString *url = repostWeibo.bmiddlePic;
+        NSString *url = repostWeibo.originalPic;
         NSLog(@"有转发:weibo.thumbnailImageUrl:%@",url);
         //有图
         if (url!=nil) {

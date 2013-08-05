@@ -80,6 +80,7 @@
 @property (nonatomic,retain) NSIndexPath    *cellIndexPath;
 @property (nonatomic,retain) NSString       *isRefresh;
 
+@property (nonatomic, retain) UIImage *     originalImage;
 
 - (NSString*)timestamp;
 

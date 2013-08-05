@@ -230,7 +230,27 @@
     }
     return nil;
 }
-
+- (void)getweiboImageIfNeed{
+    Status  *repostWeibo = self.weibo.retweetedStatus;
+    NSString *url = self.weibo.originalPic;
+    UIImage * image = self.weibo.originalImage;
+    if (url ==nil) {
+        if (repostWeibo && ![repostWeibo isEqual:[NSNull null]]){
+            url = repostWeibo.originalPic;
+            image = repostWeibo.originalImage;
+        }
+    }
+    if (url.length > 0) {
+        if (image) {
+            return;
+        }
+        NSLog(@"weibo.thumbnailImageUrl:%@",url);
+        SDWebImageManager *imagemanager = [SDWebImageManager sharedManager];
+        [imagemanager cancelForDelegate:self];
+        [imagemanager downloadWithURL:[NSURL URLWithString:url] delegate:self];
+    }
+    
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
@@ -251,7 +271,7 @@
         NSLog(@"weibotext----------:%@", weibo.text);
         //    [cell updateCellWith:[listData objectAtIndex:row]];
         [cell updateCellWith:weibo];
-        
+        [self getweiboImageIfNeed];
         return cell;
     }else{
         static NSString *cellIdentifier = @"commentCell";
@@ -426,7 +446,21 @@
     [textField resignFirstResponder];
 }
 
+#pragma mark -- SDWebImageManagerDelegate
+- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image{
 
+    NSString *url = self.weibo.originalPic;
+    if (url !=nil) {
+        self.weibo.originalImage = image;
+        
+    }else{
+        Status  *repostWeibo = self.weibo.retweetedStatus;
+        if (repostWeibo && ![repostWeibo isEqual:[NSNull null]]){
+            repostWeibo.originalImage = image;
+        }
+    }
+    [detailTableView reloadData];
+}
 
 -(void)dealloc
 {

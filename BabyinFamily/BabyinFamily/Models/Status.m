@@ -20,7 +20,7 @@
 @synthesize statusImage;
 @synthesize cellIndexPath;
 @synthesize isRefresh;
-
+@synthesize originalImage;
 - (StatusCoreDataItem*)updateStatusCDItem:(StatusCoreDataItem*)sts index:(int)theIndex isHomeLine:(BOOL) isHome
 {
     sts.bmiddlePic          = self.bmiddlePic;
@@ -254,6 +254,7 @@
 	[user release];
 	[retweetedStatus release];
 	[statusKey release];
+    [originalImage release];
 	[super dealloc];
 }
 
