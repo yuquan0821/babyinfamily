@@ -262,9 +262,9 @@
         }
         cell.backgroundColor = [UIColor whiteColor];
         if (cell.contentImage.hidden == NO) {
-            [cell.contentImage setImageWithURL:[NSURL URLWithString:self.weibo.originalPic]];
+            [cell.contentImage setImageWithURL:[NSURL URLWithString:self.weibo.originalPic ]placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]];
         }if(cell.repostContentImage.hidden == NO){
-            [cell.repostContentImage setImageWithURL:[NSURL URLWithString:self.weibo.retweetedStatus.originalPic]];
+            [cell.repostContentImage setImageWithURL:[NSURL URLWithString:self.weibo.retweetedStatus.originalPic]placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         Status * weibo  = self.weibo;
