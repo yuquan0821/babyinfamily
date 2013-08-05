@@ -99,6 +99,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     theTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 6, 320, 115)];
     theTextView.scrollEnabled = YES;
     //theTextView.backgroundColor = [UIColor clearColor];

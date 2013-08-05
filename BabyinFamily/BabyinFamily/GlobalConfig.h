@@ -23,6 +23,7 @@
 #endif
 #define DEVICE_IS_IPHONE5 ([[UIScreen mainScreen] bounds].size.height == 568)
 
+#define FZY4JW_FONT(s)          [UIFont fontWithName:@"FZKATJW--GB1-0" size:s]//方正卡通字体
 
 
 

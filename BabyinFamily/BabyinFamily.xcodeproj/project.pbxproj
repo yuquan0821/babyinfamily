@@ -96,6 +96,7 @@
 		288495621663467E0042C4CD /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288495601663467D0042C4CD /* ProfileViewController.xib */; };
 		288659AB167430C0000EADCC /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 288659A9167430C0000EADCC /* StatusCell.m */; };
 		288659AC167430C0000EADCC /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288659AA167430C0000EADCC /* StatusCell.xib */; };
+		28866BC117AFF9500036D72F /* 方正卡通简体.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28866BC017AFF9500036D72F /* 方正卡通简体.ttf */; };
 		2886A157178A828A00EB9E64 /* BabyStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886A156178A828A00EB9E64 /* BabyStatusCell.m */; };
 		288853FB167EAD67000ED11A /* BabyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 288853FA167EAD67000ED11A /* BabyHelper.m */; };
 		28885409167EB768000ED11A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28885408167EB767000ED11A /* CoreData.framework */; };
@@ -367,6 +368,7 @@
 		288659A8167430C0000EADCC /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusCell.h; path = TableCells/StatusCell.h; sourceTree = "<group>"; };
 		288659A9167430C0000EADCC /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusCell.m; path = TableCells/StatusCell.m; sourceTree = "<group>"; };
 		288659AA167430C0000EADCC /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusCell.xib; path = TableCells/StatusCell.xib; sourceTree = "<group>"; };
+		28866BC017AFF9500036D72F /* 方正卡通简体.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "方正卡通简体.ttf"; path = "Font/方正卡通简体.ttf"; sourceTree = "<group>"; };
 		2886A155178A828A00EB9E64 /* BabyStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyStatusCell.h; path = TableCells/BabyStatusCell.h; sourceTree = "<group>"; };
 		2886A156178A828A00EB9E64 /* BabyStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyStatusCell.m; path = TableCells/BabyStatusCell.m; sourceTree = "<group>"; };
 		288853F9167EAD67000ED11A /* BabyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyHelper.h; path = BabyTools/BabyHelper.h; sourceTree = "<group>"; };
@@ -750,6 +752,14 @@
 			name = introduction;
 			sourceTree = "<group>";
 		};
+		28866BBD17AFF8E30036D72F /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				28866BC017AFF9500036D72F /* 方正卡通简体.ttf */,
+			);
+			name = Font;
+			sourceTree = "<group>";
+		};
 		2896C4021661C0E2004705A4 /* OthersVCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -961,6 +971,7 @@
 		28EA949E165F59CD009F69E5 /* UIDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				28866BBD17AFF8E30036D72F /* Font */,
 				2896C4041661C150004705A4 /* TablesCells */,
 				28EA94A0165F6031009F69E5 /* ViewControllers */,
 			);
@@ -1373,6 +1384,7 @@
 				2869571C1795469600115C2D /* icon-plus@2x.png in Resources */,
 				2869571D1795469600115C2D /* icon-star.png in Resources */,
 				2869571E1795469600115C2D /* icon-star@2x.png in Resources */,
+				28866BC117AFF9500036D72F /* 方正卡通简体.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
