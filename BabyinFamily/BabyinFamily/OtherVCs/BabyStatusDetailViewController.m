@@ -262,9 +262,9 @@
         }
         cell.backgroundColor = [UIColor whiteColor];
         if (cell.contentImage.hidden == NO) {
-            [cell.contentImage setImageWithURL:[NSURL URLWithString:self.weibo.bmiddlePic]];
+            [cell.contentImage setImageWithURL:[NSURL URLWithString:self.weibo.originalPic]];
         }if(cell.repostContentImage.hidden == NO){
-            [cell.repostContentImage setImageWithURL:[NSURL URLWithString:self.weibo.retweetedStatus.bmiddlePic]];
+            [cell.repostContentImage setImageWithURL:[NSURL URLWithString:self.weibo.retweetedStatus.originalPic]];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         Status * weibo  = self.weibo;

@@ -14,7 +14,7 @@
 #import "ProfileViewController.h"
 #define IMAGE_VIEW_HEIGHT 300.0f
 #define CELL_WIDTH 300.0f
-#define CONTENT_WIDTH 280.0f
+#define CONTENTIMAGE_WIDTH 320.0f
 #define PADDING_TOP 4.0
 #define PADDING_LEFT 4.0
 #define FONT_SIZE 13.0

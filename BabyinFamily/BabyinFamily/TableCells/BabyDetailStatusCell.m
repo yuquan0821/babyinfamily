@@ -80,7 +80,7 @@ typedef enum{
     //微博图片
     self.contentImage = [[UIImageView alloc]initWithFrame:CGRectZero];
     [self.contentImage.layer setMasksToBounds:YES];
-    [self.contentImage.layer setCornerRadius:4];
+    [self.contentImage.layer setCornerRadius:2];
     self.contentImage.contentMode = UIViewContentModeScaleToFill;
     self.contentImage.tag = WeiboImages;
     //转发图片
@@ -130,7 +130,7 @@ typedef enum{
     contentText.text = weibo.text;
     Status  *repostWeibo = weibo.retweetedStatus;
     CGFloat height = 0;
-    height = [[self class] getStstusContentHeight:contentText.text contentViewWith:CONTENT_WIDTH];
+    height = [[self class] getStstusContentHeight:contentText.text contentViewWith:CONTENTIMAGE_WIDTH];
     CGRect frame;
     frame =  weiboView.frame;
     frame.origin.y = 4;
@@ -139,17 +139,17 @@ typedef enum{
     //有weibo图
     if (self.contentImage.hidden == NO) {
         if (weibo.originalImage) {
-            float height = [UIImage heightWithSpecificWidth:CONTENT_WIDTH ofAnImage:weibo.originalImage];
-            self.contentImage.frame  = CGRectMake(8,2, CONTENT_WIDTH, height);
+            float height = [UIImage heightWithSpecificWidth:CONTENTIMAGE_WIDTH ofAnImage:weibo.originalImage];
+            self.contentImage.frame  = CGRectMake(0,2, CONTENTIMAGE_WIDTH, height);
         }else{
-            self.contentImage.frame  = CGRectMake(8,2, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
+            self.contentImage.frame  = CGRectMake(0,2, CONTENTIMAGE_WIDTH, IMAGE_VIEW_HEIGHT);
         }
-        self.contentText.frame  = CGRectMake(8, contentImage.frame.origin.y + contentImage.frame.size.height+2, contentImage.frame.size.width, height+2);
+        self.contentText.frame  = CGRectMake(0, contentImage.frame.origin.y + contentImage.frame.size.height+2, contentImage.frame.size.width, height+2);
     }else{
         //无微博图
-        self.contentText.frame  = CGRectMake(8, 2, CONTENT_WIDTH, height+2);
+        self.contentText.frame  = CGRectMake(0, 2, CONTENTIMAGE_WIDTH, height+2);
     }
-    self.weiboView.frame  = CGRectMake(12, 2, CELL_WIDTH, contentText.frame.origin.y + contentText.frame.size.height + 2);
+    self.weiboView.frame  = CGRectMake(0, 2, CELL_WIDTH, contentText.frame.origin.y + contentText.frame.size.height + 2);
     
     //有转发
     if (self.repostMainView.hidden == NO) {
@@ -159,20 +159,20 @@ typedef enum{
         frame.size.width = CELL_WIDTH;
         self.repostMainView.frame = frame;
         self.repostText.text = [NSString stringWithFormat:@"@%@:%@",repostWeibo.user.name,repostWeibo.text];
-        height = [[self class]getStstusContentHeight:repostText.text contentViewWith:CONTENT_WIDTH];
+        height = [[self class]getStstusContentHeight:repostText.text contentViewWith:CONTENTIMAGE_WIDTH];
         //有转发图
         if (self.repostContentImage.hidden ==NO) {
             if (repostWeibo.originalImage) {
-                float height = [UIImage heightWithSpecificWidth:CONTENT_WIDTH ofAnImage:repostWeibo.originalImage];
-                self.repostContentImage.frame = CGRectMake(12,  2, CONTENT_WIDTH, height);
+                float height = [UIImage heightWithSpecificWidth:CONTENTIMAGE_WIDTH ofAnImage:repostWeibo.originalImage];
+                self.repostContentImage.frame = CGRectMake(0,  2, CONTENTIMAGE_WIDTH, height);
             }else{
-                self.repostContentImage.frame = CGRectMake(12,  2, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
+                self.repostContentImage.frame = CGRectMake(0,  2, CONTENTIMAGE_WIDTH, IMAGE_VIEW_HEIGHT);
             }
-            self.repostText.frame  = CGRectMake(8, repostContentImage.frame.origin.y + repostContentImage.frame.size.height, CONTENT_WIDTH, height+2);
+            self.repostText.frame  = CGRectMake(0, repostContentImage.frame.origin.y + repostContentImage.frame.size.height, CONTENTIMAGE_WIDTH, height+2);
             
         }else{
             //无转发图
-            self.repostText.frame = CGRectMake(8, 2, CONTENT_WIDTH, height+2);
+            self.repostText.frame = CGRectMake(0, 2, CONTENTIMAGE_WIDTH, height+2);
         }
         
         frame.size.height  = repostText.frame.origin.y + repostText.frame.size.height;
