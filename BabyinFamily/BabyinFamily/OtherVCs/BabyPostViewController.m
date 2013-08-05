@@ -58,7 +58,7 @@
 
     textView = [[BabyPlaceHolderTextView alloc]initWithFrame:CGRectMake(0, 6, 320, 115)];
     textView.scrollEnabled = YES;
-    textView.backgroundColor = [UIColor clearColor];
+    textView.backgroundColor = [UIColor whiteColor];
     [self.textView setPlaceholderText:@"记录宝宝的美丽瞬间，从这里开始！"];
     self.textView.delegate= self;
     self.textView.font = [UIFont systemFontOfSize:13.0f];
