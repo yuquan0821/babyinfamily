@@ -123,6 +123,7 @@
         //下载博文图片
         if (member.thumbnailPic && [member.thumbnailPic length] != 0)
         {
+            
             [[HHNetDataCacheManager getInstance] getDataWithURL:member.thumbnailPic withIndex:i];
         }
         else

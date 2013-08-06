@@ -16,6 +16,7 @@
 #import "WaterFlowView.h"
 #import "ImageViewCell.h"
 #import "UIImageView+Resize.h"
+#import "UIImageView+WebCache.h"
 
 @interface HotViewController : UIViewController<WaterFlowViewDelegate,WaterFlowViewDataSource,UIScrollViewDelegate>
 {
