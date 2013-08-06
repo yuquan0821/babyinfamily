@@ -100,7 +100,7 @@
         [alert release];
         [[SHKActivityIndicator currentIndicator] hide];
     }else{
-        [manager getUserStatusUserID:@"1659171315" sinceID:-1 maxID:-1 count:-1 page:-1 baseApp:1 feature:2];
+        [manager getUserStatusUserID:@"1659171315" sinceID:-1 maxID:-1 count:18 page:-1 baseApp:1 feature:2];
         [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
     }
 }
@@ -209,12 +209,15 @@
     
     // NSDictionary *object = [statuesArr objectAtIndex:arrIndex];
     NSData *imageData = [imageDictionary objectForKey:[NSNumber numberWithInt:arrIndex]];
-    
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    CGSize size = CGSizeMake(80, 80);
+    image = [UIImage imageWithImage:image scaledToSizeWithSameAspectRatio:size];
     ImageViewCell *imageViewCell = (ImageViewCell *)view;
     imageViewCell.indexPath = indexPath;
     imageViewCell.columnCount = waterFlowView.columnCount;
     [imageViewCell relayoutViews];
-    [(ImageViewCell *)view setImageWithData:imageData];
+    [(ImageViewCell *)view setImage:image];
+    
 }
 
 
@@ -228,8 +231,8 @@
     float height = 0.0f;
     if (dict) {
         
-        width = 80;//[[dict objectForKey:@"width"] floatValue];
-        height = 80;//[[dict objectForKey:@"height"] floatValue];
+        width = 80;
+        height = 80;
     }
     
     return waterFlowView.cellWidth * (height/width);

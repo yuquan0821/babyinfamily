@@ -15,6 +15,7 @@
 #import "CoreDataManager.h"
 #import "WaterFlowView.h"
 #import "ImageViewCell.h"
+#import "UIImageView+Resize.h"
 
 @interface HotViewController : UIViewController<WaterFlowViewDelegate,WaterFlowViewDataSource,UIScrollViewDelegate>
 {
