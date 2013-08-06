@@ -46,15 +46,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    IntroModel *model1 = [[IntroModel alloc] initWithTitle:nil description:@"如你所知\n        家贝,不止是一款拍照工具" image:@"0.jpg"];
+    IntroModel *model1 = [[IntroModel alloc] initWithTitle:nil description:@"如你所知\n        家贝,不止是一款拍照工具" image:@"sourcekit.bundle/image/Introduce/0.jpg"];
     
-    IntroModel *model2 = [[IntroModel alloc] initWithTitle:nil description:@"她记录了\n        你与孩子的美丽瞬间" image:@"1.jpg"];
+    IntroModel *model2 = [[IntroModel alloc] initWithTitle:nil description:@"她记录了\n        你与孩子的美丽瞬间" image:@"sourcekit.bundle/image/Introduce/1.jpg"];
     
-    IntroModel *model3 = [[IntroModel alloc] initWithTitle:nil description:@"他记录了\n        孩子生活中的点滴" image:@"2.jpg"];
+    IntroModel *model3 = [[IntroModel alloc] initWithTitle:nil description:@"他记录了\n        孩子生活中的点滴" image:@"sourcekit.bundle/image/Introduce/2.jpg"];
     
-    IntroModel *model4 = [[IntroModel alloc] initWithTitle:nil description:@"在纷繁的世界中\n        孩子是您永远的牵挂" image:@"3.jpg"];
+    IntroModel *model4 = [[IntroModel alloc] initWithTitle:nil description:@"在纷繁的世界中\n        孩子是您永远的牵挂" image:@"sourcekit.bundle/image/Introduce/3.jpg"];
     
-    IntroModel *model5 = [[IntroModel alloc] initWithTitle:nil description:@"如你所见\n        家贝,是你一个温馨的家" image:@"4.jpg"];
+    IntroModel *model5 = [[IntroModel alloc] initWithTitle:nil description:@"如你所见\n        家贝,是你一个温馨的家" image:@"sourcekit.bundle/image/Introduce/4.jpg"];
 
     
     self.view = [[IntroControll alloc] initWithFrame:CGRectMake(0, 0, MainWidth, MainHeight) pages:@[model1, model2, model3,model4, model5]];

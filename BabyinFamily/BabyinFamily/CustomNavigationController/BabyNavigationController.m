@@ -33,7 +33,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UIImage *navBackgroundImage = [UIImage imageNamed:@"header_bg"];
+    UIImage *navBackgroundImage = [UIImage imageWithSourceKit:@"TabBar/bg_NavigationBar.png"];
     [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
     
     // Change UINavigationBar appearance by setting the font, color, shadow and offset.
@@ -50,7 +50,7 @@
                                                           nil]];
     
     // Change the UIBarButtonItem apperance by setting a resizable background image for the back button.
-    UIImage *backButtonImage = [[UIImage imageNamed:@"navigationBarBackButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
+    UIImage *backButtonImage = [[UIImage imageWithSourceKit:@"TabBar/navigationBarBackButton.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     // Change the UIBarButtonItem apperance by setting a resizable background image for the edit button.
