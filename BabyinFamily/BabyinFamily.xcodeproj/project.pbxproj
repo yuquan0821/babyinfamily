@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		28007D3017AD00BC00CB2BD4 /* BabyAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28007D2F17AD00BA00CB2BD4 /* BabyAddCommentViewController.m */; };
+		28043C8817B1C8700002FC6C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28043C8717B1C8700002FC6C /* Default-568h@2x.png */; };
 		280CF2851664CA250031262F /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CF2831664CA240031262F /* SettingVC.m */; };
 		280CF2861664CA250031262F /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280CF2841664CA250031262F /* SettingVC.xib */; };
 		280E9EA6172A14FD003D87AB /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9EA5172A14FD003D87AB /* Utility.m */; };
@@ -36,7 +37,6 @@
 		28368F17170FB2FE008C4CC1 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28368F16170FB2FE008C4CC1 /* libz.1.2.5.dylib */; };
 		28368F1F171054F9008C4CC1 /* BlurOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28368F1E171054F9008C4CC1 /* BlurOverlayView.m */; };
 		283A8D0316F5A9E300E72753 /* HotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283A8D0216F5A9E300E72753 /* HotViewController.xib */; };
-		283CC900172FBB5D00273249 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283CC8FF172FBB5D00273249 /* Default-568h@2x.png */; };
 		283CC904172FC0B700273249 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283CC903172FC0B700273249 /* Default@2x.png */; };
 		283CC906172FC0BE00273249 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 283CC905172FC0BE00273249 /* Default.png */; };
 		284393471706C30C00675BD5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 284393461706C30C00675BD5 /* Icon.png */; };
@@ -80,7 +80,6 @@
 		28833F73174F4A5C00039B56 /* IntroControll.m in Sources */ = {isa = PBXBuildFile; fileRef = 28833F6E174F4A5C00039B56 /* IntroControll.m */; };
 		28833F74174F4A5C00039B56 /* IntroModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28833F70174F4A5C00039B56 /* IntroModel.m */; };
 		28833F75174F4A5C00039B56 /* IntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28833F72174F4A5C00039B56 /* IntroView.m */; };
-		28833F77174F4AA200039B56 /* shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28833F76174F4AA200039B56 /* shadow@2x.png */; };
 		2884955516631CD30042C4CD /* FollowerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884955316631CD30042C4CD /* FollowerVC.m */; };
 		2884955616631CD30042C4CD /* FollowerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2884955416631CD30042C4CD /* FollowerVC.xib */; };
 		28849558166321800042C4CD /* weibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28849557166321800042C4CD /* weibo.bundle */; };
@@ -225,6 +224,7 @@
 /* Begin PBXFileReference section */
 		28007D2E17AD00B800CB2BD4 /* BabyAddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyAddCommentViewController.h; path = OtherVCs/BabyAddCommentViewController.h; sourceTree = "<group>"; };
 		28007D2F17AD00BA00CB2BD4 /* BabyAddCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyAddCommentViewController.m; path = OtherVCs/BabyAddCommentViewController.m; sourceTree = "<group>"; };
+		28043C8717B1C8700002FC6C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		280CF2821664CA240031262F /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		280CF2831664CA240031262F /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		280CF2841664CA250031262F /* SettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingVC.xib; sourceTree = "<group>"; };
@@ -273,7 +273,6 @@
 		28368F1D171054F9008C4CC1 /* BlurOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurOverlayView.h; sourceTree = "<group>"; };
 		28368F1E171054F9008C4CC1 /* BlurOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurOverlayView.m; sourceTree = "<group>"; };
 		283A8D0216F5A9E300E72753 /* HotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotViewController.xib; sourceTree = "<group>"; };
-		283CC8FF172FBB5D00273249 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		283CC903172FC0B700273249 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		283CC905172FC0BE00273249 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		284393461706C30C00675BD5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -341,7 +340,6 @@
 		28833F70174F4A5C00039B56 /* IntroModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroModel.m; path = introduction/IntroModel.m; sourceTree = "<group>"; };
 		28833F71174F4A5C00039B56 /* IntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroView.h; path = introduction/IntroView.h; sourceTree = "<group>"; };
 		28833F72174F4A5C00039B56 /* IntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroView.m; path = introduction/IntroView.m; sourceTree = "<group>"; };
-		28833F76174F4AA200039B56 /* shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shadow@2x.png"; sourceTree = "<group>"; };
 		2884955216631CD30042C4CD /* FollowerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FollowerVC.h; path = OtherVCs/FollowerVC.h; sourceTree = "<group>"; };
 		2884955316631CD30042C4CD /* FollowerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FollowerVC.m; path = OtherVCs/FollowerVC.m; sourceTree = "<group>"; };
 		2884955416631CD30042C4CD /* FollowerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowerVC.xib; path = OtherVCs/FollowerVC.xib; sourceTree = "<group>"; };
@@ -1209,10 +1207,9 @@
 				B44954B715A978F200FAA116 /* AppDelegate.m */,
 				B44954AF15A978F200FAA116 /* BabyinFamily-Info.plist */,
 				B44954B515A978F200FAA116 /* BabyinFamily-Prefix.pch */,
-				283CC8FF172FBB5D00273249 /* Default-568h@2x.png */,
+				28043C8717B1C8700002FC6C /* Default-568h@2x.png */,
 				283CC905172FC0BE00273249 /* Default.png */,
 				283CC903172FC0B700273249 /* Default@2x.png */,
-				28833F76174F4AA200039B56 /* shadow@2x.png */,
 				B40B1F8B1650F001000BC5DA /* GlobalConfig.h */,
 				2854E28316D46F2A008B6E4B /* ImageCache.xcdatamodeld */,
 				B44954B015A978F200FAA116 /* InfoPlist.strings */,
@@ -1305,7 +1302,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				283CC900172FBB5D00273249 /* Default-568h@2x.png in Resources */,
 				B44954B215A978F200FAA116 /* InfoPlist.strings in Resources */,
 				B4C94EEF164C057100722F37 /* sourcekit.bundle in Resources */,
 				B40B1F7C1650EE53000BC5DA /* SinaWeibo.bundle in Resources */,
@@ -1335,7 +1331,6 @@
 				28AE00D3172CB2A200640280 /* stars2.png in Resources */,
 				283CC904172FC0B700273249 /* Default@2x.png in Resources */,
 				283CC906172FC0BE00273249 /* Default.png in Resources */,
-				28833F77174F4AA200039B56 /* shadow@2x.png in Resources */,
 				286CC3E8179544BD00633FB7 /* LICENSE in Resources */,
 				286CC3E9179544BD00633FB7 /* README.md in Resources */,
 				286957111795469600115C2D /* bg-addbutton-highlighted.png in Resources */,
@@ -1353,6 +1348,7 @@
 				2869571D1795469600115C2D /* icon-star.png in Resources */,
 				2869571E1795469600115C2D /* icon-star@2x.png in Resources */,
 				28866BC117AFF9500036D72F /* FZKATJW.ttf in Resources */,
+				28043C8817B1C8700002FC6C /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -47,7 +47,7 @@
         [self addSubview:backgroundImage2];
         
         //Initial shadow
-        UIImageView *shadowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shadow.png"]];
+        UIImageView *shadowImageView = [[UIImageView alloc] initWithImage:[UIImage imageWithSourceKit:@"Introduce/shadow.png"]];
         shadowImageView.contentMode = UIViewContentModeScaleToFill;
         shadowImageView.frame = CGRectMake(0, frame.size.height-200, frame.size.width, 200);
         [self addSubview:shadowImageView];
