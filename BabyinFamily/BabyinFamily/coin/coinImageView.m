@@ -16,7 +16,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        coinImage = [UIImage imageNamed:@"coin.png"];
+        coinImage = [UIImage imageWithSourceKit:@"coinSource/coin.png"];
         iindex = 0;
     }
     return self;

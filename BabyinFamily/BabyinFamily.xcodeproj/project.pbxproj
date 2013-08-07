@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		28007D3017AD00BC00CB2BD4 /* BabyAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28007D2F17AD00BA00CB2BD4 /* BabyAddCommentViewController.m */; };
-		28043C8817B1C8700002FC6C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28043C8717B1C8700002FC6C /* Default-568h@2x.png */; };
+		28043C8C17B1CE310002FC6C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28043C8B17B1CE310002FC6C /* Default-568h@2x.png */; };
 		280CF2851664CA250031262F /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CF2831664CA240031262F /* SettingVC.m */; };
 		280CF2861664CA250031262F /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280CF2841664CA250031262F /* SettingVC.xib */; };
 		280E9EA6172A14FD003D87AB /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9EA5172A14FD003D87AB /* Utility.m */; };
@@ -137,9 +137,6 @@
 		2896C4921661E79E004705A4 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C4831661E79E004705A4 /* AboutViewController.xib */; };
 		2896C4931661E79E004705A4 /* AddCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C4851661E79E004705A4 /* AddCommentVC.m */; };
 		2896C4941661E79E004705A4 /* AddCommentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C4861661E79E004705A4 /* AddCommentVC.xib */; };
-		28AE00CF172CB14500640280 /* coins.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28AE00CE172CB14500640280 /* coins.mp3 */; };
-		28AE00D2172CB2A200640280 /* coin.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AE00D0172CB2A200640280 /* coin.png */; };
-		28AE00D3172CB2A200640280 /* stars2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AE00D1172CB2A200640280 /* stars2.png */; };
 		28BAE94716C0DA3E00FA0F47 /* UIDeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */; };
 		28CA6685167F0A660087F45D /* BabyAlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CA6684167F0A660087F45D /* BabyAlertWindow.m */; };
 		28CBA96716990FED00D704AC /* AsyncImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBA96616990FED00D704AC /* AsyncImageDownloader.m */; };
@@ -224,7 +221,7 @@
 /* Begin PBXFileReference section */
 		28007D2E17AD00B800CB2BD4 /* BabyAddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyAddCommentViewController.h; path = OtherVCs/BabyAddCommentViewController.h; sourceTree = "<group>"; };
 		28007D2F17AD00BA00CB2BD4 /* BabyAddCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyAddCommentViewController.m; path = OtherVCs/BabyAddCommentViewController.m; sourceTree = "<group>"; };
-		28043C8717B1C8700002FC6C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		28043C8B17B1CE310002FC6C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		280CF2821664CA240031262F /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		280CF2831664CA240031262F /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		280CF2841664CA250031262F /* SettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingVC.xib; sourceTree = "<group>"; };
@@ -443,9 +440,6 @@
 		2896C4841661E79E004705A4 /* AddCommentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCommentVC.h; path = OtherVCs/AddCommentVC.h; sourceTree = "<group>"; };
 		2896C4851661E79E004705A4 /* AddCommentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddCommentVC.m; path = OtherVCs/AddCommentVC.m; sourceTree = "<group>"; };
 		2896C4861661E79E004705A4 /* AddCommentVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddCommentVC.xib; path = OtherVCs/AddCommentVC.xib; sourceTree = "<group>"; };
-		28AE00CE172CB14500640280 /* coins.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = coins.mp3; path = coin/coinSource/coins.mp3; sourceTree = "<group>"; };
-		28AE00D0172CB2A200640280 /* coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = coin.png; path = coin/coinSource/coin.png; sourceTree = "<group>"; };
-		28AE00D1172CB2A200640280 /* stars2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stars2.png; path = coin/coinSource/stars2.png; sourceTree = "<group>"; };
 		28BAE94516C0DA3D00FA0F47 /* UIDeviceHardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIDeviceHardware.h; path = OtherVCs/UIDeviceHardware.h; sourceTree = "<group>"; };
 		28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIDeviceHardware.m; path = OtherVCs/UIDeviceHardware.m; sourceTree = "<group>"; };
 		28CA6683167F0A660087F45D /* BabyAlertWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyAlertWindow.h; path = BabyTools/BabyAlertWindow.h; sourceTree = "<group>"; };
@@ -634,16 +628,6 @@
 				2813F2A6172C0BA300F88BB9 /* SoundEffect.m */,
 			);
 			name = Coin;
-			sourceTree = "<group>";
-		};
-		2813F271172BBCB300F88BB9 /* CoinSource */ = {
-			isa = PBXGroup;
-			children = (
-				28AE00D0172CB2A200640280 /* coin.png */,
-				28AE00D1172CB2A200640280 /* stars2.png */,
-				28AE00CE172CB14500640280 /* coins.mp3 */,
-			);
-			name = CoinSource;
 			sourceTree = "<group>";
 		};
 		28487DFF16DF3A5A00BFB194 /* WaterFllow */ = {
@@ -935,7 +919,6 @@
 		28EA949D165F5962009F69E5 /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				2813F271172BBCB300F88BB9 /* CoinSource */,
 				284393461706C30C00675BD5 /* Icon.png */,
 				284393481706C31A00675BD5 /* Icon@2x.png */,
 				B4C94EEE164C057100722F37 /* sourcekit.bundle */,
@@ -1207,7 +1190,7 @@
 				B44954B715A978F200FAA116 /* AppDelegate.m */,
 				B44954AF15A978F200FAA116 /* BabyinFamily-Info.plist */,
 				B44954B515A978F200FAA116 /* BabyinFamily-Prefix.pch */,
-				28043C8717B1C8700002FC6C /* Default-568h@2x.png */,
+				28043C8B17B1CE310002FC6C /* Default-568h@2x.png */,
 				283CC905172FC0BE00273249 /* Default.png */,
 				283CC903172FC0B700273249 /* Default@2x.png */,
 				B40B1F8B1650F001000BC5DA /* GlobalConfig.h */,
@@ -1326,9 +1309,6 @@
 				284393471706C30C00675BD5 /* Icon.png in Resources */,
 				284393491706C31A00675BD5 /* Icon@2x.png in Resources */,
 				28FFC52E1722B88800430C01 /* LoadingViewController.xib in Resources */,
-				28AE00CF172CB14500640280 /* coins.mp3 in Resources */,
-				28AE00D2172CB2A200640280 /* coin.png in Resources */,
-				28AE00D3172CB2A200640280 /* stars2.png in Resources */,
 				283CC904172FC0B700273249 /* Default@2x.png in Resources */,
 				283CC906172FC0BE00273249 /* Default.png in Resources */,
 				286CC3E8179544BD00633FB7 /* LICENSE in Resources */,
@@ -1348,7 +1328,7 @@
 				2869571D1795469600115C2D /* icon-star.png in Resources */,
 				2869571E1795469600115C2D /* icon-star@2x.png in Resources */,
 				28866BC117AFF9500036D72F /* FZKATJW.ttf in Resources */,
-				28043C8817B1C8700002FC6C /* Default-568h@2x.png in Resources */,
+				28043C8C17B1CE310002FC6C /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
