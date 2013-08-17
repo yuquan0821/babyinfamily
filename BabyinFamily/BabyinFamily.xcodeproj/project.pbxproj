@@ -44,6 +44,7 @@
 		28368F15170FB2F0008C4CC1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28368F14170FB2F0008C4CC1 /* libsqlite3.0.dylib */; };
 		28368F17170FB2FE008C4CC1 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28368F16170FB2FE008C4CC1 /* libz.1.2.5.dylib */; };
 		28368F1F171054F9008C4CC1 /* BlurOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28368F1E171054F9008C4CC1 /* BlurOverlayView.m */; };
+		2838993F17BF4070001752B6 /* BabyPostImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2838993E17BF406F001752B6 /* BabyPostImageViewController.m */; };
 		283A8D0316F5A9E300E72753 /* HotViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283A8D0216F5A9E300E72753 /* HotViewController.xib */; };
 		283CC904172FC0B700273249 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283CC903172FC0B700273249 /* Default@2x.png */; };
 		283CC906172FC0BE00273249 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 283CC905172FC0BE00273249 /* Default.png */; };
@@ -276,6 +277,8 @@
 		28368F16170FB2FE008C4CC1 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		28368F1D171054F9008C4CC1 /* BlurOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurOverlayView.h; sourceTree = "<group>"; };
 		28368F1E171054F9008C4CC1 /* BlurOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurOverlayView.m; sourceTree = "<group>"; };
+		2838993D17BF406F001752B6 /* BabyPostImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyPostImageViewController.h; path = OtherVCs/BabyPostImageViewController.h; sourceTree = "<group>"; };
+		2838993E17BF406F001752B6 /* BabyPostImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyPostImageViewController.m; path = OtherVCs/BabyPostImageViewController.m; sourceTree = "<group>"; };
 		283A8D0216F5A9E300E72753 /* HotViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotViewController.xib; sourceTree = "<group>"; };
 		283CC903172FC0B700273249 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		283CC905172FC0BE00273249 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -785,6 +788,8 @@
 				28007D2F17AD00BA00CB2BD4 /* BabyAddCommentViewController.m */,
 				28043C8D17B1E9CD0002FC6C /* BabyAlbumsViewController.h */,
 				28043C8E17B1E9CE0002FC6C /* BabyAlbumsViewController.m */,
+				2838993D17BF406F001752B6 /* BabyPostImageViewController.h */,
+				2838993E17BF406F001752B6 /* BabyPostImageViewController.m */,
 			);
 			name = OthersVCs;
 			sourceTree = "<group>";
@@ -1446,6 +1451,7 @@
 				28366A8217B48F5A0067B602 /* UIView+ThumbnailListView.m in Sources */,
 				282826FD17BB6BEF002C191A /* BabyViewBorder.m in Sources */,
 				2828270017BB6C54002C191A /* BabyStickerView.m in Sources */,
+				2838993F17BF4070001752B6 /* BabyPostImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

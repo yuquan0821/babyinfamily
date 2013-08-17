@@ -14,7 +14,7 @@
 #import "ProfileViewController.h"
 #import "BabyNavigationController.h"
 #import "BabyPostViewController.h"
-#import "BabyAlbumsViewController.h"
+#import "BabyPostImageViewController.h"
 
 @implementation AppDelegate
 @synthesize window;
@@ -289,7 +289,7 @@
     NSLog(@"image is nil %d",image ==nil);
     [picker dismissModalViewControllerAnimated:NO];
     
-    BabyPostPhotoViewController* viewController = [[BabyPostPhotoViewController alloc] initWithImage:image];
+    BabyPostImageViewController* viewController = [[BabyPostImageViewController alloc] initWithImage:image];
     BabyNavigationController * nav = [[[BabyNavigationController alloc] initWithRootViewController:viewController] autorelease];
     [self.tabBarController presentModalViewController:nav animated:YES];
 }
