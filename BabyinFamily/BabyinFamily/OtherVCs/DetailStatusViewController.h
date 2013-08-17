@@ -11,7 +11,6 @@
 #import "Status.h"
 #import "User.h"
 #import "ImageBrowser.h"
-#import "StatusCell.h"
 
 #define IMAGES_VIEW_HEIGHT 100.0f
 

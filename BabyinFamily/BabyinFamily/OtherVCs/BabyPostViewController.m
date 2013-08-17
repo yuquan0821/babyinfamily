@@ -19,13 +19,15 @@
 @synthesize toolBar;
 @synthesize date;
 @synthesize btnDatePicker;
+@synthesize countLabel;
 
 - (void)dealloc
 {
-    [self.textView dealloc];
-    [self.toolBar dealloc];
-    [self.btnDatePicker dealloc];
-    [self.date dealloc];
+    [self.textView release];
+    [self.toolBar release];
+    [self.btnDatePicker release];
+    [self.date release];
+    [self.countLabel release];
     [super dealloc];
 }
 
@@ -65,6 +67,10 @@
     [self.textView becomeFirstResponder];
     //  [self.textView setReturnKeyType:UIReturnKeySend];
     [self.view addSubview:textView];
+    countLabel =[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, 20)];
+    countLabel.text = [NSString stringWithFormat:@"%d个字",140 - textView.text.length];
+    countLabel.font = [UIFont systemFontOfSize:12.0f];
+    countLabel.textAlignment = UITextAlignmentRight;
     
     btnDatePicker = [UIButton buttonWithType:UIButtonTypeCustom];
     btnDatePicker.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.1];
@@ -170,6 +176,7 @@
     [self.view addSubview:pageControl];
     [pageControl release];
     [self.view addSubview:toolBar];
+    [self.view addSubview:countLabel];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)sender {
     int page = scrollView.contentOffset.x / 320;//通过滚动的偏移量来判断目前页面所对应的小白点
@@ -185,9 +192,9 @@
 
 - (void)actionBtnBack
 {
-    [self dismissModalViewControllerAnimated:YES ];
-    [self retain];
-    [self release];
+
+    [self dismissViewControllerAnimated:YES completion:NULL];
+
 }
 
 
@@ -316,7 +323,8 @@
     // Set new position to textView.
     textView.frame = CGRectMake(0, 0, textView.frame.size.width, toolBarY - 30);
     btnDatePicker.frame = CGRectMake(10, toolBarY - 25, 100, 20);
-    
+    countLabel.frame = CGRectMake(250, toolBarY - 25, 60, 20);
+
     // Set new position to toolBar.
     toolBar.frame = CGRectMake(0, toolBarY, toolBar.frame.size.width, toolBar.frame.size.height);
     
@@ -386,7 +394,7 @@
     if (temp.length > 140) {
         textView.text = [temp substringToIndex:140];
     }
-  //  countLabel.text = [NSString stringWithFormat:@"%d",140 - textView.text.length];
+   countLabel.text = [NSString stringWithFormat:@"%d个字",140 - textView.text.length];
 }
 #pragma mark - Tool Methods
 

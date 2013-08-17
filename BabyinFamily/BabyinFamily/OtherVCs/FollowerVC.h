@@ -15,7 +15,7 @@
 
 @interface FollowerVC : PullRefreshTableViewController<LPFriendCellDelegate>
 {
-    NSArray *_userArr;
+    NSMutableArray *_userArr;
     BOOL _isFollowingViewController;
     WeiBoMessageManager *_manager;
     UINib *_followerCellNib;
@@ -24,7 +24,7 @@
     User *_user;
 }
 
-@property (nonatomic,retain) NSArray *userArr;
+@property (nonatomic,retain) NSMutableArray *userArr;
 @property (nonatomic,assign) BOOL isFollowingViewController;
 @property (nonatomic,retain) UINib *followerCellNib;
 @property (nonatomic,retain) User *user;

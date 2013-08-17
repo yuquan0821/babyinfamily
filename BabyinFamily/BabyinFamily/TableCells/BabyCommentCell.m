@@ -24,7 +24,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        UIView * view =   [self createCellView];
+        UIView * view = [self createCellView];
         [self.contentView addSubview:view];
     }
     return self;
@@ -33,10 +33,10 @@
 -(UIView *)createCellView
 {
     UIView * bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-    _headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
+    _headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 42, 42)];
     [_headImageView.layer  setMasksToBounds:YES];
     [_headImageView.layer  setMasksToBounds:YES];
-    [_headImageView.layer setCornerRadius:10];
+    [_headImageView.layer setCornerRadius:5];
     
     _commentPersonNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_headImageView.frame.origin.x + _headImageView.frame.size.width + 6, _headImageView.frame.origin.y, 160, 21)];
     _commentPersonNameLabel.text = @"user";
@@ -78,7 +78,7 @@
         [_weiboDetailCommentInfo release];
         _weiboDetailCommentInfo = [comment retain];
     
-        [_headImageView setImageWithURL:[NSURL URLWithString:comment.user.profileLargeImageUrl]];
+        [_headImageView setImageWithURL:[NSURL URLWithString:comment.user.profileLargeImageUrl] placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]];
         
         _commentPersonNameLabel.text = comment.user.name;
         _commentContent.text = comment.text;

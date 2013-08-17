@@ -12,6 +12,7 @@
 #import "HHNetDataCacheManager.h"
 #import "SHKActivityIndicator.h"
 #import "BabyHelper.h"
+#import "UIImageView+WebCache.h"
 
 @interface BabyAtTableViewController ()
 
@@ -50,6 +51,8 @@
         _searchDisplayCtrl.searchResultsDelegate = self;
         _searchDisplayCtrl.searchResultsDataSource = self;
         _searchDisplayCtrl.searchBar.showsScopeBar = NO;
+        _fansCursor = 0;
+
     }
     return self;
 }
@@ -82,6 +85,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.contentInset = UIEdgeInsetsOriginal;
     self.tableView.tableHeaderView = _searchBar;
     [self loadData];
 }
@@ -99,7 +103,7 @@
     [super viewWillAppear:animated];
     NSNotificationCenter *notifCenter = [NSNotificationCenter defaultCenter];
     [notifCenter addObserver:self selector:@selector(gotFollowUserList:) name:MMSinaGotFollowingUserList object:nil];
-    [notifCenter addObserver:self selector:@selector(gotAvatar:) name:HHNetDataCacheNotification object:nil];
+   // [notifCenter addObserver:self selector:@selector(gotAvatar:) name:HHNetDataCacheNotification object:nil];
     [notifCenter addObserver:self selector:@selector(mmRequestFailed:) name:MMSinaRequestFailed object:nil];
 }
 
@@ -108,12 +112,16 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+- (void)refresh
+{
+    [self loadData];
+}
 
 -(void)loadData
 {
     NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_ID];
     
-    [_manager getFollowingUserList:[userID longLongValue] count:50 cursor:0];
+    [_manager getFollowingUserList:[userID longLongValue] count:50 cursor:_fansCursor];
     if (self.userArr == nil) {
         [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..."];
     }
@@ -124,14 +132,18 @@
     NSArray *cellArr = [self.tableView visibleCells];
     for (LPFriendCell *cell in cellArr) {
         NSIndexPath *inPath = [self.tableView indexPathForCell:cell];
-        if (!cell.headerView.image) {
-            User *user = [_userArr objectAtIndex:inPath.row];
-            if (!user.avatarImage || [user.avatarImage isEqual:[NSNull null]])
-            {
-                [[HHNetDataCacheManager getInstance] getDataWithURL:user.profileImageUrl withIndex:inPath.row];
-            }
-            else {
-                cell.headerView.image = user.avatarImage;
+        User *user = [_userArr objectAtIndex:inPath.row];
+
+        if (cell.headerView.image == [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]) {
+            //缓存图片
+            SDWebImageManager * manager = [SDWebImageManager sharedManager];
+            UIImage * chacheImage = [manager imageWithURL:[NSURL  URLWithString:user.profileLargeImageUrl]];
+            if (chacheImage) {
+                //  NSLog(@"有缓存");
+                [cell.headerView setImage:chacheImage];
+            }else{
+                //  NSLog(@"无缓存");
+                [cell.headerView setImageWithURL:[NSURL URLWithString:user.profileLargeImageUrl]placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]];
             }
         }
     }
@@ -141,51 +153,58 @@
 {
     NSDictionary *dic = sender.object;
     NSArray *arr = [dic objectForKey:@"userArr"];
+    NSNumber *cursor = [dic objectForKey:@"cursor"];
     User *tempUser = [arr lastObject];
     User *lastUser = [_userArr lastObject];
     if (![tempUser.screenName isEqualToString:lastUser.screenName]) {
-        self.userArr = arr;
+        if (_userArr == nil|| _userArr.count ==0) {
+            self.userArr = [NSMutableArray arrayWithArray:arr];
+        }else
+        {
+            [_userArr addObjectsFromArray:arr];
+        }
+        _fansCursor = [cursor intValue];
         [self.tableView reloadData];
     }
     else {
-        
+        self.refreshFooterView.hidden = YES;
     }
-    //    [self stopLoading];
+    [self stopLoading];
     [[SHKActivityIndicator currentIndicator] hide];
     
     [self refreshVisibleCellsImages];
 }
 
--(void)gotAvatar:(NSNotification*)sender
-{
-    NSDictionary * dic = sender.object;
-    NSString * url          = [dic objectForKey:HHNetDataCacheURLKey];
-    NSNumber *indexNumber   = [dic objectForKey:HHNetDataCacheIndex];
-    NSInteger index         = [indexNumber intValue];
-    NSData *data            = [dic objectForKey:HHNetDataCacheData];
-    
-    if (indexNumber == nil || index == -1) {
-        return;
-    }
-    
-    if (index >= [_userArr count]) {
-        return;
-    }
-    
-    User *user = [_userArr objectAtIndex:index];
-    
-    //得到的是头像图片
-    if ([url isEqualToString:user.profileImageUrl])
-    {
-        UIImage * image     = [UIImage imageWithData:data];
-        user.avatarImage    = image;
-        
-        LPFriendCell *cell = (LPFriendCell*)[self.tableView cellForRowAtIndexPath:user.cellIndexPath];
-        if (!cell.headerView.image) {
-            cell.headerView.image = user.avatarImage;
-        }
-    }
-}
+//-(void)gotAvatar:(NSNotification*)sender
+//{
+//    NSDictionary * dic = sender.object;
+//    NSString * url          = [dic objectForKey:HHNetDataCacheURLKey];
+//    NSNumber *indexNumber   = [dic objectForKey:HHNetDataCacheIndex];
+//    NSInteger index         = [indexNumber intValue];
+//    NSData *data            = [dic objectForKey:HHNetDataCacheData];
+//    
+//    if (indexNumber == nil || index == -1) {
+//        return;
+//    }
+//    
+//    if (index >= [_userArr count]) {
+//        return;
+//    }
+//    
+//    User *user = [_userArr objectAtIndex:index];
+//    
+//    //得到的是头像图片
+//    if ([url isEqualToString:user.profileImageUrl])
+//    {
+//        UIImage * image     = [UIImage imageWithData:data];
+//        user.avatarImage    = image;
+//        
+//        LPFriendCell *cell = (LPFriendCell*)[self.tableView cellForRowAtIndexPath:user.cellIndexPath];
+//        if (!cell.headerView.image) {
+//            cell.headerView.image = user.avatarImage;
+//        }
+//    }
+//}
 
 -(void)mmRequestFailed:(id)sender
 {
@@ -246,14 +265,14 @@
     cell.nameLabel.text = user.screenName;
     user.cellIndexPath = indexPath;
     
-    if (self.tableView.dragging == NO && self.tableView.decelerating == NO)
-    {
-        if (!user.avatarImage || [user.avatarImage isEqual:[NSNull null]]) {
-            [[HHNetDataCacheManager getInstance] getDataWithURL:user.profileImageUrl withIndex:row];
-        }
-    }
+//    if (self.tableView.dragging == NO && self.tableView.decelerating == NO)
+//    {
+//        if (!user.avatarImage || [user.avatarImage isEqual:[NSNull null]]) {
+//            [[HHNetDataCacheManager getInstance] getDataWithURL:user.profileImageUrl withIndex:row];
+//        }
+//    }
     
-    cell.headerView.image = user.avatarImage;
+    cell.headerView.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
     
     return cell;
 }

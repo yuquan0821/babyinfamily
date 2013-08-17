@@ -106,7 +106,7 @@
     theTextView.font = [UIFont systemFontOfSize:13.0f];
     theTextView.delegate = self;
     //发送图片
-    iconMark  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainFaceIconMark"]];
+    iconMark  = [[UIImageView alloc] initWithImage:[UIImage imageWithSourceKit:@"mainFaceIconMark.png"]];
     iconMark.frame = CGRectMake(50, -12, 26, 20);
     iconMark.hidden = YES;
     iconMark.userInteractionEnabled = YES;
@@ -123,7 +123,6 @@
     postImages.layer.shouldRasterize = YES;
     
     [postImages addSubview:iconMark];
-    postImages.image = [UIImage imageNamed:@"testimg.jpg"];
     //删除图片
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeImages:)];
     tapRecognizer.delegate = self;
@@ -136,7 +135,10 @@
     self.platform = [[[[[UIDeviceHardware alloc] init] platform] stringByAppendingString:@" " ] stringByAppendingString:[[self.ios stringByAppendingString:@" "] stringByAppendingString:self.iosVision]];
     self.APPVision = [@" 版本:" stringByAppendingString: [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
     self.theTextView.text = [[[@"#家贝反馈# @家贝2013 " stringByAppendingString: self.APPVision ] stringByAppendingString:@" " ]stringByAppendingString:self.platform];
-    countLabel.text = [NSString stringWithFormat:@"%d",140 - theTextView.text.length];
+    countLabel =[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, 20)];
+    countLabel.text = [NSString stringWithFormat:@"%d个字",140 - theTextView.text.length];
+    countLabel.font = [UIFont systemFontOfSize:12.0f];
+    countLabel.textAlignment = UITextAlignmentRight;
     //添加toolBar
     toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f,self.view.bounds.size.height - TOOLBARHEIGHT - KEYBOARDHEIGHT,self.view.bounds.size.width,TOOLBARHEIGHT)];
     toolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
@@ -163,6 +165,7 @@
     btnSend.titleLabel.font = [UIFont systemFontOfSize:14.0f];
     [btnSend setTitle:@"发送" forState:UIControlStateNormal];
     [toolBar addSubview:btnSend];
+    [self.view addSubview:countLabel];
     [self.view addSubview:postImages];
     [self.view bringSubviewToFront:postImages];
     [self.view addSubview:toolBar];
@@ -233,9 +236,9 @@
     NSLog(@"toolBarY: %d", toolBarY);
     
     // Set new position to textView.
-    theTextView.frame = CGRectMake(0, 0, theTextView.frame.size.width, toolBarY );
+    theTextView.frame = CGRectMake(0, 0, theTextView.frame.size.width, toolBarY -30 );
     
-    countLabel.frame = CGRectMake(200, toolBarY - 25, 100, 20);
+    countLabel.frame = CGRectMake(250, toolBarY - 25, 60, 20);
     
     // Set new position to toolBar.
     toolBar.frame = CGRectMake(0, toolBarY, toolBar.frame.size.width, toolBar.frame.size.height);
@@ -392,7 +395,7 @@
     if (temp.length > 140) {
         textView.text = [temp substringToIndex:140];
     }
-    countLabel.text = [NSString stringWithFormat:@"%d",140 - theTextView.text.length];
+    countLabel.text = [NSString stringWithFormat:@"%d个字",140 - theTextView.text.length];
 }
 
 

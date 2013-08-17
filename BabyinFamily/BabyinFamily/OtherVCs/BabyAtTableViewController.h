@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LPFriendCell.h"
+#import "PullRefreshTableViewController.h"
 
 @class WeiBoMessageManager;
 @class User;
@@ -18,15 +19,16 @@
 
 @end
 
-@interface BabyAtTableViewController :  UITableViewController<UISearchDisplayDelegate, UISearchBarDelegate>
+@interface BabyAtTableViewController : PullRefreshTableViewController <UISearchDisplayDelegate, UISearchBarDelegate>
 {
-    NSArray *_userArr;
+    NSMutableArray *_userArr;
     WeiBoMessageManager *_manager;
     UINib *_followerCellNib;
     User *_user;
+    int _fansCursor;
     
 }
-@property (nonatomic,retain) NSArray *userArr;
+@property (nonatomic,retain) NSMutableArray *userArr;
 @property (nonatomic,retain) NSMutableArray *filteredUserArr;
 @property (nonatomic,retain) UINib *followerCellNib;
 @property (nonatomic,retain) User *user;

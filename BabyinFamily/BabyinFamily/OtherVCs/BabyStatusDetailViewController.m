@@ -214,7 +214,7 @@
         Status *status = _weibo;
         NSLog(@"status user name%@", status.user.name);
         head.userNameLabel.text = [status.user name];
-        [head.avatarImage setImageWithURL:[NSURL URLWithString:status.user.profileLargeImageUrl]];
+        [head.avatarImage setImageWithURL:[NSURL URLWithString:status.user.profileLargeImageUrl] placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]];
         head.locationLabel.text = status.user.location;
         [head.timeLabel   setText:status.timestamp];
         head.user = status.user;
@@ -262,9 +262,9 @@
         }
         cell.backgroundColor = [UIColor whiteColor];
         if (cell.contentImage.hidden == NO) {
-            [cell.contentImage setImageWithURL:[NSURL URLWithString:self.weibo.originalPic ]placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]];
+            [cell.contentImage setImageWithURL:[NSURL URLWithString:self.weibo.originalPic ]placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"]];
         }if(cell.repostContentImage.hidden == NO){
-            [cell.repostContentImage setImageWithURL:[NSURL URLWithString:self.weibo.retweetedStatus.originalPic]placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]];
+            [cell.repostContentImage setImageWithURL:[NSURL URLWithString:self.weibo.retweetedStatus.originalPic]placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"]];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         Status * weibo  = self.weibo;

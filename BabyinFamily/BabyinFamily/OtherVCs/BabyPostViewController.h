@@ -35,6 +35,7 @@
 @property (nonatomic, retain) UIToolbar               *toolBar;
 @property (nonatomic, retain) NSDate                  *date;
 @property (nonatomic, retain) UIButton                *btnDatePicker;
+@property (nonatomic, retain) UILabel                 *countLabel;
 
 @end
 

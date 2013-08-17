@@ -12,6 +12,7 @@
 #import "LPFriendCell.h"
 #import "HHNetDataCacheManager.h"
 #import "SHKActivityIndicator.h"
+#import "UIImageView+WebCache.h"
 #import "ProfileViewController.h"
 
 @interface FollowerVC ()
@@ -91,7 +92,7 @@
     else {
         [notifCenter addObserver:self selector:@selector(gotFollowUserList:) name:MMSinaGotFollowedUserList object:nil];
     }
-    [notifCenter addObserver:self selector:@selector(gotAvatar:) name:HHNetDataCacheNotification object:nil];
+    //[notifCenter addObserver:self selector:@selector(gotAvatar:) name:HHNetDataCacheNotification object:nil];
     [notifCenter addObserver:self selector:@selector(gotFollowResult:) name:MMSinaFollowedByUserIDWithResult object:nil];
     [notifCenter addObserver:self selector:@selector(gotUnfollowResult:) name:MMSinaUnfollowedByUserIDWithResult object:nil];
     [notifCenter addObserver:self selector:@selector(mmRequestFailed:) name:MMSinaRequestFailed object:nil];
@@ -125,15 +126,19 @@
     NSArray *cellArr = [self.table visibleCells];
     for (LPFriendCell *cell in cellArr) {
         NSIndexPath *inPath = [self.table indexPathForCell:cell];
-        if (!cell.headerView.image) {
-            User *user = [_userArr objectAtIndex:inPath.row];
-            if (!user.avatarImage || [user.avatarImage isEqual:[NSNull null]])
-            {
-                [[HHNetDataCacheManager getInstance] getDataWithURL:user.profileImageUrl withIndex:inPath.row];
+        User *user = [_userArr objectAtIndex:inPath.row];
+        if (cell.headerView.image == [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]) {
+            //缓存图片
+            SDWebImageManager * manager = [SDWebImageManager sharedManager];
+            UIImage * chacheImage = [manager imageWithURL:[NSURL  URLWithString:user.profileLargeImageUrl]];
+            if (chacheImage) {
+                //  NSLog(@"有缓存");
+                [cell.headerView setImage:chacheImage];
+            }else{
+                //  NSLog(@"无缓存");
+                [cell.headerView setImageWithURL:[NSURL URLWithString:user.profileLargeImageUrl]placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]];
             }
-            else {
-                cell.headerView.image = user.avatarImage;
-            }
+            
         }
     }
 }
@@ -221,36 +226,36 @@
 
 
 
--(void)gotAvatar:(NSNotification*)sender
-{
-    NSDictionary * dic = sender.object;
-    NSString * url          = [dic objectForKey:HHNetDataCacheURLKey];
-    NSNumber *indexNumber   = [dic objectForKey:HHNetDataCacheIndex];
-    NSInteger index         = [indexNumber intValue];
-    NSData *data            = [dic objectForKey:HHNetDataCacheData];
-    
-    if (indexNumber == nil || index == -1) {
-        return;
-    }
-    
-    if (index >= [_userArr count]) {
-        return;
-    }
-    
-    User *user = [_userArr objectAtIndex:index];
-    
-    //得到的是头像图片
-    if ([url isEqualToString:user.profileImageUrl])
-    {
-        UIImage * image     = [UIImage imageWithData:data];
-        user.avatarImage    = image;
-        
-        LPFriendCell *cell = (LPFriendCell*)[self.table cellForRowAtIndexPath:user.cellIndexPath];
-        if (!cell.headerView.image) {
-            cell.headerView.image = user.avatarImage;
-        }
-    }
-}
+//-(void)gotAvatar:(NSNotification*)sender
+//{
+//    NSDictionary * dic = sender.object;
+//    NSString * url          = [dic objectForKey:HHNetDataCacheURLKey];
+//    NSNumber *indexNumber   = [dic objectForKey:HHNetDataCacheIndex];
+//    NSInteger index         = [indexNumber intValue];
+//    NSData *data            = [dic objectForKey:HHNetDataCacheData];
+//    
+//    if (indexNumber == nil || index == -1) {
+//        return;
+//    }
+//    
+//    if (index >= [_userArr count]) {
+//        return;
+//    }
+//    
+//    User *user = [_userArr objectAtIndex:index];
+//    
+//    //得到的是头像图片
+//    if ([url isEqualToString:user.profileImageUrl])
+//    {
+//        UIImage * image     = [UIImage imageWithData:data];
+//        user.avatarImage    = image;
+//        
+//        LPFriendCell *cell = (LPFriendCell*)[self.table cellForRowAtIndexPath:user.cellIndexPath];
+//        if (!cell.headerView.image) {
+//            cell.headerView.image = user.avatarImage;
+//        }
+//    }
+//}
 
 -(void)mmRequestFailed:(id)sender
 {
@@ -306,14 +311,14 @@
     cell.nameLabel.text = user.screenName;
     user.cellIndexPath = indexPath;
     
-    if (self.table.dragging == NO && self.table.decelerating == NO)
-    {
-        if (!user.avatarImage || [user.avatarImage isEqual:[NSNull null]]) {
-            [[HHNetDataCacheManager getInstance] getDataWithURL:user.profileImageUrl withIndex:row];
-        }
-    }
-    
-    cell.headerView.image = user.avatarImage;
+//    if (self.table.dragging == NO && self.table.decelerating == NO)
+//    {
+//        if (!user.avatarImage || [user.avatarImage isEqual:[NSNull null]]) {
+//            [[HHNetDataCacheManager getInstance] getDataWithURL:user.profileImageUrl withIndex:row];
+//        }
+//    }
+//    
+    cell.headerView.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
     
     if (user.following == NO) {
         [cell.invitationBtn setTitle:@"关注" forState:UIControlStateNormal];

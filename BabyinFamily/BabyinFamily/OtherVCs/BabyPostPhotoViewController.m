@@ -19,14 +19,16 @@
 @synthesize date;
 @synthesize btnDatePicker;
 @synthesize delegate;
+@synthesize countLabel;
 
 
 - (void)dealloc
 {
-    [self.textView dealloc];
-    [self.toolBar dealloc];
-    [self.btnDatePicker dealloc];
-    [self.date dealloc];
+    [self.textView release];
+    [self.toolBar release];
+    [self.btnDatePicker release];
+    [self.date release];
+    [self.countLabel release];
     [super dealloc];
 }
 
@@ -115,10 +117,14 @@
     [self.textView becomeFirstResponder];
     //  [self.textView setReturnKeyType:UIReturnKeySend];
     [self.view addSubview:textView];
+    countLabel =[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, 20)];
+    countLabel.text = [NSString stringWithFormat:@"%d个字",140 - textView.text.length];
+    countLabel.font = [UIFont systemFontOfSize:12.0f];
+    countLabel.textAlignment = UITextAlignmentRight;
     
     
     //发送图片
-    iconMark  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainFaceIconMark"]];
+    iconMark  = [[UIImageView alloc] initWithImage:[UIImage imageWithSourceKit:@"mainFaceIconMark.png"]];
     iconMark.frame = CGRectMake(50, -12, 26, 20);
     iconMark.hidden = NO;
     iconMark.userInteractionEnabled = YES;
@@ -249,6 +255,7 @@
     [self.view addSubview:pageControl];
     [pageControl release];
     [self.view addSubview:toolBar];
+    [self.view addSubview:countLabel];
     
     
 }
@@ -386,7 +393,8 @@
     // Set new position to textView.
     textView.frame = CGRectMake(0, 0, textView.frame.size.width, toolBarY - 30);
     btnDatePicker.frame = CGRectMake(10, toolBarY - 25, 100, 20);
-    
+    countLabel.frame = CGRectMake(250, toolBarY - 25, 60, 20);
+
     // Set new position to toolBar.
     toolBar.frame = CGRectMake(0, toolBarY, toolBar.frame.size.width, toolBar.frame.size.height);
     
@@ -456,7 +464,7 @@
     if (temp.length > 140) {
         textView.text = [temp substringToIndex:140];
     }
-    //  countLabel.text = [NSString stringWithFormat:@"%d",140 - textView.text.length];
+    countLabel.text = [NSString stringWithFormat:@"%d个字",140 - textView.text.length];
 }
 - (void)send:(id)sender
 {

@@ -320,6 +320,8 @@
 
     self.tabBarController.tabBar.hidden = NO;
     [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:NULL];
+
 }
 
 -(IBAction) handlePan:(UIGestureRecognizer *) sender

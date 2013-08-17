@@ -315,8 +315,8 @@
         //        NSLog(@"head - user - name :%@", head.userName.text);
         //        [head setNeedsDisplay];
         //下载微博图片
-        if (cell.contentImage.image == [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"] ||
-            cell.repostContentImage.image == [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"])
+        if (cell.contentImage.image == [UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"] ||
+            cell.repostContentImage.image == [UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"])
         {
             if (cell.contentImage.hidden == NO) {
                 //判断是否有本地缓存
@@ -324,6 +324,7 @@
                 UIImage *cachedImage = [sdManager imageWithURL:imgURL];
 
                 if (cachedImage) {
+                    NSLog(@"is in cache");
                     //如果cache命中，则直接利用缓存的图片进行有关操作
                     [UIView animateWithDuration:0.3 animations:^{
                         cell.contentImage.alpha = 0.0f;
@@ -344,7 +345,7 @@
                         [UIView animateWithDuration:0.3 animations:^{
                             CGSize size = CGSizeMake(300, 300);
                             cell.contentImage.alpha = 1.0f;
-                            [cell.contentImage setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]scaleSize:size ];
+                            [cell.contentImage setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"]scaleSize:size ];
                             
                             [loading stopAnimating];
                             [loading removeFromSuperview];
@@ -365,7 +366,7 @@
                     }];
                 }
                 else{
-                    cell.repostContentImage.image =  [ UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
+                    cell.repostContentImage.image =  [ UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"];
                     UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
                     [cell.contentImage addSubview:loading];
                     loading.center = cell.contentImage.center;
@@ -376,7 +377,7 @@
                         [UIView animateWithDuration:0.3 animations:^{
                             CGSize size = CGSizeMake(300, 300);
                             cell.repostContentImage.alpha = 1.0f;
-                            [cell.repostContentImage setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]scaleSize:size];
+                            [cell.repostContentImage setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"]scaleSize:size];
                             [loading stopAnimating];
                             [loading removeFromSuperview];
                             [loading release];
@@ -436,8 +437,9 @@
         [cell updateCellWith:weibo];
     }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    cell.contentImage.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
-    cell.repostContentImage.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
+    
+    cell.contentImage.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"];
+    cell.repostContentImage.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"];
     
     // [cell.userNameButton addTarget:self action:@selector(goToProfile:) forControlEvents:UIControlEventTouchUpInside];
     //不能在这个地方来下载图片
@@ -531,16 +533,12 @@
         self.browserView = [[[ImageBrowser alloc]initWithFrame:frame] autorelease];
         [browserView setUp];
     }
-    [browserView.imageView setImageWithURL:[NSURL URLWithString:theStatus.originalPic]];
+    [browserView.imageView setImageWithURL:[NSURL URLWithString:theStatus.originalPic] placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/loadingImage_50x118.png"]];
     browserView.theDelegate = self;
     [app.keyWindow addSubview:browserView];
     app.statusBarHidden = YES;
     NSLog(@"URLWithString:theStatus.middleImageUrl:%@",theStatus.originalPic);
-    if (shouldShowIndicator == YES && browserView) {
-        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:browserView];
-    }
-    else shouldShowIndicator = YES;
-    
+  
 }
 
 
@@ -646,9 +644,9 @@
     NSString *userId = [[NSUserDefaults standardUserDefaults] stringForKey:USER_STORE_USER_ID];
     
     if (status.user.userId == userId.longLongValue) {
-        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存", nil];
+        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存图片", nil];
     }else{
-        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存",nil];
+        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存图片",nil];
     }
     UIWindow *window = [[UIApplication sharedApplication]keyWindow];
     [sheet showInView:window];
@@ -659,7 +657,7 @@
 - (void)savePicture
 {
     NSIndexPath * clickedIndexPath = clickedStatus.cellIndexPath;
-    StatusCell *cell = (StatusCell *)[self.table cellForRowAtIndexPath:clickedIndexPath];
+    BabyStatusCell *cell = (BabyStatusCell *)[self.table cellForRowAtIndexPath:clickedIndexPath];
     if (clickedStatus.statusImage == nil)
     {
         [[HHNetDataCacheManager getInstance] getDataWithURL:clickedStatus.bmiddlePic withIndex:clickedIndexPath.section];
@@ -668,7 +666,7 @@
     cell.contentImage.image = clickedStatus.statusImage;
     UIImageWriteToSavedPhotosAlbum(cell.contentImage.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
-
+//
 //destroy status
 
 - (void)deletePicture
@@ -690,7 +688,7 @@
 {
     NSLog(@"%d",buttonIndex);
     NSString *userId = [[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID];
-    if (clickedStatus.user.userId == userId.longLongValue) {
+    if (clickedStatus.user.userId == userId.longLongValue ) {
         //0：删除 1：保存 2：取消
         switch (buttonIndex) {
             case 0:

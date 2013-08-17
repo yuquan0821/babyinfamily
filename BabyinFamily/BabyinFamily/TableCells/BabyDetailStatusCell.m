@@ -130,7 +130,7 @@ typedef enum{
     contentText.text = weibo.text;
     Status  *repostWeibo = weibo.retweetedStatus;
     CGFloat height = 0;
-    height = [[self class] getStstusContentHeight:contentText.text contentViewWith:CONTENTIMAGE_WIDTH];
+    height = [[self class] getStstusContentHeight:contentText.text contentViewWith:CONTENTIMAGE_WIDTH] + 0.0f;
     CGRect frame;
     frame =  weiboView.frame;
     frame.origin.y = 4;

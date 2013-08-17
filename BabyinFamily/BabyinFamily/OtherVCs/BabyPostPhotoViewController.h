@@ -46,6 +46,7 @@
 @property (nonatomic, retain) NSDate                  *date;
 @property (nonatomic, retain) UIButton                *btnDatePicker;
 @property (nonatomic, assign) id<BabyPostPhotoViewControllerDelegate> delegate;
+@property (nonatomic, retain) UILabel                  *countLabel;
 
 -(id)initWithImage:(UIImage*)image;
 

@@ -30,15 +30,16 @@
 
 - (void)customCellHead
 {
-
     self.backgroundColor = [UIColor colorWithRed:253.0f/255.0f green:253.0f/255.0f blue:253.0f/255.0f alpha:0.5];
 
     self.avatarImageBackGround = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, 50, 50)];
-    self.avatarImageBackGround.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
     
-    self.avatarImage= [[UIImageView alloc]initWithFrame:CGRectMake(avatarImageBackGround.frame.origin.x +4, avatarImageBackGround.frame.origin.y +3, 42, 42)];
+    self.avatarImage= [[UIImageView alloc]initWithFrame:CGRectMake(avatarImageBackGround.frame.origin.x+3, avatarImageBackGround.frame.origin.y+3, 42, 42)];
+    [self.avatarImage.layer  setMasksToBounds:YES];
+    [self.avatarImage.layer  setMasksToBounds:YES];
+    [self.avatarImage.layer  setCornerRadius:5];
+
    self.avatarImage.backgroundColor = [UIColor clearColor];
-    //self.avatarImage.image = [UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"];
     
     self.gotoProfileButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.gotoProfileButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;

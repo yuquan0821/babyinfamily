@@ -26,6 +26,7 @@
 #import "BabyAddCommentViewController.h"
 
 
+
 @interface HomeViewController : PullRefreshTableViewController<EGORefreshTableHeaderDelegate,ImageBrowserDelegate,UIActionSheetDelegate,BabyStatusCellHeadClickDelegate,SDWebImageManagerDelegate,BabyStatusCellDelegate>
 {
     UITableView                 *table;
