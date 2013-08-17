@@ -16,7 +16,7 @@
 @class LoadingViewController;
 @class SinaWeibo;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate,QuadCurveMenuDelegate,GTTabBarControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate,QuadCurveMenuDelegate,GTTabBarControllerDelegate,UIImagePickerControllerDelegate>
 {
     UIWindow *_window;
     SinaWeibo *sinaWeibo;

@@ -14,6 +14,7 @@
 #import "ProfileViewController.h"
 #import "BabyNavigationController.h"
 #import "BabyPostViewController.h"
+#import "BabyAlbumsViewController.h"
 
 @implementation AppDelegate
 @synthesize window;
@@ -36,6 +37,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
     
     // 微博登陆SDK的使用
     sinaWeibo = [[SinaWeibo alloc] initWithAppKey:SINA_APP_KEY appSecret:SINA_APP_SECRET appRedirectURI:SINA_APP_REDIRECT_URI andDelegate:self.loadingViewController];
@@ -131,25 +133,25 @@
     
     NSArray *ctrlArr = @[nav1,nav2,nav3,nav4,nav5];
     NSMutableDictionary *imgDic = [NSMutableDictionary dictionaryWithCapacity:3];
-	[imgDic setObject:[UIImage imageWithSourceKit:@"TabBar_Image/home.png"] forKey:@"Default"];
-	[imgDic setObject:[UIImage imageWithSourceKit:@"TabBar_Image/home.png"] forKey:@"Highlighted"];
-	[imgDic setObject:[UIImage imageWithSourceKit:@"TabBar_Image/home-on.png"] forKey:@"Seleted"];
+	[imgDic setObject:[UIImage imageWithSourceKit:@"TabBar/homeNormal_TabBar.png"] forKey:@"Default"];
+	[imgDic setObject:[UIImage imageWithSourceKit:@"TabBar/homePressed_TabBar.png"] forKey:@"Highlighted"];
+	[imgDic setObject:[UIImage imageWithSourceKit:@"TabBar/homeSelected_TabBar.png"] forKey:@"Seleted"];
 	NSMutableDictionary *imgDic2 = [NSMutableDictionary dictionaryWithCapacity:3];
-	[imgDic2 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/topic.png"] forKey:@"Default"];
-	[imgDic2 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/topic.png"] forKey:@"Highlighted"];
-	[imgDic2 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/topic-on.png"] forKey:@"Seleted"];
+	[imgDic2 setObject:[UIImage imageWithSourceKit:@"TabBar/hotNormal_TabBar.png"] forKey:@"Default"];
+	[imgDic2 setObject:[UIImage imageWithSourceKit:@"TabBar/hotPressed_TabBar.png"] forKey:@"Highlighted"];
+	[imgDic2 setObject:[UIImage imageWithSourceKit:@"TabBar/hotSelected_TabBar.png"] forKey:@"Seleted"];
 	NSMutableDictionary *imgDic3 = [NSMutableDictionary dictionaryWithCapacity:3];
-	[imgDic3 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/search.png"] forKey:@"Default"];
-	[imgDic3 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/search.png"] forKey:@"Highlighted"];
-	[imgDic3 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/search.png"] forKey:@"Seleted"];
+	[imgDic3 setObject:[UIImage imageWithSourceKit:@"TabBar/center_TabBar0.png"] forKey:@"Default"];
+	[imgDic3 setObject:[UIImage imageWithSourceKit:@"TabBar/center_TabBar0.png"] forKey:@"Highlighted"];
+	[imgDic3 setObject:[UIImage imageWithSourceKit:@"TabBar/center_TabBar0.png"] forKey:@"Seleted"];
 	NSMutableDictionary *imgDic4 = [NSMutableDictionary dictionaryWithCapacity:3];
-	[imgDic4 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/shoppping.png"] forKey:@"Default"];
-	[imgDic4 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/shoppping.png"] forKey:@"Highlighted"];
-	[imgDic4 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/shoppping-on.png"] forKey:@"Seleted"];
+	[imgDic4 setObject:[UIImage imageWithSourceKit:@"TabBar/messageNormal_TabBar.png"] forKey:@"Default"];
+	[imgDic4 setObject:[UIImage imageWithSourceKit:@"TabBar/messagePressed_TabBar.png"] forKey:@"Highlighted"];
+	[imgDic4 setObject:[UIImage imageWithSourceKit:@"TabBar/messageSelected_TabBar.png"] forKey:@"Seleted"];
 	NSMutableDictionary *imgDic5 = [NSMutableDictionary dictionaryWithCapacity:3];
-	[imgDic5 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/my.png"] forKey:@"Default"];
-	[imgDic5 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/my.png"] forKey:@"Highlighted"];
-	[imgDic5 setObject:[UIImage imageWithSourceKit:@"TabBar_Image/my-on.png"] forKey:@"Seleted"];
+	[imgDic5 setObject:[UIImage imageWithSourceKit:@"TabBar/meNormal_TabBar.png"] forKey:@"Default"];
+	[imgDic5 setObject:[UIImage imageWithSourceKit:@"TabBar/mePressed_TabBar.png"] forKey:@"Highlighted"];
+	[imgDic5 setObject:[UIImage imageWithSourceKit:@"TabBar/meSelected_TabBar.png"] forKey:@"Seleted"];
 	NSArray *imgArr = [NSArray arrayWithObjects:imgDic,imgDic2,imgDic3,imgDic4,imgDic5,nil];
     
     self.tabBarController = [[GTTabBarController alloc] initWithViewControllers:ctrlArr imageArray:imgArr];
@@ -159,22 +161,25 @@
 
     
     [[window subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    UIImage *storyMenuItemImage = [UIImage imageNamed:@"bg-menuitem.png"];
-    UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"bg-menuitem-highlighted.png"];
+    UIImage *storyMenuItemImage = [UIImage imageWithSourceKit:@"TabBar/bg_Menu.png"];
+    UIImage *storyMenuItemImagePressed = [UIImage imageWithSourceKit:@"TabBar/bgHeight_Menu.png"];
     
-    UIImage *starImage = [UIImage imageNamed:@"icon-star.png"];
+    UIImage *textImage = [UIImage imageWithSourceKit:@"TabBar/bg_PostText.png"];
+    UIImage *photoImage = [UIImage imageWithSourceKit:@"TabBar/bg_PostPhoto.png"];
+    UIImage *pictureImage = [UIImage imageWithSourceKit:@"TabBar/bg_PostPicture.png"];
+
     
     QuadCurveMenuItem *starMenuItem1 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
                                                                highlightedImage:storyMenuItemImagePressed
-                                                                   ContentImage:starImage
+                                                                   ContentImage:textImage
                                                         highlightedContentImage:nil];
     QuadCurveMenuItem *starMenuItem2 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
                                                                highlightedImage:storyMenuItemImagePressed
-                                                                   ContentImage:starImage
+                                                                   ContentImage:photoImage
                                                         highlightedContentImage:nil];
     QuadCurveMenuItem *starMenuItem3 = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
                                                                highlightedImage:storyMenuItemImagePressed
-                                                                   ContentImage:starImage
+                                                                   ContentImage:pictureImage
                                                         highlightedContentImage:nil];
     
     NSArray *menus = [NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, nil];
@@ -183,7 +188,7 @@
     [starMenuItem3 release];
     
     
-    float height = DEVICE_IS_IPHONE5 ? 518 : 430;
+    float height = DEVICE_IS_IPHONE5 ? 520 : 432;
     
     menu = [[QuadCurveMenu alloc] initWithFrame:CGRectMake(160, height, 0, 0) menus:menus];
     menu.delegate = self;
@@ -231,16 +236,16 @@
         }
         case 1:
         {
-            TakePhotoViewController *picker = [[[TakePhotoViewController alloc] init] autorelease];
-            BabyNavigationController * nav = [[[BabyNavigationController alloc] initWithRootViewController:picker] autorelease];
-            [picker.navigationController setNavigationBarHidden:YES];
+            TakePhotoViewController *takePhoto = [[[TakePhotoViewController alloc] init] autorelease];
+            BabyNavigationController * nav = [[[BabyNavigationController alloc] initWithRootViewController:takePhoto] autorelease];
+            [takePhoto.navigationController setNavigationBarHidden:YES];
             [self.tabBarController presentModalViewController:nav animated:NO];
             [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
             break;
         }
         case 2:
         {
-            NSLog(@"Select the index : %d",idx);
+            [self LocalPhoto];
             break;
         }
             
@@ -255,16 +260,44 @@
     if (viewController.hidesBottomBarWhenPushed)
     {
         self.tabBarController.tabBarTransparent = YES;
-        [self.tabBarController hidesTabBar:YES animated:NO driect:1];
+        [self.tabBarController hidesTabBar:YES animated:NO driect:0];
         menu.hidden = YES;
     }
     else
     {
         self.tabBarController.tabBarTransparent = NO;
-        [self.tabBarController hidesTabBar:NO animated:NO driect:1];
+        [self.tabBarController hidesTabBar:NO animated:NO driect:0];
         menu.hidden = NO;
     }
 }
 
+-(void)LocalPhoto
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    picker.editing = NO;
+    [self.tabBarController presentModalViewController:picker animated:YES];
+    [picker release];
+}
+
+//当选择一张图片后进入这里
+-(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+
+{
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    NSLog(@"image is nil %d",image ==nil);
+    BabyPostPhotoViewController* viewController = [[BabyPostPhotoViewController alloc] initWithImage:image];
+    BabyNavigationController * nav = [[[BabyNavigationController alloc] initWithRootViewController:viewController] autorelease];
+    [self.tabBarController presentModalViewController:nav animated:NO];
+    [picker dismissModalViewControllerAnimated:YES];
+
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissModalViewControllerAnimated:YES];
+    
+}
 
 @end
