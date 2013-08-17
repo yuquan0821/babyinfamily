@@ -243,12 +243,17 @@ static GTTabBarController *gtTabBarController;
     {
         return;
     }
+    
+    UIViewController *oldselectedVC = [self.viewControllers objectAtIndex:selectedIndex];
+    [oldselectedVC viewWillDisappear:YES];
+    
     NSLog(@"Display View.");
     selectedIndex = index;
     
 	UIViewController *selectedVC = [self.viewControllers objectAtIndex:index];
 	
 	selectedVC.view.frame = transitionView.frame;
+    [selectedVC viewWillAppear:YES];
 	if ([selectedVC.view isDescendantOfView:transitionView])
 	{
 		[transitionView bringSubviewToFront:selectedVC.view];
