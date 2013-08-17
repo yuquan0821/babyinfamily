@@ -32,11 +32,14 @@
 			btn = [UIButton buttonWithType:UIButtonTypeCustom];
 			btn.showsTouchWhenHighlighted = YES;
 			btn.tag = i;
-			btn.frame = CGRectMake(width * i, 0, width, frame.size.height);
+			btn.frame = CGRectMake(width * i, 6, width, frame.size.height);
 			[btn setImage:[[imageArray objectAtIndex:i] objectForKey:@"Default"] forState:UIControlStateNormal];
 			[btn setImage:[[imageArray objectAtIndex:i] objectForKey:@"Highlighted"] forState:UIControlStateHighlighted];
 			[btn setImage:[[imageArray objectAtIndex:i] objectForKey:@"Seleted"] forState:UIControlStateSelected];
 			[btn addTarget:self action:@selector(tabBarButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            if (i ==2) {
+                btn.hidden = YES;
+            }
 			[self.buttons addObject:btn];
 			[self addSubview:btn];
 		}
@@ -93,7 +96,7 @@
         {
             btn.tag--;
         }
-        btn.frame = CGRectMake(width * btn.tag, 0, width, self.frame.size.height);
+        btn.frame = CGRectMake(width * btn.tag, 6, width, self.frame.size.height);
     }
 }
 - (void)insertTabWithImageDic:(NSDictionary *)dict atIndex:(NSUInteger)index
@@ -106,12 +109,12 @@
         {
             b.tag ++;
         }
-        b.frame = CGRectMake(width * b.tag, 0, width, self.frame.size.height);
+        b.frame = CGRectMake(width * b.tag, 6, width, self.frame.size.height);
     }
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.showsTouchWhenHighlighted = YES;
     btn.tag = index;
-    btn.frame = CGRectMake(width * index, 0, width, self.frame.size.height);
+    btn.frame = CGRectMake(width * index, 6, width, self.frame.size.height);
     [btn setImage:[dict objectForKey:@"Default"] forState:UIControlStateNormal];
     [btn setImage:[dict objectForKey:@"Highlighted"] forState:UIControlStateHighlighted];
     [btn setImage:[dict objectForKey:@"Seleted"] forState:UIControlStateSelected];

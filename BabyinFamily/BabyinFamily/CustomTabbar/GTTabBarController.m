@@ -8,7 +8,7 @@
 
 #import "GTTabBarController.h"
 #import "GTTabBar.h"
-#define kTabBarHeight 53.0f
+#define kTabBarHeight 58.0f
 
 static GTTabBarController *gtTabBarController;
 
@@ -52,7 +52,7 @@ static GTTabBarController *gtTabBarController;
         gtTabBarController = self;
         animateDriect = 0;
         tabBarHidden = NO;
-        [tabBar setBackgroundImage:[UIImage imageWithSourceKit:@"TabBar_Image/bottom-bg.png"]];
+        [tabBar setBackgroundImage:[UIImage imageWithSourceKit:@"TabBar/bg_TabBar.png"]];
 	}
 	return self;
 }
