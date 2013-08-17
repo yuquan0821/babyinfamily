@@ -659,6 +659,16 @@
 
 - (void)savePicture
 {
+    if(self.clickedStatus && clickedStatus.bmiddlePic){
+        NSURL *imgURL = [NSURL URLWithString:clickedStatus.bmiddlePic];
+        SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
+        UIImage *cachedImage = [sdManager imageWithURL:imgURL];
+        if (cachedImage) {
+            UIImageWriteToSavedPhotosAlbum(cachedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
+    }
+    return;
+    
     NSIndexPath * clickedIndexPath = clickedStatus.cellIndexPath;
     BabyStatusCell *cell = (BabyStatusCell *)[self.table cellForRowAtIndexPath:clickedIndexPath];
     if (clickedStatus.statusImage == nil)
