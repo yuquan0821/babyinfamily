@@ -48,10 +48,10 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         self.menusArray = aMenusArray;
         
         // add the "Add" Button.
-        _addButton = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"bg-addbutton.png"]
-                                       highlightedImage:[UIImage imageNamed:@"bg-addbutton-highlighted.png"] 
-                                           ContentImage:[UIImage imageNamed:@"icon-plus.png"] 
-                                highlightedContentImage:[UIImage imageNamed:@"icon-plus-highlighted.png"]];
+        _addButton = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageWithSourceKit:@"TabBar/center_TabBar.png"]
+                                       highlightedImage:[UIImage imageWithSourceKit:@"TabBar/centerHeight_TabBar.png"] 
+                                           ContentImage:[UIImage imageWithSourceKit:@"TabBar/centerHeard_TabBar.png"] 
+                                highlightedContentImage:[UIImage imageWithSourceKit:@"TabBar/centerHearHeight_TabBar.png"]];
         _addButton.delegate = self;
         _addButton.center = STARTPOINT;
         [self addSubview:_addButton];
