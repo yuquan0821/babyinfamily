@@ -642,14 +642,27 @@
 {
     UIActionSheet *sheet;
     NSString *userId = [[NSUserDefaults standardUserDefaults] stringForKey:USER_STORE_USER_ID];
-    
-    if (status.user.userId == userId.longLongValue) {
-        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存图片", nil];
-    }else{
-        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存图片",nil];
-    }
-    
     self.clickedStatus = status;
+    Status  *repostWeibo = status.retweetedStatus;
+    if (status.user.userId == userId.longLongValue) {
+        
+        if (status.bmiddlePic!=nil || repostWeibo.bmiddlePic !=nil){
+           sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存图片",@"复制", nil];
+        }else
+        {
+            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"复制", nil];
+        }
+
+    }else{
+        if (status.bmiddlePic!=nil || repostWeibo.bmiddlePic !=nil){
+            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存图片",@"复制",nil];
+
+        }else{
+            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"复制",nil];
+
+        }
+        
+    }
     
     UIWindow *window = [[UIApplication sharedApplication]keyWindow];
     [sheet showInView:window];
@@ -668,16 +681,7 @@
         }
     }
     return;
-    
-    NSIndexPath * clickedIndexPath = clickedStatus.cellIndexPath;
-    BabyStatusCell *cell = (BabyStatusCell *)[self.table cellForRowAtIndexPath:clickedIndexPath];
-    if (clickedStatus.statusImage == nil)
-    {
-        [[HHNetDataCacheManager getInstance] getDataWithURL:clickedStatus.bmiddlePic withIndex:clickedIndexPath.section];
-    }
-    
-    cell.contentImage.image = clickedStatus.statusImage;
-    UIImageWriteToSavedPhotosAlbum(cell.contentImage.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+
 }
 //
 //destroy status
@@ -695,6 +699,23 @@
     });
 }
 
+- (void)copyText
+{
+    if(self.clickedStatus){
+        UIPasteboard *generalPasteBoard = [UIPasteboard generalPasteboard];
+        [generalPasteBoard setString:self.clickedStatus.text];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"已复制到粘贴版！"
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:@"ok"
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+        [alert release];
+    }
+   
+}
 
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -703,30 +724,68 @@
     NSString *userId = [[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID];
     if (clickedStatus.user.userId == userId.longLongValue ) {
         //0：删除 1：保存 2：取消
-        switch (buttonIndex) {
-            case 0:
-                [self deletePicture];
-                break;
-            case 1:
-                [self savePicture];
-                break;
-            case 2:
-                break;
-            default:
-                break;
+        if(self.clickedStatus && clickedStatus.bmiddlePic){
+        
+            switch (buttonIndex) {
+                case 0:
+                    [self deletePicture];
+                    break;
+                case 1:
+                    [self savePicture];
+                    break;
+                case 2:
+                    [self copyText];
+                    break;
+                case 3:
+                    break;
+                default:
+                    break;
+            }
+        }else
+        {
+            switch (buttonIndex) {
+                case 0:
+                    [self deletePicture];
+                    break;
+                case 1:
+                    [self copyText];
+                    break;
+                case 2:
+                    break;
+                default:
+                    break;
+            }
         }
+        
     }else{
-        //0：保存 1：取消
-        switch (buttonIndex) {
-            case 0:
-                [self savePicture];
-                break;
-            case 1:
-                break;
-            default:
-                break;
+        if(self.clickedStatus && clickedStatus.bmiddlePic){
+            //0：保存 1：取消
+            switch (buttonIndex) {
+                case 0:
+                    [self savePicture];
+                    break;
+                case 1:
+                    [self copyText];
+                    break;
+                case 2:
+                    break;
+                default:
+                    break;
+            }
+
+        }else
+        {
+            switch (buttonIndex) {
+                case 0:
+                    [self copyText];
+                    break;
+                case 1:
+                    break;
+                default:
+                    break;
+            }
         }
-    }
+            }
 }
 
 //查看图片的评论和做出评理
