@@ -7,6 +7,7 @@
 //
 
 #import "LPFriendCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation LPFriendCell
 @synthesize invitationBtn;
@@ -21,6 +22,34 @@
 - (IBAction)cellButtonClicked:(id)sender 
 {
     [_delegate lpCellDidClicked:self];
+}
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        // Initialization code
+        [self createView];
+ //自定义Cell
+        
+    }
+    return self;
+}
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+           }
+    return self;
+}
+- (void)createView
+{
+    self.headerView = [[UIImageView alloc]initWithFrame:CGRectMake(9, 10, 42, 42)];
+    [self.headerView.layer  setMasksToBounds:YES];
+    [self.headerView.layer  setMasksToBounds:YES];
+    [self.headerView.layer  setCornerRadius:5];
+    [self addSubview:self.headerView];
+
 }
 
 - (void)dealloc
