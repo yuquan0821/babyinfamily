@@ -648,6 +648,9 @@
     }else{
         sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存图片",nil];
     }
+    
+    self.clickedStatus = status;
+    
     UIWindow *window = [[UIApplication sharedApplication]keyWindow];
     [sheet showInView:window];
     [sheet release];
