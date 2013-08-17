@@ -102,7 +102,9 @@
 {
     
     [super viewDidLoad];
-    
+    UIBarButtonItem *moreBtn = [[UIBarButtonItem alloc]initWithTitle:@"更多" style:UIBarButtonItemStylePlain target:self action:@selector(moreButtonClicked)];
+    self.navigationItem.rightBarButtonItem = moreBtn;
+    [moreBtn release];
     listCommentsArray = [[NSMutableArray alloc]initWithCapacity:0];
     float height = DEVICE_IS_IPHONE5 ? 504 : 416;
     height-=40;
@@ -460,6 +462,174 @@
         }
     }
     [detailTableView reloadData];
+}
+
+- (void)moreButtonClicked
+{
+    UIActionSheet *sheet;
+    NSString *userId = [[NSUserDefaults standardUserDefaults] stringForKey:USER_STORE_USER_ID];
+    Status  *repostWeibo = _weibo.retweetedStatus;
+    if (_weibo.user.userId == userId.longLongValue) {
+        
+        if (_weibo.bmiddlePic!=nil || repostWeibo.bmiddlePic !=nil){
+            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存图片",@"复制", nil];
+        }else
+        {
+            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"复制", nil];
+        }
+        
+    }else{
+        if (_weibo.bmiddlePic!=nil || repostWeibo.bmiddlePic !=nil){
+            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存图片",@"复制",nil];
+            
+        }else{
+            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"复制",nil];
+            
+        }
+        
+    }
+    
+    UIWindow *window = [[UIApplication sharedApplication]keyWindow];
+    [sheet showInView:window];
+    [sheet release];
+}
+//save picture
+
+- (void)savePicture
+{
+    if(_weibo && _weibo.bmiddlePic){
+        NSURL *imgURL = [NSURL URLWithString:_weibo.bmiddlePic];
+        SDWebImageManager *sdManager = [SDWebImageManager sharedManager];
+        UIImage *cachedImage = [sdManager imageWithURL:imgURL];
+        if (cachedImage) {
+            UIImageWriteToSavedPhotosAlbum(cachedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
+    }
+    return;
+    
+}
+//
+//destroy status
+
+- (void)deletePicture
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSString *weiboID =[NSString stringWithFormat:@"%lld",_weibo.statusId];
+        [manager destroyAstatus:weiboID];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:weiboID,@"weiboID", nil];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
+            [userInfo release];
+        });
+    });
+}
+
+- (void)copyText
+{
+    if(_weibo){
+        UIPasteboard *generalPasteBoard = [UIPasteboard generalPasteboard];
+        [generalPasteBoard setString:_weibo.text];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"已复制到粘贴版！"
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:@"ok"
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+        [alert release];
+    }
+    
+}
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%d",buttonIndex);
+    NSString *userId = [[NSUserDefaults standardUserDefaults]stringForKey:USER_STORE_USER_ID];
+    if (_weibo.user.userId == userId.longLongValue ) {
+        //0：删除 1：保存 2：取消
+        if(_weibo && _weibo.bmiddlePic){
+            
+            switch (buttonIndex) {
+                case 0:
+                    [self deletePicture];
+                    break;
+                case 1:
+                    [self savePicture];
+                    break;
+                case 2:
+                    [self copyText];
+                    break;
+                case 3:
+                    break;
+                default:
+                    break;
+            }
+        }else
+        {
+            switch (buttonIndex) {
+                case 0:
+                    [self deletePicture];
+                    break;
+                case 1:
+                    [self copyText];
+                    break;
+                case 2:
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+    }else{
+        if(_weibo && _weibo.bmiddlePic){
+            //0：保存 1：取消
+            switch (buttonIndex) {
+                case 0:
+                    [self savePicture];
+                    break;
+                case 1:
+                    [self copyText];
+                    break;
+                case 2:
+                    break;
+                default:
+                    break;
+            }
+            
+        }else
+        {
+            switch (buttonIndex) {
+                case 0:
+                    [self copyText];
+                    break;
+                case 1:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    UIAlertView *alert;
+    
+    // Unable to save the image
+    if (error)
+        alert = [[UIAlertView alloc] initWithTitle:nil
+                                           message:@"保存失败！"
+                                          delegate:self cancelButtonTitle:@"确认"
+                                 otherButtonTitles:nil];
+    else // All is well
+        alert = [[UIAlertView alloc] initWithTitle:nil
+                                           message:@"保存成功"
+                                          delegate:self cancelButtonTitle:@"确认"
+                                 otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 -(void)dealloc

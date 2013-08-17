@@ -13,7 +13,7 @@
 #import "BabyDetailStatusCellHeadView.h"
 #import "WeiBoMessageManager.h"
 
-@interface BabyStatusDetailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,BabyStatusCellHeadClickDelegate,SDWebImageManagerDelegate,UITextFieldDelegate>
+@interface BabyStatusDetailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,BabyStatusCellHeadClickDelegate,SDWebImageManagerDelegate,UITextFieldDelegate,UIActionSheetDelegate>
 {
     WeiBoMessageManager    *manager;
     UITableView            * detailTableView;
