@@ -182,8 +182,8 @@ enum {
     frame = genderIamgeView.frame;
     frame.origin.x = nameLabel.frame.origin.x + nameLabel.frame.size.width + 5;
     genderIamgeView.frame = frame;
+    [self.avatarImageView setImageWithURL:[NSURL URLWithString:user.profileLargeImageUrl] placeholderImage:[UIImage imageNamed:@"weibo.bundle/WeiboImages/touxiang_40x40.png"]];
     
-    [[HHNetDataCacheManager getInstance] getDataWithURL:user.profileLargeImageUrl];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -196,7 +196,6 @@ enum {
         [alert release];
         
     }else{
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:) name:HHNetDataCacheNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfo:)    name:MMSinaGotUserInfo          object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFollowByUserIDWithResult:) name:MMSinaFollowedByUserIDWithResult object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUnfollowByUserIDWithResult:) name:MMSinaUnfollowedByUserIDWithResult object:nil];
@@ -232,25 +231,6 @@ enum {
     // e.g. self.myOutlet = nil;
 }
 
-
--(void)getAvatar:(NSNotification*)sender
-{
-    NSDictionary * dic  = sender.object;
-    NSString * url      = [dic objectForKey:HHNetDataCacheURLKey];
-    NSData *data        = [dic objectForKey:HHNetDataCacheData];
-    UIImage * image     = [UIImage imageWithData:data];
-    
-    if (data == nil) {
-        NSLog(@"data == nil");
-    }
-    
-    //得到的是头像图片
-    if ([url isEqualToString:user.profileLargeImageUrl])
-    {
-        user.avatarImage = image;
-        self.avatarImageView.image = image;
-    }
-}
 
 -(void)didGetUserInfo:(NSNotification*)sender
 {

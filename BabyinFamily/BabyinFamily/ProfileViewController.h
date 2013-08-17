@@ -12,6 +12,8 @@
 #import "User.h"
 #import "BabyFeedBackViewController.h"
 #import "SettingVC.h"
+#import "UIImageView+WebCache.h"
+
 
 
 @class profileCell;
