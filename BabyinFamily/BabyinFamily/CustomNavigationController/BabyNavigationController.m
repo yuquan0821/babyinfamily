@@ -45,7 +45,7 @@
                                                           
                                                           [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
                                                           
-                                                   FZKATJW_FONT(23) , UITextAttributeFont,
+                                                  [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0] , UITextAttributeFont,
                                                           
                                                           nil]];
     
