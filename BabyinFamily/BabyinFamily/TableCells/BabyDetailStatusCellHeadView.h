@@ -16,6 +16,7 @@
 }
 @property (retain, nonatomic)Status   *weibo;
 @property (retain, nonatomic) UILabel *commentCount;
+@property (retain, nonatomic) UIImageView *separator;
 
 
 @end
