@@ -287,11 +287,11 @@
 {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     NSLog(@"image is nil %d",image ==nil);
+    [picker dismissModalViewControllerAnimated:NO];
+    
     BabyPostPhotoViewController* viewController = [[BabyPostPhotoViewController alloc] initWithImage:image];
     BabyNavigationController * nav = [[[BabyNavigationController alloc] initWithRootViewController:viewController] autorelease];
-    [self.tabBarController presentModalViewController:nav animated:NO];
-    [picker dismissModalViewControllerAnimated:YES];
-
+    [self.tabBarController presentModalViewController:nav animated:YES];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
