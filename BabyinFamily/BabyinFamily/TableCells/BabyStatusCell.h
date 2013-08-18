@@ -14,11 +14,10 @@
 #define IMAGE_VIEW_HEIGHT 300.0f
 #define CELL_WIDTH 300.0f
 #define CONTENT_WIDTH 280.0f
-#define PADDING_TOP 4.0
-#define PADDING_LEFT 4.0
-#define FONT_SIZE 13.0
-#define FONT @"Arial"
-#define TEXT_VIEW_SIZE CGSizeMake(240, 1000)
+#define PADDING_TOP 2.0
+#define PADDING_LEFT 8.0
+#define BUTTON_HEIGHT 28.0
+#define BUTTON_WIDTH  100.0
 
 @class  BabyStatusCell;
 @protocol BabyStatusCellDelegate<NSObject>

@@ -15,11 +15,8 @@
 #define IMAGE_VIEW_HEIGHT 300.0f
 #define CELL_WIDTH 300.0f
 #define CONTENTIMAGE_WIDTH 320.0f
-#define PADDING_TOP 4.0
-#define PADDING_LEFT 4.0
-#define FONT_SIZE 13.0
-#define FONT @"Arial"
-#define TEXT_VIEW_SIZE CGSizeMake(240, 1000)
+#define TOP 4.0
+#define LEFT 4.0
 
 @class  BabyDetailStatusCell;
 @protocol BabyDetailStatusCellDelegate<NSObject>

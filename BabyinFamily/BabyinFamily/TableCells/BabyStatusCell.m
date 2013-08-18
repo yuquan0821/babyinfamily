@@ -95,12 +95,20 @@ typedef enum{
     //评论按钮
     self.commentButton = [[UIButton alloc]initWithFrame:CGRectZero];
     self.commentButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.commentButton.titleLabel.textColor = [UIColor blackColor];
+    [self.commentButton addTarget:self action:@selector(statusCommentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     //分享按钮
     self.shareButton = [[UIButton alloc]initWithFrame:CGRectZero];
     self.shareButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.shareButton.titleLabel.textColor = [UIColor blackColor];
+    [self.shareButton setTitle: @"分享" forState:UIControlStateNormal];
+    [self.shareButton addTarget:self action:@selector(StatusShareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     //更多操作按钮
     self.more = [[UIButton alloc]initWithFrame:CGRectZero];
     self.more = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.more.titleLabel.textColor = [UIColor blackColor];
+    [self.more setTitle: @"..." forState:UIControlStateNormal];
+    [self.more addTarget:self action:@selector(statusMoreButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     self.repostContentImage.userInteractionEnabled = YES;
     self.repostContentImage.contentMode = UIViewContentModeScaleAspectFit;
@@ -156,14 +164,13 @@ typedef enum{
   
     //有weibo图
     if (self.contentImage.hidden == NO) {
-        self.contentImage.frame  = CGRectMake(8,2, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
-        self.contentText.frame  = CGRectMake(8, contentImage.frame.origin.y + contentImage.frame.size.height+2, contentImage.frame.size.width, height+2);
-       }else{
+        self.contentImage.frame  = CGRectMake(PADDING_LEFT,PADDING_TOP, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
+        self.contentText.frame  = CGRectMake(PADDING_LEFT, contentImage.frame.origin.y + contentImage.frame.size.height+2, contentImage.frame.size.width, height + PADDING_TOP);
+    }else{
         //无微博图
-        self.contentText.frame  = CGRectMake(8, 2, CONTENT_WIDTH, height+2);
-        }
-    self.weiboView.frame  = CGRectMake(12, 2, CELL_WIDTH, contentText.frame.origin.y + contentText.frame.size.height + 2);
-    
+        self.contentText.frame  = CGRectMake(PADDING_LEFT, PADDING_TOP, CONTENT_WIDTH, height + PADDING_TOP);
+    }
+    self.weiboView.frame  = CGRectMake(PADDING_LEFT, PADDING_TOP, CELL_WIDTH, contentText.frame.origin.y + contentText.frame.size.height + PADDING_TOP);
     //有转发
     if (self.repostMainView.hidden == NO) {
         frame =  repostMainView.frame;
@@ -175,43 +182,34 @@ typedef enum{
         height = [[self class]getStstusContentHeight:repostText.text contentViewWith:CONTENT_WIDTH];
         //有转发图
         if (self.repostContentImage.hidden ==NO) {
-            self.repostContentImage.frame = CGRectMake(12,  2, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
-            self.repostText.frame  = CGRectMake(8, repostContentImage.frame.origin.y + repostContentImage.frame.size.height, CONTENT_WIDTH, height+2);
+            self.repostContentImage.frame = CGRectMake(PADDING_LEFT,  PADDING_TOP, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
+            self.repostText.frame  = CGRectMake(PADDING_LEFT, repostContentImage.frame.origin.y + repostContentImage.frame.size.height, CONTENT_WIDTH, height + PADDING_TOP);
             
-            }else{
+        }else{
             //无转发图
-            self.repostText.frame = CGRectMake(8, 2, CONTENT_WIDTH, height+2);
-            }
-        
+            self.repostText.frame = CGRectMake(PADDING_LEFT, PADDING_TOP, CONTENT_WIDTH, height + PADDING_TOP);
+        }
+    
         frame.size.height  = repostText.frame.origin.y + repostText.frame.size.height;
         self.repostMainView.frame = frame;
-        //        self.repostBg.frame = CGRectMake(2, 0, 300, repostView.frame.size.height);
         self.statusHeight = repostMainView.frame.size.height + repostMainView.frame.origin.y;
-    }else{
+     }else{
         //无转发
         self.statusHeight = weiboView.frame.size.height + weiboView.frame.origin.y;
-    }
+     }
  
-      self.commentButton.frame = CGRectMake(10, self.statusHeight + 4, 100, 28);
-      self.commentButton.titleLabel.textColor = [UIColor blackColor];
+    self.commentButton.frame = CGRectMake(10, self.statusHeight + PADDING_TOP, BUTTON_WIDTH, BUTTON_HEIGHT);
     if (weibo.commentsCount ==0) {
         [self.commentButton setTitle: @"评论" forState:UIControlStateNormal];
 
     }else{
         [self.commentButton setTitle: [NSString stringWithFormat:@"评论:%d",weibo.commentsCount] forState:UIControlStateNormal];
     }
-    [self.commentButton addTarget:self action:@selector(statusCommentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.shareButton.frame = CGRectMake(110, self.statusHeight +PADDING_TOP, BUTTON_WIDTH, BUTTON_HEIGHT);
 
-      self.shareButton.frame = CGRectMake(110, self.statusHeight +4, 100, 28);
-      self.shareButton.titleLabel.textColor = [UIColor blackColor];
-      [self.shareButton setTitle: @"分享" forState:UIControlStateNormal];
-     [self.shareButton addTarget:self action:@selector(StatusShareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.more.frame = CGRectMake(210, self.statusHeight + PADDING_TOP, BUTTON_WIDTH, BUTTON_HEIGHT);
 
-      self.more.frame = CGRectMake(210, self.statusHeight + 4, 100, 28);
-      self.more.titleLabel.textColor = [UIColor blackColor];
-      [self.more setTitle: @"..." forState:UIControlStateNormal];
-      [self.more addTarget:self action:@selector(statusMoreButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-      self.cellHeight = commentButton.frame.origin.y + commentButton.frame.size.height + 6;
+    self.cellHeight = commentButton.frame.origin.y + commentButton.frame.size.height + 6;
     
     self.frame = CGRectMake(0, 0, 320, cellHeight);
 }
@@ -280,7 +278,6 @@ typedef enum{
 - (void)statusCommentButtonClicked:(id)sender
 {
     [delegate statusCommentButtonClicked:self.status];
-
 }
 
 - (void)statusMoreButtonClicked:(id)sender
