@@ -190,6 +190,8 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         _flag = self.isExpanding ? 0 : ([_menusArray count] - 1);
         SEL selector = self.isExpanding ? @selector(_expand) : @selector(_close);
         _timer = [[NSTimer scheduledTimerWithTimeInterval:TIMEOFFSET target:self selector:selector userInfo:nil repeats:YES] retain];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+
     }
 }
 #pragma mark - private methods
