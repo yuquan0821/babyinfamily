@@ -63,12 +63,12 @@ typedef enum{
     self.repostMainView.backgroundColor = [UIColor clearColor];
     
     //微博内容
-    self.contentText = [[UITextView alloc] initWithFrame:CGRectZero];
+    self.contentText = [[UITextView alloc] initWithFrame: CGRectMake(PADDING_LEFT, 0, CELL_WIDTH, 0)];
     self.contentText.font = [UIFont systemFontOfSize:15];
     self.contentText.editable = NO;
     self.contentText.backgroundColor = [UIColor clearColor];
     //转发内容
-    self.repostText = [[UITextView alloc] initWithFrame:CGRectZero];
+    self.repostText = [[UITextView alloc] initWithFrame:CGRectMake(PADDING_LEFT, 0, CELL_WIDTH, 0)];
     self.repostText.font = [UIFont systemFontOfSize:15];
     self.repostText.editable = NO;
     self.repostText.backgroundColor = [UIColor clearColor];
@@ -156,19 +156,19 @@ typedef enum{
     contentText.text = weibo.text;
     Status  *repostWeibo = weibo.retweetedStatus;
     CGFloat height = 0;
-    height = [[self class] getStstusContentHeight:contentText.text contentViewWith:CONTENT_WIDTH] + 0.0f;
+    height = contentText.contentSize.height;//[[self class] getStstusContentHeight:contentText.text contentViewWith:CONTENTIMAGE_WIDTH] + 0.0f;
     CGRect frame;
     frame =  weiboView.frame;
     frame.origin.y = 4;
     frame.origin.x = 8;
-  
+    
     //有weibo图
     if (self.contentImage.hidden == NO) {
-        self.contentImage.frame  = CGRectMake(PADDING_LEFT,PADDING_TOP, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
-        self.contentText.frame  = CGRectMake(PADDING_LEFT, contentImage.frame.origin.y + contentImage.frame.size.height+2, contentImage.frame.size.width, height + PADDING_TOP);
+        self.contentImage.frame  = CGRectMake(PADDING_LEFT,PADDING_TOP, CELL_WIDTH, IMAGE_VIEW_HEIGHT);
+        self.contentText.frame  = CGRectMake(PADDING_LEFT, contentImage.frame.origin.y + contentImage.frame.size.height+2, contentImage.frame.size.width, height+PADDING_TOP);
     }else{
         //无微博图
-        self.contentText.frame  = CGRectMake(PADDING_LEFT, PADDING_TOP, CONTENT_WIDTH, height + PADDING_TOP);
+        self.contentText.frame  = CGRectMake(PADDING_LEFT, PADDING_TOP, CELL_WIDTH, height+PADDING_TOP);
     }
     self.weiboView.frame  = CGRectMake(PADDING_LEFT, PADDING_TOP, CELL_WIDTH, contentText.frame.origin.y + contentText.frame.size.height + PADDING_TOP);
     //有转发
@@ -179,15 +179,15 @@ typedef enum{
         frame.size.width = CELL_WIDTH;
         self.repostMainView.frame = frame;
         self.repostText.text = [NSString stringWithFormat:@"@%@:%@",repostWeibo.user.name,repostWeibo.text];
-        height = [[self class]getStstusContentHeight:repostText.text contentViewWith:CONTENT_WIDTH];
+        height = repostText.contentSize.height;//[[self class]getStstusContentHeight:repostText.text contentViewWith:CONTENT_WIDTH];
         //有转发图
         if (self.repostContentImage.hidden ==NO) {
             self.repostContentImage.frame = CGRectMake(PADDING_LEFT,  PADDING_TOP, CONTENT_WIDTH, IMAGE_VIEW_HEIGHT);
-            self.repostText.frame  = CGRectMake(PADDING_LEFT, repostContentImage.frame.origin.y + repostContentImage.frame.size.height, CONTENT_WIDTH, height + PADDING_TOP);
+            self.repostText.frame  = CGRectMake(PADDING_LEFT, repostContentImage.frame.origin.y + repostContentImage.frame.size.height, CONTENT_WIDTH, height+PADDING_TOP);
             
         }else{
             //无转发图
-            self.repostText.frame = CGRectMake(PADDING_LEFT, PADDING_TOP, CONTENT_WIDTH, height + PADDING_TOP);
+            self.repostText.frame = CGRectMake(PADDING_LEFT, PADDING_TOP, CONTENT_WIDTH, height+PADDING_TOP);
         }
     
         frame.size.height  = repostText.frame.origin.y + repostText.frame.size.height;
@@ -278,6 +278,7 @@ typedef enum{
 - (void)statusCommentButtonClicked:(id)sender
 {
     [delegate statusCommentButtonClicked:self.status];
+
 }
 
 - (void)statusMoreButtonClicked:(id)sender

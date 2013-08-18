@@ -63,12 +63,12 @@ typedef enum{
     self.repostMainView.backgroundColor = [UIColor clearColor];
     
     //微博内容
-    self.contentText = [[UITextView alloc] initWithFrame:CGRectZero];
+    self.contentText = [[UITextView alloc] initWithFrame:CGRectMake(0,0, CONTENTIMAGE_WIDTH, 0)];
     self.contentText.font = [UIFont systemFontOfSize:15];
     self.contentText.editable = NO;
     self.contentText.backgroundColor = [UIColor clearColor];
     //转发内容
-    self.repostText = [[UITextView alloc] initWithFrame:CGRectZero];
+    self.repostText = [[UITextView alloc] initWithFrame:CGRectMake(0,0, CONTENTIMAGE_WIDTH, 0)];
     self.repostText.font = [UIFont systemFontOfSize:15];
     self.repostText.editable = NO;
     self.repostText.backgroundColor = [UIColor clearColor];
@@ -130,7 +130,7 @@ typedef enum{
     contentText.text = weibo.text;
     Status  *repostWeibo = weibo.retweetedStatus;
     CGFloat height = 0;
-    height = [[self class] getStstusContentHeight:contentText.text contentViewWith:CONTENTIMAGE_WIDTH] + 0.0f;
+    height = contentText.contentSize.height;//[[self class] getStstusContentHeight:contentText.text contentViewWith:CONTENTIMAGE_WIDTH] + 0.0f;
     CGRect frame;
     frame =  weiboView.frame;
     frame.origin.y = 4;
@@ -159,7 +159,7 @@ typedef enum{
         frame.size.width = CELL_WIDTH;
         self.repostMainView.frame = frame;
         self.repostText.text = [NSString stringWithFormat:@"@%@:%@",repostWeibo.user.name,repostWeibo.text];
-        height = [[self class]getStstusContentHeight:repostText.text contentViewWith:CONTENTIMAGE_WIDTH];
+        height =repostText.contentSize.height;// [[self class]getStstusContentHeight:repostText.text contentViewWith:CONTENTIMAGE_WIDTH];
         //有转发图
         if (self.repostContentImage.hidden ==NO) {
             if (repostWeibo.originalImage) {

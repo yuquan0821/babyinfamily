@@ -15,7 +15,7 @@
 #define CELL_WIDTH 300.0f
 #define CONTENT_WIDTH 280.0f
 #define PADDING_TOP 2.0
-#define PADDING_LEFT 8.0
+#define PADDING_LEFT 5.0
 #define BUTTON_HEIGHT 28.0
 #define BUTTON_WIDTH  100.0
 
