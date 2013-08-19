@@ -315,6 +315,8 @@
                                                                      40.0f)];
     toolBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:toolBar];
+    toolBar.tintColor = [UIColor colorWithRed:0.45 green:0.60 blue:0.16 alpha:1.0];
+
     
     textField = [[UITextField alloc] initWithFrame:CGRectMake(10.0f,
                                                               6.0f,

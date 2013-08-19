@@ -37,6 +37,7 @@
     if (self) {
         // Custom initialization
         _shouldPostImage = NO;
+        self.title = @"反馈";
         manager = [WeiBoMessageManager getInstance];
     }
     return self;
@@ -145,7 +146,7 @@
     UIEdgeInsets insets = UIEdgeInsetsMake(40, 0, 40, 0);
     [toolBar setBackgroundImage:[[UIImage imageNamed:@"keyBoardBack"] resizableImageWithCapInsets:insets] forToolbarPosition:0 barMetrics:0];
     [toolBar setBarStyle:UIBarStyleBlack];
-    
+     toolBar.tintColor = [UIColor colorWithRed:0.45 green:0.60 blue:0.16 alpha:1.0];
     //照片
     btnPicture = [UIButton buttonWithType:UIButtonTypeCustom];
     btnPicture.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;

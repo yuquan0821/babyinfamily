@@ -184,6 +184,8 @@
     UIEdgeInsets insets = UIEdgeInsetsMake(40, 0, 40, 0);
     [toolBar setBackgroundImage:[[UIImage imageNamed:@"keyBoardBack"] resizableImageWithCapInsets:insets] forToolbarPosition:0 barMetrics:0];
     [toolBar setBarStyle:UIBarStyleBlack];
+    toolBar.tintColor = [UIColor colorWithRed:0.45 green:0.60 blue:0.16 alpha:1.0];
+
     
     //第一次按钮
     btnFirstTime = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -197,7 +199,7 @@
     [toolBar addSubview:btnFirstTime];
     
     //@按钮
-    btnAtSomeOne = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnAtSomeOne = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     btnAtSomeOne.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;
     [btnAtSomeOne setBackgroundImage:[UIImage imageNamed:@"face"] forState:UIControlStateNormal];
     [btnAtSomeOne addTarget:self action:@selector(goToAtSomeBody) forControlEvents:UIControlEventTouchUpInside];

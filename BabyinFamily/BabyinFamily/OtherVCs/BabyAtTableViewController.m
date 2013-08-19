@@ -45,7 +45,8 @@
         self.title = @"选好友";
         _manager = [WeiBoMessageManager getInstance];
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
-        _searchBar.showsCancelButton = YES;
+        _searchBar.tintColor = [UIColor colorWithRed:0.45 green:0.60 blue:0.16 alpha:1.0];
+
         _searchDisplayCtrl = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
         _searchDisplayCtrl.delegate = self;
         _searchDisplayCtrl.searchResultsDelegate = self;
