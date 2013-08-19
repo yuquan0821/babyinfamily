@@ -852,6 +852,7 @@
     }
     [self.statuesArr removeObjectAtIndex:index];
     [self.table reloadData];
+    [self loadVisuableImage:self.table];
     
 }
 

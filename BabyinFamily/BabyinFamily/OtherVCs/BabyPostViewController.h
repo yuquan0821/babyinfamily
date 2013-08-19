@@ -28,7 +28,7 @@
     BOOL keyboardIsShow;//键盘是否显示
     UIScrollView *scrollView;//第一次表情滚动视图
     UIPageControl *pageControl;
-    
+    UILabel       *titleLabel;    
 }
 
 @property (nonatomic, retain) BabyPlaceHolderTextView *textView;

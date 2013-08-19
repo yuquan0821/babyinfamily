@@ -470,6 +470,13 @@
 }
 - (void)send:(id)sender
 {
+    titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+    titleLabel.text = @"发送中，请稍后...";
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.font = [UIFont systemFontOfSize:13.0f];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.alpha = 0.0f;
+    
     NSString *content = textView.text;
     UIImage *image = postImages.image;
     if(![Utility connectedToNetwork])
@@ -482,12 +489,26 @@
         {
             if (!_shouldPostImage) {
                 [manager postWithText:content];
-                [[SHKActivityIndicator currentIndicator] displayActivity:@"发送中，请稍后..." inView:self.view];
+                [self.view addSubview:titleLabel];
+                [titleLabel release];
+                
+                [UIView animateWithDuration:0.6 animations:^{
+                    titleLabel.alpha = 1.0f;
+                    titleLabel.frame = CGRectMake(60, 60, 180, 24);
+                }];
+
 
             }
             else {
                 [manager postWithText:content image:image];
-                [[SHKActivityIndicator currentIndicator] displayActivity:@"发送中，请稍后..." inView:self.view];
+                [self.view addSubview:titleLabel];
+                [titleLabel release];
+                
+                [UIView animateWithDuration:0.6 animations:^{
+                    titleLabel.alpha = 1.0f;
+                    titleLabel.frame = CGRectMake(60, 60, 180, 24);
+                }];
+
 
             }
         }
@@ -498,17 +519,22 @@
 {
     Status *sts = sender.object;
     if (sts.text != nil && [sts.text length] != 0) {
-        [[SHKActivityIndicator currentIndicator] hide];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"发送成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"发送失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         [alert release];
-        [[SHKActivityIndicator currentIndicator] hide];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
     }
+    [UIView animateWithDuration:0.6 animations:^{
+        titleLabel.alpha = 0;
+        titleLabel.frame = CGRectMake(0, 0, 0, 0);
+    }];
 }
 
 

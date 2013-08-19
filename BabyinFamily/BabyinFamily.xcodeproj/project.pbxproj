@@ -985,10 +985,10 @@
 		28EA94A0165F6031009F69E5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				286956EA1795462500115C2D /* CustomTabbar */,
 				282826F517BB6B30002C191A /* Sticker */,
 				28366A7A17B48EFA0067B602 /* ImageListView */,
 				28FE083B17AB968800621D2A /* CustomNavigationController */,
-				286956EA1795462500115C2D /* CustomTabbar */,
 				286CC3F11795457000633FB7 /* QuadCurveMenu */,
 				28833F6A174F49F200039B56 /* Introduction */,
 				2813F260172BBC6700F88BB9 /* Coin */,

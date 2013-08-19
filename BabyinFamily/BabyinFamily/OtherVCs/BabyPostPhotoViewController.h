@@ -26,19 +26,19 @@
 <UIScrollViewDelegate,BabyAtTableViewControllerDelegate,BabyPositionViewControllerDelegate,UIGestureRecognizerDelegate,UINavigationBarDelegate,AFPhotoEditorControllerDelegate,UITextViewDelegate>
 {
     BabyPlaceHolderTextView *textView;
-    WeiBoMessageManager *manager;
-    BOOL _shouldPostImage;
-    UIToolbar *toolBar;//工具栏
-    UIButton *btnFirstTime;
-    UIButton *btnAtSomeOne;
-    UIButton *btnLocation;
-    UIButton *btnSend;
-    BOOL keyboardIsShow;//键盘是否显示
-    UIScrollView *scrollView;//第一次表情滚动视图
+    WeiBoMessageManager     *manager;
+    BOOL           _shouldPostImage;
+    UIToolbar     *toolBar;//工具栏
+    UIButton      *btnFirstTime;
+    UIButton      *btnAtSomeOne;
+    UIButton      *btnLocation;
+    UIButton      *btnSend;
+    BOOL          keyboardIsShow;//键盘是否显示
+    UIScrollView  *scrollView;//第一次表情滚动视图
     UIPageControl *pageControl;
     UIImageView   *postImages;
     UIImageView   *iconMark;
-    
+    UILabel       *titleLabel;    
 }
 
 @property (nonatomic, retain) BabyPlaceHolderTextView *textView;
