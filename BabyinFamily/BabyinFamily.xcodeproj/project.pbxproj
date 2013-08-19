@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		28007D3017AD00BC00CB2BD4 /* BabyAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28007D2F17AD00BA00CB2BD4 /* BabyAddCommentViewController.m */; };
 		2800865917C065D90089579A /* stars.png in Resources */ = {isa = PBXBuildFile; fileRef = 2800865817C065D90089579A /* stars.png */; };
-		28043C8C17B1CE310002FC6C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28043C8B17B1CE310002FC6C /* Default-568h@2x.png */; };
 		28043C8F17B1E9CF0002FC6C /* BabyAlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28043C8E17B1E9CE0002FC6C /* BabyAlbumsViewController.m */; };
 		2806E49817B3E83000710901 /* MMReachabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2806E49717B3E83000710901 /* MMReachabilityViewController.m */; };
 		280CF2851664CA250031262F /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CF2831664CA240031262F /* SettingVC.m */; };
@@ -132,6 +131,7 @@
 		2896C4931661E79E004705A4 /* AddCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896C4851661E79E004705A4 /* AddCommentVC.m */; };
 		2896C4941661E79E004705A4 /* AddCommentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2896C4861661E79E004705A4 /* AddCommentVC.xib */; };
 		28BAE94716C0DA3E00FA0F47 /* UIDeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */; };
+		28BF794317C1FFAE00454D18 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BF794217C1FFAE00454D18 /* Default-568h@2x.png */; };
 		28CA6685167F0A660087F45D /* BabyAlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CA6684167F0A660087F45D /* BabyAlertWindow.m */; };
 		28CBA96716990FED00D704AC /* AsyncImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBA96616990FED00D704AC /* AsyncImageDownloader.m */; };
 		28D14F5D169CF53600B39793 /* SendAndSaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D14F5B169CF53600B39793 /* SendAndSaveViewController.m */; };
@@ -216,7 +216,6 @@
 		28007D2E17AD00B800CB2BD4 /* BabyAddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyAddCommentViewController.h; path = OtherVCs/BabyAddCommentViewController.h; sourceTree = "<group>"; };
 		28007D2F17AD00BA00CB2BD4 /* BabyAddCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyAddCommentViewController.m; path = OtherVCs/BabyAddCommentViewController.m; sourceTree = "<group>"; };
 		2800865817C065D90089579A /* stars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stars.png; path = coin/stars.png; sourceTree = "<group>"; };
-		28043C8B17B1CE310002FC6C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		28043C8D17B1E9CD0002FC6C /* BabyAlbumsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyAlbumsViewController.h; path = OtherVCs/BabyAlbumsViewController.h; sourceTree = "<group>"; };
 		28043C8E17B1E9CE0002FC6C /* BabyAlbumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyAlbumsViewController.m; path = OtherVCs/BabyAlbumsViewController.m; sourceTree = "<group>"; };
 		2806E49617B3E83000710901 /* MMReachabilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMReachabilityViewController.h; path = NetWork/MMReachabilityViewController.h; sourceTree = "<group>"; };
@@ -437,6 +436,7 @@
 		2896C4861661E79E004705A4 /* AddCommentVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddCommentVC.xib; path = OtherVCs/AddCommentVC.xib; sourceTree = "<group>"; };
 		28BAE94516C0DA3D00FA0F47 /* UIDeviceHardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIDeviceHardware.h; path = OtherVCs/UIDeviceHardware.h; sourceTree = "<group>"; };
 		28BAE94616C0DA3E00FA0F47 /* UIDeviceHardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIDeviceHardware.m; path = OtherVCs/UIDeviceHardware.m; sourceTree = "<group>"; };
+		28BF794217C1FFAE00454D18 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		28CA6683167F0A660087F45D /* BabyAlertWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BabyAlertWindow.h; path = BabyTools/BabyAlertWindow.h; sourceTree = "<group>"; };
 		28CA6684167F0A660087F45D /* BabyAlertWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BabyAlertWindow.m; path = BabyTools/BabyAlertWindow.m; sourceTree = "<group>"; };
 		28CBA96516990FED00D704AC /* AsyncImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncImageDownloader.h; path = NetWork/AsyncImageDownloader.h; sourceTree = "<group>"; };
@@ -553,8 +553,8 @@
 				28885409167EB768000ED11A /* CoreData.framework in Frameworks */,
 				2896C4801661E653004705A4 /* libicucore.dylib in Frameworks */,
 				2896C47E1661E63D004705A4 /* libsqlite3.dylib in Frameworks */,
-				2896C47C1661E616004705A4 /* Security.framework in Frameworks */,
 				2896C47A1661E5FC004705A4 /* ImageIO.framework in Frameworks */,
+				2896C47C1661E616004705A4 /* Security.framework in Frameworks */,
 				28EA9378165F13BA009F69E5 /* libGPUImage.a in Frameworks */,
 				28EA9368165F1305009F69E5 /* QuartzCore.framework in Frameworks */,
 				28EA9364165F12DE009F69E5 /* CoreVideo.framework in Frameworks */,
@@ -1197,11 +1197,11 @@
 		B44954AE15A978F200FAA116 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				28BF794217C1FFAE00454D18 /* Default-568h@2x.png */,
 				B44954B615A978F200FAA116 /* AppDelegate.h */,
 				B44954B715A978F200FAA116 /* AppDelegate.m */,
 				B44954AF15A978F200FAA116 /* BabyinFamily-Info.plist */,
 				B44954B515A978F200FAA116 /* BabyinFamily-Prefix.pch */,
-				28043C8B17B1CE310002FC6C /* Default-568h@2x.png */,
 				283CC905172FC0BE00273249 /* Default.png */,
 				283CC903172FC0B700273249 /* Default@2x.png */,
 				B40B1F8B1650F001000BC5DA /* GlobalConfig.h */,
@@ -1325,10 +1325,10 @@
 				286CC3E8179544BD00633FB7 /* LICENSE in Resources */,
 				286CC3E9179544BD00633FB7 /* README.md in Resources */,
 				28866BC117AFF9500036D72F /* FZKATJW.ttf in Resources */,
-				28043C8C17B1CE310002FC6C /* Default-568h@2x.png in Resources */,
 				2828270317BB7E88002C191A /* ZDBtn2.png in Resources */,
 				2828270417BB7E88002C191A /* ZDBtn3.png in Resources */,
 				2800865917C065D90089579A /* stars.png in Resources */,
+				28BF794317C1FFAE00454D18 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

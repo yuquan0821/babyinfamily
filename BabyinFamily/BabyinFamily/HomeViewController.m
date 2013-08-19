@@ -647,18 +647,18 @@
     if (status.user.userId == userId.longLongValue) {
         
         if (status.bmiddlePic!=nil || repostWeibo.bmiddlePic !=nil){
-           sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存图片",@"复制", nil];
+           sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消操作" destructiveButtonTitle:@"删除" otherButtonTitles:@"保存图片",@"复制文字", nil];
         }else
         {
-            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"复制", nil];
+            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消操作" destructiveButtonTitle:@"删除" otherButtonTitles:@"复制文字", nil];
         }
 
     }else{
         if (status.bmiddlePic!=nil || repostWeibo.bmiddlePic !=nil){
-            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存图片",@"复制",nil];
+            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消操作" destructiveButtonTitle:nil otherButtonTitles:@"保存图片",@"复制文字",nil];
 
         }else{
-            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"复制",nil];
+            sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消操作" destructiveButtonTitle:nil otherButtonTitles:@"复制文字",nil];
 
         }
         

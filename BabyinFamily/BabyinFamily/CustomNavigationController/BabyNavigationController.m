@@ -39,7 +39,7 @@
     // Change UINavigationBar appearance by setting the font, color, shadow and offset.
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           
-                                                          [UIColor colorWithRed:85.0 / 255.0 green:154.0 / 255.0 blue:26.0 / 255.0 alpha:1.0], UITextAttributeTextColor,
+                                                          [UIColor colorWithRed:110.0 / 255.0 green:188.0 / 255.0 blue:26.0 / 255.0 alpha:1.0], UITextAttributeTextColor,
                                                           
                                                           [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8], UITextAttributeTextShadowColor,
                                                           
@@ -52,7 +52,7 @@
     // Change the UIBarButtonItem apperance by setting a resizable background image for the back button.
     UIImage *backButtonImage = [[UIImage imageWithSourceKit:@"1TabBar/navigationBarBackButton.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTintColor:[UIColor colorWithRed:0.45 green:0.60 blue:0.16 alpha:1.0]];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTintColor:[UIColor colorWithRed:0.43 green:0.73 blue:0.16 alpha:1.0]];
     
     // Change the UIBarButtonItem apperance by setting a resizable background image for the edit button.
     UIEdgeInsets insets = {0, 6, 0, 6};// Same as doing this: UIEdgeInsetsMake (top, left, bottom, right)
